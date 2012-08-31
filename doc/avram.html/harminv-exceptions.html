@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>harminv exceptions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="harminv.html#harminv" title="harminv">
+<link rel="prev" href="harminv-output.html#harminv-output" title="harminv output">
+<link rel="next" href="Additional-harminv-notes.html#Additional-harminv-notes" title="Additional harminv notes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="harminv-exceptions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Additional-harminv-notes.html#Additional-harminv-notes">Additional harminv notes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="harminv-output.html#harminv-output">harminv output</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="harminv.html#harminv">harminv</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.8.3 <code>harminv</code> exceptions</h4>
+
+<p>Various exceptional conditions are possible with the <code>harminv</code>
+library interface, and one of the following messages could be
+returned. Each of them has the form of a list containing a single
+character string.
+
+     <ul>
+<li><code>unrecognized harminv function name</code>
+is reported in case of a function call of the form
+<code>library('harminv',f)</code> where <code>f</code> is anything other than
+the character string <code>'hsolve'</code>, this being the only function in
+the library. 
+<li><code>bad harminv function call</code>
+is reported if the input parameters don't meet the specifications
+described in <a href="harminv-input-parameters.html#harminv-input-parameters">harminv input parameters</a>, or if <code>fmin</code> is
+greater than <code>fmax</code>. 
+<li><code>bad vector specification</code>
+could be the result of a list of real numbers rather than complex
+numbers being passed as a <code>signal</code>. Real numbers can
+be converted to complex numbers using the <code>create</code> function from
+the <code>complex</code> library (<a href="complex.html#complex">complex</a>). 
+<li><code>memory overflow</code>
+can occur if <code>avram</code> is operating very close to the limit of host
+memory, or perhaps if infeasibly large values are passed as <code>nf</code>
+<li><code>counter overflow</code>
+is similar to a memory overflow
+</ul>
+
+   </body></html>
+

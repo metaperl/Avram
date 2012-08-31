@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+<title>Cat - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Functions.html#List-Functions" title="List Functions">
+<link rel="prev" href="List-Functions.html#List-Functions" title="List Functions">
+<link rel="next" href="Reverse.html#Reverse" title="Reverse">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Cat"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Reverse.html#Reverse">Reverse</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="List-Functions.html#List-Functions">List Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Functions.html#List-Functions">List Functions</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.14.1 Cat</h5>
+
+<p>The list concatenation operation has this representation in virtual code. 
+<a name="index-g_t_0040code_007bcat_007d-342"></a><a name="index-concatenation-343"></a>
+     <dl>
+<dt><em>T28</em><dd>[[<code>cat</code>]] = <code>((nil,nil),(nil,nil))</code>
+</dl>
+
+<p class="noindent">This function takes a pair of lists as an argument, an returns the list
+obtained by appending the right one to the left. The semantics of
+concatenation is what one would expect.
+
+     <dl>
+<dt><em>P35</em><dd>[[<code>cat</code>]] <code>(nil,</code><var>z</var><code>)</code> = <var>z</var>
+<br><dt><em>P36</em><dd>[[<code>cat</code>]] <code>((</code><var>x</var><code>,</code><var>y</var><code>),</code><var>z</var><code>)</code> = <code>(</code><var>x</var><code>,</code>[[<code>cat</code>]] <code>(</code><var>y</var><code>,z))</code>
+</dl>
+
+   </body></html>
+

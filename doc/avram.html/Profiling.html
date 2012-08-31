@@ -1,0 +1,144 @@
+<html lang="en">
+<head>
+<title>Profiling - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Library-Reference.html#Library-Reference" title="Library Reference">
+<link rel="prev" href="Error-Reporting.html#Error-Reporting" title="Error Reporting">
+<link rel="next" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Profiling"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Error-Reporting.html#Error-Reporting">Error Reporting</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Library-Reference.html#Library-Reference">Library Reference</a>
+<hr>
+</div>
+
+<h3 class="section">3.7 Profiling</h3>
+
+<p><a name="index-g_t_0040file_007bprofile_002eh_007d-616"></a>The functions declared in <samp><span class="file">profile.h</span></samp> can be used for constructing
+and writing tables of run time statistics such as those mentioned in
+<a href="Files.html#Files">Files</a>, and <a href="Profile.html#Profile">Profile</a>. These functions maintain a database of
+structures, each recording the statistics for a particular virtual code
+fragment.
+
+   <p>Each structure in the database is identified by a unique key, which must
+be a list representing a character string. A pointer to such a structure
+<a name="index-g_t_0040code_007bscore_007d-617"></a>is declared to be of type <code>score</code>. For the most part, the data
+structure should be regarded as opaque by a client program, except for a
+field <code>reductions</code> of type <code>counter</code>, which may be modified
+arbitrarily by the client.
+
+   <p>The way these operations are used in the course of evaluating virtual
+code applications containing profile annotations is to add a structure
+to the database each time a new profiled code fragment is encountered,
+using the annotation as its key, and to increment the <code>reductions</code>
+<a name="index-annotations-618"></a>of the structure each time any constituent of the code gets a quantum of
+work done on it. Other ways of using these operations are left to the
+developer's discretion.
+
+<div class="defun">
+&mdash; Function: score <b>avm_entries</b> (<var>list team, list *message, int *fault</var>)<var><a name="index-avm_005fentries-619"></a></var><br>
+<blockquote><p>This function retrieves or creates a data base entry given its key. The
+parameters have these interpretations.
+
+          <dl>
+<dt><var>team</var><dd>is a list representing a character string that uniquely identifies the
+database entry to be retrieved or created. 
+<br><dt><var>message</var><dd>is the address of a list known to the caller, which will be assigned a
+list representing an error message if any error occurs in the course of
+searching the database or creating a new entry. 
+<br><dt><var>fault</var><dd>is the address of an integer that will be set to a non-zero value if any
+error is caused by this function. 
+</dl>
+
+        <p>The pointer returned by this function is the address of the record whose
+key is given by the <var>team</var> parameter. If such a record is
+already in the database, its address is returned, but otherwise a new
+one is created whose address is then returned. The <code>reductions</code>
+field of a newly created entry will be zero.
+
+        <p>In the course of searching the database, the <code>avm_compare</code>
+function is used, so the associated lists may be modified as noted in
+<a href="Comparison.html#Comparison">Comparison</a>.  It is not necessary for a client to include the header
+file <samp><span class="file">compare.h</span></samp> or to call <code>avm_initialize_compare</code> in order
+to use the profile operations, because they are done automatically.
+
+        <p>If an error message is assigned to the list referenced by
+<var>message</var>, the integer referenced by <var>fault</var> will
+be set to a non-zero value. The form of the error message will be a list
+in which each item is a list of character representations as per
+<a href="Character-Table.html#Character-Table">Character Table</a>. It is the responsibility of the caller to dispose
+of the error message. Currently the only possible error is a memory
+overflow, which in this case is non-fatal. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_tally</b> (<var>char *filename</var>)<var><a name="index-avm_005ftally-620"></a></var><br>
+<blockquote><p>This function makes a table of the results stored in the data base built
+by the <code>avm_entries</code> function. The argument is the address of a
+null terminated character string containing the name of the file in
+which the results will be written. A file is opened and the table is
+written in a self explanatory text format, with columns labeled
+&ldquo;reductions&rdquo; and &ldquo;invocations&rdquo; among others. The latter contains the
+number of times the associated key was accessed through
+<code>avm_entries</code>.
+
+        <p>The data written to the file should be taken with a grain of salt.  It
+is computed using native integer and floating point arithmetic, with no
+checks made for overflow or roundoff error, and no guarantee of cross
+<a name="index-reductions-621"></a>platform portability. The number of &ldquo;reductions&rdquo; means whatever the
+developer of the client program wants it to mean.
+
+        <p>The following error messages are possible with this function, which will
+be written to standard error. None of them is fatal. 
+<a name="index-g_t_0040code_007bcan_0027t-write_007d-622"></a><a name="index-g_t_0040code_007bcan_0027t-close_007d-623"></a><a name="index-g_t_0040code_007binvalid-profile-identifier_007d-624"></a>
+          <ul>
+<li><var>program-name</var><code>: can't write </code><var>filename</var>
+<li><var>program-name</var><code>: can't write to </code><var>filename</var>
+<li><var>program-name</var><code>: can't close </code><var>filename</var>
+<li><var>program-name</var><code>: invalid profile identifier</code>
+</ul>
+
+        <p>The last message is reported if any record in the database has a key
+that is not a list of valid character representations. The others are
+<a name="index-g_t_0040code_007bstrerror_007d-625"></a>accompanied by an explanation from the standard <code>strerror</code> function
+if possible. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_profile</b> ()<var><a name="index-avm_005finitialize_005fprofile-626"></a></var><br>
+<blockquote><p>This function should be called before any of the other functions in this
+section in order to initialize the data base. Results are undefined if
+it is not called first. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_profile</b> ()<var><a name="index-avm_005fcount_005fprofile-627"></a></var><br>
+<blockquote><p>This function can be called after the other functions in this section as
+a way of detecting memory leaks. If any storage remains unreclaimed that
+was created by the functions in this section, a warning message is
+written to standard error. If the <code>avm_count_lists</code> function is
+being used by the client program, it should be called after this one. 
+</p></blockquote></div>
+
+   </body></html>
+

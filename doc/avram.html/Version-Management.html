@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+<title>Version Management - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Library-Reference.html#Library-Reference" title="Library Reference">
+<link rel="prev" href="Invocation.html#Invocation" title="Invocation">
+<link rel="next" href="Error-Reporting.html#Error-Reporting" title="Error Reporting">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Version-Management"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Error-Reporting.html#Error-Reporting">Error Reporting</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Invocation.html#Invocation">Invocation</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Library-Reference.html#Library-Reference">Library Reference</a>
+<hr>
+</div>
+
+<h3 class="section">3.5 Version Management</h3>
+
+<p>The <code>avram</code> library is designed to support any number of backward
+<a name="index-versions-602"></a>compatibility modes with itself, by way of some functions declared in
+<samp><span class="file">vman.h</span></samp>. The assumption is that the library will go through a
+sequence of revisions during its life, each being identified by a unique
+number. In the event of a fork in the project, each branch will
+attempt to maintain compatibility at least with its own ancestors.
+
+<div class="defun">
+&mdash; Function: void <b>avm_set_version</b> (<var>char *number</var>)<var><a name="index-avm_005fset_005fversion-603"></a></var><br>
+<blockquote><p>This function can be used to delay the demise of a client program that
+uses the library but is not updated very often. The argument is a null
+terminated string representing a version number, such as <code>"0.13.0"</code>.
+
+        <p>A call to this function requests that all library functions revert to
+their behavior as of that version in any cases where the current
+behavior is incompatible with it. It will also cause virtual code
+applications evaluated with <code>avm_apply</code> to detect a version number
+equal to the given one rather than the current one. (See <a href="Version.html#Version">Version</a>.)
+
+        <p>The program will exit with an internal error message if any function in
+the library has already interrogated the version number before this
+function is called, or if it is passed a null pointer. This problem can
+be avoided by calling it prior to any of the <code>avm_initialize</code>
+functions with a valid address. The program will exit with the message
+
+     <pre class="display">          <var>program-name</var><code>: multiple version specifications</code>
+</pre>
+        <p>if this function is called more than once, even with the same number. 
+If the number is not recognized as a present or past version, or is so
+old that it is no longer supported, the program will exit with this
+message.
+
+     <pre class="display">          <code>avram: can't emulate version </code><var>number</var>
+</pre>
+        <p>Client programs that are built to last should allow the version number
+to be specified as an option by the user, and let virtual code
+applications that they execute take care of their own backward
+compatibility problems. This strategy will at least guard against
+changes in the virtual machine specification and other changes that do
+not affect the library API. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: int <b>avm_prior_to_version</b> (<var>char *number</var>)<var><a name="index-avm_005fprior_005fto_005fversion-604"></a></var><br>
+<blockquote><p>This function takes the address of a null terminated string representing
+a version number as an argument, such as <code>"0.13.0"</code>, and returns a
+non-zero value if the version currently being emulated predates it.
+
+        <p>If no call has been made to <code>avm_set_version</code> prior to the call to
+this function, the current version is assumed, and subsequent calls to
+<code>avm_set_version</code> will cause an internal error.
+
+        <p>The intended use for this function would be by a maintainer of the
+library introducing an enhancement that will not be backward compatible,
+who doesn't wish to break existing client programs and virtual code
+applications. For example, if a version <code>1.0</code> is developed at some
+time in the distant future, and it incorporates a previously unexpected
+way of doing something, code similar to the following could be used to
+maintain backward compatibility.
+
+     <pre class="example">          if (avm_prior_to_version("1.0"))
+            {
+              /* do it the 0.x way */
+            }
+          else
+            {
+              /* do it the 1.0-and-later way */
+            }
+</pre>
+        <p class="noindent">This function will cause an internal error if the parameter does not
+match any known past or present version number, or if it is a null pointer. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: char* <b>avm_version</b> ()<var><a name="index-avm_005fversion-605"></a></var><br>
+<blockquote><p>This function returns the number of the version currently being emulated
+as the address of a null terminated string. The string whose address is
+returned should not be modified by the caller.
+
+        <p>If no call has been made to <code>avm_set_version</code> prior to the call to
+this function, the current version is assumed, and subsequent calls to
+<code>avm_set_version</code> will cause an internal error. 
+</p></blockquote></div>
+
+   </body></html>
+

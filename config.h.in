@@ -1,0 +1,166 @@
+/* config.h.in.  Generated from configure.in by autoheader.  */
+
+/* if you have the argz library */
+#undef HAVE_ARGZ_H
+
+/* if you have complex math */
+#undef HAVE_COMPLEX
+
+/* Define to 1 if you have the `ctime_r' function. */
+#undef HAVE_CTIME_R
+
+/* Define to 1 if you have the <ctype.h> header file. */
+#undef HAVE_CTYPE_H
+
+/* Define to 1 if you have the declaration of `__free_hook', and to 0 if you
+   don't. */
+#undef HAVE_DECL___FREE_HOOK
+
+/* Define to 1 if you have the declaration of `__malloc_hook', and to 0 if you
+   don't. */
+#undef HAVE_DECL___MALLOC_HOOK
+
+/* Define to 1 if you have the declaration of `__realloc_hook', and to 0 if
+   you don't. */
+#undef HAVE_DECL___REALLOC_HOOK
+
+/* Define if you have libexpect */
+#undef HAVE_EXPECT
+
+/* Define to 1 if you have the <fcntl.h> header file. */
+#undef HAVE_FCNTL_H
+
+/* if you have floating point math */
+#undef HAVE_FENV
+
+/* Define if you have the fftw library */
+#undef HAVE_FFTW
+
+/* Define if you have libgcrypt */
+#undef HAVE_GCRYPT
+
+/* Define if you have the GNU linear programming kit */
+#undef HAVE_GLPK
+
+/* Define if you have GNU multiple precision library */
+#undef HAVE_GMP
+
+/* Define if you have the GNU Scientific library */
+#undef HAVE_GSL
+
+/* Define if you have the harminv library */
+#undef HAVE_HARMINV
+
+/* Define to 1 if you have the <inttypes.h> header file. */
+#undef HAVE_INTTYPES_H
+
+/* Define for sundials */
+#undef HAVE_KINSOL
+
+/* Define if you have the lapack library */
+#undef HAVE_LAPACK
+
+/* Define if you have lpsolve */
+#undef HAVE_LPSOLVE
+
+/* Define if you have the standard malloc.h header */
+#undef HAVE_MALLOC
+
+/* Define to 1 if you have the <math.h> header file. */
+#undef HAVE_MATH_H
+
+/* Define to 1 if you have the `memmove' function. */
+#undef HAVE_MEMMOVE
+
+/* Define to 1 if you have the <memory.h> header file. */
+#undef HAVE_MEMORY_H
+
+/* Define if you have the minpack library */
+#undef HAVE_MINPACK
+
+/* Define if you have the mpfr arbitrary precision library */
+#undef HAVE_MPFR
+
+/* Define if you have the GNU R math library */
+#undef HAVE_RMATH
+
+/* Define if you have setjmp functions */
+#undef HAVE_SETJMP
+
+/* Define to 1 if you have the <stdint.h> header file. */
+#undef HAVE_STDINT_H
+
+/* Define to 1 if you have the <stdlib.h> header file. */
+#undef HAVE_STDLIB_H
+
+/* Define to 1 if you have the `strdup' function. */
+#undef HAVE_STRDUP
+
+/* Define to 1 if you have the `strerror' function. */
+#undef HAVE_STRERROR
+
+/* Define to 1 if you have the <strings.h> header file. */
+#undef HAVE_STRINGS_H
+
+/* Define to 1 if you have the <string.h> header file. */
+#undef HAVE_STRING_H
+
+/* Define to 1 if you have the `strstr' function. */
+#undef HAVE_STRSTR
+
+/* Define to 1 if you have the <sys/file.h> header file. */
+#undef HAVE_SYS_FILE_H
+
+/* Define to 1 if you have the <sys/stat.h> header file. */
+#undef HAVE_SYS_STAT_H
+
+/* Define to 1 if you have the <sys/time.h> header file. */
+#undef HAVE_SYS_TIME_H
+
+/* Define to 1 if you have the <sys/types.h> header file. */
+#undef HAVE_SYS_TYPES_H
+
+/* Define to 1 if you have the <time.h> header file. */
+#undef HAVE_TIME_H
+
+/* Define if you have the ufsparse libraries */
+#undef HAVE_UMF
+
+/* Define to 1 if you have the <unistd.h> header file. */
+#undef HAVE_UNISTD_H
+
+/* Define to 1 if your C compiler doesn't accept -c and -o together. */
+#undef NO_MINUS_C_MINUS_O
+
+/* Name of package */
+#undef PACKAGE
+
+/* Define to the address where bug reports for this package should be sent. */
+#undef PACKAGE_BUGREPORT
+
+/* Define to the full name of this package. */
+#undef PACKAGE_NAME
+
+/* Define to the full name and version of this package. */
+#undef PACKAGE_STRING
+
+/* Define to the one symbol short name of this package. */
+#undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
+
+/* Define to the version of this package. */
+#undef PACKAGE_VERSION
+
+/* Define to 1 if you have the ANSI C header files. */
+#undef STDC_HEADERS
+
+/* Version number of package */
+#undef VERSION
+
+/* Define to empty if `const' does not conform to ANSI C. */
+#undef const
+
+/* Define to `unsigned int' if <sys/types.h> does not define. */
+#undef size_t

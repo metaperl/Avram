@@ -1,0 +1,156 @@
+<html lang="en">
+<head>
+<title>Preface - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="index.html#Top" title="Top">
+<link rel="next" href="User-Manual.html#User-Manual" title="User Manual">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Preface"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="User-Manual.html#User-Manual">User Manual</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="index.html#Top">Top</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="unnumbered">Preface</h2>
+
+<p><code>avram</code> is a virtual machine code interpreter.  It reads an input
+file containing a user-supplied application expressed in virtual machine
+code, and executes it on the host machine. The name is a quasi-acronym
+for &ldquo;Applicative ViRtuAl Machine&rdquo;.  Notable features are
+
+   <p><a name="index-functional-programming-1"></a><a name="index-environment-2"></a><a name="index-Unix-3"></a>
+     <ul>
+<li>strong
+support for functional programming operations (e.g., list processing)
+<li>interfaces to selected functions from mathematical libraries, such as
+          <ul>
+<li><code>gsl</code>      (numerical integration, differentiation, and series acceleration)
+
+          <p><a href="http://www.gnu.org/software/gsl/">http://www.gnu.org/software/gsl/</a>
+<li><code>mpfr</code>     (arbitrary precision arithmetic)
+
+          <p><a href="http://www.mpfr.org">http://www.mpfr.org</a>
+<li><code>minpack</code>  (non-linear optimization)
+
+          <p><a href="http://ftp.netlib.org/minpack">http://ftp.netlib.org/minpack</a>
+<li><code>lapack</code>   (linear algebra)
+
+          <p><a href="http://ftp.netlib.org/lapack">http://ftp.netlib.org/lapack</a>
+<li><code>fftw</code>     (fast fourier transforms)
+
+          <p><a href="http://www.fftw.org">http://www.fftw.org</a>
+<li><code>Rmath</code>    (statistical and transcendental functions)
+
+          <p><a href="http://www.r-project.org">http://www.r-project.org</a>
+<li><code>ufsparse</code> (sparse matrices)
+
+          <p><a href="http://www.cise.ufl.edu/research/sparse/SuiteSparse/current/SuiteSparse/">http://www.cise.ufl.edu/research/sparse/SuiteSparse/current/SuiteSparse/</a>
+<li><code>glpk</code>     (linear programming by the simplex method)
+
+          <p><a href="http://tech.groups.yahoo.com/group/lp_solve/">http://tech.groups.yahoo.com/group/lp_solve/</a>
+<li><code>lpsolve</code>      (mixed integer linear programming)
+
+          <p><a href="http://www.llnl.gov/CASC/sundials/">http://www.llnl.gov/CASC/sundials/</a>
+<li><code>kinsol</code>   (constrained non-linear optimization)
+
+          <p><a href="http://www.llnl.gov/CASC/sundials/">http://www.llnl.gov/CASC/sundials/</a>
+</ul>
+     <li>interoperability of virtual code applications with other console
+applications or shells through the <code>expect</code> library
+<li>a simple high-level
+interface to files, environment variables and command line parameters
+<li>support for various styles of stateless or persistent stream
+processors (a.k.a. Unix filters)
+</ul>
+
+   <p>The reason for writing <code>avram</code> was that I wanted to do some work
+using a functional programming language, didn't like any functional
+programming languages that already existed, and felt that it would be
+less trouble to write a virtual machine emulator than the back end of
+a compiler. As of version 0.1.0, the first public release of
+<code>avram</code> as such in 2000, most of the code base had been in heavy
+use by me for about four years, running very reliably. At this writing
+some six years later, it has seen even more use with rarely any
+reliability issues, in some cases attacking large combinatorial
+problems for weeks or months at a time. These problems have involved
+both long running continuous execution, and batches of thousands of
+shorter jobs.
+
+   <p>Although the virtual machine is biased toward functional programming,
+it is officially language agnostic, so <code>avram</code> may be useful to
+anyone involved in the development of compilers for other programming,
+scripting, or special purpose languages. The crucial advantage of
+using it in your own project is that rather than troubling over
+address modes, register allocation, and other hassles inherent in
+generating native code, your compiler can just dump a fairly high
+level intermediate code representation of the source text to a file,
+and let the virtual machine emulator deal with the details. The
+tradeoff for using a presumably higher level interpreted language is that the
+performance is unlikely to be competitive with native code, but this
+issue is mitigated in the case of numerical applications whose heavy
+lifting is done by the external libraries mentioned above.
+
+   <p>Portability is an added bonus. The virtual code is binary compatible
+across all platforms. Versions of <code>avram</code> as of 0.1.0 and later are
+packaged using GNU autotools and should be possible to build on any
+platform supporting them. In particular, the package is known to have
+built successfully on MacOS, FreeBSD, Solaris (thanks to the compile
+farm at Sourceforge.net) Digital Unix, and Debian GNU/Linux for i386 and
+Alpha platforms, although it has not been extensively tested on all of
+them. Earlier versions were compiled and run successfully on Irix and
+even Windows-NT (with <samp><span class="command">gcc</span></samp>).
+
+   <p>This document is divided into three main parts, with possibly three
+different audiences, but they all depend on a basic familiarity with
+<a name="index-Unix-4"></a>Unix or GNU/Linux systems.
+
+     <dl>
+<dt><a href="User-Manual.html#User-Manual">User Manual</a><dd>essentially reproduces the information found in
+the manpage that is distributed with <code>avram</code> with a few extra
+examples and longer explanations. Properly deployed,
+<code>avram</code> should be almost entirely hidden from end users by wrapper
+scripts, so the &ldquo;users&rdquo; to whom this part is relevant would be
+those involved in preparing these scripts (a matter of choosing the right
+command line options). Depending on the extent to which this task is
+automated by a compiler, that may include the compiler writer or the
+developers of applications. 
+<br><dt><a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a><dd>documents much of what one would need to know in order to write a
+compiler that generates code executable by <code>avram</code>. That includes
+the complete virtual machine code semantics and file formats. It would
+also be possible to implement a compatible replacement for <code>avram</code>
+from scratch based on the information in this chapter, in case anyone
+has anything against C, my coding style, or the GPL.  (A few patches to
+make it <samp><span class="command">lint</span></samp> cleanly or a new implementation in good
+pedagogical Java without pointers would both be instructive
+exercises. ;-))
+<a name="index-pointers-5"></a><a name="index-Java-6"></a><br><dt><a href="Library-Reference.html#Library-Reference">Library Reference</a><dd>includes documentation on the application program interface and
+recommended entry points for the C library distributed with
+<code>avram</code>. This information would be of use to those wishing to
+develop applications incorporating similar features, or to reuse the
+code for unrelated purposes. It might also be useful to anyone wishing
+to develop C or C++ applications that read or write data files in the
+format used by <code>avram</code>. 
+</dl>
+
+   </body></html>
+

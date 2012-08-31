@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>mpfr exceptions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mpfr.html#mpfr" title="mpfr">
+<link rel="prev" href="mpfr-conversion-functions.html#mpfr-conversion-functions" title="mpfr conversion functions">
+<link rel="next" href="Additional-mpfr-notes.html#Additional-mpfr-notes" title="Additional mpfr notes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="mpfr-exceptions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Additional-mpfr-notes.html#Additional-mpfr-notes">Additional mpfr notes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-conversion-functions.html#mpfr-conversion-functions">mpfr conversion functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.14.9 <code>mpfr</code> exceptions</h4>
+
+     <ul>
+<li>A message of <code>&lt;'memory overflow'&gt;</code> is possible any time
+<code>mpfr</code> runs out of memory. 
+<li>A message of <code>&lt;'bad mpfr specification'&gt;</code> will be returned
+<a name="index-bad-mpfr-specification-799"></a>if an input argument recognizably violates the required specification. 
+<li>The <code>&lt;'mpfr error'&gt;</code> message is returned in the event of any
+<a name="index-mpfr-error-800"></a>unexpected behavior or irregular status from the API. 
+<li>The message of <code>&lt;'mpfr overflow'&gt;</code> can be cause by the
+<code>nat2mp</code> function if a natural number has too many bits to be
+represented exactly as an <code>mpfr</code> number. 
+</ul>
+
+   </body></html>
+

@@ -1,0 +1,284 @@
+<html lang="en">
+<head>
+<title>Simple Operations - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Lists.html#Lists" title="Lists">
+<link rel="prev" href="Lists.html#Lists" title="Lists">
+<link rel="next" href="Recoverable-Operations.html#Recoverable-Operations" title="Recoverable Operations">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Simple-Operations"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Recoverable-Operations.html#Recoverable-Operations">Recoverable Operations</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Lists.html#Lists">Lists</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.1 Simple Operations</h4>
+
+<p>These functions are declared in the header file <code>lists.h</code>, which
+should be included in any C source file that uses them with a directive
+such as <code>#include&nbsp;&lt;avm/lists.h&gt;<!-- /@w --></code>. All of these functions except
+the first three have the potential cause a memory overflow. In that
+<a name="index-overflow-399"></a>event, a brief message is written to standard error and the process is
+killed rather than returning to the caller. It is possible for client
+programs requiring more robust behavior to do their own error handling
+by using the alternative versions of these operations described in the
+next section.
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_lists</b> ()<var><a name="index-avm_005finitialize_005flists-400"></a></var><br>
+<blockquote><p>The function <code>avm_initialize_lists</code> should be called before any of
+the other ones in this section is called, because it sets up some
+internal data structures. Otherwise, the behavior of the other functions
+is undefined. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_dispose</b> (<var>list front</var>)<var><a name="index-avm_005fdispose-401"></a></var><br>
+<blockquote><p>This function deallocates the memory associated with a given list,
+either by consigning it to a cache maintained internally by the library,
+or by the standard <code>free</code> function if the cache is full. Shared
+lists are taken into account and handled properly according to a
+reference counting scheme. Lists should be freed only by this function,
+not by using <code>free</code> directly. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_lists</b> ()<var><a name="index-avm_005fcount_005flists-402"></a></var><br>
+<blockquote><p>If a client program aims to do its own storage reclamation, this
+function can be called optionally at the end of a run when it is
+believed that all lists have been freed. If any allocated lists remain
+at large, a warning will be printed to standard error. This function
+therefore provides a useful check for memory leaks. Overhead is small
+enough that it is not infeasible to leave this check in the production
+code. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_copied</b> (<var>list operand</var>)<var><a name="index-avm_005fcopied-403"></a></var><br>
+<blockquote><p>A copy of the argument list is returned by this function. The copy
+remains intact after the original is reclaimed. A typical use might be
+for retaining part of a list after the rest of it is no longer
+needed. In this example, a list <code>x</code> is traversed by a hypothetical
+<code>visit</code> function to each item, which is then immediately reclaimed.
+
+     <pre class="example">          while(x){
+             visit(x-&gt;head);
+             old_x = x;
+             x = avm_copied(x-&gt;tail);       /* the right way */
+             avm_dispose(old_x);
+          }
+</pre>
+        <p>This example allows each item in the list to be visited even as
+previously visited items are reclaimed, because <code>x</code> is copied at
+each iteration. This example contrasts with the next one, which will
+probably cause a segmentation fault. 
+<a name="index-segmentation-fault-404"></a>
+     <pre class="example">          while(x){
+             visit(x-&gt;head);
+             old_x = x;
+             x = x-&gt;tail;                   /* the wrong way */
+             avm_dispose(old_x);
+          }
+</pre>
+        <p>In the second example, a reference is made to a part of a list which no
+longer exists because it has been deallocated.
+
+        <p>In fact, the <code>avm_copied</code> function does nothing but increment a
+reference count, so it is a fast, constant time operation that requires
+<a name="index-reference-count-405"></a>no additional memory allocation. Semantically this action is equivalent
+to creating a fresh copy of the list, because all list operations in the
+library deal with reference counts properly. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_join</b> (<var>list left, list right</var>)<var><a name="index-avm_005fjoin-406"></a></var><br>
+<blockquote><p>This function takes a pair of lists to a list in which the left is the
+head and the right is the tail. It may need to use <code>malloc</code> to
+allocate additional memory. If there is insufficient memory, an error
+message is written to standard error and the program exits. 
+When the list returned by <code>avm_join</code> is eventually deallocated, the
+lists from which it was built are taken with it and must not be
+referenced again. For example, the following code is an error.
+
+     <pre class="example">          z = avm_join(x,y);
+          ...
+          avm_dispose(z);
+          avm_print_list(x);         /* error here */
+</pre>
+        <p>To accomplish something similar to this without an error, a copy of
+<code>x</code> should be made, as in the next example.
+
+     <pre class="example">          z = avm_join(avm_copied(x),y);
+          ...
+          avm_dispose(z);
+          avm_print_list(x);         /* original x still intact */
+</pre>
+        </blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_enqueue</b> (<var>list *front, list *back, list operand</var>)<var><a name="index-avm_005fenqueue-407"></a></var><br>
+<blockquote><p><a name="index-queues-408"></a>A fast simple way of building a list head first is provided by the
+<code>enqueue</code> function. The <code>front</code> is a pointer to the beginning
+of the list being built, and the <code>back</code> is a pointer to the last
+item. The recommended way to use it would be something like this.
+
+     <pre class="example">          front = back = NULL;
+          avm_enqueue(&amp;front,&amp;back,item);
+          avm_enqueue(&amp;front,&amp;back,next_item);
+          avm_enqueue(&amp;front,&amp;back,another_item);
+          ...
+</pre>
+        <p>It might be more typical for the calls to <code>avm_enqueue</code> to appear
+within a loop. In any case, after the above code is executed, the
+following postconditions will hold.
+
+     <pre class="example">          front-&gt;head == item
+          front-&gt;tail-&gt;head == next_item
+          front-&gt;tail-&gt;tail-&gt;head == another_item
+          back-&gt;head == another_item
+          back-&gt;tail == NULL
+</pre>
+        <p>The <code>avm_enqueue</code> function must never be used on a shared list, because
+it modifies its arguments in place. The only practical way to guarantee
+that a list is not shared is to initialize the <code>front</code> and <code>back</code> to
+<code>NULL</code> as shown before the first call to <code>avm_enqueue</code>, and to
+make no copies of <code>front</code> or <code>back</code> until after the last call
+to <code>avm_enqueue</code>.
+
+        <p>Because a list built with <code>avm_enqueue</code> is not shared, it is one of the
+few instances of a list that can have something harmlessly appended to
+it in place. For example, if the next line of code were
+
+     <pre class="example">          back-&gt;tail = rest_of_list;
+</pre>
+        <p>that would be acceptable assuming <code>rest_of_list</code> is not shared and
+does not conceal a dangling or cyclic reference, and if nothing further
+were enqueued.
+
+        <p>The items that are enqueued into a list are not copied and will be
+deallocated when the list is deallocated, so they must not be referenced
+thereafter. A non-obvious violation of this convention is implicit in
+the following code.
+
+     <pre class="example">          ...
+          avm_enqueue(&amp;front,&amp;back,x-&gt;head);
+          ...
+          avm_dispose(front);
+          avm_print_list(x);      /* error here  */
+</pre>
+        <p>This code might cause a segmentation fault because of the reference to
+<a name="index-segmentation-fault-409"></a><code>x</code> after its head has been deallocated. The following code is
+subject to the same problem,
+
+     <pre class="example">          ...
+          avm_enqueue(&amp;front,&amp;back,x-&gt;head);
+          ...
+          avm_dispose(x);
+          avm_print_list(front);       /* error here */
+</pre>
+        <p>as is the following.
+
+     <pre class="example">          ...
+          avm_enqueue(&amp;front,&amp;back,x-&gt;head);
+          ...
+          avm_dispose(x);       /* front is now impossible to reclaim */
+          avm_dispose(front);
+</pre>
+        <p>The problem with the last example is that it is not valid even to
+dispose of the same list more than once, albeit indirectly.
+
+        <p>If part of a list is intended to be enqueued temporarily or
+independently of its parent, the list should be copied explicitly, as
+the following code demonstrates.
+
+     <pre class="example">          ...
+          avm_enqueue(&amp;front,&amp;back,avm_copied(x-&gt;head));   /* correct */
+          ...
+          avm_dispose(front);
+          avm_print_list(x);
+</pre>
+        </blockquote></div>
+
+<div class="defun">
+&mdash; Function: counter <b>avm_length</b> (<var>list operand</var>)<var><a name="index-avm_005flength-410"></a></var><br>
+<blockquote><p>A <code>counter</code> is meant to be the longest unsigned integer available
+<a name="index-g_t_0040code_007bcounter_007d-411"></a>on the host machine, and is defined in <code>common.h</code>, which is
+automatically included whenever <code>lists.h</code> is included. The
+<code>avm_length</code> function returns the number of items in a list. If a
+list is <code>NULL</code>, a value of zero is returned. There is a possibility
+of a counter overflow error from this function (<a href="Overflow-Errors.html#Overflow-Errors">Overflow Errors</a>),
+but only on a platform where the <code>counter</code> type is shorter than the
+address length. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: counter <b>avm_area</b> (<var>list operand</var>)<var><a name="index-avm_005farea-412"></a></var><br>
+<blockquote><p>This function is similar to <code>avm_length</code>, but it treats its
+argument as a list of lists and returns the summation of their lengths. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_natural</b> (<var>counter number</var>)<var><a name="index-avm_005fnatural-413"></a></var><br>
+<blockquote><p><a name="index-naturals-414"></a>This function takes a <code>counter</code> to its representation as a list, as
+described in <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>. That is,
+the number is represented as a list of bits, least significant bit
+first, with each zero bit represented by <code>NULL</code> and each one bit
+represented by a list whose <code>head</code> and <code>tail</code> are <code>NULL</code>. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_print_list</b> (<var>list operand</var>)<var><a name="index-avm_005fprint_005flist-415"></a></var><br>
+<blockquote><p>The <code>avm_print_list</code> function is not used in any production code
+but retained in the library for debugging purposes. It prints a list to
+<a name="index-standard-output-416"></a>standard output using an expression involving only commas and parentheses,
+as per the <code>silly</code> syntax (<a href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>). The
+results quickly become unintelligible for lists of any significant size. 
+The function is recursively defined and will crash in the event of a
+stack overflow, which will occur in the case of very large or cyclic
+lists. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_position</b> (<var>list key, list table, int *fault</var>)<var><a name="index-avm_005fposition-417"></a></var><br>
+<blockquote><p>This function searches for a <var>key</var> in a short <var>table</var> where
+each item is a possible key.
+
+        <p>If it's not found, a <code>NULL</code> value is returned. If it's
+found, a list representing a character encoding according to
+<a href="Character-Table.html#Character-Table">Character Table</a> is returned.
+
+        <p>The ascii code of the character corresponding to the returned list is
+the position of the <var>key</var> in the <var>table</var>, assuming position
+numbers start with 1.
+
+        <p>The table should have a length of 255 or less. If it's longer and the
+<var>key</var> is found beyond that range, the higher order bits of the
+position number are ignored.
+
+        <p>The integer referenced by <var>fault</var> is set to a non-zero value in
+the event of a memory overflow, which could happen in the course of
+the list comparisons necessary for the search. 
+</p></blockquote></div>
+
+   </body></html>
+

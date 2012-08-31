@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+<title>Lists of Pairs of Ports - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
+<link rel="prev" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
+<link rel="next" href="Ports-and-Packets.html#Ports-and-Packets" title="Ports and Packets">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Lists-of-Pairs-of-Ports"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Ports-and-Packets.html#Ports-and-Packets">Ports and Packets</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.8.1 Lists of Pairs of Ports</h4>
+
+<p><a name="index-g_t_0040code_007bport_007d-628"></a>A <code>port</code> is the name given to a type of pointer used in the library
+as the address of a place where a computational result yet to be
+evaluated will be sent. Ports are discussed further in <a href="Ports-and-Packets.html#Ports-and-Packets">Ports and Packets</a>,
+but are mentioned here because it is sometimes necessary to employ a
+list of pairs of them. A pointer to such a list is declared as a
+<code>portal</code> type. It refers to a structure of the form
+<a name="index-g_t_0040code_007bportal_007d-629"></a><a name="index-g_t_0040code_007bport_005fpair_007d-630"></a>
+<pre class="example">     struct port_pair
+     {
+       port left;
+       port right;
+       portal alters;
+     }
+</pre>
+   <p>A small selection of functions for <code>portal</code> memory management is
+declared as follows in the header file <samp><span class="file">portals.h</span></samp>. For reasons of
+C-ness, the type declarations themselves are forced to be in
+<samp><span class="file">lists.h</span></samp>.
+
+<div class="defun">
+&mdash; Function: portal <b>avm_new_portal</b> (<var>portal alters</var>)<var><a name="index-avm_005fnew_005fportal-631"></a></var><br>
+<blockquote><p>This function is used to create storage for a new <code>port_pair</code>
+structure, and returns a <code>portal</code> pointer to it if successful. If
+the storage can't be allocated, a <code>NULL</code> pointer is returned. 
+The <code>alters</code> field of the result is initialized as the given
+parameter supplied by the caller. All other fields are filled with zeros. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_seal</b> (<var>portal fate</var>)<var><a name="index-avm_005fseal-632"></a></var><br>
+<blockquote><p>This function performs the reclamation of storage associated with
+<code>portal</code> pointers, either by freeing them or by consigning them
+temporarily to a local cache for performance reasons. Client programs
+should use only this function for disposing of <code>portal</code> storage
+rather than using <code>free</code> directly, so as to allow accurate record
+keeping. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_portals</b> ()<var><a name="index-avm_005finitialize_005fportals-633"></a></var><br>
+<blockquote><p>This function should be called by a client program prior to calling
+either of the above memory management functions in order to initialize
+some local variables. Anomalous results are possible otherwise. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_portals</b> ()<var><a name="index-avm_005fcount_005fportals-634"></a></var><br>
+<blockquote><p>This function should be called at the end of a run or after the last
+call to any of the other functions in this section as a way of detecting
+memory leaks associated with <code>portal</code> pointers. A warning message
+will be written to standard error if any remains unreclaimed. 
+</p></blockquote></div>
+
+   </body></html>
+

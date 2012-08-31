@@ -1,0 +1,77 @@
+<html lang="en">
+<head>
+<title>fftw - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="complex.html#complex" title="complex">
+<link rel="next" href="glpk.html#glpk" title="glpk">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="fftw"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="glpk.html#glpk">glpk</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="complex.html#complex">complex</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.3 <code>fftw</code></h3>
+
+<p>Some functions in the <code>fftw</code> fast Fourier transform library are
+<a name="index-Fourier-transforms-712"></a><a name="index-Hartley-transforms-713"></a>callable by virtual code programs of the form
+<code>library('fftw',f)</code>, where <code>f</code> can be one of the following
+character strings.
+
+     <dl>
+<dt><code>u_fw_dft</code><dd>(uni-dimensional forward Discrete Fourier transform)
+<br><dt><code>u_bw_dft</code><dd>(uni-dimensional backward Discrete Fourier transform)
+<br><dt><code>b_fw_dft</code><dd>(bi-dimensional forward Discrete Fourier transform)
+<br><dt><code>b_bw_dft</code><dd>(bi-dimensional backward Discrete Fourier transform)
+<br><dt><code>u_dht</code><dd>(uni-dimensional Discrete Hartley transform)
+<br><dt><code>b_dht</code><dd>(bi-dimensional Discrete Hartley transform)
+</dl>
+
+   <p>These stand for the discrete Fourier transform, in one dimension and two
+dimensions, either backward or forward, and the discrete Hartley
+transform in one dimension and two dimensions. The <code>fftw</code> library
+documentation (<a href="http://www.fftw.org">http://www.fftw.org</a>) can give more information
+about the meaning of these transformations.
+
+   <p>The interface is somewhat simplified compared to the API for the <code>fftw</code>
+C library because there are no considerations of memory management or
+planning, nor any provision for dimensions higher than two.
+
+   <p>Furthermore, from the virtual side of the interface, these
+functions operate on lists rather than arrays. The one dimensional
+Fourier transforms take a list of complex numbers to a list of complex
+numbers (see <a href="complex.html#complex">complex</a>), and the one dimensional Hartley
+transforms take a list of reals to a list of reals (see
+<a href="math.html#math">math</a>). The two dimensional transforms are analogous but they
+take a matrix represented as a list of lists. Error messages
+pertaining to invalid input documented at the beginning of
+this section (<a href="External-Libraries.html#External-Libraries">External Libraries</a>) are relevant.
+
+   <p>Finally, unlike the native API for <code>fftw</code>, these transformations are
+scaled so that the backward transformation is the inverse of the
+forward, and the Hartley transformations are their own inverses
+(subject to roundoff error).
+
+   </body></html>
+

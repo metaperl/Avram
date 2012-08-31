@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+<title>Diagnostics - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
+<link rel="prev" href="Command-Line-Syntax.html#Command-Line-Syntax" title="Command Line Syntax">
+<link rel="next" href="Security.html#Security" title="Security">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Diagnostics"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Security.html#Security">Security</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
+<hr>
+</div>
+
+<h3 class="section">1.6 Diagnostics</h3>
+
+<p><a name="index-diagnostics-52"></a><a name="index-error-messages-53"></a><a name="index-run-time-errors-54"></a>The means exists for virtual code applications to have run time error
+messages written to standard error on their behalf by
+<code>avram</code>. Any error messages not documented here originate with an
+application and should be documented by it.
+
+   <p>Most error messages originating from <code>avram</code> are prefaced by the
+application name (i.e., the name of the file containing the virtual
+machine code), but will be prefaced by <code>avram:</code> if the error is
+caused by a problem loading this file itself. Error messages originating
+from virtual code applications are the responsibility of their
+respective authors and might not be prefaced by the application name.
+
+   <p>The run time errors not specifically raised by the application can be
+classified as internal errors, i/o errors, overflow errors, file
+format errors, application programming errors, and configuration related
+errors.
+
+   <p>Some error messages include a code number. The number identifies
+the specific point in the source code where the condition was
+detected, for the benefit of the person maintaining it.
+
+<ul class="menu">
+<li><a accesskey="1" href="Internal-Errors.html#Internal-Errors">Internal Errors</a>
+<li><a accesskey="2" href="i_002fo-Errors.html#i_002fo-Errors">i/o Errors</a>
+<li><a accesskey="3" href="Overflow-Errors.html#Overflow-Errors">Overflow Errors</a>
+<li><a accesskey="4" href="File-Format-Errors.html#File-Format-Errors">File Format Errors</a>
+<li><a accesskey="5" href="Application-Programming-Errors.html#Application-Programming-Errors">Application Programming Errors</a>
+<li><a accesskey="6" href="Configuration-Related-Errors.html#Configuration-Related-Errors">Configuration Related Errors</a>
+<li><a accesskey="7" href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">Other Diagnostics and Warnings</a>
+</ul>
+
+   </body></html>
+

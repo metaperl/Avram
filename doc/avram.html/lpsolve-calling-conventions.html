@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>lpsolve calling conventions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="lpsolve.html#lpsolve" title="lpsolve">
+<link rel="prev" href="lpsolve.html#lpsolve" title="lpsolve">
+<link rel="next" href="lpsolve-return-values.html#lpsolve-return-values" title="lpsolve return values">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="lpsolve-calling-conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lpsolve-return-values.html#lpsolve-return-values">lpsolve return values</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lpsolve.html#lpsolve">lpsolve</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="lpsolve.html#lpsolve">lpsolve</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.15.1 <code>lpsolve</code> calling conventions</h4>
+
+<p>The library is able to solve linear and mixed integer programming
+problems, depending on which function is selected. The
+<a name="index-linear-programming-804"></a>function to call the linear programming solver is of the form
+
+     <ul>
+<li><code>library('lpsolve','stdform')</code>
+</ul>
+
+<p class="noindent"><a name="index-mixed-integer-programming-805"></a>and the mixed integer programming functions are of the form
+
+     <ul>
+<li><code>library('lpsolve','iform')</code>
+<li><code>library('lpsolve','bform')</code>
+<li><code>library('lpsolve','biform')</code>
+</ul>
+
+<p class="noindent">The argument to the <code>stdform</code> function represents a triple
+<code>(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>))</code>, which has the same interpretation
+described in <a href="glpk-input-parameters.html#glpk-input-parameters">glpk input parameters</a>. The arguments to the <code>iform</code>,
+<code>bform</code>, and <code>biform</code> functions are tuples
+<code>(</code><var>i</var><code>,(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>)))</code>
+<code>(</code><var>b</var><code>,(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>)))</code>, and
+<code>((</code><var>b</var><code>,</code><var>i</var><code>),(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>)))</code>, respectively, where
+<var>c</var>, <var>m</var>, and <var>y</var> are as above, and
+
+     <ul>
+<li><var>b</var> is a list of binary variable column indices
+<li><var>i</var> is a list of integer variable column indices
+</ul>
+
+<p class="noindent">where column indices pertain to the constraint matrix, and are
+numbered from zero.  Specifying some or all variables as integers
+directs the solver to seek only solutions in which those variables
+have integer values, and specifying any as binary directs the solver
+to seek only solutions in which those variables have values of zero or
+one.  The IEEE floating point representation is used for all variables
+regardless (<a href="math.html#math">math</a>).
+
+   </body></html>
+

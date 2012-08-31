@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>math library operators - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="math.html#math" title="math">
+<link rel="prev" href="math.html#math" title="math">
+<link rel="next" href="math-library-predicates.html#math-library-predicates" title="math library predicates">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="math-library-operators"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="math-library-predicates.html#math-library-predicates">math library predicates</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="math.html#math">math</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="math.html#math">math</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.11.1 <code>math</code> library operators</h4>
+
+<p>The unary operators take a single real number to a real result. They
+<a name="index-trigonometric-functions-767"></a>include
+
+<pre class="example">     ceil  floor round trunc
+     sin   cos   tan   sinh   cosh   tanh
+     asin  acos  atan  asinh  acosh  atanh
+     exp   log   sqrt  cbrt   expm1  log1p  fabs
+</pre>
+   <p>The binary operators take a pair of real numbers <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> to
+a single real number output. They include
+
+<pre class="example">     pow  hypot  atan2  remainder  bus  vid  add  sub  mul  div
+</pre>
+   <p class="noindent">where the last four correspond to the C language operators <code>+</code>,
+<code>-</code>, <code>*</code>, and <code>/</code>. The functions named <code>bus</code> and
+<code>vid</code> are like the <code>sub</code> and <code>div</code> functions,
+respectively, with the order of the operands reversed, as explained in
+<a href="complex.html#complex">complex</a>.
+
+   <p>The meanings of these operators are documented in the GNU <code>libc</code> reference
+manual or other C language references. They follow IEEE standards including
+proper handling of <code>nan</code> and infinity.
+
+   </body></html>
+

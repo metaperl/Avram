@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+<title>Calling existing library functions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Library-Maintenance.html#External-Library-Maintenance" title="External Library Maintenance">
+<link rel="prev" href="External-Library-Maintenance.html#External-Library-Maintenance" title="External Library Maintenance">
+<link rel="next" href="Implementing-new-library-functions.html#Implementing-new-library-functions" title="Implementing new library functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Calling-existing-library-functions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.9.1 Calling existing library functions</h4>
+
+<p>Whatever data types a library function manipulates, its argument and
+its result are each ultimately encoded each by a single list as
+explained in <a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>. This representation allows all
+library functions to be invoked by a uniform calling convention as
+detailed below.
+
+<div class="defun">
+&mdash; Function: list <b>avm_library_call</b> (<var>list library_name, list function_name, list argument, int *fault</var>)<var><a name="index-avm_005flibrary_005fcall-654"></a></var><br>
+<blockquote><p>This function serves as an interpreter of external library functions
+by taking a <var>library_name</var>, a <var>function_name</var>, and an
+<var>argument</var> to the result returned by the corresponding library
+function for the given <var>argument</var>.
+
+        <p>The library and function names should be encoded as lists of character
+representations, the same as the arguments that would be used with the
+<code>library</code> combinator if it were being invoked by virtual code
+<a name="index-backward-compatability-655"></a>(with attention to the backward compatibility issue explained in
+<a href="Characters-and-Strings.html#Characters-and-Strings">Characters and Strings</a>).
+
+        <p>If an error occurs in the course of evaluating a library function, the
+integer referenced by <var>fault</var> will be assigned a non-zero value,
+and the result will be a list of character string representations
+explaining the error, such as <code>&lt;'memory overflow'&gt;</code>, for example. 
+Otherwise, the list returned will encode the result of the library
+function in a way that depends on the particular function being evaluated. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_have_library_call</b> (<var>list library_name, list function_name, int *fault</var>)<var><a name="index-avm_005fhave_005flibrary_005fcall-656"></a></var><br>
+<blockquote><p>This function implements the <code>have</code> combinator described in
+<a href="Have-combinator.html#Have-combinator">Have combinator</a>, which tests for the availability of a library
+function. The <var>library_name</var> and <var>function_name</var> parameters
+are as explained above for <code>avm_library_call</code>, and <code>fault</code>
+could signal an error similarly for this function as well.
+
+        <p>The result returned will be an error message in the event of an error,
+or a list of pairs of strings otherwise. The list will be empty if the
+library function is not available. If the library function is
+available, the list will contain a single pair, as in
+
+     <pre class="example">          &lt;(library_name,function_name)&gt;
+</pre>
+        <p>In addition, the list representation of the character string
+<code>'*'</code> can be specified as either the library name or the function
+name or both. This string is interpreted as a wild card and will cause
+all matching pairs of library and function names to be returned in the
+list. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_libfuns</b> ()<var><a name="index-avm_005finitialize_005flibfuns-657"></a></var><br>
+<blockquote><p>This function initializes some static data structures used by the two
+functions above. It may be called optionally before the first call to
+either of them, but will be called automatically if not. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_libfuns</b> ()<var><a name="index-avm_005fcount_005flibfuns-658"></a></var><br>
+<blockquote><p>This function can be used as an aid to detecting memory leaks. It
+reclaims any data structures allocated by
+<code>avm_initialize_libfuns</code> and should be called towards the end of
+a run some time prior to <code>avm_count_lists</code> <a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>, if the latter is being used. 
+</p></blockquote></div>
+
+   </body></html>
+

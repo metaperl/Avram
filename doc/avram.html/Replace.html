@@ -1,0 +1,91 @@
+<html lang="en">
+<head>
+<title>Replace - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Reference-Implementations.html#Reference-Implementations" title="Reference Implementations">
+<link rel="prev" href="Insert.html#Insert" title="Insert">
+<link rel="next" href="Transition.html#Transition" title="Transition">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Replace"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Transition.html#Transition">Transition</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Insert.html#Insert">Insert</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Reference-Implementations.html#Reference-Implementations">Reference Implementations</a>
+<hr>
+</div>
+
+<h3 class="section">B.3 Replace</h3>
+
+<p><a name="index-g_t_0040code_007breplace_007d-701"></a>This code is needed in the discussion of assignment in <a href="Assignment.html#Assignment">Assignment</a>. 
+where it serves as a solution to equation <em>E0</em>. The idea is that
+the function takes an argument of the form
+<code>((</code><var>locations</var><code>,</code><var>values</var><code>),</code><var>store</var><code>)</code> and returns the
+store with the values stored at the locations indicated.
+
+<pre class="example">     
+     locations = compose(left,compose(left,argument))
+     values    = compose(right,compose(left,argument))
+     store     = compose(right,argument)
+     
+     replace =
+     
+     refer conditional(
+        store,
+        (
+           conditional(
+              compose(left,locations),
+              (
+                 conditional(
+                    compose(right,locations),
+                    (
+                       (hired meta)(
+                          self,
+                          couple(
+                             (hired fan right)(locations,values),
+                             (hired meta)(
+                                self,
+                                couple(
+                                   (hired fan left)(locations,values),
+                                   store)))),
+                       couple(
+                          (hired meta)(
+                             self,
+                             couple(
+                                couple(compose(left,locations),values),
+                                compose(left,store))),
+                          compose(right,store)))),
+                 conditional(
+                    compose(right,locations),
+                    (
+                       couple(
+                          compose(left,store),
+                          (hired meta)(
+                             self,
+                             couple(
+                                couple(compose(right,locations),values),
+                                compose(right,store)))),
+                       values)))),
+              (hired meta)(
+                 self,
+                 couple(couple(locations,values),constant (nil,nil)))))
+</pre>
+   </body></html>
+

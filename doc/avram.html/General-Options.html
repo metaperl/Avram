@@ -1,0 +1,82 @@
+<html lang="en">
+<head>
+<title>General Options - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
+<link rel="prev" href="User-Manual.html#User-Manual" title="User Manual">
+<link rel="next" href="Modes-of-Operation.html#Modes-of-Operation" title="Modes of Operation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="General-Options"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="User-Manual.html#User-Manual">User Manual</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
+<hr>
+</div>
+
+<h3 class="section">1.1 General Options</h3>
+
+<p>Regardless of whatever other command line parameters are given,
+<code>avram</code> accepts the following parameters:
+
+   <p><a name="index-help-9"></a><a name="index-emulation-10"></a><a name="index-g_t_0040code_007bhelp_007d-command-line-option-11"></a><a name="index-g_t_0040code_007bemulation_007d-command-line-option-12"></a>
+     <dl>
+<dt><code>-h, --help</code><dd>Show a summary of options and exit. 
+<br><dt><code>-V,-v, --version</code><dd>Show the version of program and a short copyleft message and exit. 
+<br><dt><code>--emulation=</code><var>version</var><dd>Be backward compatible with an older version of <code>avram</code>.  This
+option should include a valid version number, for example
+<kbd>0.13.0</kbd>, which is the version of <code>avram</code> to be
+emulated. It can make virtual code applications future proof, assuming
+that future versions of <code>avram</code> correctly support backward
+compatibility. It may be used in conjunction with any other option in
+any mode of operation. 
+<a name="index-web-page-13"></a><a name="index-home-page-14"></a><a name="index-url-15"></a>This copy of the user manual has not been updated since version 0.13.0 of
+<code>avram</code>, so it is unable to document incompatibilities with later
+versions. The latest version of the manual may be found at
+<a href="http://www.lsbu.ac.uk/~fureyd/avram">http://www.lsbu.ac.uk/~fureyd/avram</a>. 
+<br><dt><code>-e, --external-libraries</code><dd><a name="index-g_t_0040code_007bexternal_002dlibraries_007d-16"></a>Show a list of libraries with which <code>avram</code> has been linked and
+whose functions therefore could be called from virtual machine
+programs. This growing list currently includes selected functions from
+<code>fftw</code>, <code>glpk</code>, <code>gsl</code>, <code>kinsol</code>, <code>lapack</code>,
+<code>minpack</code>, <code>mpfr</code>, <code>lpsolve</code>, <code>Rmath</code> and <code>ufsparse</code>
+(see <a href="Preface.html#Preface">Preface</a>) which are documented further in <a href="External-Libraries.html#External-Libraries">External Libraries</a>. 
+<br><dt><code>-j, --jail</code><dd><a name="index-g_t_0040code_007bjail_007d-17"></a>This option disables execution of shell commands by virtual code
+applications, which is normally possible by default even for nominally
+non-interactive applications (see <a href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>). A
+virtual code application attempting to spawn a shell (using the
+<code>interact</code> combinator) when this option is selected will
+encounter an exception rather than successful completion of the
+operation. This option is provided as a security feature for running
+untrusted code (see <a href="Security.html#Security">Security</a>), and is incompatible with
+<samp><span class="option">-i</span></samp>, <samp><span class="option">-t</span></samp>, and <samp><span class="option">-s</span></samp>. 
+<br><dt><code>-f, --force-text-input</code><dd><a name="index-g_t_0040code_007bforce_002dtext_002dinput_007d-command-line-option-18"></a>Normally <code>avram</code> will try to guess by looking at a file whether it
+is an ordinary text file or one that has been written in the virtual
+code file format, and choose a different internal representation
+accordingly. An application may require one representation or the
+other. This option tells <code>avram</code> to treat all input files other
+than the virtual code file (named in the first command line parameter)
+as text files regardless of whether or not it would be possible to
+interpret them otherwise. This option may be used in combination with
+any other option. 
+</dl>
+
+   </body></html>
+

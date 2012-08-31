@@ -1,0 +1,191 @@
+<html lang="en">
+<head>
+<title>Instruction Stacks - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
+<link rel="prev" href="Ports-and-Packets.html#Ports-and-Packets" title="Ports and Packets">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Instruction-Stacks"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Ports-and-Packets.html#Ports-and-Packets">Ports and Packets</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.8.3 Instruction Stacks</h4>
+
+<p>A header file named <samp><span class="file">instruct.h</span></samp> declares a number of memory
+management and stack operations on a data structure of the following
+form. 
+<a name="index-g_t_0040code_007binstruction_005fnode_007d-645"></a>
+<pre class="example">     struct instruction_node
+     {
+       port client;
+       score sheet;
+       struct avm_packet actor;
+       struct avm_packet datum;
+       instruction dependents;
+     };
+</pre>
+   <p>In this structure, an <code>instruction</code> is a pointer to an
+<code>instruction_node</code>, a <code>score</code> is a pointer to a profile
+database entry as discussed in <a href="Profiling.html#Profiling">Profiling</a>, and the <code>port</code> and
+<code>avm_packet</code> types are as described in <a href="Ports-and-Packets.html#Ports-and-Packets">Ports and Packets</a>.
+
+   <p>This data structure is appropriate for a simple virtual machine code
+<a name="index-concurrency-646"></a>evaluation strategy involving no concurrency. The strategy to evaluate an
+expression <var>f</var> <var>x</var> would be based on a stack of these
+nodes threaded through the <code>dependents</code> field, and would proceed
+something like this.
+
+     <ol type=1 start=1>
+<li>The stack is initialized to contain a single node having
+<var>f</var> in its <code>actor.contents</code> field, and <var>x</var> in
+its <code>datum.contents</code> field. 
+<li>The <code>client</code> in this node would refer to a static packet to whose
+<code>contents</code> field the final result will be delivered. 
+<li>The evaluator examines the <code>actor.contents</code> field on the top of the
+stack, detects by its form the operation it represents, and decides
+whether it corresponds to one that can be evaluated immediately by way
+of a canned function available in the library. List reversal,
+transposition, and comparison would be examples of such operations. 
+<li>If the operation can be performed in this way, the result is computed
+and assigned to the destination indicated by the <code>client</code> field. 
+<li>If the operation is not easy enough to perform immediately but is of a
+form recognizable as a combination of simpler operations, it is
+decomposed into the simpler operations, and each of them is
+strategically positioned on the stack so as to effect the evaluation of
+the combination. For example, if <var>f</var> were of the form
+<code>compose(</code><var>g</var><code>,</code><var>h</var><code>)</code> (<code>silly</code> notation), the node with
+<var>f</var> and <var>x</var> would be popped, but a node with
+<var>g</var> as its <code>actor.contents</code> would be pushed, and then a
+node with <var>h</var> as its <code>actor.contents</code> and <var>x</var>
+as its <code>datum.contents</code> would be pushed. Furthermore, the
+<code>client</code> field of the latter node would point to the
+<code>datum.contents</code> of the one with <var>g</var>, and the
+<code>client</code> field of the one with <var>g</var> would point
+wherever the <code>client</code> of the popped node used to point. 
+<li>If the operation indicated by the top <code>actor.contents</code> is neither
+implemented by a canned operation in the library nor easily decomposable
+into some that are, the evaluator can either give up or use virtual code
+to execute other virtual code. The latter trick is accomplished by
+pushing a node with <var>f</var> as its <code>datum.contents</code>, and a
+copy of a hard coded virtual code interpreter <var>V</var> as its
+<code>actor.contents</code>. The <code>client</code> of this node will point to the
+<var>f</var> in the original node so as to overwrite it when a
+simplified version is subsequently computed. The implementation of
+<var>V</var> is a straightforward exercise in <code>silly</code>
+programming. 
+<li>In any case, the evaluator would continue working on the stack until
+everything on it has been popped, at which time the result of the entire
+computation will be found in the packet addressed by the <code>client</code>
+in the original instruction node.
+        </ol>
+
+   <p>What makes this strategy feasible to implement is the assumption of a
+sequential language, wherein synchronization incurs no cost and is
+automatic. The availability of any operand is implied by its position at
+the top of the stack. If you are reading this section with a view to
+<a name="index-threads-647"></a>implementing a concurrent or multi-threaded evaluation strategy, it will
+be apparent that further provisions would need to be made, such as that
+of a <code>data_ready</code> flag added to the <code>avm_packet</code> structure.
+
+   <p>The following functions support the use of stacks of instruction nodes
+that would be needed in an evaluation strategy such as the one above.
+
+<div class="defun">
+&mdash; Function: int <b>avm_scheduled</b> (<var>list actor_contents, counter datum_errors, list datum_contents, port client, instruction *next, score sheet</var>)<var><a name="index-avm_005fscheduled-648"></a></var><br>
+<blockquote>
+        <p>This function performs the memory allocation for instruction nodes. It
+attempts to create one and to initialize the fields with the given
+parameters, returning a pointer to it if successful. It returns a
+<code>NULL</code> pointer if the storage could not be allocated.
+
+        <p>Copies of the <code>list</code> parameters <code>actor_contents</code> and
+<code>data_contents</code> are made by this function using <code>avm_copied</code>,
+so the originals still exist as far as the caller is concerned and will
+have to be deallocated separately from this structure. The copies are
+made only if the allocation succeeds.
+
+        <p>Any fields other than those indicated by the parameters to this function
+are filled with zeros in the result. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_retire</b> (<var>instruction *done</var>)<var><a name="index-avm_005fretire-649"></a></var><br>
+<blockquote><p>This function performs the storage reclamation of instructions, taking
+as its argument the instruction to be reclaimed. The <code>list</code> fields
+in the structure corresponding to the <code>list</code> parameters used when
+it was created are specifically reclaimed as well, using
+<code>avm_dispose</code>.
+
+        <p>The argument to this function is the address of an <code>instruction</code>
+rather than just an <code>instruction</code> so that the <code>instruction</code>
+whose address is given may be reassigned as the <code>dependents</code> field
+of the deallocated node. In this way, the instructions can form a stack
+that is popped by this function.
+
+        <p>This function cooperates with <code>avm_scheduled</code> in the use of a local
+cache of instruction nodes in the interest of better performance. Client
+modules should not attempt to allocate or reclaim instructions directly
+with <code>malloc</code> or <code>free</code>, but use only these functions.
+
+        <p>It causes a fatal internal error to pass a <code>NULL</code> pointer to this
+function. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_reschedule</b> (<var>instruction *next</var>)<var><a name="index-avm_005freschedule-650"></a></var><br>
+<blockquote><p>Given the address of an instruction pointer that may be regarded as the
+top of a stack of instructions threaded through the <code>dependents</code>
+field, this function exchanges the positions of the top instruction and
+the one below it. A fatal internal error is caused if there are fewer
+than two instructions in the stack.
+
+        <p>A use for this function arises in the course of evaluating virtual code
+applications of the form <code>conditional(</code><var>p</var><code>,(</code><var>f</var><code>,</code><var>g</var><code>))</code>
+(in <code>silly</code> notation). The evaluation strategy would require
+pushing nodes for all three constituents, but with <var>p</var> pushed
+last (therefore evaluated first). The result of the evaluation of
+<var>p</var> would require either the top one or the one below it to
+be popped without being evaluated, depending on whether the result is
+empty. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_instruct</b> ()<var><a name="index-avm_005finitialize_005finstruct-651"></a></var><br>
+<blockquote><p>This function should be called before any of the instruction memory
+management functions is called in order to initialize some local data
+structures. Results are unpredictable without it. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_instruct</b> ()<var><a name="index-avm_005fcount_005finstruct-652"></a></var><br>
+<blockquote><p>This function should be called after the last call to any of the
+other functions in this section in order to detect and report
+unreclaimed storage associated with them. A warning message will be
+written to standard error if any unreclaimed instructions remain. This
+function relies on the assumption that the memory management has been
+done only by way of the above functions. 
+</p></blockquote></div>
+
+   </body></html>
+

@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+<title>gsldif output - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="gsldif.html#gsldif" title="gsldif">
+<link rel="prev" href="gsldif-input-parameters.html#gsldif-input-parameters" title="gsldif input parameters">
+<link rel="next" href="gsldif-exceptions.html#gsldif-exceptions" title="gsldif exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="gsldif-output"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="gsldif-exceptions.html#gsldif-exceptions">gsldif exceptions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="gsldif-input-parameters.html#gsldif-input-parameters">gsldif input parameters</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="gsldif.html#gsldif">gsldif</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.5.2 <code>gsldif</code> output</h4>
+
+<p>The result returned by <code>library('gsldif',method) (f,x)</code> or
+<code>library('gsldif',method) ((f,t),x)</code>
+is an approximation of the first derivative of <var>f</var> evaluated at
+<var>x</var>.
+
+   <p>The result is obtained by the one of the GNU Scientific Library (GSL)
+<a name="index-GNU-Scientific-Library-719"></a>functions for numerical differentiation that matches the virtual code
+function name. These functions are documented in the GSL reference
+manual. The three methods should have approximately the same results
+but may differ in numerical properties.
+
+   </body></html>
+

@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>math library exceptions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="math.html#math" title="math">
+<link rel="prev" href="math-library-conversion-functions.html#math-library-conversion-functions" title="math library conversion functions">
+<link rel="next" href="Additional-math-library-notes.html#Additional-math-library-notes" title="Additional math library notes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="math-library-exceptions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Additional-math-library-notes.html#Additional-math-library-notes">Additional math library notes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="math-library-conversion-functions.html#math-library-conversion-functions">math library conversion functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="math.html#math">math</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.11.4 <code>math</code> library exceptions</h4>
+
+<p>The most likely cause of an exception is an attempt to apply a
+<code>math</code> library function to <code>nil</code> or to an argument that
+doesn't represent a floating point number. In these cases, an error
+<a name="index-missing-value-771"></a><a name="index-invalid-value-772"></a>message of <code>&lt;'missing value'&gt;</code> or <code>&lt;'invalid value'&gt;</code> will
+be the result.
+
+   <p>An error message of <code>&lt;'invalid asprintf() specifier'&gt;</code> is
+<a name="index-invalid-asprintf-specifier-773"></a>reported by the <code>asprintf</code> function if the format specifier
+<a name="index-asprintf-774"></a>pertains to a string, such as <code>'%s'</code>. This error is specifically
+trapped because the alternative would be a segmentation
+<a name="index-segmentation-fault-775"></a>fault. Otherwise, invalid format specifiers are not detected or
+reported.
+
+   <p>Error messages of <code>&lt;'invalid text format'&gt;</code> can be generated
+<a name="index-invalid-text-format-776"></a>by conversion functions if any parameters that are meant to be
+character string representations are something else.
+
+   <p>There is always a chance of a <code>&lt;'memory overflow'&gt;</code> error if
+there is insufficient memory to allocate a result.
+
+   </body></html>
+

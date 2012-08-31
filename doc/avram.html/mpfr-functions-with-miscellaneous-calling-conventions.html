@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>mpfr functions with miscellaneous calling conventions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mpfr.html#mpfr" title="mpfr">
+<link rel="prev" href="mpfr-constants.html#mpfr-constants" title="mpfr constants">
+<link rel="next" href="mpfr-conversion-functions.html#mpfr-conversion-functions" title="mpfr conversion functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="mpfr-functions-with-miscellaneous-calling-conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="mpfr-conversion-functions.html#mpfr-conversion-functions">mpfr conversion functions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-constants.html#mpfr-constants">mpfr constants</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.14.7 <code>mpfr</code> functions with miscellaneous calling conventions</h4>
+
+<p>Some functions listed below don't conform to any of the previously
+mentioned calling conventions.
+
+     <dl>
+<dt><code>eq</code><dd>This is a ternary operator taking a triple
+<code>(</code><var>prec</var><code>,(</code><var>x</var><code>,</code><var>y</var><code>))</code>, where <var>prec</var> is a natural
+number and <var>x</var> and <var>y</var> are <code>mpfr</code> numbers. It returns a
+result of <code>(nil,nil)</code> (i.e., true) if the numbers agree up to the
+specified precision measured in bits, and returns <code>nil</code>
+otherwise.<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+<br><dt><code>urandomb</code><dd>This function takes a natural number specifying a precision and
+<a name="index-random-numbers-798"></a>returns a uniformly distributed pseudo-random number of that precision
+between 0 and 1. 
+<br><dt><code>prec</code><dd>This function takes an <code>mpfr</code> number and returns a natural number
+as a result, which is the precision of the argument in bits. 
+<br><dt><code>sin_cos</code><dd>This function takes an <code>mpfr</code> number <var>z</var> as an argument and
+returns a pair of <code>mpfr</code> numbers <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> as a
+result, where <var>x</var> is the sine of <var>z</var> and <var>y</var> is the cosine.  The
+precisions of the results are the same as the precision of the
+argument. 
+</dl>
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> a potentially useful tool for algorithms concerned
+with numerical approximations despite its inexplicable malignment in
+the <code>mpfr</code> documentation</p>
+
+   <hr></div>
+
+   </body></html>
+

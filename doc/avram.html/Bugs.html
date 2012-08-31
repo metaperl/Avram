@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>Bugs - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
+<link rel="prev" href="Environment.html#Environment" title="Environment">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Bugs"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Environment.html#Environment">Environment</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
+<hr>
+</div>
+
+<h3 class="section">1.11 Bugs</h3>
+
+<p><a name="index-internal-errors-138"></a><a name="index-bugs-139"></a><a name="index-exceptions-140"></a>
+There are no known bugs outstanding, except for any that may be
+inherent in the external library functions. However, <code>avram</code> has
+been used most extensively on GNU/Linux systems, and the prospect
+of portability issues with new or lesser used features on other
+systems can't be excluded.
+
+   <p>Though not observed in practice, it's theoretically possible to blow
+the stack by passing enough functions as arguments to library
+functions that pass more functions to library functions (e.g., by
+using nested calls to the gsl integration functions meant for a single
+variable to evaluate a very high dimensional multiple integral). In
+all other cases only dynamic heap storage or a constant amount of
+stack space is used.  In particular, this issue is <em>not</em> relevant
+to virtual code applications that don't use external libraries, or
+that don't pass functions to them as arguments.
+
+   <p><code>avram</code> is designed to recover gracefully from memory overflows
+by always checking for <code>NULL</code> results from <code>malloc()</code> or
+otherwise trapping functions that allocate memory. In the event of an
+overflow, it conveys an appropriate error message to the virtual code
+application to be handled by the usual exception handling
+mechanisms. However, there is currently no way for a virtual code
+application to detect in advance whether sufficient memory is
+available, nor for it to resume normal operation once an exception
+occurs. Furthermore, it has been observed on some systems including
+Irix and 2.4 series Linux kernels that the <code>avram</code> process is
+killed automatically for attempting to allocate too much memory rather
+than given the chance to recover.
+
+   <p>Please send bug reports to <a href="mailto:avram-support@basis.uklinux.net">avram-support@basis.uklinux.net</a>.
+
+   </body></html>
+

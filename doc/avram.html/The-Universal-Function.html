@@ -1,0 +1,85 @@
+<html lang="en">
+<head>
+<title>The Universal Function - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Lists.html#Lists" title="Lists">
+<link rel="prev" href="Indirection.html#Indirection" title="Indirection">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="The-Universal-Function"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Indirection.html#Indirection">Indirection</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.8 The Universal Function</h4>
+
+<p><a name="index-universal-function-501"></a>A function computing the result of the invisible operator used to
+specify the virtual code semantics in <a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>, is
+easily available by way of a declaration in <samp><span class="file">apply.h</span></samp>.
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_apply</b> ()<var><a name="index-avm_005finitialize_005fapply-502"></a></var><br>
+<blockquote><p>This function should be called by the client program at least once prior
+to the first call to <code>avm_apply</code> or
+<code>avm_recoverable_apply</code>. It causes certain internal data structures
+and error message texts to be initialized. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_apply</b> ()<var><a name="index-avm_005fcount_005fapply-503"></a></var><br>
+<blockquote><p>This function should be used at the end of a run for the purpose of
+detecting and reporting any unreclaimed storage associated with
+functions in this section. If the function <code>avm_count_lists()</code> is
+also being used, it should be called after this one. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_apply</b> (<var>list operator, list operand</var>)<var><a name="index-avm_005fapply-504"></a></var><br>
+<blockquote><p>This is the function that evaluates the operator used to describe the
+virtual code semantics. For example, the value of <var>f</var> <var>x</var>
+can be obtained as the result returned by
+<code>avm_apply(</code><var>f</var><code>,</code><var>x</var><code>)</code>.
+
+        <p>Both parameters to this function are deallocated unconditionally and
+should not be referenced again by the caller. If the parameters are
+needed subsequently, then only copies of them should be passed to
+<code>avm_apply</code> using <code>avm_copied</code>.
+
+        <p>This function is not guaranteed to terminate, and may cause a memory
+overflow error. In the event of an exceptional condition, the error
+message is written to standard error and the program is halted. There is
+no externally visible distinction between different levels of error
+conditions. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_recoverable_apply</b> (<var>list operator, list operand, int *fault</var>)<var><a name="index-avm_005frecoverable_005fapply-505"></a></var><br>
+<blockquote><p>This function is similar to <code>avm_apply</code> but leaves the
+responsibility of error handling with the caller. If any
+overflow or exceptional condition occurs, the result returned is a list
+representing the error message, and the <var>fault</var> flag is set to
+a non-zero value. This behavior contrasts with that of <code>avm_apply</code>,
+which will display the message to standard error and kill the process. 
+</p></blockquote></div>
+
+   </body></html>
+

@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>Working around library misfeatures - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Library-Maintenance.html#External-Library-Maintenance" title="External Library Maintenance">
+<link rel="prev" href="Implementing-new-library-functions.html#Implementing-new-library-functions" title="Implementing new library functions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Working-around-library-misfeatures"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.9.3 Working around library misfeatures</h4>
+
+<p>As mentioned already (<a href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>), some
+common problems with external libraries that are worthwhile in other
+respects are that they may generate unwelcome console output while
+running, they may follow ill defined memory management policies, and
+they may handle exceptions just by crashing themselves along with the
+client module.
+
+   <p>An accumulation of techniques for coping with these issues (short of
+modifying the library source) has been collected into the API and made
+available by way of the header file <samp><span class="file">mwrap.h</span></samp>. This section
+briefly documents how they might be put to use.
+
+<ul class="menu">
+<li><a accesskey="1" href="Inept-excess-verbiage.html#Inept-excess-verbiage">Inept excess verbiage</a>
+<li><a accesskey="2" href="Memory-leaks.html#Memory-leaks">Memory leaks</a>
+<li><a accesskey="3" href="Suicidal-exception-handling.html#Suicidal-exception-handling">Suicidal exception handling</a>
+</ul>
+
+   </body></html>
+

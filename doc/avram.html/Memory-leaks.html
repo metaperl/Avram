@@ -1,0 +1,224 @@
+<html lang="en">
+<head>
+<title>Memory leaks - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Working around library misfeatures">
+<link rel="prev" href="Inept-excess-verbiage.html#Inept-excess-verbiage" title="Inept excess verbiage">
+<link rel="next" href="Suicidal-exception-handling.html#Suicidal-exception-handling" title="Suicidal exception handling">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Memory-leaks"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Suicidal-exception-handling.html#Suicidal-exception-handling">Suicidal exception handling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Inept-excess-verbiage.html#Inept-excess-verbiage">Inept excess verbiage</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">3.9.3.2 Memory leaks</h5>
+
+<p>Incorrect memory management may undermine confidence in a library when
+one wonders what else it gets wrong, but if the worst it does is leave
+a few bytes unreclaimed, then help is at hand.
+
+   <p>The first priority is to assess the seriousness of the situation. 
+Similarly to the way library functions are bracketed with calls to
+those listed in <a href="Inept-excess-verbiage.html#Inept-excess-verbiage">Inept excess verbiage</a>, the following functions
+are meant to be placed before and after a call to a library function
+either for diagnostic purposes or production use.
+
+<div class="defun">
+&mdash; Function: void <b>avm_manage_memory</b> ()<var><a name="index-avm_005fmanage_005fmemory-683"></a></var><br>
+<blockquote><p>After this function is called, all subsequent calls to the standard C
+functions <code>malloc</code>, <code>free</code>, and <code>realloc</code> are
+intercepted and logged until the next time
+<code>avm_dont_manage_memory</code> is called. Furthermore, a complete
+record is maintained of the addresses and sizes of all allocated areas
+of memory during this time in a persistent data structure managed
+internally. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_dont_manage_memory</b> ()<var><a name="index-avm_005fdont_005fmanage_005fmemory-684"></a></var><br>
+<blockquote><p>Calling this function suspends the storage monitoring activities
+initiated by calling <code>avm_manage_memory</code>, but the record of
+allocated memory areas is not erased. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_debug_memory</b> ()<var><a name="index-avm_005fdebug_005fmemory-685"></a></var><br>
+<blockquote><p>After this function is called and <code>avm_manage_memory</code> is also
+called, the standard output stream will display a running account of
+the sizes and addresses of all memory allocations or deallocations as
+they occur until the next call to either <code>avm_dont_debug_memory</code>
+or <code>avm_dont_manage_memory</code>. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_dont_debug_memory</b> ()<var><a name="index-avm_005fdont_005fdebug_005fmemory-686"></a></var><br>
+<blockquote><p>This function stops the output being sent to <code>stdout</code> caused by
+<code>avm_debug_memory</code>, if any, but has no effect on the logging of
+memory management events preformed due to <code>avm_manage_memory</code>. 
+</p></blockquote></div>
+
+   <p>While the latter two are not useful in production code, they can help
+to clarify an inadequately documented API during development by
+experimentally identifying the functions that cause memory to be
+allocated. They can also provide the answer to questions like whether
+separate copies are made from arrays passed to functions (useful for
+knowing when it's appropriate to free them).
+
+   <p>Although the console output reveals everything there is to know about
+memory management during the selected window, the question of
+unreclaimed storage is more directly settled by the following
+functions.
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_mwrap</b> ()<var><a name="index-avm_005finitialize_005fmwrap-687"></a></var><br>
+<blockquote><p>This function has to be called before any other functions from
+<samp><span class="file">mwrap.h</span></samp> in order to clean the slate and prepare the static data
+structures for use. This function might not have to be called
+explicitly if the client module is part of <code>avram</code>, whose main
+program would have already called it. There is no harm in calling it
+repeatedly. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_mwrap</b> ()<var><a name="index-avm_005fcount_005fmwrap-688"></a></var><br>
+<blockquote><p>This function should be called after the last call to any other
+functions in <samp><span class="file">mwrap.h</span></samp>, when it is expected that all storage that
+was allocated while <code>avm_manage_memory</code> was in effect should have
+been reclaimed.
+
+        <p>If there is no unreclaimed storage allocated during an interval when
+memory was being managed, this function returns uneventfully. However,
+if any storage remains unreclaimed, a message stating the number of
+bytes is written to <code>stderr</code>.
+
+        <p>If <code>avm_debug_memory</code> is also in effect when this function
+detects unreclaimed storage, an itemized list of the unreclaimed
+memory addresses and their sizes is written to standard output. 
+</p></blockquote></div>
+
+   <p>Of course, in order for <code>avm_count_mwrap</code> to report meaningful
+results, any memory that is allocated during the interval between
+calls to <code>avm_manage_memory</code> and <code>avm_dont_manage_memory</code>
+must have been given an opportunity to be reclaimed also while
+this logging mechanism is in effect. However, there may be arbitrarily
+many intervening intervals during which it is suspended.
+
+   <p>On the other hand, any storage that is allocated when memory is not
+being managed must not be freed at a time when it is (except for
+freeing a <code>NULL</code> pointer, which is tolerated but not
+encouraged). Doing so raises an internal error, causing termination
+<a name="index-internal-error-689"></a>with extreme prejudice. This behavior is a precaution against library
+functions freeing storage that they didn't allocate, which would mean
+no memory is safe and it's better for <code>avram</code> not to continue.
+
+   <p>If these investigations uncover no evidence of a memory leak, then
+perhaps the relevant library functions are reliable enough to run
+without supervisory memory management. Alternatively, when memory
+leaks are indicated, the next function provides a simple remedy.
+
+<div class="defun">
+&mdash; Function: void <b>avm_free_managed_memory</b> ()<var><a name="index-avm_005ffree_005fmanaged_005fmemory-690"></a></var><br>
+<blockquote><p>This function causes all storage to be reclaimed that was allocated
+at any time while logging of memory allocation was in effect (i.e.,
+whenever <code>avm_manage_memory</code> had been called more recently than
+<code>avm_dont_manage_memory</code>). When the storage is freed, no further
+record of it is maintained.
+
+        <p>A side effect of this function is to call <code>avm_dont_manage_memory</code>
+and therefore leave memory management turned off. 
+</p></blockquote></div>
+
+   <p>This last function when used in conjunction with the others is
+therefore the workaround for library functions that don't clean up
+after themselves. It may be important to do it for them if repeated
+calls to the library function are expected, which would otherwise
+cause unreclaimed storage to accumulate until it curtailed other
+operations.
+
+   <p>One small issue with this function is the assumption that unreclaimed
+storage is really a leak and not internal library data that is
+designed to persist between calls. If this assumption is not valid,
+breakage will occur. However, libraries deliberately making use of
+persistent data are likely to have initialization and destructor
+functions as part of their API's, so this assumption is often
+justified if they don't.
+
+   <p>An example of using these functions is given below.
+
+   <p>In this example, <code>allocated_library_object</code> is a hypothetical
+function exported by an external library that causes storage to be
+allocated, and <code>library_reclamation_routine</code> is provided by the
+same library ostensibly to reclaim the storage thus
+allocated. However, the latter is suspected of memory leaks.
+
+   <p>The variable <code>my_data</code> is declared and used by an <code>avram</code>
+developer who is presumably competent to reclaim it correctly, rather
+than it being part of an external library. Memory management is
+therefore enabled during the calls to the library routines but not at
+other times.
+
+   <p>The call to <code>avm_count_mwrap</code> is redundant immediately after a
+call to <code>avm_free_managed_memory</code>, because with all managed
+memory having been freed, no memory leak will ever be detected, but it
+is included for illustrative purposes.
+
+<pre class="example">     #include &lt;avm/mwrap.h&gt;
+     ...
+     
+     {
+       void *behemoth;
+       char *my_data;
+     
+       avm_initialize_mwrap ();
+       avm_manage_memory ();
+       behemoth = allocated_library_object (foo, bar);
+       avm_dont_manage_memory ();
+       my_data = (char *) malloc (100);
+       ...
+       free (my_data);
+       avm_manage_memory ();
+       library_reclamation_routine (&amp;behemoth);
+       avm_free_managed_memory ();
+       avm_count_mwrap ();
+       return;
+     }
+</pre>
+   <p>It might be a cleaner solution in some sense to omit the call to
+<code>library_reclamation_routine</code> entirely, because the storage
+allocated during the call to <code>allocated_library_object</code> will be
+reclaimed perfectly well by <code>avm_free_managed_memory</code> without
+it. Doing so may also be the only option if the library reclamation
+routine is either extremely unreliable or non-existent. However, the
+style above is to be preferred for portability if possible. The memory
+management functions rely on the availability of the system header
+file <code>malloc.h</code>, and GNU C library features whose portability is
+not assured.  If the required features are not detected on the host
+system at configuration time, conditional directives in the
+<code>avram</code> source will make the <code>avm_</code>* memory management
+functions perform no operations, and the responsibility for memory
+management will devolve to the possibly less robust external library
+implementation.
+
+   </body></html>
+

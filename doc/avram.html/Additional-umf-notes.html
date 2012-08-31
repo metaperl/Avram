@@ -1,0 +1,47 @@
+<html lang="en">
+<head>
+<title>Additional umf notes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="umf.html#umf" title="umf">
+<link rel="prev" href="umf-exceptions.html#umf-exceptions" title="umf exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Additional-umf-notes"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="umf-exceptions.html#umf-exceptions">umf exceptions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="umf.html#umf">umf</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.17.4 Additional <code>umf</code> notes</h4>
+
+<p>The C language API to <code>umf</code> provides very many less frequently
+used features that are not part of the virtual code interface, some of
+which could be added by minor modifications to the file <samp><span class="file">umf.c</span></samp>
+in the <code>avram</code> source tree.
+
+   <p>A set of <code>dl_</code>* and <code>zl_</code>* functions orthogonal to those
+presently accessible would enable matrices having billions of rows or
+columns by using long integers, but memory requirements on the virtual
+code side for problems of that scale are probably prohibitive for the
+foreseeable future.
+
+   </body></html>
+

@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>Recoverable Operations - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Lists.html#Lists" title="Lists">
+<link rel="prev" href="Simple-Operations.html#Simple-Operations" title="Simple Operations">
+<link rel="next" href="List-Transformations.html#List-Transformations" title="List Transformations">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Recoverable-Operations"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="List-Transformations.html#List-Transformations">List Transformations</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Simple-Operations.html#Simple-Operations">Simple Operations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.2 Recoverable Operations</h4>
+
+<p>The functions in this section are similar to the ones in the previous
+section except with regard to error handling. Whereas the other ones
+cause an error message to be printed and the process to exit in the
+event of an overflow, these return to the caller, whose responsibility
+it is to take appropriate action. The functions in both sections are
+declared in <samp><span class="file">lists.h</span></samp>, and should be preceded by a call to
+<code>avm_initialize_lists</code>.
+
+<div class="defun">
+&mdash; Function: list <b>avm_recoverable_join</b> (<var>list left, list right</var>)<var><a name="index-avm_005frecoverable_005fjoin-418"></a></var><br>
+<blockquote><p>This function is similar to <code>avm_join</code>, but will return a
+<code>NULL</code> pointer if memory that was needed can not be allocated. A
+<code>NULL</code> pointer would never be the result of a join under normal
+circumstances, so the overflow can be detected by the caller. Regardless
+of whether overflow occurs, the arguments are deallocated by this function
+and should not be referenced thereafter. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_recoverable_enqueue</b> (<var>list *front, list *back, list operand, int *fault</var>)<var><a name="index-avm_005frecoverable_005fenqueue-419"></a></var><br>
+<blockquote><p>This version of the enqueue function will dispose of the <var>operand</var> if there
+isn't room to append another item and set <code>*</code><var>fault</var> to a non-zero
+value. Other than that, it does the same as <code>avm_enqueue</code>. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: counter <b>avm_recoverable_length</b> (<var>list operand</var>)<var><a name="index-avm_005frecoverable_005flength-420"></a></var><br>
+<blockquote><p>This function checks for arithmetic overflow when calculating the length
+of a list, and returns a zero value if overflow occurs. The caller can
+detect the error by noting that zero is not the length of any list other
+than <code>NULL</code>. This kind of overflow is impossible unless the host
+does not have long enough integers for its address space. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: counter <b>avm_recoverable_area</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005frecoverable_005farea-421"></a></var><br>
+<blockquote><p>This function is similar to <code>avm_area</code>, except that it reacts
+differently to arithmetic overflow. The <code>fault</code> parameter should be
+the address of an integer known to the caller, which will be set to a
+non-zero value if overflow occurs. In that event, the value of zero will
+also be returned for the area. Note that it is possible for non-empty
+lists to have an area of zero, so this condition alone is not indicative
+of an error. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_recoverable_natural</b> (<var>counter number</var>)<var><a name="index-avm_005frecoverable_005fnatural-422"></a></var><br>
+<blockquote><p>This function returns the <code>list</code> representation of a native
+unsigned long integer, provided that there is enough memory, similarly to the
+<code>avm_natural</code> function. Unlike that function, this one will return
+a value of <code>NULL</code> rather than exiting the program in the event of a
+memory overflow. The overflow can be detected by the caller insofar as a
+<code>NULL</code> <code>list</code> does not represent any number other than zero. 
+</p></blockquote></div>
+
+   </body></html>
+

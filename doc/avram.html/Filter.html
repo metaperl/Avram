@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>Filter - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
+<link rel="prev" href="Map.html#Map" title="Map">
+<link rel="next" href="Reduce.html#Reduce" title="Reduce">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Filter"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Reduce.html#Reduce">Reduce</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Map.html#Map">Map</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.13.2 Filter</h5>
+
+<p><a name="index-g_t_0040code_007bfilter_007d-320"></a>Another well known list operation is that which applies a predicate to
+every item of a list, and deletes those for which the predicate is
+false. For a predicate with virtual code <var>p</var>, such an
+application can be coded conveniently in this form,
+
+     <dl>
+<dt><em>T23</em><dd>[[<code>filter</code>]] <var>p</var> = <code>((nil,nil),(nil,(</code><var>p</var><code>,nil)))</code>
+</dl>
+
+<p class="noindent">which is to say that writing <code>((nil,nil),(nil,(</code><var>p</var><code>,nil)))</code> in
+<code>silly</code> is the same as writing <code>filter </code><var>p</var>.
+
+   <p>The virtual machine detects code of this form provided that
+<var>p</var> is other than <code>nil</code>, and evaluates it consistently
+with the following properties, causing it to have the meaning that it
+does.
+
+     <dl>
+<dt><em>P26</em><dd>([[<code>filter</code>]] <var>p</var>) <code>nil</code> = <code>nil</code>
+<br><dt><em>P27</em><dd>([[<code>filter</code>]] <var>p</var>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> =
+([[<code>filter</code>]] <var>p</var>) <var>y</var> if <var>p</var> <var>x</var> = <code>nil</code>
+<br><dt><em>P28</em><dd>([[<code>filter</code>]] <var>p</var>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> =
+<code>(</code><var>x</var><code>,</code>([[<code>filter</code>]] <var>p</var>) <var>y</var><code>)</code> if <var>p</var> <var>x</var> is a non-<code>nil</code> tree
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>kinsol input parameters - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="kinsol.html#kinsol" title="kinsol">
+<link rel="prev" href="kinsol.html#kinsol" title="kinsol">
+<link rel="next" href="kinsol-output.html#kinsol-output" title="kinsol output">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="kinsol-input-parameters"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="kinsol-output.html#kinsol-output">kinsol output</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="kinsol.html#kinsol">kinsol</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="kinsol.html#kinsol">kinsol</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.9.1 <code>kinsol</code> input parameters</h4>
+
+<p>Functions whose names are of the form <var>x</var><code>d_</code><var>zzzzz</var>
+take an argument of the form
+<code>(</code><var>f</var><code>,(</code><var>i</var><code>,</code><var>o</var><code>))</code>,
+and functions whose names are of the form <var>x</var><code>j_</code><var>zzzzz</var>
+take an argument of the form
+<code>((</code><var>f</var><code>,</code><var>j</var><code>),(</code><var>i</var><code>,</code><var>o</var><code>))</code>. 
+The parameters have these interpretations.
+
+     <ul>
+<li><var>f</var> is a function to be optimized, expressed in virtual machine
+code. It takes a list of real numbers as input and returns a list of
+real numbers as output. The numbers must be in floating point format
+as described in <a href="math.html#math">math</a>. 
+<li><var>j</var> is a function in virtual machine code that computes the
+Jacobian or partial derivatives of <var>f</var> for a given list of input
+<a name="index-Jacobian-741"></a>numbers. The exact calling convention for <var>j</var> depends on the
+optimization algorithm selected, as explained below. 
+<li><var>i</var> is a list of real numbers suitable as an input for <var>f</var>. 
+The exact values of the numbers in <var>i</var> are not crucial but the
+length of <var>i</var> is taken as an indication of the required length for
+any input list to <var>f</var>. In the case of constrained optimization
+problems (i.e., functions with names beginning with <code>c</code>), <var>i</var> must
+consist entirely of non-negative numbers. 
+<li><var>o</var> is a list numbers indicating the &ldquo;optimal&rdquo; output from
+<var>f</var> in the sense described below (<a href="kinsol-output.html#kinsol-output">kinsol output</a>). Its length
+is taken to indicate the usual length of an output returned by
+<var>f</var>. 
+</ul>
+
+   <p>If the optimization problem is being solved by either the
+<code>cj_dense</code> or the <code>uj_dense</code> method, the Jacobian parameter
+<var>j</var> is expected to take a list <var>v</var> of real numbers the length
+of <var>i</var> as input and return a list of lists of reals as output. The
+numbers are represented as described in <a href="math.html#math">math</a>. The outer list in
+the output from <var>j</var> is required to be the length of <var>o</var>, while
+each inner list is required to be the length of <var>i</var>.
+
+   <p>The output from <var>j</var> is interpreted as a matrix of the form
+described in <a href="Two-dimensional-arrays.html#Two-dimensional-arrays">Two dimensional arrays</a>. The entry in row <var>m</var>
+and column <var>n</var> is the partial derivative (evaluated at <var>v</var>) of
+the <var>m</var>-th component of the output of <var>f</var> with respect to the
+<var>n</var>-th item of the input list.
+
+   <p>For optimization problems being solved by the methods of
+<var>x</var><code>j_gmres</code>, <var>x</var><code>j_bicgs</code>, or
+<var>x</var><code>j_tfqmr</code>, (i.e., where <var>x</var> is either <code>c</code> or
+<code>u</code>) the Jacobian function <var>j</var> follows a different convention
+that is meant to be more memory efficient. Given an argument of the
+form <code>(</code><var>m</var><code>,</code><var>v</var><code>)</code>, it returns only the <var>m</var>-th row of
+the matrix described above instead of the whole thing. The parameter
+<var>m</var> is a natural number less than the length of <var>o</var>, and
+<var>v</var> is a list of real numbers the length of <var>i</var> the same as
+above. The number <var>m</var> is encoded as described in
+<a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>.
+
+   </body></html>
+

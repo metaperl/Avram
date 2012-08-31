@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<title>Refer - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Recursion.html#Recursion" title="Recursion">
+<link rel="prev" href="Recur.html#Recur" title="Recur">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Refer"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Recur.html#Recur">Recur</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Recursion.html#Recursion">Recursion</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.9.2 Refer</h5>
+
+<p><a name="index-g_t_0040code_007brefer_007d-300"></a>In the style of recursive programming compelled by the available
+<code>meta</code> primitive, a function effectively requires a copy of its own
+machine code as its left argument. Bringing about that state of
+affairs is an interesting party trick.
+
+   <p><a name="index-g_t_0040code_007bbu_007d-301"></a>If we had a definition of <code>bu</code> in the standard library implying
+
+     <dl>
+<dt><em>T16</em><dd>([[<code>bu</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code>) <var>x</var> = <var>f</var><code>(</code><var>k</var><code>,</code><var>x</var><code>)</code>
+</dl>
+
+<p class="noindent">which for the sake of concreteness can be done like this,
+
+<pre class="example">     bu = (hired compose)(
+             left,
+             (hired couple)(compose(constant,right),constant identity))
+</pre>
+   <p class="noindent">then a definition of <code>refer</code> as
+
+<pre class="example">     refer = (hired bu)(identity,identity)
+</pre>
+   <p class="noindent">would be consistent with the following property of the operator.
+
+     <dl>
+<dt><em>P15</em><dd>([[<code>refer</code>]] <var>f</var>) <var>x</var> = <var>f</var><code> (</code><var>f</var><code>,</code><var>x</var><code>)</code>
+</dl>
+
+<p class="noindent">The proof, as always, is a matter of routine calculation in the manner
+of the section on how <code>avram</code> thinks.
+
+   <p>However, this pattern would occur so frequently in recursively defined
+functions as to be a significant waste of space and time. Therefore,
+rather than requiring it to be defined in terms of other operations, the
+virtual machine specification recognizes a pattern of the form below with
+respect to property <em>P15</em>,
+
+     <dl>
+<dt><em>T17</em><dd>[[<code>refer</code>]] <var>f</var> = <code>(((</code><var>f</var><code>,nil),nil),nil)</code>
+</dl>
+
+<p class="noindent">and takes the property to be true by definition of the operator. A
+definition of <code>refer</code> consistent with <em>T17</em> is therefore to
+<a name="index-standard-library-302"></a>be found in the standard library, not the definition proposed above.
+
+   </body></html>
+

@@ -1,0 +1,171 @@
+<html lang="en">
+<head>
+<title>Ports and Packets - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
+<link rel="prev" href="Lists-of-Pairs-of-Ports.html#Lists-of-Pairs-of-Ports" title="Lists of Pairs of Ports">
+<link rel="next" href="Instruction-Stacks.html#Instruction-Stacks" title="Instruction Stacks">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Ports-and-Packets"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Instruction-Stacks.html#Instruction-Stacks">Instruction Stacks</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Lists-of-Pairs-of-Ports.html#Lists-of-Pairs-of-Ports">Lists of Pairs of Ports</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.8.2 Ports and Packets</h4>
+
+<p>A pointer type declared as a <code>port</code> points to a structure in the
+following form, where a <code>flag</code> is an unsigned short integer type,
+and a <code>counter</code> is an unsigned long integer. 
+<a name="index-g_t_0040code_007bcounter_007d-635"></a><a name="index-g_t_0040code_007bflag_007d-636"></a><a name="index-g_t_0040code_007bavm_005fpacket_007d-637"></a>
+<pre class="example">     struct avm_packet
+     {
+       port parent;
+       counter errors;
+       portal descendents;
+       list impetus, contents;
+       flag predicating;
+     };
+</pre>
+   <p class="noindent">For reasons that make sense to C, the <code>avm_packet</code> and <code>port</code>
+types are declared in <code>lists.h</code>, but a few memory management
+operations on them are available by way of functions declared in
+<samp><span class="file">ports.h</span></samp>. The intended meaning of this structure is described
+presently, but first the memory management functions are as follows.
+
+<div class="defun">
+&mdash; Function: port <b>avm_newport</b> (<var>counter errors, port parent, int predicating</var>)<var><a name="index-avm_005fnewport-638"></a></var><br>
+<blockquote><p>This function attempts to allocate storage for a new packet structure
+and returns its address if successful. If storage can not be allocated,
+a <code>NULL</code> pointer is returned. The <code>errors</code>, <code>parent</code>, and
+<code>predicating</code> fields are initialized with the parameters supplied
+by the caller. The rest of the structure is filled with zeros. A local
+memory cache is used for improved performance. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_sever</b> (<var>port appendage</var>)<var><a name="index-avm_005fsever-639"></a></var><br>
+<blockquote><p>This function reclaims the storage associated with a <code>port</code>, either
+freeing it entirely or holding it in a local cache.  None of the
+entities that may be referenced by pointers within the structure are
+affected.  Only this function should be used by client programs for
+disposing of ports, not the <code>free</code> function directly, or some
+internal bookkeeping will be disrupted. An internal error results if the
+argument is a <code>NULL</code> pointer. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_ports</b> ()<var><a name="index-avm_005finitialize_005fports-640"></a></var><br>
+<blockquote><p>This function must be called prior to calling either of the two above,
+in order to initialize some static variables. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_ports</b> ()<var><a name="index-avm_005fcount_005fports-641"></a></var><br>
+<blockquote><p>This function may be called after the last call to any of the other
+functions in this section in order to detect and report unreclaimed
+storage associated with ports. A non-fatal warning will be written to
+standard error if any is detected, but otherwise there is no effect. 
+</p></blockquote></div>
+
+   <p>The interesting aspect of this data structure is the role it plays in
+capturing the state of a computation. For this purpose, it corresponds
+to a single node in a partially computed result to be represented by a
+<code>list</code> when it's finished. The nodes should be envisioned as a
+doubly-linked binary tree, except that the pair of <code>descendents</code>
+for each node is not yet known with certainty, so a list of alternatives
+must be maintained.
+
+   <p>Because the computation is not completed while this data structure
+exists, there are always some empty fields in it. For example, the
+<code>descendents</code> and the <code>contents</code> fields embody the same
+information, the latter doing so in a compact as opposed to a more
+expanded form. Hence, it would be redundant for both fields to be
+non-empty at the same time. The data structure is built initially with
+<code>descendents</code> and no <code>contents</code>, only to be transformed into
+one with <code>contents</code> and no <code>descendents</code>.
+
+   <p>The significance of each field in the structure can be summarized as
+follows.
+
+     <dl>
+<dt><code>contents</code><dd>If the computational result destined for the <code>port</code> pointing to this packet
+is not complete, then this field is <code>NULL</code> and the
+<code>descendents</code> are being computed. Otherwise, it contains the result
+of the computation. 
+<br><dt><code>descendents</code><dd>This field points to a list of pairs of ports serving as the
+destinations for an ensemble of concurrent computations.<a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a> The <code>head</code>
+and <code>tail</code> of the <code>contents</code> are to be identified respectively
+with the <code>contents</code> of the <code>left</code> and <code>right</code> <code>port</code>
+in the first pair to finish being computed. 
+<br><dt><code>parent</code><dd>If this packet is addressed by the <code>left</code> or the <code>right</code> of
+<code>port</code> in one of the <code>descendents</code> of some other packet, then
+this field points to that packet. 
+<br><dt><code>errors</code><dd>A non-zero value in this field indicates that the result destined for
+the <code>contents</code> of this packet is expected to be an error
+message. If the exact level of error severity incurred in the
+computation of the <code>contents</code> matches this number, then the
+contents can be assigned the result, but otherwise the result should
+propagate to the <code>contents</code> of the <code>parent</code>. 
+<br><dt><code>predicating</code><dd>A non-zero value in this field implies that the result destined for the
+<code>contents</code> of this packet is being computed in order to decide
+which arm of a conditional function should be chosen. I.e., a
+<code>NULL</code> result calls for the one that is invoked when the predicate
+is false. 
+<br><dt><code>impetus</code><dd>If the result destined for the <code>contents</code> of this packet is being
+computed in order to transform a virtual code fragment from its original
+form to an equivalent representation capable of being evaluated more
+directly, this field points to a <code>list</code> node at the root of the
+virtual code in its original form. 
+</dl>
+
+   <p>One of the hitherto undocumented fields in a <code>list</code> node structure
+<a name="index-g_t_0040code_007binterpretation_007d-642"></a><a name="index-g_t_0040code_007bimpetus_007d-643"></a>declared in <samp><span class="file">lists.h</span></samp> is called the <code>interpretation</code>, and is
+of type <code>list</code>. A client program delving into sufficient depth of
+detail to be concerned with ports and packets may reasonably assign the
+<code>interpretation</code> field of the <code>list</code> referenced by the
+<code>impetus</code> field in a packet to be a copy of the <code>contents</code> of
+the packet when they are eventually obtained. Doing so will save some
+time by eliminating the need for it to be recomputed if the same virtual
+code should be executed again.
+
+   <p>If this course is taken, the <code>facilitator</code> field in a <code>list</code>
+<a name="index-g_t_0040code_007bfacilitator_007d-644"></a>node, also hitherto undocumented, should contain the address of the
+packet referring to the list node as its <code>impetus</code>. The reason for
+this additional link is so that it can be followed when the
+<code>impetus</code> of the packet is be cleared by <code>avm_dispose</code> in the
+event that the <code>list</code> node is freed before the computation
+completes. This action is performed in order to preclude a dangling
+pointer in the <code>impetus</code> field.
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> Earlier
+versions of <code>avram</code> included a bottom avoiding choice combinator
+that required this feature, but which has been withdrawn. A single pair
+of descendent ports would now suffice.</p>
+
+   <hr></div>
+
+   </body></html>
+

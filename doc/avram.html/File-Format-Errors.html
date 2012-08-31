@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+<title>File Format Errors - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
+<link rel="prev" href="Overflow-Errors.html#Overflow-Errors" title="Overflow Errors">
+<link rel="next" href="Application-Programming-Errors.html#Application-Programming-Errors" title="Application Programming Errors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="File-Format-Errors"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Application-Programming-Errors.html#Application-Programming-Errors">Application Programming Errors</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Overflow-Errors.html#Overflow-Errors">Overflow Errors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
+<hr>
+</div>
+
+<h4 class="subsection">1.6.4 File Format Errors</h4>
+
+<p>Certain application crashes result from an application not adhering
+to the required conventions about data and file formats, or because the
+application was invoked in the wrong mode (<a href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>). These
+are the following.
+
+     <dl>
+<dt><var>application-name</var><code>: invalid text format (code </code><var>nn</var><code>)</code><dd><a name="index-g_t_0040code_007binvalid-text-format_007d-77"></a>An application that was expected to return a string of characters to
+be written to a text file returned data that did not correspond to any
+valid character representation. 
+<br><dt><var>application-name</var><code>: null character in prompt</code><dd>An interactive application (invoked rightly or wrongly with <samp><span class="option">-i</span></samp>,
+<samp><span class="option">-t</span></samp>, or <samp><span class="option">-s</span></samp>) is required to exchange strings of non-null
+characters internally with <code>avram</code>, and used a null. 
+<br><dt><var>application-name</var><code>: invalid file name (code </code><var>nn</var><code>)</code><dd>The data structure representing a file obtained from an application
+has a name consisting of something other than character strings. This
+error could be the result of a filter mode application (<a href="Filter-Mode.html#Filter-Mode">Filter Mode</a>) being invoked in parameter mode. 
+(<a href="Parameter-Mode.html#Parameter-Mode">Parameter Mode</a>)
+<br><dt><var>application-name</var><code>: null character in file name</code><dd><a name="index-g_t_0040code_007bnull-character-in-file-name_007d-78"></a>Similar to the above errors. 
+<br><dt><var>application-name</var><code>: bad character in file name</code><dd><a name="index-g_t_0040code_007bbad-character-in-file-name_007d-79"></a>Slashes, backslashes, and unprintable characters other than spaces are
+also prohibited in file names. 
+<br><dt><var>application-name</var><code>: invalid output preamble format</code><dd><a name="index-g_t_0040code_007binvalid-output-preamble-format_007d-80"></a>According the format used by <code>avram</code> for data files, a data file
+may contain an optional text portion, known as the preamble. This
+error occurs when a data file obtained from an application can not be
+written because the preamble is something other than a list of
+character strings. 
+<br><dt><var>application-name</var><code>: invalid file specification</code><dd><a name="index-g_t_0040code_007binvalid-file-specification_007d-81"></a>This error occurs in situations where the data structure for a file
+obtained by evaluating the application is too broken to permit any
+more specific diagnosis. 
+<br><dt><code>avram: invalid raw file format in </code><var>application-name</var><dd><a name="index-g_t_0040code_007binvalid-raw-file-format_007d-82"></a>The file containing the virtual machine code was not able to be
+loaded, because the code was not in a recognizable format. Either the
+file has become corrupted, the compiler that generated it has a
+bug in it, or the wrong file was used as a virtual code file. 
+</dl>
+
+   </body></html>
+

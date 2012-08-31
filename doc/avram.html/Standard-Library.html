@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>Standard Library - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="A Simple Lisp Like Language">
+<link rel="prev" href="Semantics.html#Semantics" title="Semantics">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Standard-Library"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Semantics.html#Semantics">Semantics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.4.3 Standard Library</h5>
+
+<p><code>silly</code> programs may be linked with library modules, which consist
+of <code>silly</code> source text to be concatenated with the user
+<a name="index-library-modules-259"></a><a name="index-standard-prelude-260"></a>program prior to the preprocessing phase. Most <code>silly</code> programs are
+linked with the standard <code>silly</code> prelude, which contains the
+following declarations among others. 
+<a name="index-g_t_0040code_007bnil_007d-261"></a><a name="index-g_t_0040code_007bidentity_007d-262"></a><a name="index-g_t_0040code_007bleft_007d-263"></a><a name="index-g_t_0040code_007bright_007d-264"></a><a name="index-g_t_0040code_007bmeta_007d-265"></a><a name="index-g_t_0040code_007bconstant_007d-266"></a><a name="index-g_t_0040code_007bcouple_007d-267"></a><a name="index-g_t_0040code_007bcompose_007d-268"></a><a name="index-g_t_0040code_007bconditional_007d-269"></a>
+<pre class="example">     
+     nil           = ()
+     identity      = (nil,(nil,nil))
+     left          = (nil,((nil,nil),nil))
+     right         = (nil,(nil,(nil,nil)))
+     meta          = (((nil,(nil,nil)),nil),nil)
+     constant_nil  = ((nil,nil),nil)
+     couple        = ((((left,nil),constant_nil),nil),right)
+     compose       = couple(identity,constant_nil)
+     constant      = couple(couple(constant_nil,identity),constant_nil)
+     conditional   =
+        couple(couple(left,compose(left,right)),compose(right,right))
+     
+</pre>
+   <p>There is a close correspondence between these declarations and the
+properties described in <a href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties">A Minimal Set of Properties</a>. A fitting analogy would be that
+the properties of the operator specify the virtual machine instruction
+set in a language independent way, and the <code>silly</code> library defines
+the instruction mnemonics for a virtual assembly language. The
+<a name="index-mnemonics-270"></a>relationship of some mnemonics to their corresponding instructions may
+be less clear than that of others, so they are all discussed next.
+
+   </body></html>
+

@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+<title>bes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="next" href="complex.html#complex" title="complex">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="bes"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="complex.html#complex">complex</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="External-Libraries.html#External-Libraries">External Libraries</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.1 <code>bes</code></h3>
+
+<p>An interface to the Bessel functions as defined in the GNU Scientific
+Library (gsl) is available to virtual code applications by invoking a
+function of the form
+
+<pre class="example">     library('bes',f)
+</pre>
+   <p class="noindent">where f is a character string identifying the Bessel function family. 
+All functions in this library return a floating point number encoded
+as in <a href="math.html#math">math</a>.
+
+<ul class="menu">
+<li><a accesskey="1" href="Bessel-function-calling-conventions.html#Bessel-function-calling-conventions">Bessel function calling conventions</a>
+<li><a accesskey="2" href="Bessel-function-errors.html#Bessel-function-errors">Bessel function errors</a>
+</ul>
+
+   </body></html>
+

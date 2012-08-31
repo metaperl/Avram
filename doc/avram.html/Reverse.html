@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>Reverse - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Functions.html#List-Functions" title="List Functions">
+<link rel="prev" href="Cat.html#Cat" title="Cat">
+<link rel="next" href="Distribute.html#Distribute" title="Distribute">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Reverse"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Distribute.html#Distribute">Distribute</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Cat.html#Cat">Cat</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Functions.html#List-Functions">List Functions</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.14.2 Reverse</h5>
+
+<p><a name="index-g_t_0040code_007breverse_007d-344"></a>The function that reverses a list has the following representation in
+virtual code.
+
+     <dl>
+<dt><em>T29</em><dd>[[<code>reverse</code>]] = <code>((nil,nil),(nil,(nil,nil)))</code>
+</dl>
+
+<p class="noindent">This function takes a list as an argument, and returns a the list
+consisting of the same items in the reverse order. The semantics is
+given by the following properties.
+
+     <dl>
+<dt><em>P37</em><dd>[[<code>reverse</code>]] <code>nil</code> = <code>nil</code>
+<br><dt><em>P38</em><dd>[[<code>reverse</code>]] <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = [[<code>cat</code>]] ([[<code>reverse</code>]] <var>y</var><code>,(</code><var>x</var><code>,nil)</code>)
+</dl>
+
+   </body></html>
+

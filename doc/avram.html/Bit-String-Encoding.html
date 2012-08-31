@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+<title>Bit String Encoding - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Concrete-Syntax.html#Concrete-Syntax" title="Concrete Syntax">
+<link rel="prev" href="Concrete-Syntax.html#Concrete-Syntax" title="Concrete Syntax">
+<link rel="next" href="Blocking.html#Blocking" title="Blocking">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Bit-String-Encoding"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Blocking.html#Blocking">Blocking</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.2.1 Bit String Encoding</h4>
+
+<p>The conversion from trees to bit strings might have been done in several
+<a name="index-trees-148"></a>ways, perhaps the most obvious being based on a preorder traversal with
+each vertex printed as it is traversed.  By this method, the entire
+encoding of the left descendent would precede that of the right in the
+bit string. This alternative is therefore rejected because it imposes
+unnecessary serialization on communication.
+
+   <p>It is preferable for the encodings of both descendents of a tree to be
+interleaved to allow concurrent transmission. Although there is
+presently no distributed implementation of the virtual machine and hence
+<a name="index-distributed-implementation-149"></a>none that takes advantage of this possibility, it is better to plan
+ahead than to be faced with backward compatibility problems later.
+
+   <p>The preferred algorithm for encoding a tree as a bit string employs a
+queue. The queue contains trees and allows them to be processed in a
+<a name="index-queues-150"></a>first-in first-out order. Intuitively, the algorithm works by traversing
+<a name="index-printing-algorithm-151"></a>the tree in level order. To print a tree <code>T</code> as a string of
+<code>1</code>s and <code>0</code>s, it performs the following steps.
+<pre class="display">     
+     Initialize the queue to contain only <code>T</code>
+     while the queue is not empty do
+        if the front element of the queue is <code>nil</code> then
+           print <code>0</code>
+        else if the front element of the queue is of the form <code>cons(x,y)</code> then
+           print <code>1</code>
+           append <code>x</code> to the back of the queue
+           append <code>y</code> to the back of the queue
+        end if
+        remove the front element of the queue
+     end while
+     
+</pre>
+   <p>This algorithm presupposes that any given tree
+<a name="index-deconstruction-152"></a><code>cons(x,y)</code> can be &ldquo;deconstructed&rdquo; to obtain <code>x</code> and
+<code>y</code>. The computability of such an operation is assured in theory by
+the uniqueness property of the <code>cons</code> operator, regardless of the
+representation chosen. If the trees are implemented with pointers in the
+obvious way, their deconstruction is a trivial constant time operation.
+
+   <p>As an example, running the following tree through the above algorithm
+results in the bit string <code>111111101011110010001001100010100010100100100</code>.
+
+<pre class="example">     
+     cons(
+        cons(
+           cons(nil,cons(nil,cons(nil,nil))),
+           cons(nil,cons(nil,nil))),
+        cons(
+           cons(
+              cons(nil,cons(nil,cons(nil,cons(nil,nil)))),
+              cons(nil,nil)),
+           cons(
+              cons(
+                 cons(nil,cons(nil,cons(cons(nil,cons(nil,nil)),nil))),
+                 cons(nil,nil)),
+              nil)))
+</pre>
+   </body></html>
+

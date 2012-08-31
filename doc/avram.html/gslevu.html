@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>gslevu - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="gsldif.html#gsldif" title="gsldif">
+<link rel="next" href="gslint.html#gslint" title="gslint">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="gslevu"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="gslint.html#gslint">gslint</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="gsldif.html#gsldif">gsldif</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.6 <code>gslevu</code></h3>
+
+<p>This library exports a pair of functions of the form
+
+<pre class="example">     library('gslevu','accel')
+     
+     library('gslevu','utrunc')
+</pre>
+   <p class="noindent">that take a list of real numbers <var>x</var> to a pair of real numbers
+<code>(</code><var>s</var><code>,</code><var>e</var><code>)</code>.
+
+   <p>The idea is that <var>x</var> represents the first few terms of an infinite
+<a name="index-infinite-series-722"></a>series whose sum converges, but only very slowly. The functions
+<a name="index-convergence-723"></a>extrapolate an estimate of the infinite summation by the Levin
+<a name="index-Levin-u_002dtransform-724"></a>u-transform as documented in the GNU Scientific Library reference
+manual.
+
+   <p>For well behaved series, considerably fewer terms are needed for an
+accurate estimate than a direct summation would require.
+
+<ul class="menu">
+<li><a accesskey="1" href="gslevu-calling-conventions.html#gslevu-calling-conventions">gslevu calling conventions</a>
+<li><a accesskey="2" href="gslevu-exceptions.html#gslevu-exceptions">gslevu exceptions</a>
+</ul>
+
+   </body></html>
+

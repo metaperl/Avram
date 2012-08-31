@@ -1,0 +1,102 @@
+<html lang="en">
+<head>
+<title>Error Messages - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link rel="prev" href="Operator-Generalization.html#Operator-Generalization" title="Operator Generalization">
+<link rel="next" href="Expedient-Error-Messages.html#Expedient-Error-Messages" title="Expedient Error Messages">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Error-Messages"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Expedient-Error-Messages.html#Expedient-Error-Messages">Expedient Error Messages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Operator-Generalization.html#Operator-Generalization">Operator Generalization</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.15.3 Error Messages</h5>
+
+<p>The basic strategy for representing the results of exceptional
+conditions arising from the evaluation of operands on a given level of
+the hierarchy will be to use an error message corresponding to the image
+of a list of character strings on the level above.
+
+   <p>Unfortunately, the official <code>silly</code> standard does not
+define character constants, but they are available as a vendor specific
+extension in <code>silly-me</code> (millennium edition), where character strings
+<a name="index-g_t_0040code_007bsilly_002dme_007d-356"></a><a name="index-strings-357"></a><a name="index-character-strings-358"></a>may be enclosed in single quotes. The value of the semantic
+<a name="index-semantic-function-359"></a>function [[<small class="dots">...</small>]] in the case of a character string is the list
+of representations of the characters, based on <a href="Character-Table.html#Character-Table">Character Table</a>
+and <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>.
+
+   <p>For the sake of consistency, each standard error message is a list of
+character strings, even though the list has only one string in it. If
+any exceptional condition is the result of a computation, it is written
+to standard error by <code>avram</code> as the list of character strings it
+represents.
+
+     <dl>
+<dt><em>P45</em><dd>([[<code>compare</code>]] <code>nil</code>)<code>_</code><var>n</var> = [[<code>('invalid comparison',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P46</em><dd>([[<code>left</code>]] <code>nil</code>)<code>_</code><var>n</var>  = [[<code>('invalid deconstruction',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P47</em><dd>([[<code>right</code>]] <code>nil</code>)<code>_</code><var>n</var> = [[<code>('invalid deconstruction',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P48</em><dd>(([[<code>fan</code>]] <var>f</var>)
+<code>nil</code>)<code>_</code><var>n</var> = [[<code>('invalid deconstruction',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P49</em><dd>([[<code>member</code>]] <code>nil</code>)<code>_</code><var>n</var>  = [[<code>('invalid membership',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P50</em><dd>([[<code>distribute</code>]] <code>nil</code>)<code>_</code><var>n</var> = [[<code>('invalid distribution',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P51</em><dd>([[<code>cat</code>]] <code>nil</code>)<code>_</code><var>n</var>  = [[<code>('invalid concatenation',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<br><dt><em>P52</em><dd>([[<code>meta</code>]] <code>nil</code>)<code>_</code><var>n</var> = [[<code>('invalid recursion',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+</dl>
+
+   <p>Note that by virtue of property <em>P44</em>, there is no need for an
+application to make explicit checks for exceptional results at any
+point, because the exceptional result propagates through to the output
+of any function composed with the one that incurred it. For example, an
+application of the form <code>h = compose(f,right)</code>, which will cause an
+invalid deconstruction error if applied in filter mode to an empty file,
+imposes no requirement that <code>f</code> be written to accommodate that
+possibility (i.e., by checking for it) in order for the error to be
+reported properly. The following proof demonstrates that the meaning of <code>f</code>
+is irrelevant to the result.
+<pre class="format">[[<code>compose(f,right)</code>]]<code>_0</code> <code>nil_0</code>
+
+   = [[<code>f</code>]]<code>_0</code> [[<code>right</code>]]<code>_0</code> <code>nil</code><code>_0</code>
+
+   = [[<code>f</code>]]<code>_0</code> [[<code>('invalid deconstruction',nil)</code>]]<code>_1</code>
+
+   = [[<code>('invalid deconstruction',nil)</code>]]<code>_1</code>
+</pre>
+   <p class="noindent">In an application <code>h = compose(f,g)</code>, the input
+validation therefore may be confined to the &ldquo;front end&rdquo;,&nbsp;<code>g</code>.<!-- /@w -->
+
+   <p>It will be recalled from the discussions of <code>recur</code> (<a href="Recur.html#Recur">Recur</a>)
+<a name="index-g_t_0040code_007brecur_007d-360"></a><a name="index-g_t_0040code_007btranspose_007d-361"></a>and <code>transpose</code> (<a href="Transpose.html#Transpose">Transpose</a>) that the semantics of
+virtual code involving these forms is defined in terms of the
+<code>field</code> format for deconstruction functions (<a href="Field.html#Field">Field</a>),
+<a name="index-g_t_0040code_007bfield_007d-362"></a>which depends implicitly on the semantics of <code>left</code> and
+<code>right</code>, being a generalization of them. An invalid deconstruction
+<a name="index-g_t_0040code_007bleft_007d-363"></a><a name="index-g_t_0040code_007bright_007d-364"></a>message could therefore result from applications incorporating any of
+the forms of <code>recur</code>, <code>transpose</code>, or <code>field</code>. Invalid
+deconstructions could also arise from the <code>replace</code> operation
+<a name="index-g_t_0040code_007breplace_007d-365"></a><a name="index-assignment-366"></a>(<a href="Replace.html#Replace">Replace</a>), which is used for assignment (<a href="Assignment.html#Assignment">Assignment</a>), because
+<code>replace</code> is defined by virtual code, except as noted next.
+
+   </body></html>
+

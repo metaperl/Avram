@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+<title>A Hierarchy of Sets - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link rel="prev" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link rel="next" href="Operator-Generalization.html#Operator-Generalization" title="Operator Generalization">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="A-Hierarchy-of-Sets"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Operator-Generalization.html#Operator-Generalization">Operator Generalization</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.15.1 A Hierarchy of Sets</h5>
+
+<p>As indicated already, the virtual machine represents all functions and
+data as members of a set satisfying the properties in <a href="Raw-Material.html#Raw-Material">Raw Material</a>,
+namely a <code>nil</code> element and a <code>cons</code> operator for constructing
+trees or nested pairs of <code>nil</code>. However, it will be necessary to
+distinguish the results of computations that go wrong for exceptional
+reasons from normal results. Because any tree in the set could conceivably
+represent a normal result, we need to go outside the set to find an
+unambiguous representation of exceptional results.
+
+   <p>Because there may be many possible exceptional conditions, it will be helpful
+to have a large set of possible ways to encode them, and in fact there
+is no need to refrain from choosing a countably infinite
+set. Furthermore, it will be useful to distinguish between different
+levels of severity among exceptional conditions, so for this purpose a
+countably infinite hierarchy of mutually disjoint sets is used.
+
+   <p>In order to build on the theory already developed, the set that has been
+used up to this point will form the bottom level of the hierarchy, and
+its members will represent normal computational results. The members of
+sets on the higher levels in the hierarchy represent exceptional
+results. To avoid ambiguity, the term &ldquo;trees&rdquo; is reserved for members
+<a name="index-trees-349"></a>of the bottom set, as in &ldquo;for any tree <var>x</var> <small class="dots">...</small>&rdquo;. 
+Unless otherwise stated, variables like <var>x</var> and
+<var>y</var> are universally quantified over the bottom set only. 
+<a name="index-universal-quantification-350"></a>
+Because each set in the hierarchy is countably infinite, it is
+isomorphic to the bottom set. With respect to an arbitrary but fixed
+bijection between them, let <var>x</var><code>_</code><var>n</var> denote the image in
+the <var>n</var>th level set of a tree <var>x</var> in the bottom
+set. The level numbers in this notation start with zero, and we take
+<var>x</var><code>_0</code> to be synonymous with <var>x</var>. For good measure,
+let <code>(</code><var>x</var><code>_</code><var>n</var><code>)_</code><var>m</var> = <var>x</var><code>_(</code><var>n</var><code>+</code><var>m</var><code>)</code>.
+
+   </body></html>
+

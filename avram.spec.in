@@ -1,0 +1,61 @@
+%define name	avram
+%define version @VERSION@
+%define release 1
+%define builddir $RPM_BUILD_DIR/%{name}-%{version}
+
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Vendor:		Dennis Furey 
+Packager:	Dennis Furey avram-support@basis.uklinux.net
+URL:		http://www.lsbu.ac.uk/~fureyd/avram
+Source:         %{name}-%{version}.tar.gz
+#Patch:		
+Group:		Application/Generic
+Copyright:	GPL
+#Icon:		
+#Requires:	
+BuildRoot:	/var/tmp/%{name}-%{version}
+Summary:	applicative virtual machine code interpreter
+%description
+An acronym for "Applicative ViRtuAl Machine", avram is a virtual
+machine code interpreter. It reads an input file containing a
+user-supplied application expressed in virtual machine code, and
+executes it on the host machine. Notable features are strong support
+for functional programming operations (e.g., list processing),
+interoperability of virtual code applications with other console
+applications or shells through libexpect, the ability to package
+virtual code applications conveniently as self contained shell
+scripts, and a choice of operating modes providing for either a simple
+high-level interface to files, environment variables and command line
+arguments, or various styles of stateless or persistent stream
+processors (a.k.a. filters). The intended audience is writers of
+compilers for programming, scripting, or special purpose languages,
+whose projects stand to gain portability and ease of implementation.
+The package includes a toy compiler for a simple lisp-like language
+as a proof of concept.
+@configure_input@		
+%prep
+%setup -n %{name}-%{version} 
+#%patch -p1
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix}
+make
+
+%install
+if [ -d $RPM_BUILD_ROOT ]; then rm -rf $RPM_BUILD_ROOT; fi
+mkdir -p $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+# Build the file-list automagically :)
+cd $RPM_BUILD_ROOT
+find . -type d | sed '1,2d;s,^\.,\%attr(-\,root\,root) \%dir ,' > $RPM_BUILD_DIR/file.list.%{name}
+find . -type f | sed 's,^\.,\%attr(-\,root\,root) ,' >> $RPM_BUILD_DIR/file.list.%{name}
+find . -type l | sed 's,^\.,\%attr(-\,root\,root) ,' >> $RPM_BUILD_DIR/file.list.%{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+rm ../file.list.%{name}
+
+%files -f ../file.list.%{name}
+%doc README

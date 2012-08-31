@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+<title>Have combinator - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Interfaces to External Code">
+<link rel="prev" href="Library-combinator.html#Library-combinator" title="Library combinator">
+<link rel="next" href="Interaction-combinator.html#Interaction-combinator" title="Interaction combinator">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Have-combinator"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Interaction-combinator.html#Interaction-combinator">Interaction combinator</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Library-combinator.html#Library-combinator">Library combinator</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.16.2 Have combinator</h5>
+
+<p>As virtual machine interfaces to external libraries accumulate faster
+than they can be documented and may vary from one installation to
+another, it is helpful to have a way of interrogating the virtual
+machine for an up to date list of the installed libraries and
+functions. A combinator called <code>have</code> can be used to test for the
+availability of a library function. It takes the form
+
+     <dl>
+<dt><em>T34</em><dd>[[<code>have</code>]] (<var>x</var>,<var>y</var>) = <code>((nil,nil),((nil,</code><var>x</var><code>),(nil,</code><var>y</var><code>)))</code>
+</dl>
+
+<p class="noindent">where <var>x</var> is the name of a library and <var>y</var> is the name of a
+function within the library encoded as character strings. For example,
+if <var>x</var> is <code>'mtwist'</code> and <var>y</var> is <code>'u_disc'</code> (for the
+natural random number generator function in the Mersenne twistor
+library) then <code>have(</code><var>x</var><code>,</code><var>y</var><code>)</code> is a function that returns
+a non-empty value if an only if that library is installed and that
+function is available within it. The actual argument to the function
+is ignored as the result depends only on the installed virtual machine
+configuration. In this sense, it acts like a <code>constant</code> combinator.
+
+   <p>One way for this combinator to be used is in code of the form
+
+<pre class="example">        portable_rng =
+     
+        conditional(
+           have('mtwist','u_disc'),
+           library('mtwist','u_disc'),
+           some_replacement_function)
+</pre>
+   <p class="noindent">which will use the library function if available but otherwise use a
+replacement function. Code in this form makes the decision at run
+time, but it is also possible to express the function such that the
+check for library presence is made at compile time, as the following
+example shows, which will imply a slight improvement in performance.
+
+<pre class="example">        non_portable_rng =
+     
+        apply(
+           conditional(
+              have('mtwist','u_disc'),
+              constant library('mtwist','u_disc'),
+              constant some_replacement_function),
+           0)
+</pre>
+   <p class="noindent">This program would be non-portable in the sense that it would need to
+be recompiled for each installation if there were a chance that some
+of them might have the <code>mtwist</code> library and some might not,
+whereas the previous example would be binary compatible across all of
+them. <a rel="footnote" href="#fn-1" name="fnd-1"><sup>1</sup></a>
+
+   <p>The actual value returned by a function <code>have(foo,bar)</code> is the
+list of pairs of strings <code>&lt;(foo,bar)&gt;</code> if the function is
+available, or the empty list otherwise. A non-empty list is
+represented as a pair <code>(head,tail)</code>, and an empty list as
+<code>nil</code>. The angle bracket notation <code>&lt;a,b,c...&gt;</code> used here is
+an abbreviation for <code>(a,(b,(c...nil)))</code>.
+
+   <p>Either or both arguments to the <code>have</code> combinator can be a
+wildcard, which is the string containing a single asterisk,
+<a name="index-wild-cards-379"></a><code>'*'</code>. In that case, the list of all available matching library
+names and function names will be returned. This feature can be used to
+find out what library functions are available without already knowing
+their names.
+
+   <p>If a library had a function named <code>'*'</code>, which clashes with
+the wild card string, the interpretation as a wild card would take
+precedence.
+
+   <div class="footnote">
+<hr>
+<h4>Footnotes</h4><p class="footnote"><small>[<a name="fn-1" href="#fnd-1">1</a>]</small> In practice both examples are equally portable because
+the <code>mtwist</code> source is distributed with <code>avram</code> so all
+installations will have it. Most libraries are distributed
+separately.</p>
+
+   <hr></div>
+
+   </body></html>
+

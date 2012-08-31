@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>Transition - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Reference-Implementations.html#Reference-Implementations" title="Reference Implementations">
+<link rel="prev" href="Replace.html#Replace" title="Replace">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Transition"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Replace.html#Replace">Replace</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Reference-Implementations.html#Reference-Implementations">Reference Implementations</a>
+<hr>
+</div>
+
+<h3 class="section">B.4 Transition</h3>
+
+<p>This code is relevant to the discussion of <code>transfer</code> in <a href="Transfer.html#Transfer">Transfer</a>,
+where its specification is described in detail. When this code
+is evaluated on a virtual code application <var>f</var>, the result is
+the code for a transition function that takes one configuration to the
+next in the course of evaluating a transfer function, as specified in
+equations <em>E7</em> to <em>E9</em>. 
+<a name="index-g_t_0040code_007btransition_007d-702"></a>
+<pre class="example">     
+     output_buffer = compose(left,argument)
+     input_buffer = compose(right,compose(right,argument))
+     active = compose(left,compose(right,argument))
+     state = compose(left,active)
+     output = compose(right,active)
+     
+     transition =
+     
+     bu(compose,refer) (hired bu(conditional,active))(
+        (hired conditional)(
+           constant input_buffer,
+           bu(compose,(fan bu(hired meta,self))) (hired apply)(
+              constant fan bu(couple,couple(output,output_buffer)),
+              couple (fan bu(compose,couple))(
+                 couple(
+                    (hired apply)(
+                       hired,
+                       constant (state,compose(head,input_buffer))),
+                    constant compose(tail,input_buffer)),
+                 couple(
+                    (hired apply)(hired,constant(state,constant nil)),
+                    constant constant nil)))),
+        constant compose(flat,compose(reverse,output_buffer)))
+</pre>
+   </body></html>
+

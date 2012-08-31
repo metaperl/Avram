@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>Concrete Syntax - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
+<link rel="prev" href="Raw-Material.html#Raw-Material" title="Raw Material">
+<link rel="next" href="File-Format.html#File-Format" title="File Format">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Concrete-Syntax"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="File-Format.html#File-Format">File Format</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Raw-Material.html#Raw-Material">Raw Material</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>
+<hr>
+</div>
+
+<h3 class="section">2.2 Concrete Syntax</h3>
+
+<p>The previous section has developed a basic vocabulary for statements
+such as &ldquo;the virtual machine code for the identity function is
+<a name="index-identity-function-146"></a><code>(nil,(nil,nil))</code>&rdquo;, which are elaborated extensively in the
+subsequent sections on code and data formats. However, a description in
+this style would be inadequate without an explanation of how such an
+entity as <code>(nil,(nil,nil))</code> is communicated to <code>avram</code> in a
+virtual machine code file. The purpose of this section is to fill the
+gap by explaining exactly how any given tree would be transformed to its
+concrete representation.
+
+   <p>The syntax is based on a conversion of the trees to bit strings,
+<a name="index-bit-strings-147"></a>followed by grouping the bits into blocks of six, which are then encoded
+by printable characters. Although anyone is free to modify <code>avram</code>,
+it is recommended that the concrete syntax described here be maintained
+for the sake of portability of virtual machine code applications.
+
+   <p>Building a tree by reading the data from a file requires a more
+difficult algorithm than the one presented in this section, and is not
+considered because it's not strictly necessary for a
+compiler. Procedures for both reading and writing are available to C and
+C++ users as part of the <code>avram</code> library, and are also easily
+invoked on the virtual code level.
+
+<ul class="menu">
+<li><a accesskey="1" href="Bit-String-Encoding.html#Bit-String-Encoding">Bit String Encoding</a>
+<li><a accesskey="2" href="Blocking.html#Blocking">Blocking</a>
+</ul>
+
+   </body></html>
+

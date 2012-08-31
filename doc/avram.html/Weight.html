@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>Weight - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
+<link rel="prev" href="Profile.html#Profile" title="Profile">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Weight"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Profile.html#Profile">Profile</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.7.4 Weight</h5>
+
+<p>The following virtual code implements a function that returns the weight
+of its argument in the standard representation for natural numbers. 
+<a name="index-g_t_0040code_007bweight_007d-286"></a>
+<pre class="example">     weight = ((nil,nil),((nil,nil),(nil,(nil,nil))))
+</pre>
+   <p class="noindent">The weight of a tree is zero if the tree is <code>nil</code>, and otherwise
+the sum of the weights of the two subtrees plus one.
+
+   <p>An algorithm to compute the weight of a tree would be trivial to
+implement without being built in to the virtual machine. The built in
+capability could also be used for purposes unrelated to code
+maintenance. Nevertheless, it is built in for the following reasons.
+
+     <ul>
+<li>Computing weights happened to be a bottleneck for a particular
+aspect of code generation that was of interest to the author,
+<a name="index-compression-287"></a>namely the compression of generated code. 
+<li>A built in implementation in C runs at least an order of magnitude
+faster than the equivalent implementation in virtual code. 
+<li>It runs even faster when repeated on the same data, by retrieving
+previously calculated weights rather than recalculating them. 
+</ul>
+
+   <p>The only disadvantage of using this feature instead of implementing a
+function in virtual code to compute weights is that it relies on native
+<a name="index-native-integer-arithmetic-288"></a><a name="index-overflow-289"></a>integer arithmetic and could overflow, causing a fatal error. It has
+never occurred in practice, but is possible due to sharing, whereby the
+nominal weight of a tree could be exponentially larger than the actual
+amount of memory occupied by it.
+
+   </body></html>
+

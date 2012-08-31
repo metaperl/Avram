@@ -1,0 +1,115 @@
+avram - applicative virtual machine code interpreter
+
+Copyright (C) 2006,2007,2012 Dennis Furey
+
+This package includes a virtual machine code interpreter and a
+development library. It enables you to run programs that have been
+compiled into the virtual code format that it uses. A compiler to
+generate code in this format is available separately at
+http://gueststar.github.com/ursala. 
+
+The quick install guide (assuming you have root):
+-----------------------
+
+Change to the directory with this README file in it, and do the
+following.
+
+configure
+make
+su
+make install
+
+If this doesn't work, try reading INSTALL, and please let me know what
+you had to do to get it to work so I can include it in this file or
+improve the configuration script.
+
+Installation for non-root users (whose admins are busy):
+-------------------------------
+
+Change to the directory with this README file in it and type
+
+configure --prefix=$HOME
+make
+make install
+
+The avram binary will be installed under $HOME/bin, which you need to
+put in your path. You might also want to modify your $MANPATH and your
+$INFOPATH environment variables to include $HOME/man and $HOME/info.
+You may substitute any directory you own for $HOME.
+
+See below if you want to link avram with external math libraries,
+which will need to be installed first.
+
+Installation for non-root users with small disk quotas (aka students):
+------------------------------------------------------
+
+Unpack the tarball in /tmp, which is world writable on most systems,
+cd to /tmp/avram-0.3.0 (or current version) and type
+
+configure --prefix=/tmp
+make
+strip src/avram
+
+The third line is optional but recommended. When it's finished
+building, copy src/avram to your home directory wherever you keep your
+executables (probably ~/bin). You won't have any on-line documentation
+with this kind of installation, but you can always read it on the home
+page. Nor will you be able to link your own code against the avram
+library, but you'll use only a few hundred kbytes for the executable
+and will be able to execute unmodified virtual code scripts if they're
+done right.
+
+A combination of the above installations is to follow the building in
+/tmp with make install, and then copy /tmp/lib to your home directory
+as well as /tmp/bin/avram. That will give you the executable and the
+library but no documentation.
+
+Installation of Expect
+----------------------
+
+Avram has cooler features when built on a machine with the expect
+library, available at http://expect.sourceforge.net. If your system
+doesn't have any files named /usr/lib/*expect* or
+/usr/local/lib/*expect*, you might want to install the expect library
+in order to get the full benefit before installing avram. Version
+numbers shown below may vary.
+
+1) download tcl8.5.12-src.tar.gz and expect5.45.tar.gz
+2) tar -zxvf tcl8.5.12-src.tar.gz
+3) tar -zxvf expect5.45.tar.gz
+4) cd tcl8.5.12/unix
+5) su
+6) configure; make; make install
+7) cd ../../expect-5.45
+8) configure; make; make install
+
+It is possible to install these libraries non-root by using configure
+--prefix=$HOME. As a show of my solidarity with non-root users, I've
+made the avram configure script look under $HOME for shared libraries
+and header files. You will then have to put your $HOME/lib directory
+in your LD_LIBRARY_PATH environment variable.
+
+Installation of other libraries
+-------------------------------
+
+Some other libraries with which avram is able to interface may be of
+interest. These should be installed prior to compiling avram, if you
+want, but avram will also work without them.
+
+* gsl      integration, differentiation, and series acceleration
+* mpfr     arbitrary precision arithmetic
+* minpack  non-linear optimization
+* lapack   linear algebra
+* fftw     fast fourier transforms
+* Rmath    statistical and transcendental functions
+* ufsparse sparse matrices
+* glpk     linear programming by the simplex method
+
+Keep an eye on the output messages from the configuration script to
+ensure the libraries you want have been detected if you're compiling
+avram yourself, and then as a check execute "avram -e" with the newly
+built binary.
+
+Comments are welcome.
+
+	- Dennis Furey <ursala-users@freelists.org>

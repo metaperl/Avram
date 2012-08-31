@@ -1,0 +1,238 @@
+<html lang="en">
+<head>
+<title>Formatted Output - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="File-Manipulation.html#File-Manipulation" title="File Manipulation">
+<link rel="prev" href="Formatted-Input.html#Formatted-Input" title="Formatted Input">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Formatted-Output"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Formatted-Input.html#Formatted-Input">Formatted Input</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.3.4 Formatted Output</h4>
+
+<p>The following functions pertaining to the output of text files or data files with
+<a name="index-preamble-562"></a>preambles are declared in the header file <samp><span class="file">formout.h</span></samp>.
+
+<div class="defun">
+&mdash; Function: void <b>avm_output</b> (<var>FILE *repository, char *filename, list preamble, list contents, int trace_mode</var>)<var><a name="index-avm_005foutput-563"></a></var><br>
+<blockquote>
+        <p>This function writes a either a text file or a data file in the format
+described in <a href="File-Format.html#File-Format">File Format</a>. The parameters have these
+interpretations.
+
+          <dl>
+<dt><var>repository</var><dd>is the address of a file opened for writing by the caller, that will be
+written from its current position. 
+<br><dt><var>filename</var><dd>is the address of a null terminated character string set
+by the caller to be the name of the file that will
+be reported to the user in the event of an i/o error. 
+<br><dt><var>preamble</var><dd>is <code>NULL</code> in the case of a text file, but a list of character string
+representations as per <a href="Character-Table.html#Character-Table">Character Table</a>, in the case of a data
+file. If a data file has is to be written with an empty preamble, then
+this list should have a <code>NULL</code> <code>head</code> and a <code>NULL</code>
+<code>tail</code>. 
+<br><dt><var>contents</var><dd>is either a list of character string representations in the case of a
+text file, or is an unconstrained list in the case of a data file. 
+<br><dt><var>trace_mode</var><dd>may be set to a non-zero value by the caller to request that everything
+written to a text file should be echoed to standard output. It is
+ignored in the case of a data file. 
+</dl>
+
+        <p>The effect of calling this function is to write the preamble and
+contents to the file in the format indicated by the preamble. The file
+is left open when this function returns.
+
+        <p>Line breaks are always written as character code 10, not as 13 10,
+<a name="index-line-breaks-564"></a>regardless of the convention on the host system, so that files written
+by this function can be reliably read by other functions in the library.
+
+        <p>Leading hashes are automatically added to the beginning of the lines in
+the preamble, except where they are unnecessary due to a continuation
+character on the previous line. This action enforces consistency with the
+file format, ensuring that anything written as a data file can be read
+back as one. The hashes are stripped automatically when the file is
+read by <code>avm_preamble_and_contents</code>.
+
+        <p>Another feature of this function is that it will mark any output file as
+executable if it is a data format file with a prelude whose first
+<a name="index-executable-files-565"></a>character in the first line is an exclamation point. This feature makes
+it easier for a compiler implemented in virtual code to generate
+executable shell scripts directly.
+
+        <p>A fatal error is reported if any of the data required
+to be a character representation is not listed in the <a href="Character-Table.html#Character-Table">Character Table</a>. A fatal error can also be caused by a memory overflow. Possible
+error messages are the following. 
+<a name="index-g_t_0040code_007binvalid-output-preamble-format_007d-566"></a><a name="index-g_t_0040code_007binvalid-text-format_007d-567"></a><a name="index-g_t_0040code_007bcan_0027t-write_007d-568"></a>
+          <ul>
+<li><var>program-name</var><code>: invalid output preamble format</code>
+<li><var>program-name</var><code>: invalid text format</code>
+<li><var>program-name</var><code>: can't write to </code><var>filename</var>
+</ul>
+
+        <p><a name="index-g_t_0040code_007bstrerror_007d-569"></a>In the last case, the error message will be followed by an explanation
+furnished by the standard <code>strerror</code> function if available. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_output_as_directed</b> (<var>list data, int ask_to_overwrite_mode, int verbose_mode</var>)<var><a name="index-avm_005foutput_005fas_005fdirected-570"></a></var><br>
+<blockquote><p>This function writes an ensemble of files at specified paths in either
+text or data format, optionally interacting with the user through
+standard input and output. The parameters
+have these interpretations.
+
+          <dl>
+<dt><var>data</var><dd>is a list in which each item specifies a file to be
+written. 
+<br><dt><var>ask_to_overwrite_mode</var><dd>may be set to a non-zero value by the calling program in order to
+have this function ask the user for permission to overwrite existing files. 
+<br><dt><var>verbose_mode</var><dd>may be set to a non-zero value by the calling program to have this
+function print to standard output a list of the names of the files it
+writes. 
+</dl>
+
+        <p>A high level interface between virtual code applications and the file
+system is provided by this function. The <var>data</var> parameter
+format is compatible with the the data structure returned by an
+application complying with the conventions in <a href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications">Output From Non-interactive Applications</a>.
+
+        <p>Each item in the <var>data</var> list should be a non-empty list whose
+<code>head</code> and <code>tail</code> are also non-empty. The fields in each item have
+the following relevance to the file it specifies.
+
+          <ul>
+<li>The <code>head</code> of the <code>head</code> is <code>NULL</code> if the file is
+to be opened for appending, and non-<code>NULL</code> if it is to be
+overwritten. 
+<li>The <code>tail</code> of the <code>head</code> represents a path as a list of
+character string representations, in a form suitable as an argument to
+<code>avm_path_name</code>. 
+<li>The <code>head</code> of the <code>tail</code> represents the preamble of the
+file, as either <code>NULL</code> for a text file or a non-empty list of
+character string representations for a data file. 
+<li>The <code>tail</code> of the <code>tail</code> represents the contents of the
+file, either as a list of character string representations for a text
+file or as a list in an unconstrained format for a data file. 
+</ul>
+
+        <p>For each item in the list, the function performs the following steps.
+          <ol type=1 start=1>
+<li>It decides whether to open a file
+for overwriting or appending based on the <code>head</code> of the
+<code>head</code>. 
+<li>It uses the <code>tail</code> of the <code>head</code> to find out the
+file name from <code>avm_path_name</code>, in order to open it. 
+<li>If the
+<var>ask_to_overwrite_mode</var> flag is set and the file is found to
+exist already, the function will print one of the following messages to
+standard output, depending on whether the file is to be overwritten or
+appended.
+               <ul>
+<li><var>program-name</var><code>: overwrite </code><var>filename</var><code>? (y/n)</code>
+<li><var>program-name</var><code>: append to </code><var>filename</var><code>? (y/n)</code>
+</ul>
+          It will then insist on either <kbd>y</kbd> or <kbd>n</kbd> as an answer before continuing. 
+<li>If the <var>ask_to_overwrite</var> flag has not been set, or the file did
+not previously exist, or the answer of <kbd>y</kbd> was given, the preamble
+and contents of the file are then written with <code>avm_output</code>. 
+<li>If permission to write or append was denied, one of the following
+messages is reported to standard output, and the data that were to be
+written are lost. 
+<a name="index-g_t_0040code_007bnot-writing_007d-file-name-571"></a><a name="index-g_t_0040code_007bwriting_007d-file-name-572"></a>
+               <ul>
+<li><var>program-name</var><code>: not writing </code><var>filename</var>
+<li><var>program-name</var><code>: not appending </code><var>filename</var>
+</ul>
+
+          <li>If permission was granted to write or append to the file or the <var>verbose_mode</var> flag is
+set, one of the messages
+
+               <ul>
+<li><var>program-name</var><code>: writing </code><var>filename</var>
+<li><var>program-name</var><code>: appending </code><var>filename</var>
+</ul>
+
+          <p>is sent to standard output.
+             </ol>
+
+        <p><a name="index-standard-output-573"></a>If any files are to be written to standard output, which would be
+indicated by a <code>NULL</code> path, they are not written until all other
+files in the list are written. This feature is in the interest of
+<a name="index-security-574"></a>security, as it makes it more difficult for malicious or inept virtual
+code to alter the appearance of the console through standard output until after
+the interactive dialogue has taken place. Permission is not solicited
+for writing to standard output, and it will not be closed.
+
+        <p>Any of the fatal errors or i/o errors possible with <code>avm_output</code> or
+<code>avm_path_name</code> are also possible with this function, as well as
+the following additional ones. 
+<a name="index-g_t_0040code_007binvalid-file-specification_007d-575"></a><a name="index-g_t_0040code_007bcan_0027t-close_007d-576"></a><a name="index-g_t_0040code_007bcan_0027t-write_007d-577"></a>
+          <ul>
+<li><var>program-name</var><code>: invalid file specification</code>
+<li><var>program-name</var><code>: can't close </code><var>filename</var>
+<li><var>program-name</var><code>: can't write </code><var>filename</var>
+</ul>
+
+        <p>The last two are non-fatal i/o errors that will be accompanied by an
+<a name="index-g_t_0040code_007bstrerror_007d-578"></a>explanation from the <code>strerror</code> function if the host supports
+it. The other message is the result of a badly formatted
+<var>data</var> parameter.
+
+        </blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_put_bytes</b> (<var>list bytes</var>)<var><a name="index-avm_005fput_005fbytes-579"></a></var><br>
+<blockquote>
+        <p>This function takes a list of character representations, converts them
+to characters, and sends them to standard output. There is no chance of
+a memory overflow, but the following other errors are possible. 
+<a name="index-g_t_0040code_007binvalid-text-format_007d-580"></a><a name="index-g_t_0040code_007bcan_0027t-write_007d-581"></a>
+          <ul>
+<li><var>program-name</var><code>: invalid text format (code </code><var>nn</var><code>)</code>
+<li><var>program-name</var><code>: can't write to standard output</code>
+</ul>
+
+        <p>The latter is non-fatal, but the former causes the program to abort. 
+It is caused when any member of the list <var>bytes</var> is not a
+character representation appearing in <a href="Character-Table.html#Character-Table">Character Table</a>. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_formout</b> ()<var><a name="index-avm_005finitialize_005fformout-582"></a></var><br>
+<blockquote><p>This function initializes some data structures used locally by the other
+functions in this section, and should be called at the beginning of a
+run before any of them is called. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_formout</b> ()<var><a name="index-avm_005fcount_005fformout-583"></a></var><br>
+<blockquote><p>This function doesn't do anything in the current version of the library,
+but should be called after the last call to any of the other functions
+in this section. Future versions of the library might use this function
+for cleaning up some internal data structures, and client programs that
+call it will maintain compatibility with them. 
+</p></blockquote></div>
+
+   </body></html>
+

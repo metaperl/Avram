@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+<title>Profile - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
+<link rel="prev" href="Note.html#Note" title="Note">
+<link rel="next" href="Weight.html#Weight" title="Weight">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Profile"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Weight.html#Weight">Weight</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Note.html#Note">Note</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.7.3 Profile</h5>
+
+<p>The virtual machine supports a profiling capability by way of this
+<a name="index-g_t_0040file_007bprofile_002etxt_007d-284"></a>feature. Profiling an application causes run time statistics about it to
+be written to a file <samp><span class="file">./profile.txt</span></samp>. Profiled applications are of
+the form indicated in the following theorem
+
+     <dl>
+<dt><em>T12</em><dd>[[<code>profile</code>]] <code>(</code><var>f</var><code>,</code><var>s</var><code>)</code> = <code>((nil,nil),((nil,nil),(nil,((</code><var>f</var><code>,</code><var>s</var><code>),nil))))</code>
+</dl>
+
+<p class="noindent">where <var>f</var> stands for the virtual code of the application, and
+<var>s</var> stands for the name of it to be written to the file. 
+The semantics of a profiled function is identical to the unprofiled
+form for any non-<code>nil</code> <var>f</var>.
+
+     <dl>
+<dt><em>P9</em><dd>([[<code>profile</code>]] <code>(</code><var>f</var><code>,</code><var>s</var><code>)</code>) <var>x</var> = <var>f</var> <var>x</var>
+</dl>
+
+   <p>Unlike the situation with <code>note</code>, the annotation <var>s</var> of
+<a name="index-g_t_0040code_007bnote_007d-285"></a>used in profiled code is not in an unrestricted format but must be a
+character string in the standard representation (as in
+<a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>),
+because this string needs to be written by <code>avram</code> to the file
+<samp><span class="file">./profile.txt</span></samp>. Ordinarily this string will be the source code
+identifier of the function being profiled.
+
+   <p>When profiles are used in many parts of an application, an informative
+table is generated showing the time spent in each part.
+
+   </body></html>
+

@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+<title>Bessel function calling conventions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="bes.html#bes" title="bes">
+<link rel="prev" href="bes.html#bes" title="bes">
+<link rel="next" href="Bessel-function-errors.html#Bessel-function-errors" title="Bessel function errors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Bessel-function-calling-conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Bessel-function-errors.html#Bessel-function-errors">Bessel function errors</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="bes.html#bes">bes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="bes.html#bes">bes</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.1.1 Bessel function calling conventions</h4>
+
+<p><a name="index-bessel-functions-709"></a>The virtual code interface simplifies the gsl C language API by
+excluding the facilities for error estimates, omitting certain array
+valued functions, and subsuming sets of related functions
+within common ones where possible.
+
+   <p>The functions with names in the following group take an argument of
+the form <code>(n,x)</code>, where <code>n</code> identifies the member of the
+function family, and <code>x</code> is the argument to the function.
+
+     <ul>
+<li><code>J</code>
+regular cylindrical Bessel functions
+<li><code>Y</code>
+irregular cylindrical Bessel functions
+<li><code>I</code>
+regular modified cylindrical Bessel functions
+<li><code>K</code>
+irregular modified cylindrical Bessel functions
+</ul>
+
+   <p>For these functions, <code>n</code> can be either a natural number encoded
+as in <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>, or a floating
+point number encoded as in <a href="math.html#math">math</a>. The latter case specifies
+functions of a fractional order. The relevant gsl function is called
+based on the value and type of the parameter.
+
+   <p>Two further related families of functions follow the same calling
+convention.
+
+     <ul>
+<li><code>Isc</code>
+scaled regular modified cylindrical Bessel functions
+<li><code>Ksc</code>
+scaled irregular modified cylindrical Bessel functions
+</ul>
+
+<p class="noindent">The foregoing functions are related to those above by an exponential scale
+factor as documented in the gsl reference manual.
+
+   <p>Functions with names in the following group also take an argument of
+the form <code>(n,x)</code>, but are not defined for fractional orders and
+so require a natural number for <code>n</code>.
+
+     <ul>
+<li><code>j</code>
+regular spherical Bessel functions
+<li><code>y</code>
+irregular spherical Bessel functions
+<li><code>isc</code>
+regular modified spherical Bessel functions
+<li><code>ksc</code>
+irregular modified spherical Bessel functions
+</ul>
+
+   <p>The functions in the remaining group follow idiosyncratic calling
+conventions.
+
+     <ul>
+<li><code>zJ0</code>, <code>zJ1</code>
+These take a natural number <code>n</code> and return the <code>n</code>th root of
+the regular cylindrical Bessel functions of order 0 or 1,
+respectively. 
+<li><code>zJnu</code>
+This takes a pair <code>(nu,n)</code> where <code>nu</code> is the (fractional)
+order of a regular cylindrical Bessel function, <code>n</code> is a natural
+number. It returns the <code>n</code>th zero of the function. 
+<li><code>lnKnu</code>
+This takes a pair of floating point numbers <code>(nu,x)</code> where
+<code>nu</code> is the (fractional) order of an irregular modified
+cylindrical Bessel and <code>x</code> is the argument to the function,
+and it returns the natural log of the function. 
+</ul>
+
+   </body></html>
+

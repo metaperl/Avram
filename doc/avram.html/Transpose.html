@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>Transpose - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Functions.html#List-Functions" title="List Functions">
+<link rel="prev" href="Distribute.html#Distribute" title="Distribute">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Transpose"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Distribute.html#Distribute">Distribute</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Functions.html#List-Functions">List Functions</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.14.4 Transpose</h5>
+
+<p>The <code>transpose</code> operation has the following representation in
+virtual code.
+
+     <dl>
+<dt><em>T31</em><dd>[[<code>transpose</code>]] = <code>((nil,nil),((nil,nil),(nil,nil)))</code>
+</dl>
+
+<p class="noindent"><a name="index-g_t_0040code_007btranspose_007d-346"></a>This function takes a list of equal length lists as an argument, and
+returns a list of lists as a result. In the resulting list, the first
+item is the list of all first items of lists in the argument. The next
+item is the list of all second items, and so on.
+
+   <p>In the specification of the semantics, the <code>silly</code> mnemonic
+<a name="index-g_t_0040code_007bflat_007d-347"></a><code>flat</code> is defined by <code>flat = reduce(cat,nil)</code> in the standard
+<code>silly</code> prelude, which means that it flattens a list of lists into
+one long list.
+
+     <dl>
+<dt><em>P41</em><dd>[[<code>transpose</code>]] <var>x</var> = <code>nil</code> if [[<code>flat</code>]] <var>x</var> = <code>nil</code>
+<br><dt><em>P42</em><dd>[[<code>transpose</code>]] <var>x</var> =
+<code>(</code>[[<code>map left</code>]] <var>x</var><code>,</code>[[<code>transpose</code>]] [[<code>map right</code>]] <var>x</var><code>)</code><br>
+&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w --> if [[<code>flat</code>]] <var>x</var> is a non-<code>nil</code> tree
+</dl>
+
+   </body></html>
+

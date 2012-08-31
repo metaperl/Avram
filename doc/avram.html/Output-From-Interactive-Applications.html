@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+<title>Output From Interactive Applications - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
+<link rel="prev" href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Output From Non-interactive Applications">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Output-From-Interactive-Applications"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications">Output From Non-interactive Applications</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.6.4 Output From Interactive Applications</h4>
+
+<p><a name="index-g_t_0040code_007binteractive_007d-command-line-option-228"></a><a name="index-g_t_0040code_007bstep_007d-command-line-option-229"></a>Parameter mode applications invoked with either of the
+<samp><span class="option">--interactive</span></samp> or <samp><span class="option">--step</span></samp> options are
+required to take the data structure described in <a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a> as an
+argument but to return the virtual code for a function that will observe
+<a name="index-shell-230"></a>a certain protocol allowing shell commands to be executed on its
+behalf. The intent is that the virtual code file doesn't contain the
+real application <em>per se</em>, but only something that builds the real
+one on the fly using configuration information from the input files and
+command line options.
+
+   <p>The format of the result returned by an interactive application, being a
+virtual code application itself, requires a full exposition of the
+virtual machine code semantics. This subject is deferred to <a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>. 
+The remainder of this section describes the protocol followed by the
+function returned by the interactive application rather than the
+application itself.
+
+   <p>Similarly to the case of a byte transducer described in <a href="Byte-Transducers.html#Byte-Transducers">Byte Transducers</a>,
+the basic pattern of interaction between <code>avram</code> and the function
+is a cycle of invocations. In general terms, the function is applied to
+a <code>nil</code> argument initially, and expected to return an initial state
+and initial output. Thereafter, the function is applied to a pair of the
+state returned on the previous iteration, and the next installment of
+input. The function returns further output and a new state, and the
+cycle continues until the function returns a value of <code>nil</code>, at
+which time the computation terminates.
+
+<ul class="menu">
+<li><a accesskey="1" href="Line-Oriented-Interaction.html#Line-Oriented-Interaction">Line Oriented Interaction</a>
+<li><a accesskey="2" href="Character-Oriented-Interaction.html#Character-Oriented-Interaction">Character Oriented Interaction</a>
+<li><a accesskey="3" href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>
+</ul>
+
+   </body></html>
+

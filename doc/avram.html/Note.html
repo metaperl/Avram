@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>Note - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
+<link rel="prev" href="Version.html#Version" title="Version">
+<link rel="next" href="Profile.html#Profile" title="Profile">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Note"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Profile.html#Profile">Profile</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Version.html#Version">Version</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.7.2 Note</h5>
+
+<p>This operation allows arbitrary information or comments to be embedded
+in a virtual code application in such a way that it will be ignored by
+<code>avram</code> when executing it. For the <code>silly</code> language, a
+<code>note</code> function is defined in the standard prelude so as to imply
+the following theorem. 
+<a name="index-g_t_0040code_007bnote_007d-281"></a><a name="index-annotations-282"></a>
+     <dl>
+<dt><em>T11</em><dd>[[<code>note</code>]] <code>(</code><var>f</var><code>,</code><var>c</var><code>)</code> = <code>((nil,nil),((nil,nil),(nil,(nil,(</code><var>f</var><code>,</code><var>c</var><code>)))))</code>
+</dl>
+
+<p class="noindent">Intuitively, the argument <var>f</var> represents a function, and the
+argument <code>c</code> represents the comment, annotation, or whatever, that
+will be embedded but ignored in the virtual code.
+
+   <p>Semantically, a function with a note attached is the same as the
+function by itself, as the following property stipulates for
+any non-<code>nil</code> <var>f</var>.
+
+     <dl>
+<dt><em>P8</em><dd>([[<code>note</code>]] <code>(</code><var>f</var><code>,</code><var>c</var><code>)</code>) <var>x</var> = <var>f</var> <var>x</var>
+</dl>
+
+   <p>A possible reason for using this feature might be to support a language
+that performs run-time type checking by hanging type tags on
+<a name="index-type-tags-283"></a>everything. Another possible use would be to include symbolic
+information needed by a debugger.
+
+   </body></html>
+

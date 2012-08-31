@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>Loading All of Standard Input at Once - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Filter Mode Interface">
+<link rel="prev" href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Filter Mode Interface">
+<link rel="next" href="Line-Maps.html#Line-Maps" title="Line Maps">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Loading-All-of-Standard-Input-at-Once"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Line-Maps.html#Line-Maps">Line Maps</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Filter-Mode-Interface.html#Filter-Mode-Interface">Filter Mode Interface</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Filter-Mode-Interface.html#Filter-Mode-Interface">Filter Mode Interface</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.5.1 Loading All of Standard Input at Once</h4>
+
+<p>Unless <samp><span class="option">--line-map</span></samp> or <samp><span class="option">--byte-transducer</span></samp> is used as a
+<a name="index-g_t_0040code_007bline_002dmap_007d-command-line-option-175"></a><a name="index-g_t_0040code_007bbyte_002dtransducer_007d-command-line-option-176"></a><a name="index-standard-input-177"></a>command line option when the application is invoked, the contents of
+standard input are loaded entirely into memory by <code>avram</code> before
+evaluation of the virtual code begins.  This interface is obviously not
+<a name="index-infinite-streams-178"></a>appropriate for infinite streams.
+
+   <p>The virtual code application in this mode of operation is treated as a
+single function taking the entire contents of standard input as its argument,
+and returning the entire contents of standard output as its result. 
+Hence, this interface is one of the simplest available.
+
+<ul class="menu">
+<li><a accesskey="1" href="Standard-Input-Representation.html#Standard-Input-Representation">Standard Input Representation</a>
+<li><a accesskey="2" href="Standard-Output-Representation.html#Standard-Output-Representation">Standard Output Representation</a>
+</ul>
+
+   </body></html>
+

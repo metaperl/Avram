@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>math - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="lapack.html#lapack" title="lapack">
+<link rel="next" href="mtwist.html#mtwist" title="mtwist">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="math"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="mtwist.html#mtwist">mtwist</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lapack.html#lapack">lapack</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.11 <code>math</code></h3>
+
+<p>The <code>math</code> library exports functions that operate on IEEE double
+precision floating point numbers using the host system's C
+library. The numbers are represented natively as contiguous blocks of
+8 bytes each, and on the virtual side as lists of eight character
+representations. (More explanation is given in <a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>.) These functions take the form
+
+<pre class="example">     library('math',f)
+</pre>
+   <p class="noindent">where <code>f</code> is a character string identifying the function in most
+cases by its standard name in the C library.
+
+<ul class="menu">
+<li><a accesskey="1" href="math-library-operators.html#math-library-operators">math library operators</a>
+<li><a accesskey="2" href="math-library-predicates.html#math-library-predicates">math library predicates</a>
+<li><a accesskey="3" href="math-library-conversion-functions.html#math-library-conversion-functions">math library conversion functions</a>
+<li><a accesskey="4" href="math-library-exceptions.html#math-library-exceptions">math library exceptions</a>
+<li><a accesskey="5" href="Additional-math-library-notes.html#Additional-math-library-notes">Additional math library notes</a>
+</ul>
+
+   </body></html>
+

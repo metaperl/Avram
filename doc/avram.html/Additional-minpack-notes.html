@@ -1,0 +1,69 @@
+<html lang="en">
+<head>
+<title>Additional minpack notes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="minpack.html#minpack" title="minpack">
+<link rel="prev" href="minpack-exceptions.html#minpack-exceptions" title="minpack exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Additional-minpack-notes"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="minpack-exceptions.html#minpack-exceptions">minpack exceptions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="minpack.html#minpack">minpack</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.13.3 Additional <code>minpack</code> notes</h4>
+
+<p>The <code>lm</code>* functions are better suited to problems in which the
+system function <var>f</var> has more outputs than inputs, and the
+<code>hybr</code>* functions are better suited to the alternative. If either
+is called when the other is more appropriate, the job is handed off to
+the other automatically.
+
+   <p>The <code>lmstr</code> function is more memory efficient than the others
+because it doesn't compute the whole Jacobian matrix at once. Any
+<a name="index-Jacobian-787"></a>of the <code>lm</code>* functions is more memory efficient than
+the <code>kinsol</code> equivalent when the output list is sufficiently
+longer than the input list.
+
+   <p>Unlike <code>kinsol</code>, there is no provision in <code>minpack</code> for
+<a name="index-constrained-optimization-788"></a>constrained optimization.
+
+   <p>The <code>minpack</code> documentation doesn't state whether it's
+<a name="index-re_002dentrancy-789"></a>re-entrant, but the odds are against it unless it uses no storage
+outside the user provided work areas. If it isn't re-entrant,
+anomalous effects could occur when a virtual code function being
+optimized calls another <code>minpack</code> function.  A workaround would
+be to use an equivalent <code>kinsol</code> function, which is re-entrant by
+design.
+
+   <p>The <code>avram</code> configuration script searches for a C header file
+<a name="index-header-file-790"></a><samp><span class="file">minpack.h</span></samp> on the host system in order to build an interface to
+this library. This file is specific to the Debian <code>minpack-dev</code>
+package and is not part of the upstream Fortran source. Configuring
+<code>avram</code> with an interface to the <code>minpack</code> library on a
+<a name="index-Debian-791"></a>non-Debian system may require the administrator to retrieve the header
+file manually from the Debian archive and place it under
+<samp><span class="file">/usr/include</span></samp> before running the configuration script (in
+addition to installing the <code>minpack</code> library itself, of course).
+
+   </body></html>
+

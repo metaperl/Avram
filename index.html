@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Avram : applicative virtual machine" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Avram</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/gueststar/Avram">View on GitHub</a>
+
+          <h1 id="project_title">Avram</h1>
+          <h2 id="project_tagline">applicative virtual machine</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/gueststar/Avram/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/gueststar/Avram/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p>Avram is an interpreter that executes programs written in <a href="http://gueststar.github.com/Ursala">Ursala</a>. The virtual code format supported by Avram has a simple and well defined semantics that might also make it a suitable target for other compiler projects, especially for functional programming languages.</p>
+
+<p>The virtual machine code for an application program to be executed, along with any required input files, are passed to Avram on the command line. Execution takes place for the most part non-interactively, and the results, if any, are written to output files or to the console by Avram.</p>
+
+<p>Avram is written in C and can be linked with various numerical libraries to make them callable from the interpreted application program. These libraries include the GNU Scientific library, fftw (for fast Fourier transforms), Harminv (for harmonic inversion), Lapack and minpack (for linear algebra), mpfr (for arbitrary precision floating point arithmetic), ufsparse (for sparse matrix computations), and the R math library (for probability and statistics). Adding a new interface to someone's favorite library, although not a fully automated procedure, is well documented and should be a straightforward task for a competent C programmer. It is also possible to link Avram with the Expect library, enabling it to interact arbitrarily with command line interpreters on behalf of the application program it executes.</p>
+
+<p>The computational model implemented by Avram is amenable to distributed concurrent evaluation in potentially the same manner as a map-reduce architecture. Currently Avram implements a full complement of client-side features for dynamically decomposing, scattering, and gathering the results of an application program at run-time using TCP sockets. Implementation of a corresponding server-side capability is an area for further development.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Avram maintained by <a href="https://github.com/gueststar">gueststar</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>Filter Mode Interface - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
+<link rel="prev" href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data" title="Representation of Numeric and Textual Data">
+<link rel="next" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Filter-Mode-Interface"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>
+<hr>
+</div>
+
+<h3 class="section">2.5 Filter Mode Interface</h3>
+
+<p><a name="index-filter-mode-171"></a><a name="index-parameter-mode-172"></a><a name="index-modes-173"></a>From the point of view of the application developer or compiler writer,
+there are parameter mode applications, which are discussed in
+<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>, and filter mode applications,
+which are discussed in this section. Of the latter, there are mainly
+three kinds: those that read one character at a time, those that read a
+line at a time, and those that read the whole standard input file at
+<a name="index-standard-input-174"></a>once. Each of them is invoked with different options and expected to
+follow different calling conventions. This section summarizes these
+conventions.
+
+<ul class="menu">
+<li><a accesskey="1" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once">Loading All of Standard Input at Once</a>
+<li><a accesskey="2" href="Line-Maps.html#Line-Maps">Line Maps</a>
+<li><a accesskey="3" href="Byte-Transducers.html#Byte-Transducers">Byte Transducers</a>
+</ul>
+
+   </body></html>
+

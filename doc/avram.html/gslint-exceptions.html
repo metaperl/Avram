@@ -1,0 +1,54 @@
+<html lang="en">
+<head>
+<title>gslint exceptions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="gslint.html#gslint" title="gslint">
+<link rel="prev" href="gslint-output.html#gslint-output" title="gslint output">
+<link rel="next" href="Additional-gslint-notes.html#Additional-gslint-notes" title="Additional gslint notes">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="gslint-exceptions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Additional-gslint-notes.html#Additional-gslint-notes">Additional gslint notes</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="gslint-output.html#gslint-output">gslint output</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="gslint.html#gslint">gslint</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.7.3 <code>gslint</code> exceptions</h4>
+
+<p>If an argument of an inappropriate form can be detected (such as an
+empty pair or one without floating point numbers), it causes an error
+message to be returned saying
+<a name="index-bad-integral-specification-731"></a>
+<pre class="example">     &lt;'bad integral specification'&gt;
+</pre>
+   <p class="noindent">Error messages signalled by the integrand <var>f</var> may also be
+reported, as well as any message returned by <code>gsl_strerror</code>. A
+typical cause for a <code>gsl_strerror</code> message would be an explicitly
+specified tolerance that is too tight. An error message of
+<a name="index-slow-convergence-732"></a>
+<pre class="example">     &lt;'slow convergence'&gt;
+</pre>
+   <p class="noindent">is returned in the event of excessively many function evaluations
+(currently 3600 at each tolerance level).
+
+   </body></html>
+

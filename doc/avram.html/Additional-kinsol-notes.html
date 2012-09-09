@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>Additional kinsol notes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="kinsol.html#kinsol" title="kinsol">
+<link rel="prev" href="kinsol-exceptions.html#kinsol-exceptions" title="kinsol exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Additional-kinsol-notes"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="kinsol-exceptions.html#kinsol-exceptions">kinsol exceptions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="kinsol.html#kinsol">kinsol</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.9.4 Additional <code>kinsol</code> notes</h4>
+
+<p>When a user supplied Jacobian function <var>j</var> is specified, the
+<a name="index-Jacobian-745"></a>solution is likely to be found faster and more accurately. The
+Jacobian should be given if an analytical form for <var>f</var> is known,
+from which the Jacobian can be obtained easily by partial
+differentiation. If the Jacobian is unavailable, a finite difference
+method implemented internally by <code>kinsol</code> is used as a substitute
+and will usually yield acceptable results.
+
+   <p>Tolerances are not explicitly specified on the virtual side of the
+interface although the native <code>kinsol</code> API requires them. A range
+of tolerances over ten orders of magnitude is automatically tried
+before giving up.
+
+   <p>Similarly to the <code>glpk</code> and <code>lpsolve</code> library interfaces
+(<a href="glpk.html#glpk">glpk</a> and <a href="lpsolve.html#lpsolve">lpsolve</a>), the only expressible constraint through
+<a name="index-constraints-746"></a>the virtual code interface is that all variables are
+non-negative. Arbitrary upper and lower bounds can be simulated by
+appropriate variable substitutions in the formulation of the problem.
+
+   <p>The <code>kinsol</code> library natively requires a system function <var>f</var>
+with equally many inputs as outputs, and will search only for the
+input associated with an output vector of all zeros, but the virtual
+code interface relaxes these requirements by allowing a function that
+transforms between lists of unequal lengths, and will search for the
+input of <var>f</var> causing it to match any given &ldquo;optimal&rdquo; output
+<var>o</var>. These effects are achieved by padding the shorter of the two
+vectors transparently and subtracting the specified optimum from the
+result.
+
+   <p>The <code>kinsol</code> library can be configured to use single precision,
+double precision, or extended precision arithmetic, but only a double
+precision configuration is compatible with <code>avram</code>. This
+condition is checked when <code>avram</code> is configured and it will not
+interface with alternative <code>kinsol</code> configurations.
+
+   <p>The <code>kinsol</code> library has some more advanced features to which
+this interface doesn't do justice, such as preconditioning, scaling,
+solution of systems with band limited Jacobians, and concurrent
+computation.
+
+   </body></html>
+

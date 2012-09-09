@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+<title>mpfr binary operators - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mpfr.html#mpfr" title="mpfr">
+<link rel="prev" href="mpfr.html#mpfr" title="mpfr">
+<link rel="next" href="mpfr-unary-operators.html#mpfr-unary-operators" title="mpfr unary operators">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="mpfr-binary-operators"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="mpfr-unary-operators.html#mpfr-unary-operators">mpfr unary operators</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr.html#mpfr">mpfr</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.14.1 <code>mpfr</code> binary operators</h4>
+
+<p>Functions with these names take a pair of <code>mpfr</code> numbers
+<code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> and return an <code>mpfr</code> number as a result.
+
+     <ul>
+<li><code>add</code>
+<li><code>sub</code>
+<li><code>mul</code>
+<li><code>div</code>
+<li><code>pow</code>
+<li><code>atan2</code>
+<li><code>hypot</code>
+<li><code>min</code>
+<li><code>max</code>
+<li><code>vid</code>
+<li><code>bus</code>
+</ul>
+
+   <p>Their semantics are similar to those listed in the <code>mpfr</code>
+documentation, with some minor qualifications.
+
+     <ul>
+<li>Unlike the native API, there is no third argument to which the result
+is assigned, because the result is the returned value. 
+<li>The precision of the result is the greater of the two precisions of
+the input numbers <var>x</var> and <var>y</var>. 
+<li>The <code>vid</code> and <code>bus</code> functions are added features of the
+virtual code interface, corresponding to division and subtraction with
+the order of the operands reversed, as explained in <a href="complex.html#complex">complex</a>. 
+</ul>
+
+   <p>Mathematically it might make more sense for the precision of the
+<a name="index-precision-793"></a>result to be the lesser of the two input precisions, but this way is
+more convenient for virtual code programs that perform binary
+operations on their input with hard coded constants, because it makes
+one size fit all.
+
+   </body></html>
+

@@ -1,0 +1,92 @@
+<html lang="en">
+<head>
+<title>A Minimal Set of Properties - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="prev" href="On-Equality.html#On-Equality" title="On Equality">
+<link rel="next" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="A Simple Lisp Like Language">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="A-Minimal-Set-of-Properties"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="On-Equality.html#On-Equality">On Equality</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.7.3 A Minimal Set of Properties</h4>
+
+<p>For any trees <var>x</var>, <var>y</var>, and <var>k</var>, and any non-<code>nil</code>
+trees <var>p</var>, <var>f</var>, and <var>g</var>, the new invisible operator satisfies these
+conditions. In these expressions and hereafter, increasing abuse of
+notation is perpetrated by not writing the <code>cons</code> in expressions of the form
+<code>cons(</code><var>x</var><code>,</code><var>y</var><code>)</code>.
+
+     <dl>
+<dt><em>P0</em><dd><code>(nil,(nil,nil)) </code><var>x</var> = <var>x</var>
+<br><dt><em>P1</em><dd><code>(nil,((nil,nil),nil)) (</code><var>x</var><code>,</code><var>y</var><code>)</code> = <var>x</var>
+<br><dt><em>P2</em><dd><code>(nil,(nil,(nil,nil))) (</code><var>x</var><code>,</code><var>y</var><code>)</code> = <var>y</var>
+<br><dt><em>P3</em><dd><code>((nil,</code><var>k</var><code>),nil) </code><var>x</var> = <var>k</var>
+<br><dt><em>P4</em><dd><code>(((nil,(nil,nil)),nil),nil) (</code><var>f</var><code>,</code><var>x</var><code>)</code> = <var>f</var><code> (</code><var>f</var><code>,</code><var>x</var><code>)</code>
+<br><dt><em>P5</em><dd><code>((</code><var>f</var><code>,</code><var>g</var><code>),nil) </code><var>x</var> = <var>f</var> <var>g</var> <var>x</var>
+<br><dt><em>P6</em><dd><code>((</code><var>f</var><code>,nil),</code><var>g</var><code>) </code><var>x</var> = <code>(</code><var>f</var> <var>x</var><code>,</code><var>g</var> <var>x</var><code>)</code>
+<br><dt><em>P7</em><dd><code>((</code><var>p</var><code>,</code><var>f</var><code>),</code><var>g</var><code>) </code><var>x</var> = <var>f</var> <var>x</var> if
+<var>p</var> <var>x</var>  is a non-<code>nil</code> tree,
+but <var>g</var> <var>x</var> if <var>p</var> <var>x</var> = <code>nil</code>
+</dl>
+
+   <p><a name="index-properties-246"></a><a name="index-operator-properties-247"></a>Although other properties remain to be described, it is worth pausing at
+this point because there is ample food for thought in the ones already
+given. An obvious question would be that of their origin. The short
+answer is that they have been chosen arbitrarily to be true by
+definition of the operator. At best, the completion of the construction
+may lead to a more satisfactory answer based on aesthetic or engineering
+grounds.
+
+   <p>A more important question would be that of the relevance of the mystery
+operator and its properties to the stated purpose of this section, which
+is to specify the virtual machine code semantics. The answer lies in
+that the operator induces a function for any given tree <var>t</var>,
+such that the value returned by the function when given an argument
+<var>x</var> is <var>t</var> <var>x</var>. This function is the one that is
+implemented by the virtual code <var>t</var>, which is to say the way an
+application will behave if we put <var>t</var> in its virtual code file. An
+equivalent way of looking at the situation is that the virtual machine
+does nothing but compute the result of this operator, taking the tree in
+the virtual code file as its left operand and the input data as the
+right operand. By knowing what the operator will do with a given pair of
+operands, we know what to put into the virtual code file to get the
+function we want.
+
+   <p><a name="index-universality-248"></a><a name="index-Turing-equivalence-249"></a><a name="index-exceptions-250"></a><a name="index-lists-251"></a>It is worthwhile to note that properties <em>P0</em> to <em>P7</em> are
+sufficient for universality in the sense of Turing equivalence. That
+means that any computable function could be implemented by the suitable
+choice of a tree <var>t</var> without recourse to any other properties of the
+operator. A compiler writer who finds this material boring could
+therefore stop reading at this point and carry out the task of targeting
+any general purpose programming language to the virtual machine based on
+the specifications already given. However, such an implementation would
+not take advantage of the features for list processing, exception
+handling, or profiling that are also built into the virtual
+machine and have yet to be described.
+
+   </body></html>
+

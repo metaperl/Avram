@@ -1,0 +1,80 @@
+<html lang="en">
+<head>
+<title>Security - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
+<link rel="prev" href="Diagnostics.html#Diagnostics" title="Diagnostics">
+<link rel="next" href="Example-Script.html#Example-Script" title="Example Script">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Security"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Example-Script.html#Example-Script">Example Script</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Diagnostics.html#Diagnostics">Diagnostics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
+<hr>
+</div>
+
+<h3 class="section">1.7 Security</h3>
+
+<p><a name="index-security-115"></a>A few obvious security considerations are relevant to running untrusted
+virtual code applications. These points are only as reliable as the
+assumption that the <code>avram</code> executable has not been modified to the
+contrary.
+
+     
+<a name="index-filter-mode-116"></a>
+<ul><li>The applications with the best protection from malicious code are
+those that run in filter mode, because they have no access to any
+information not presented to them in standard input, nor the ability to
+affect anything other than the contents of standard output (provided that
+the <code>--jail</code> command line option is used). The worst
+they can do is use up a lot of memory, which can be prevented with the
+<samp><span class="command">ulimit</span></samp> command. Unfortunately, not all applications are usable
+in this mode. 
+<li>Parameter mode applications that do not involve the <samp><span class="option">-i</span></samp>,
+<a name="index-parameter-mode-117"></a><a name="index-standard-input-118"></a><samp><span class="option">-t</span></samp> or <samp><span class="option">-s</span></samp> options are almost as safe (also assuming
+<code>--jail</code>). They have (read-only) access to environment variables, and to the files that are
+indicated explicitly on the command line. If standard input is one of
+the files (as indicated by the use of <code>-</code> as a parameter), the
+virtual code application may infer the current date and time.  However,
+a parameter mode application may write any file that the user has
+permission to write. The <samp><span class="option">--ask-to-overwrite</span></samp> option should be
+used for better security, or at least the <samp><span class="option">--quiet</span></samp> option should
+not be used.  The virtual code can neither override nor detect the use
+of these options. 
+<li>Interactive parameter mode applications (those that use either the
+<a name="index-interactive-applications-119"></a><samp><span class="option">-i</span></samp>, <samp><span class="option">-t</span></samp> or <samp><span class="option">-s</span></samp> options) are the least secure
+because they can execute arbitrary shell commands on behalf of the
+user. This statement also applies to filter mode and parameter mode
+applications where the <samp><span class="option">--jail</span></samp> option is not used.  Use of
+<samp><span class="option">--step</span></samp> is preferable to <samp><span class="option">-i</span></samp> for making an audit
+trail of all commands executed, but the application could probably
+subvert it. The <samp><span class="option">--step</span></samp> option may be slightly better because
+it can allow the user to inspect each command and interrupt it if
+appropriate. However, in most cases a command will not be displayed
+until it is already executed. Commands executed by non-interactive
+applications normally will display no output to that effect. A
+<samp><span class="command">chroot</span></samp> environment may be the only secure way of running
+untrusted interactive applications. 
+</ul>
+
+   </body></html>
+

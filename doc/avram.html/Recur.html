@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>Recur - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Recursion.html#Recursion" title="Recursion">
+<link rel="prev" href="Recursion.html#Recursion" title="Recursion">
+<link rel="next" href="Refer.html#Refer" title="Refer">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Recur"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Refer.html#Refer">Refer</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Recursion.html#Recursion">Recursion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Recursion.html#Recursion">Recursion</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.9.1 Recur</h5>
+
+<p><a name="index-g_t_0040code_007bmeta_007d-298"></a><a name="index-g_t_0040code_007brecur_007d-299"></a>A generalization of the form denoted by <code>meta</code> in <code>silly</code> is
+recognized by the virtual machine and allows a slightly more efficient
+encoding of recursive applications. An expression <code>recur </code><var>p</var>
+has the representation indicated by this theorem,
+
+     <dl>
+<dt><em>T15</em><dd>[[<code>recur</code>]] <var>p</var> = <code>(((nil,</code><var>p</var><code>),nil),nil)</code>
+</dl>
+
+<p class="noindent">which implies that [[<code>meta</code>]] = [[<code>recur</code>]] <code>(nil,nil)</code>.
+
+   <p>If <var>p</var> is non-<code>nil</code>, a tree of the form [[<code>recur</code>]]
+<var>p</var> is interpreted as follows. Note that <em>P4</em> is
+equivalent to the special case of this property for which <var>p</var>
+is <code>(nil,nil)</code>.
+
+     <dl>
+<dt><em>P14</em><dd>([[<code>recur</code>]] <var>p</var>) <var>x</var> = [[<code>meta</code>]] ([[<code>field</code>]] <var>p</var>) <var>x</var>
+</dl>
+
+   <p>The rationale is that <code>meta</code> would very frequently be composed with
+a deconstruction <code>field </code><var>p</var>, so the virtual machine saves some
+time and space by allowing the two of them to be encoded in a smaller
+tree with the combined meaning.
+
+   </body></html>
+

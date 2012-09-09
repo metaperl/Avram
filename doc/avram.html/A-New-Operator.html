@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+<title>A New Operator - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="prev" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="next" href="On-Equality.html#On-Equality" title="On Equality">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="A-New-Operator"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="On-Equality.html#On-Equality">On Equality</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.7.1 A New Operator</h4>
+
+<p>With regard to a set of trees as described in <a href="Raw-Material.html#Raw-Material">Raw Material</a>, we can define
+a new binary operator. Unlike the <code>cons</code> operator, this one is not
+required to associate an element of the set with every possible pair
+of elements. For very many pairs of operands we will have nothing to
+say about its result. In fact, we require nothing of it beyond
+a few simple properties to be described presently.
+
+   <p>Because this is the only other operator than <code>cons</code>, there is no
+<a name="index-g_t_0040code_007bcons_007d-240"></a>need to have a special notation for it, so it will be denoted by empty
+space. The tree associated by the operator with a pair of trees <var>x</var>
+and <var>y</var>, if any, will be expressed in the infix notation
+<var>x</var> <var>y</var>. For convenience, the operator is regarded as
+being right associative, so that <var>a</var> <var>b</var> <var>c</var> can be
+written for <var>a</var><code> (</code><var>b</var> <var>c</var><code>)</code>.
+
+   </body></html>
+

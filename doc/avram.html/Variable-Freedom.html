@@ -1,0 +1,129 @@
+<html lang="en">
+<head>
+<title>Variable Freedom - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="prev" href="How-_0040code_007bavram_007d-Thinks.html#How-_0040code_007bavram_007d-Thinks" title="How @code{avram} Thinks">
+<link rel="next" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Variable-Freedom"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="How-_003ccode_003eavram_003c_002fcode_003e-Thinks.html#How-_003ccode_003eavram_003c_002fcode_003e-Thinks">How &lt;code&gt;avram&lt;/code&gt; Thinks</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.7.6 Variable Freedom</h4>
+
+<p>The virtual code semantics is easier to specify using the
+<code>silly</code> language than it would be without it, but still awkward in
+some cases. An example is the following declaration from the standard
+library,
+<a name="index-g_t_0040code_007bhired_007d-275"></a>
+<pre class="example">     hired = compose(
+        compose,
+        couple(
+           constant compose,
+           compose(couple,couple(constant,constant couple))))
+</pre>
+   <p class="noindent">which is constructed in such a way as to imply the following theorem,
+provable by routine computation.
+
+     <dl>
+<dt><em>T9</em><dd><code>(</code>[[<code>hired</code>]] <var>h</var><code>) (</code><var>f</var><code>,</code><var>g</var><code>)</code> = [[<code>compose</code>]]<code>(</code><var>h</var><code>,</code>[[<code>couple</code>]]<code>(</code><var>f</var><code>,</code><var>g</var><code>))</code>
+</dl>
+
+<p class="noindent">Intuitively, <code>hired</code> represents a function that takes a given
+function to a higher order function. For example, if <code>f</code> were a
+function that adds two real numbers, <code>hired f</code> would be a function that
+takes two real valued functions to their pointwise sum.
+
+   <p>Apart from its cleverness, such an opaque way of defining a function has
+little to recommend it. The statement of the theorem about the function
+is more readable than the function definition itself, probably because
+the theorem liberally employs mathematical variables, whereas the
+<code>silly</code> language is variable free. On the other hand, it is not
+worthwhile to linger over further enhancements to the language, such as
+adding variables to it. The solution will be to indicate informally a
+general method of inferring a variable free function definition from an
+expression containing variables, and hereafter omit the more
+cumbersome definitions.
+
+   <p><a name="index-g_t_0040code_007bisolate_007d-276"></a><a name="index-variables-277"></a>An algorithm called <code>isolate</code> does the job. 
+The input to <code>isolate</code> is a pair <code>(</code><var>e</var><code>,</code><var>x</var><code>)</code>, where
+<var>e</var> is a syntactically correct <code>silly</code> expression in
+which the identifier <var>x</var> may occur, but no other identifiers
+dependent on <var>x</var> may occur (or else it's
+garbage-in/garbage-out).  Output is a syntactically correct <code>silly</code>
+expression <var>f</var> in which the identifier <var>x</var> does
+not occur, such that [[<var>e</var>]] = [[<var>f</var> <var>x</var>]]. 
+The algorithm is as follows,
+
+<pre class="display">     
+     if <var>e</var> = <var>x</var> then
+        return <code>identity</code>
+     else if <var>e</var> is of the form <code>(</code><var>u</var><code>,</code><var>v</var><code>)</code>
+        return <code>couple(isolate(</code><var>u</var><code>,</code><var>x</var><code>),isolate(</code><var>v</var><code>,</code><var>x</var><code>))</code>
+     else if <var>e</var> is of the form <var>u</var> <var>v</var>
+        return <code>(hired apply)(isolate(</code><var>u</var><code>,</code><var>x</var><code>),isolate(</code><var>v</var><code>,</code><var>x</var><code>))</code>
+     else
+        return <code>constant </code><var>e</var>
+     
+</pre>
+   <p class="noindent"><a name="index-equality-278"></a>where equality is by literal comparison of expressions, and the
+definition of <code>apply</code> is
+<a name="index-g_t_0040code_007bapply_007d-279"></a>
+<pre class="example">     apply = (hired meta)((hired compose)(left,constant right),right)
+</pre>
+   <p class="noindent">which represents a function that does the same thing as the invisible
+operator.
+
+     <dl>
+<dt><em>T10</em><dd>[[<code>apply</code>]] <code>(</code><var>f</var><code>,</code><var>x</var><code>)</code> = <var>f</var> <var>x</var>
+</dl>
+
+   <p>The <code>isolate</code> algorithm can be generalized to functions of
+arbitrarily many variables, but in this document we will need
+only a unary and a binary version. The latter takes an expression
+<var>e</var> and a pair of identifiers <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> as
+input, and returns an expression <var>f</var> such that
+[[<var>e</var>]] = [[<var>f</var><code> (</code><var>x</var><code>,</code><var>y</var><code>)</code>]].
+
+<pre class="display">     
+     if <var>e</var> = <var>x</var> then
+        return <code>left</code>
+     else if <var>e</var> = <var>y</var> then
+        return <code>right</code>
+     else if <var>e</var> is of the form <code>(</code><var>u</var><code>,</code><var>v</var><code>)</code>
+        return <code>couple(isolate(</code><var>u</var><code>,(</code><var>x</var><code>,</code><var>y</var><code>)),isolate(</code><var>v</var><code>,(</code><var>x</var><code>,</code><var>y</var><code>)))</code>
+     else if <var>e</var> is of the form <var>u</var> <var>v</var>
+        return <code>(hired apply)(isolate(</code><var>u</var><code>,(</code><var>x</var><code>,</code><var>y</var><code>)),isolate(</code><var>v</var><code>,(</code><var>x</var><code>,</code><var>y</var><code>)))</code>
+     else
+        return <code>constant </code><var>e</var>
+     
+</pre>
+   <p>It might be noted in passing that something similar to these algorithms
+would be needed in a compiler targeted to <code>avram</code> if the source
+were a functional language with variables.
+
+   </body></html>
+

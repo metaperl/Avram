@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+<title>Field - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Deconstruction.html#Deconstruction" title="Deconstruction">
+<link rel="prev" href="Deconstruction.html#Deconstruction" title="Deconstruction">
+<link rel="next" href="Fan.html#Fan" title="Fan">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Field"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Fan.html#Fan">Fan</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Deconstruction.html#Deconstruction">Deconstruction</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Deconstruction.html#Deconstruction">Deconstruction</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.8.1 Field</h5>
+
+<p>The virtual machine supports a generalization of the <code>left</code> and
+<a name="index-g_t_0040code_007bleft_007d-291"></a><a name="index-g_t_0040code_007bright_007d-292"></a><code>right</code> deconstruction operations that is applicable to deeply nested
+structures. Use of this feature is conducive to code that is faster and
+more compact than is possible by relying on the primitive deconstructors
+alone. It may also be easier for a code optimizer to recognize and
+transform.
+
+   <p>The general form of a virtual code application to perform deconstruction
+is that it is a pair with a <code>nil</code> left side, and a non-<code>nil</code>
+right side. The right side indicates the nature of the deconstruction to
+be performed when the function is evaluated on an argument.
+
+   <p>To make the expression of deconstruction functions more readable in
+<code>silly</code>, the standard library contains the declaration
+
+<pre class="example">     field = couple(constant nil,identity)
+</pre>
+   <p class="noindent">which implies the following theorem.
+
+     <dl>
+<dt><em>T13</em><dd>[[<code>field</code>]] <var>w</var> = <code>(nil,</code><var>w</var><code>)</code>
+</dl>
+
+   <p><a name="index-g_t_0040code_007bfield_007d-293"></a>The virtual machine recognizes an application in this form and evaluates
+it according to the following properties, where <var>u</var> and
+<var>v</var> are other than <code>nil</code>, but <var>x</var>,
+<var>y</var>, and <var>z</var> are unrestricted.
+
+     <dl>
+<dt><em>P10</em><dd>([[<code>field</code>]] <code>(</code><var>u</var><code>,nil)</code>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = ([[<code>field</code>]] <var>u</var>) <var>x</var>
+<br><dt><em>P11</em><dd>([[<code>field</code>]] <code>(nil,</code><var>v</var><code>)</code>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = ([[<code>field</code>]] <var>v</var>) <var>y</var>
+<br><dt><em>P12</em><dd>([[<code>field</code>]] <code>(</code><var>u</var><code>,v)</code>) <var>z</var> = <code>((</code>[[<code>field</code>]] <var>u</var><code>) </code><var>z</var><code>,(</code>[[<code>field</code>]] <var>v</var><code>) </code><var>z</var><code>)</code>
+</dl>
+
+<p class="noindent">One might also add that ([[<code>field</code>]] <code>(nil,nil)</code>)
+<var>z</var> = <var>z</var>, but this statement would be equivalent to
+<em>P0</em>.
+
+   <p>A suitable choice of the <code>field</code> operand permits the implementation
+of any deconstruction function expressible in terms of <code>compose</code>,
+<code>couple</code>, <code>identity</code>, <code>left</code> and <code>right</code>. For
+example, the application <code>couple(compose(right,right),left)</code> has an
+equivalent representation in
+<code>field((nil,(nil,(nil,nil))),((nil,nil),nil))</code>. The latter looks
+longer in <code>silly</code> but is smaller and faster in virtual code.
+
+   </body></html>
+

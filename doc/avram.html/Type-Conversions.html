@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+<title>Type Conversions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Lists.html#Lists" title="Lists">
+<link rel="prev" href="List-Transformations.html#List-Transformations" title="List Transformations">
+<link rel="next" href="Comparison.html#Comparison" title="Comparison">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Type-Conversions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Comparison.html#Comparison">Comparison</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="List-Transformations.html#List-Transformations">List Transformations</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.4 Type Conversions</h4>
+
+<p>External library functions accessed by the <code>library</code> combinator
+as explained in <a href="Library-combinator.html#Library-combinator">Library combinator</a> may operate on data other
+than the <code>list</code> type usually used by <code>avram</code>, such as
+floating point numbers and arrays, but a virtual code application must
+be able to represent the arguments and results of these functions in
+order to use them. As a matter of convention, a data structure
+occupying <var>size</var> bytes of contiguous storage on the host machine
+appears as a list of length <var>size</var> to a virtual code application,
+in which each item corresponds to a byte, and is represented according
+to <a href="Character-Table.html#Character-Table">Character Table</a>.
+
+   <p>In principle, a virtual code application invoking a library function
+to operate on a contiguous block of data, such as an IEEE double
+precision number, for example, would construct a list of eight
+character representations (one for each byte in a double precision
+number), and pass this list as an argument to the library
+function. The virtual machine would transparently convert this
+representation to the native floating point format, evaluate the
+function, and convert the result back to a list.  In practice, high
+level language features beyond the scope of this document would
+insulate the programmer from some of the details on the application
+side as well.
+
+   <p>To save the time of repeatedly converting between the list
+representation and the contiguous native binary representation, the
+structure referenced by a <code>list</code> pointer contains a <code>value</code>
+<a name="index-value-field-439"></a>field which is a <code>void</code> pointer to a block of memory of
+unspecified type, and serves as a persistent cache of the value
+represented by the list. This field normally should be managed by the
+API rather than being accessed directly by client modules, but see the
+code in <samp><span class="file">mpfr.c</span></samp> for an example of a situation in which it's
+appropriate to break this rule. (Generally these situations involve
+library functions operating on non-contiguous data.)
+
+<ul class="menu">
+<li><a accesskey="1" href="Primitive-types.html#Primitive-types">Primitive types</a>
+<li><a accesskey="2" href="One-dimensional-arrays.html#One-dimensional-arrays">One dimensional arrays</a>
+<li><a accesskey="3" href="Two-dimensional-arrays.html#Two-dimensional-arrays">Two dimensional arrays</a>
+<li><a accesskey="4" href="Related-utility-functions.html#Related-utility-functions">Related utility functions</a>
+</ul>
+
+   </body></html>
+

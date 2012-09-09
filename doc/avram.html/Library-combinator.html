@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+<title>Library combinator - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Interfaces to External Code">
+<link rel="prev" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Interfaces to External Code">
+<link rel="next" href="Have-combinator.html#Have-combinator" title="Have combinator">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Library-combinator"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Have-combinator.html#Have-combinator">Have combinator</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.16.1 Library combinator</h5>
+
+<p>The simplest and fastest method of interfacing to an external library
+is by way of a virtual machine combinator called <code>library</code>. It
+takes two non-empty character strings as arguments to a virtual code
+program of the form implied by the following property.
+     <dl>
+<dt><em>T33</em><dd>[[<code>library</code>]] (<var>x</var>,<var>y</var>) = <code>((nil,nil),((</code><var>x</var><code>,</code><var>y</var><code>),(nil,nil)))</code>
+</dl>
+
+<p class="noindent">Intuitively, <var>x</var> is the name of a library and <var>y</var> is the name
+of a function within the library. For example, if <var>x</var> is
+<code>'math'</code> and <var>y</var> is <code>'sqrt'</code>, then
+<code>library</code>(<var>x</var>,<var>y</var>) represents the function that computes
+the square root of a floating point number as defined by the host
+machine's native C implementation, normally in IEEE double precision
+format.  Different functions and libraries may involve other argument
+and result types, such as complex numbers, arrays, sparse matrices, or
+arbitrary precision numbers. A list of currently supported external
+library names with their functions and calling conventions is given in
+<a href="External-Libraries.html#External-Libraries">External Libraries</a>.
+
+   <p>On the virtual code side, all function arguments and results
+regardless of their types are encoded as nested pairs of <code>nil</code>,
+as always, and may be manipulated or stored as any other data,
+including storage and retrieval from files in <samp><span class="file">.avm</span></samp> virtual
+code format (<a href="File-Format.html#File-Format">File Format</a>). However, on the C side,
+various memory management and caching techniques are employed to
+maintain this facade while allowing the libraries to operate on data
+in their native format. The details are given more fully in the API
+documentation, particularly in <a href="Type-Conversions.html#Type-Conversions">Type Conversions</a> and
+<a href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>.
+
+   <p>While this style is fast and convenient, it is limited either to
+libraries that have already been built into the virtual machine, or to
+those for which the user is prepared to implement a new interface
+module in C as described in <a href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>.
+
+   </body></html>
+

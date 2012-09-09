@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>External Library Maintenance - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Library-Reference.html#Library-Reference" title="Library Reference">
+<link rel="prev" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="External-Library-Maintenance"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Library-Reference.html#Library-Reference">Library Reference</a>
+<hr>
+</div>
+
+<h3 class="section">3.9 External Library Maintenance</h3>
+
+<p>External mathematical library functions such as those documented in
+<a href="External-Libraries.html#External-Libraries">External Libraries</a> that are invoked from virtual code by the
+<code>library</code> combinator (<a href="Library-combinator.html#Library-combinator">Library combinator</a>) are also
+accessible from C by way of a uniform API implemented by the functions
+declared in <code>libfuns.h</code>. This interface applies even to libraries
+<a name="index-Fortran-653"></a>implemented in Fortran such as <code>minpack</code>. This section briefly
+documents the functions in <code>libfuns.h</code> and sets out some
+recommeded guidelines for developers wishing to add support for other
+external libraries.
+
+<ul class="menu">
+<li><a accesskey="1" href="Calling-existing-library-functions.html#Calling-existing-library-functions">Calling existing library functions</a>
+<li><a accesskey="2" href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>
+<li><a accesskey="3" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>
+</ul>
+
+   </body></html>
+

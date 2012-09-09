@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+<title>harminv input parameters - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="harminv.html#harminv" title="harminv">
+<link rel="prev" href="harminv.html#harminv" title="harminv">
+<link rel="next" href="harminv-output.html#harminv-output" title="harminv output">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="harminv-input-parameters"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="harminv-output.html#harminv-output">harminv output</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="harminv.html#harminv">harminv</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="harminv.html#harminv">harminv</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.8.1 <code>harminv</code> input parameters</h4>
+
+<p>The virtual machine interface to the <code>harminv</code> library provides
+only a single function, callable as
+
+<pre class="example">     library('harminv','hsolve')
+</pre>
+   <p class="noindent">The input to this function is an operand of the form
+
+<pre class="example">     (signal,(fmin,fmax),nf)
+</pre>
+   <p class="noindent">where
+
+     <ul>
+<li><code>signal</code> is a list of complex numbers containing samples
+of the function to be decomposed at equal time steps
+(<a href="complex.html#complex">complex</a> and <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>). 
+<li><code>fmin</code> and <code>fmax</code> are the band limits expressed in units
+of inverse time steps as floating point numbers (<a href="math.html#math">math</a>). 
+<li><code>nf</code> is the number of spectral basis functions expressed as a
+natural (<a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>). 
+</ul>
+
+<p class="noindent">If a value of 0 is specified for <code>nf</code> a default value of
+
+<pre class="example">     min(300, (fmax - fmin) * n * 1.1)
+</pre>
+   <p class="noindent">is used, where <code>n</code> is the length of <code>signal</code>. The
+computation time increases cubically with <code>nf</code>.
+
+   </body></html>
+

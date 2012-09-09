@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>Lists - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Library-Reference.html#Library-Reference" title="Library Reference">
+<link rel="prev" href="Library-Reference.html#Library-Reference" title="Library Reference">
+<link rel="next" href="Characters-and-Strings.html#Characters-and-Strings" title="Characters and Strings">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Lists"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Characters-and-Strings.html#Characters-and-Strings">Characters and Strings</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Library-Reference.html#Library-Reference">Library Reference</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Library-Reference.html#Library-Reference">Library Reference</a>
+<hr>
+</div>
+
+<h3 class="section">3.1 Lists</h3>
+
+<p>The basic data structure used for representing virtual code and data in
+the <code>avram</code> library is declared as a <code>list</code>. 
+<a name="index-lists-396"></a><a name="index-g_t_0040code_007bhead_007d-field-397"></a><a name="index-g_t_0040code_007btail_007d-field-398"></a>The <code>list</code> type is a pointer to a structure having a <code>head</code>
+field and a <code>tail</code> field, which are also lists. The empty tree,
+<code>nil</code>, is represented by the C constant <code>NULL</code>. A tree of the
+form <code>cons(</code><var>a</var><code>,</code><var>b</var><code>)</code> is represented in C as a list whose
+<code>head</code> is the representation of <var>a</var> and whose
+<code>tail</code> is the representation of <var>b</var>.
+
+   <p>A number of other fields in the structure are maintained automatically
+and should not be touched. For that matter, even the <code>head</code> and
+<code>tail</code> fields should be considered read-only. Because of sharing,
+it is almost never valid to modify a list &ldquo;in place&rdquo;, except for cases
+that are already covered by library functions.
+
+<ul class="menu">
+<li><a accesskey="1" href="Simple-Operations.html#Simple-Operations">Simple Operations</a>
+<li><a accesskey="2" href="Recoverable-Operations.html#Recoverable-Operations">Recoverable Operations</a>
+<li><a accesskey="3" href="List-Transformations.html#List-Transformations">List Transformations</a>
+<li><a accesskey="4" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>
+<li><a accesskey="5" href="Comparison.html#Comparison">Comparison</a>
+<li><a accesskey="6" href="Deconstruction-Functions.html#Deconstruction-Functions">Deconstruction Functions</a>
+<li><a accesskey="7" href="Indirection.html#Indirection">Indirection</a>
+<li><a accesskey="8" href="The-Universal-Function.html#The-Universal-Function">The Universal Function</a>
+</ul>
+
+   </body></html>
+

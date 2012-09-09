@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>Iteration - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="prev" href="Predicates.html#Predicates" title="Predicates">
+<link rel="next" href="List-Combinators.html#List-Combinators" title="List Combinators">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Iteration"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="List-Combinators.html#List-Combinators">List Combinators</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Predicates.html#Predicates">Predicates</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.7.12 Iteration</h4>
+
+<p><a name="index-recursion-314"></a><a name="index-g_t_0040code_007biterate_007d-315"></a>One of many alternatives to recursion provided by the virtual machine is
+iteration, which allows an operation to be repeated until a condition is
+met. If the source language is imperative, this feature provides an easy
+means of translating loop statements to virtual code. In languages that allow
+functions to be treated as data, iteration can be regarded as a function
+that takes a predicate and a function as arguments, and returns a
+function that applies the given function repeatedly to its argument
+until the predicate is refuted.
+
+   <p>Iterative applications are expressed in virtual code by the pattern shown below.
+
+     <dl>
+<dt><em>T21</em><dd>[[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code> = <code>((nil,nil),(nil,(</code><var>p</var><code>,</code><var>f</var><code>)))</code>
+</dl>
+
+<p class="noindent">In the <code>silly</code> language, the <code>iterate</code> mnemonic plays the role
+of the function that takes the virtual code for a predicate
+<var>p</var> and a function <var>f</var> as arguments, and returns
+the virtual code for an iterating function.
+
+   <p>The code for an iterating function is recognized as such by the virtual
+machine emulator only if the subtrees <var>f</var> and <var>p</var> are other
+than <code>nil</code>. The resulting function tests the argument
+<var>x</var> with <var>p</var> and returns <var>x</var> if the
+predicate is false.
+
+     <dl>
+<dt><em>P22</em><dd>([[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>x</var> = <var>x</var> if <var>p</var> <var>x</var> = <code>nil</code>
+</dl>
+
+<p class="noindent">If the predicate turns out to be true, <var>f</var> is applied to
+<var>x</var>, and then another iteration is performed.
+
+     <dl>
+<dt><em>P23</em><dd>([[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>x</var> =
+([[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>f</var> <var>x</var> if <var>p</var> <var>x</var> is a non-<code>nil</code> tree
+</dl>
+
+   </body></html>
+

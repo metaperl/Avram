@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+<title>Standard Input Representation - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once" title="Loading All of Standard Input at Once">
+<link rel="prev" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once" title="Loading All of Standard Input at Once">
+<link rel="next" href="Standard-Output-Representation.html#Standard-Output-Representation" title="Standard Output Representation">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Standard-Input-Representation"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Standard-Output-Representation.html#Standard-Output-Representation">Standard Output Representation</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once">Loading All of Standard Input at Once</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once">Loading All of Standard Input at Once</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.5.1.1 Standard Input Representation</h5>
+
+<p><a name="index-standard-input-179"></a>The representation for the standard input file used as the argument to
+the function depends both on the file format and on the command line
+options specified when the application is invoked. The
+<a name="index-g_t_0040code_007bunparameterized_007d-command-line-option-180"></a><a name="index-g_t_0040code_007braw_002dmode_007d-command-line-option-181"></a><samp><span class="option">--unparameterized</span></samp> and <samp><span class="option">--raw-output</span></samp> options make no
+difference to the input representation, and the <samp><span class="option">--line-map</span></samp>
+and <samp><span class="option">--byte-transducer</span></samp> options are not relevant to this mode of
+operation. That leaves four possible combined settings of the
+<a name="index-g_t_0040code_007bchoice_002dof_002doutput_007d-command-line-option-182"></a><a name="index-g_t_0040code_007bforce_002dtext_002dinput_007d-command-line-option-183"></a><samp><span class="option">--choice-of-output</span></samp> and <samp><span class="option">--force-text-input</span></samp> options.  If
+standard input conforms to the data file format specification <a href="File-Format.html#File-Format">File Format</a>,
+the following effects are possible.
+
+     <ul>
+<li>If neither <samp><span class="option">--choice-of-output</span></samp> nor
+<samp><span class="option">--force-text-input</span></samp> is used, the argument to the function will
+be given directly by the tree encoded in the data section of the
+file. The preamble of the file will be ignored. 
+<li>If the <samp><span class="option">--choice-of-output</span></samp> option is used
+and the <samp><span class="option">--force-text-input</span></samp> option is not used, the argument to
+the function will be a pair <code>(</code><var>preamble</var><code>,</code><var>contents</var><code>)</code>,
+where <var>preamble</var> is a list of character strings taken from the
+preamble of the file (with leading hashes stripped), and <var>contents</var>
+is the tree represented in the data section of the file. 
+<li>If the <samp><span class="option">--choice-of-output</span></samp> option is not used
+and the <samp><span class="option">--force-text-input</span></samp> option is used, the argument to the
+function will be the whole file as a list of character strings.  I.e.,
+both the preamble and the data sections are included, hashes are not
+stripped from the preamble, and the data section is not converted to the
+tree it represents. 
+<li>If the <samp><span class="option">--choice-of-output</span></samp> option is used
+and the <samp><span class="option">--force-text-input</span></samp> option is also used, the argument to the
+the function will be a pair <code>(nil,</code><var>contents</var><code>)</code>, where the
+contents are the list of character strings as in the previous case. 
+</ul>
+
+   <p><a name="index-file-format-184"></a>If standard input does not conform to the data file format specification
+in <a href="File-Format.html#File-Format">File Format</a>, then it is assumed to be a text file. The
+<samp><span class="option">--force-text-input</span></samp> option makes no difference, and there are
+only two possible effects, depending on whether
+<samp><span class="option">--choice-of-output</span></samp> is used. They correspond to the latter two
+cases above, where <samp><span class="option">--force-text-input</span></samp> is used.
+
+   <p><a name="index-preamble-185"></a><a name="index-text-files-186"></a>The idea of the <samp><span class="option">--choice-of-output</span></samp> option is that it is used
+only for applications that are smart enough to be aware of the
+<code>(</code><var>preamble</var><code>,</code><var>contents</var><code>)</code> convention. A non-empty preamble
+implies a data file whose contents could be any type, but an empty
+preamble implies a text file whose contents can only be a list of
+character strings. (In the case of a data file with no preamble, the
+list of the empty string is used for the preamble to distinguish it from
+a text file.)
+
+   <p>Dumb applications that never want to deal with anything but text files
+should be invoked with <samp><span class="option">--force-text-input</span></samp>. Otherwise, they have
+to be prepared for either text or data as arguments.
+
+   <p>The use of both options at once is unproductive as far as the input
+format is concerned, but may be justified when the output is to be a
+data file and the input is text only.
+
+   </body></html>
+

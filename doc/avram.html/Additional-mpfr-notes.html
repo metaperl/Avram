@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+<title>Additional mpfr notes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mpfr.html#mpfr" title="mpfr">
+<link rel="prev" href="mpfr-exceptions.html#mpfr-exceptions" title="mpfr exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Additional-mpfr-notes"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-exceptions.html#mpfr-exceptions">mpfr exceptions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.14.10 Additional <code>mpfr</code> notes</h4>
+
+<p>The <code>eq</code> and <code>urandomb</code> functions depend not only on the
+<code>mpfr</code> library but on the <code>gmp</code> library
+<a name="index-gmp-library-801"></a>(<a href="http://ftp.gnu.org/gnu/gmp">http://ftp.gnu.org/gnu/gmp</a>). It's possible for them to be
+unavailable on a host without <code>gmp</code> even if the rest of the
+<code>mpfr</code> library is properly configured.
+
+   <p>The file <code>mpfr.c</code> in the <code>avram</code> source tree exports a
+couple of functions that may be of use to C hackers interested in
+further development of <code>avram</code> with <code>mpfr</code>. The functions
+<code>avm_mpfr_of_list</code> and <code>avm_list_of_mpfr</code> convert between
+the native representation for <code>mpfr</code> numbers and the caching list
+representation used by <code>avram</code> (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>). This
+conversion is non-trivial because the numbers are not stored
+contiguously.
+
+   </body></html>
+

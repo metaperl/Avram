@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+<title>mpfr unary operators - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mpfr.html#mpfr" title="mpfr">
+<link rel="prev" href="mpfr-binary-operators.html#mpfr-binary-operators" title="mpfr binary operators">
+<link rel="next" href="mpfr-binary-operators-with-a-natural-operand.html#mpfr-binary-operators-with-a-natural-operand" title="mpfr binary operators with a natural operand">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="mpfr-unary-operators"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="mpfr-binary-operators-with-a-natural-operand.html#mpfr-binary-operators-with-a-natural-operand">mpfr binary operators with a natural operand</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-binary-operators.html#mpfr-binary-operators">mpfr binary operators</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.14.2 <code>mpfr</code> unary operators</h4>
+
+<p>Functions with these names take a single <code>mpfr</code> number as an
+argument and return a single <code>mpfr</code> number as a result. 
+<a name="index-gamma-functions-794"></a>
+<pre class="example">     sqr      sqrt     cbrt     neg      abs      log
+     log2     log10    exp      exp2     exp10    cos
+     sin      tan      acos     asin     atan     cosh
+     sinh     tanh     acosh    asinh    atanh    lngamma
+     expm1    eint     gamma    erf      log1p    nextbelow
+     ceil     floor    round    trunc    frac     nextabove
+     erfc
+</pre>
+   <p>The semantics of these functions are similar to those of their
+counterparts in the native API, with these provisions.
+
+     <ul>
+<li>The precision of the result is the precision of the argument. 
+<li>There is no second argument for assigning the result. 
+<li>The <code>nextabove</code> and <code>nextbelow</code> functions do not modify
+their arguments in place, but return a freshly allocated result
+like all other functions. 
+</ul>
+
+   </body></html>
+

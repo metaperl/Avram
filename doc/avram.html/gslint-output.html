@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>gslint output - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="gslint.html#gslint" title="gslint">
+<link rel="prev" href="gslint-input-parameters.html#gslint-input-parameters" title="gslint input parameters">
+<link rel="next" href="gslint-exceptions.html#gslint-exceptions" title="gslint exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="gslint-output"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="gslint-exceptions.html#gslint-exceptions">gslint exceptions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="gslint-input-parameters.html#gslint-input-parameters">gslint input parameters</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="gslint.html#gslint">gslint</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.7.2 <code>gslint</code> output</h4>
+
+<p>In all cases, if no exception occurs, the result returned is an
+approximation of the integral of <var>f</var> over the interval from
+<var>a</var> to <var>b</var> or from the first item of <var>p</var> to the last.
+
+   <p>Results may differ in numerical properties depending on the
+integration method and the tolerance used.
+
+     <ul>
+<li>The <code>qagp</code>* and <code>qagx</code>* functions use an adaptive algorithm,
+<a name="index-adaptive-integration-729"></a><a name="index-non_002dadaptive-integration-730"></a>whereas the <code>qng</code>* functions use a faster non-adaptive algorithm
+suitable only for smooth integrands. 
+<li>Faster and maybe more accurate results are obtained for discontinuous
+or non-differentiable integrands by the <code>qagp</code>* integration
+methods if the interior points in <var>p</var> are chosen to coincide with
+the discontinuities or corners. 
+<li>Larger tolerances are conducive to faster but less accurate results in
+most cases. 
+</ul>
+
+   </body></html>
+

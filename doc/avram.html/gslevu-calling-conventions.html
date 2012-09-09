@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+<title>gslevu calling conventions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="gslevu.html#gslevu" title="gslevu">
+<link rel="prev" href="gslevu.html#gslevu" title="gslevu">
+<link rel="next" href="gslevu-exceptions.html#gslevu-exceptions" title="gslevu exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="gslevu-calling-conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="gslevu-exceptions.html#gslevu-exceptions">gslevu exceptions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="gslevu.html#gslevu">gslevu</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="gslevu.html#gslevu">gslevu</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.6.1 <code>gslevu</code> calling conventions</h4>
+
+<p>The input to either of these functions is a list of real numbers
+represented as explained in <a href="math.html#math">math</a>.
+
+   <p>The result is a pair <code>(</code><var>s</var><code>,</code><var>e</var><code>)</code> holding an estimate of
+the sum, <var>s</var>, and an estimate of the error in the sum,
+<var>e</var>, each being a real number.
+
+   <p>Both functions compute the same sum, <var>s</var>, but the <code>utrunc</code> function
+is faster and
+<a name="index-infinite-sum-725"></a>more memory efficient, using a less trustworthy method of estimating
+the error.
+
+   </body></html>
+

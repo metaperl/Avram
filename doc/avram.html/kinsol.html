@@ -1,0 +1,73 @@
+<html lang="en">
+<head>
+<title>kinsol - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="harminv.html#harminv" title="harminv">
+<link rel="next" href="lapack.html#lapack" title="lapack">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="kinsol"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lapack.html#lapack">lapack</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="harminv.html#harminv">harminv</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.9 <code>kinsol</code></h3>
+
+<p>The <code>kinsol</code> library (<a href="http://www.llnl.gov/CASC/sundials/">http://www.llnl.gov/CASC/sundials/</a>)
+contains sophisticated routines for non-linear optimization and
+<a name="index-optimization-738"></a><a name="index-non_002dlinear-optimization-739"></a>constrained non-linear optimization, some of which are available to
+<a name="index-constrained-non_002dlinear-optimization-740"></a>virtual code applications by way of functions expressed as shown.
+
+<pre class="example">     library('kinsol',k)
+</pre>
+   <p class="noindent">The function name <code>k</code> is a string of the form
+<code>'</code><var>xy</var><code>_</code><var>zzzzz</var><code>'</code>. The field <var>zzzzz</var> specifies
+the optimization algorithm, which can be one of <code>dense</code>,
+<code>gmres</code>, <code>bicgs</code>, or <code>tfqmr</code>, following the names used
+by the API for <code>kinsol</code> in C. The field <var>y</var> determines
+the way gradients are obtained, which is either <code>j</code> for a user
+supplied Jacobian, or <code>d</code> for finite differences computed by
+<code>kinsol</code>. The remaining field <var>x</var> is either <code>c</code> for
+constrained optimization, or <code>u</code> for unconstrained. Hence, the
+whole function name can be one of sixteen possible alternatives.
+
+<pre class="example">     cd_dense   cd_gmres   cd_bicgs   cd_tfqmr
+     ud_dense   ud_gmres   ud_bicgs   ud_tfqmr
+     cj_dense   cj_gmres   cj_bicgs   cj_tfqmr
+     uj_dense   uj_gmres   uj_bicgs   uj_tfqmr
+</pre>
+   <p>More specific information about the optimization algorithms can be
+found in the <code>kinsol</code> documentation at the above
+address. Different algorithms may perform better on different
+problems.
+
+<ul class="menu">
+<li><a accesskey="1" href="kinsol-input-parameters.html#kinsol-input-parameters">kinsol input parameters</a>
+<li><a accesskey="2" href="kinsol-output.html#kinsol-output">kinsol output</a>
+<li><a accesskey="3" href="kinsol-exceptions.html#kinsol-exceptions">kinsol exceptions</a>
+<li><a accesskey="4" href="Additional-kinsol-notes.html#Additional-kinsol-notes">Additional kinsol notes</a>
+</ul>
+
+   </body></html>
+

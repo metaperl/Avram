@@ -1,0 +1,96 @@
+<html lang="en">
+<head>
+<title>Sort - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
+<link rel="prev" href="Reduce.html#Reduce" title="Reduce">
+<link rel="next" href="Transfer.html#Transfer" title="Transfer">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Sort"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Transfer.html#Transfer">Transfer</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Reduce.html#Reduce">Reduce</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.13.4 Sort</h5>
+
+<p><a name="index-g_t_0040code_007bsort_007d-329"></a>Sorting is a frequently used operation that has the following standard
+representation in virtual code.
+
+     <dl>
+<dt><em>T25</em><dd>[[<code>sort</code>]] <var>p</var> = <code>((nil,nil),((</code><var>p</var><code>,nil),(nil,nil)))</code>
+</dl>
+
+<p class="noindent">When an application in this form is evaluated with an operand
+representing a list, the result is a sorted version of the list.
+
+   <p>The way a list is sorted depends on what order is of interest. For
+example, numbers could be sorted in ascending or descending order,
+character strings could be sorted lexically or by length, etc.. The
+value of <var>p</var> is therefore needed in sorting applications to
+specify the order. It contains the virtual code for a partial order
+relational operator. This operator can be evaluated with any pair of
+items selected from a list, and should have a value of true if the left
+one should precede the right under the ordering. For example, if numbers
+were to be sorted in ascending order, then <var>p</var> would compute
+the &ldquo;less or equal&rdquo; relation, returning true if its operand were a
+pair of numbers in which the left is less or equal to the right.
+
+   <p>The virtual code semantics for sorting applications is given by these
+two properties, wherein <var>p</var> is a non-<code>nil</code> tree, and
+<code>insert</code> is a <code>silly</code> mnemonic to be defined next. 
+<a name="index-g_t_0040code_007binsert_007d-330"></a>
+     <dl>
+<dt><em>P31</em><dd>([[<code>sort</code>]] <var>p</var>) <code>nil</code> = <code>nil</code>
+<br><dt><em>P32</em><dd>([[<code>sort</code>]] <var>p</var>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = ([[<code>insert</code>]] <var>p</var>)
+<code>(</code><var>x</var><code>,</code>([[<code>sort</code>]] <var>p</var>) <var>y</var><code>)</code>
+</dl>
+
+<p class="noindent">These properties say that the empty list is already sorted, and
+a non-empty list is sorted if its tail is sorted and the head is then
+inserted in the proper place. This specification of sorting has nothing
+to do with the sorting algorithm that <code>avram</code> really uses.
+
+   <p>The meaning of insertion is convenient to specify in virtual code
+itself. It should satisfy these three equations.
+
+     <dl>
+<dt><em>E4</em><dd>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,nil)</code> = <code>(</code><var>x</var><code>,nil)</code>
+<br><dt><em>E5</em><dd>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code> =
+<code>(</code><var>y</var><code>,</code>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,</code><var>z</var><code>))</code>
+if <var>p</var><code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = <code>nil</code>
+<br><dt><em>E6</em><dd>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>)</code>) =
+<code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code> if <var>p</var><code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> is a non-<code>nil</code> tree
+</dl>
+
+<p class="noindent">Intuitively, the right argument, whether <code>nil</code> or
+<code>(</code><var>y</var><code>,</code><var>z</var><code>)</code>, represents a list that is already sorted. The
+left argument <var>x</var> therefore only needs to be compared to the
+head element, <var>y</var> to ascertain whether or not it belongs at
+the beginning. If not, it should be inserted into the tail.
+
+   <p>A possible implementation of <code>insert</code> in <code>silly</code> is given in
+<a href="Insert.html#Insert">Insert</a>.
+
+   </body></html>
+

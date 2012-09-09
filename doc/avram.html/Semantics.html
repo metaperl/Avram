@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>Semantics - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="A Simple Lisp Like Language">
+<link rel="prev" href="Syntax.html#Syntax" title="Syntax">
+<link rel="next" href="Standard-Library.html#Standard-Library" title="Standard Library">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Semantics"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Standard-Library.html#Standard-Library">Standard Library</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Syntax.html#Syntax">Syntax</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.4.2 Semantics</h5>
+
+<p>Declarations in <code>silly</code> should be understood in the obvious way as
+preprocessor directives to perform parenthetic textual substitutions (similar to
+<code>#define id (exp)</code> in C). All identifiers in expressions are thereby
+eliminated during the preprocessing phase.
+
+   <p><a name="index-semantic-function-257"></a>The overall meaning of the program is the meaning of the expression in
+the last declaration.  A denotational semantics for expressions is given
+by the following equations, where [[<var>x</var>]] should be read as
+&ldquo;the meaning of <var>x</var>&rdquo;, and <var>x</var>, <var>y</var> and <var>z</var>
+are metavariables. (That is, they stand for any source code fragment
+that could fit there subject to the constraint, informally speaking,
+that it has to correspond to a connected subtree of the parse tree as enforced
+by the unambiguous grammar in the context of the rest of the program.)
+
+<pre class="display">     
+     [[<code>()</code>]] = <code>nil</code>
+     
+     [[<code>(</code><var>x</var><code>)</code>]] = [[<var>x</var>]]
+     
+     [[<code>(</code><var>x</var><code>,</code><var>y</var><code>)</code>]] = <code>cons(</code>[[<var>x</var>]]<code>,</code>[[<var>y</var>]]<code>)</code>
+     
+     [[<var>x</var> <var>y</var>]] = [[<var>x</var><code>(</code><var>y</var><code>)</code>]] = [[<var>x</var>]] [[<var>y</var>]]
+     
+     [[<var>x</var><code> (</code><var>y</var><code>,</code><var>z</var><code>)</code>]] = [[<var>x</var><code>(</code><var>y</var><code>,</code><var>z</var><code>)</code>]] = [[<var>x</var>]] [[<code>(</code><var>y</var><code>,</code><var>z</var><code>)</code>]]
+     
+</pre>
+   <p class="noindent">Toy languages like this are among the few situations a
+<a name="index-denotational-semantics-258"></a>denotational semantics stands a chance of clarifying more than it
+obfuscates, so the reader is invited to take a moment to savor it.
+
+   </body></html>
+

@@ -1,0 +1,125 @@
+<html lang="en">
+<head>
+<title>Assignment - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="prev" href="Recursion.html#Recursion" title="Recursion">
+<link rel="next" href="Predicates.html#Predicates" title="Predicates">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Assignment"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Predicates.html#Predicates">Predicates</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Recursion.html#Recursion">Recursion</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.7.10 Assignment</h4>
+
+<p><a name="index-assignment-303"></a><a name="index-imperative-programming-304"></a>In an imperative programming paradigm, a machine consists partly of an
+ensemble of addressable storage locations, whose contents are changed
+over time by assignment statements. An assignment statement includes
+some computable function of the global machine state, and the address of
+the location whose contents will be overwritten with the value computed
+from the function when it is evaluated.
+
+   <p>Compiling a language containing assignment statements into virtual
+machine code suitable for <code>avram</code> might be facilitated by
+exploiting the following property.
+
+     <dl>
+<dt><em>P16</em><dd>([[<code>assign</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>x</var> = [[<code>replace</code>]] <code>((</code><var>p</var><code>,</code><var>f</var> <var>x</var><code>),</code><var>x</var><code>)</code>
+</dl>
+
+<p class="noindent">The identifier <code>assign</code> is used in <code>silly</code> to express a
+virtual code fragment having the form shown below, and <code>replace</code>
+corresponds to a further operation to be explained presently. 
+<a name="index-g_t_0040code_007bassign_007d-305"></a>
+     <dl>
+<dt><em>T18</em><dd>[[<code>assign</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code> = <code>(((</code><var>p</var><code>,</code><var>f</var><code>),nil),nil)</code>
+</dl>
+
+   <p>This feature simulates assignment statements in the following way.  The
+variable <var>x</var> in <em>P16</em> corresponds intuitively to the set
+of addressable locations in the machine. The variable <var>f</var>
+corresponds to the function whose value will be stored in the location
+addressed by <var>p</var>. The result of a function expressed using
+<code>assign</code> is a new store similar to the argument <var>x</var>, but
+with the part of it in location <var>p</var> replaced by <var>f</var>
+<var>x</var>. A source text with a sequence of assignment statements could
+therefore be translated directly into a functional composition of trees
+in this form.
+
+   <p><a name="index-storage-locations-306"></a>The way storage locations are modeled in virtual code using this feature
+would be as nested pairs, and the address <var>p</var> of a location
+is a tree interpreted similarly to the trees used as operands to the
+<code>field</code> operator described in <a href="Field.html#Field">Field</a>, to specify
+deconstructions. In fact, <code>replace</code> can be defined as a minimal
+solution to the following equation. 
+<a name="index-g_t_0040code_007breplace_007d-307"></a>
+     <dl>
+<dt><em>E0</em><dd>([[<code>field</code>]] <var>p</var>) [[<code>replace</code>]] <code>((</code><var>p</var><code>,</code><var>y</var><code>),</code><var>x</var><code>)</code> = <var>y</var>
+</dl>
+
+   <p>This equation regrettably does
+not lend itself to inferring the <code>silly</code> source for <code>replace</code>
+<a name="index-g_t_0040code_007bisolate_007d-308"></a>using the <code>isolate</code> algorithm in <a href="Variable-Freedom.html#Variable-Freedom">Variable Freedom</a>, so an explicit
+construction is given in <a href="Replace.html#Replace">Replace</a>. This construction need not concern a
+reader who considers the equation a sufficiently precise specification
+in itself.
+
+   <p>In view of the way addresses for deconstruction are represented as
+trees, it would be entirely correct to infer from this equation that a
+tuple of values computed together can be assigned to a tuple of
+locations. The locations don't even have to be &ldquo;contiguous&rdquo;, but could
+be anywhere in the tree representing the store, and the function is
+computed from the contents of all of them prior to the update. Hence,
+this simulation of assignment fails to capture the full inconvenience of
+imperative programming except in the special case of a single value
+assigned to a single location, but fortunately this case is the only one
+most languages allow.
+
+   <p>There is another benefit to this feature besides running languages with
+assignment statements in them, which is the support of abstract or
+opaque data structures. A function that takes an abstract data structure
+as an argument and returns something of the same type can be coded in a
+way that is independent of the fields it doesn't use. For example, a
+data structure with three fields having the field identifiers
+<code>foo</code>, <code>bar</code>, and <code>baz</code> in some source language might be
+represented as a tuple <code>((</code><var>foo contents</var><code>,</code><var>bar
+contents</var><code>),</code><var>baz contents</var><code>)</code> on the virtual code level. Compile time
+constants like <code>bar = ((nil,(nil,nil)),nil)</code> could be defined in an
+effort to hide the details of the representation, so that the virtual
+code <code>field bar</code> is used instead of <code>compose(right,left)</code>. 
+Using field identifiers appropriately, a function that transforms such a
+structure by operating on the <code>bar</code> field could have the virtual
+<a name="index-g_t_0040code_007bfield_007d-309"></a>code <code>couple(couple(field foo,compose(f,field bar)),field
+baz)</code>. However, this code does not avoid depending on the representation
+of the data structure, because it relies on the assumption of the <code>foo</code>
+field being on the left of the left, and the <code>baz</code> field being on
+the right. On the other hand, the code <code>assign(bar,compose(f,field
+bar))</code> does the same job without depending on anything but the position
+of the <code>bar</code> field. Furthermore, if this position were to change
+relative to the others, the code maintenance would be limited to a
+recompilation.
+
+   </body></html>
+

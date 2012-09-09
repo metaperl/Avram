@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+<title>Compare - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Predicates.html#Predicates" title="Predicates">
+<link rel="prev" href="Predicates.html#Predicates" title="Predicates">
+<link rel="next" href="Member.html#Member" title="Member">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Compare"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Member.html#Member">Member</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Predicates.html#Predicates">Predicates</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Predicates.html#Predicates">Predicates</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.11.1 Compare</h5>
+
+<p><a name="index-g_t_0040code_007bcompare_007d-311"></a>A function that performs comparison has a the following very simple
+virtual code representation.
+
+     <dl>
+<dt><em>T19</em><dd>[[<code>compare</code>]] = <code>(nil,nil)</code>
+</dl>
+
+<p class="noindent">The proof of theorem <em>T19</em> is that the standard <code>silly</code> prelude
+contains the declaration <code>compare = (nil,nil)</code>.  Code in this form
+has the following semantics.
+
+     <dl>
+<dt><em>P17</em><dd>For distinct trees <var>x</var> and <var>y</var>, [[<code>compare</code>]] <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = <code>nil</code>
+<br><dt><em>P18</em><dd>[[<code>compare</code>]] <code>(</code><var>x</var><code>,</code><var>x</var><code>)</code> = <code>(nil,nil)</code>
+</dl>
+
+<p class="noindent"><a name="index-equality-312"></a>In other words, the virtual code <code>(nil,nil)</code> implements a function
+that takes a pair of trees and returns true if and only if they are
+equal.
+
+   <p>It would be fairly simple to write an equivalent virtual code
+application that implements this function if it were not realizable in
+this form by definition of the operator. However, this method is
+preferable because it saves space in virtual code and has a highly
+optimized implementation in C.
+
+   </body></html>
+

@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+<title>Raw Material - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
+<link rel="prev" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
+<link rel="next" href="Concrete-Syntax.html#Concrete-Syntax" title="Concrete Syntax">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Raw-Material"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>
+<hr>
+</div>
+
+<h3 class="section">2.1 Raw Material</h3>
+
+<p>The purpose of this section is to instill some basic concepts about the
+way information is stored or communicated by the virtual machine, which
+may be necessary for an understanding of subsequent sections.
+
+   <p>The virtual machine represents both programs and data as members of a
+semantic domain that is straightforward to describe. Lisp users and
+functional programmers may recognize familiar concepts of atoms and
+<a name="index-lists-141"></a>lists in this description. However, these terms are avoided for the
+moment, in order to keep this presentation self contained and to prevent
+knowledgeable readers from inferring any unintended meanings.
+
+   <p>As a rule, it is preferable to avoid overspecifying any theoretical
+artifact.  In this spirit, the set of entities with which the virtual
+machine is concerned can be defined purely in terms of the properties we
+need it to have.
+
+     <dl>
+<dt><em>A distinguished element</em><dd>A particular element of the set is designated, arbitrarily or otherwise,
+as a distinguished element. Given any element of the set, it is
+always possible to decide whether or not it is the distinguished
+element. The set is non-empty and such an element exists. 
+<br><dt><em>A binary operator</em><dd>A map from pairs of elements of the set to elements of the set exists
+and meets these conditions.
+
+          <ul>
+<li>It associates a <em>unique</em> element of the set with any given
+ordered pair of elements from the set. 
+<li>It does not associate the distinguished element with any pair of elements. 
+</ul>
+     </dl>
+
+   <p>For the sake of concreteness, an additional constraint is needed:
+<em>the set has no proper subset satisfying the above conditions</em>. Any
+number of constructions remain within these criteria, but there is no
+need to restrict them further, because they are all equivalent for our
+purposes.
+
+   <p>To see that these properties provide all the structure we need for
+general purpose computation, we may suppose some given set <code>S</code> and
+an operator <code>cons</code> having them are fixed, and infer the following
+points.
+
+     <ul>
+<li><code>S</code> contains at least one element, the distinguished
+element. Call it <code>nil</code>. 
+<a name="index-g_t_0040code_007bnil_007d-142"></a><li>The pair <code>(nil,nil)</code> is a pair of
+elements of <code>S</code>, so there must be an element of <code>S</code> that
+<code>cons</code> associates with it. We can denote this element
+<code>cons(nil,nil)</code>. 
+<a name="index-g_t_0040code_007bcons_007d-143"></a><li>As no pair of elements is associated with the
+distinguished element, <code>cons(nil,nil)</code> must differ from <code>nil</code>, so
+<code>S</code> contains at least two distinct elements. 
+<li>The pair <code>(nil,cons(nil,nil))</code> therefore differs from <code>(nil,nil)</code>,
+but because it is yet another pair of elements from <code>S</code>, there
+must be an element associated with it by the operator. We can denote
+this element as <code>cons(nil,cons(nil,nil))</code>. 
+<li>Inasmuch as the operator
+associates every pair of elements with a <em>unique</em> element,
+<code>cons(nil,cons(nil,nil))</code> must differ from the element associated
+with any other pair of elements, so it must differ from
+<code>cons(nil,nil)</code>, and we conclude that <code>nil</code>,
+<code>cons(nil,nil)</code> and <code>cons(nil,cons(nil,nil))</code> constitute three
+distinct elements of the set <code>S</code>. 
+<li>By defining <code>cons(cons(nil,nil),nil)</code>
+and <code>cons(cons(nil,nil),cons(nil,nil))</code> analogously and following a
+similar line of reasoning, one may establish the existence of two more
+distinct elements of <code>S</code>. 
+</ul>
+
+   <p>It is not difficult to see that an argument in more general terms could
+show that the inclusion of infinitely many elements in <code>S</code> is
+mandated by the properties of the <code>cons</code> operator. Furthermore,
+every element of <code>S</code> other than <code>nil</code> owes its inclusion to
+being associated with some other pair of elements by <code>cons</code>,
+because if it were not, its exclusion would permit a proper subset of
+<code>S</code> to meet all of the above conditions. We can conclude that
+<code>S</code> contains exactly <code>nil</code> and the countable infinitude of
+elements of the form <code>cons(x,y)</code>, where <code>x</code> and <code>y</code> are
+either <code>nil</code> or something of the form <code>cons(...)</code> themselves.
+
+   <p>Some specific examples of sets and operators that have the required
+properties are as follows.
+
+     <ul>
+<li>the set of natural numbers, with <code>0</code> as the distinguished element,
+and the <code>cons</code> operator defined by <code>cons(</code><var>x</var><code>,</code><var>y</var><code>) =
+((</code><var>x</var><code>+</code><var>y</var><code>)(</code><var>x</var><code>+</code><var>y</var><code>+1))/2 + </code><var>y</var><code> + 1</code>
+<li>a set of balanced strings of parentheses, with <code>()</code> as the
+distinguished element, and <code>cons</code> defined as string concatenation
+followed by enclosure in parentheses
+<li>a set of ordered binary trees, with the empty tree as the distinguished
+element, and the <code>cons</code> operator as that which takes an ordered
+pair of trees to the tree having them as its descendents
+<li>a set containing only its own Cartesian product and an arbitrary
+but fixed element <code>nil</code>, with <code>cons</code> being the identity
+function
+</ul>
+
+   <p>Each of these models may suggest a different implementation, some of which
+are more practical than others. The remainder of this document is
+phrased somewhat imprecisely in terms of a combination of the latter
+two. The nature of the set in question is not considered further, and
+elements of the set are described as &ldquo;trees&rdquo; or &ldquo;lists&rdquo;. The
+<a name="index-trees-144"></a><a name="index-lists-145"></a>distinguished element is denoted by <code>nil</code> and the operator by
+<code>cons</code>. Where no ambiguity results, <code>cons(x,y)</code> may be written
+simply as <code>(x,y)</code>.  These terms should not be seen as constraints
+on the implementation.
+
+   </body></html>
+

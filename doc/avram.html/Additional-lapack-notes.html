@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+<title>Additional lapack notes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="lapack.html#lapack" title="lapack">
+<link rel="prev" href="lapack-exceptions.html#lapack-exceptions" title="lapack exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Additional-lapack-notes"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lapack-exceptions.html#lapack-exceptions">lapack exceptions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="lapack.html#lapack">lapack</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.10.3 Additional <code>lapack</code> notes</h4>
+
+<p>The functions <code>dgesdd</code> and <code>zgesdd</code> are an effective
+dimensionality reduction technique for a large database of time
+<a name="index-dimensionality-reduction-760"></a>series.  A set of basis vectors can be computed once for the database,
+and then any time series in the database can be expressed as a linear
+combination thereof. To the extent that the data embody any redundant
+information, an approximate reconstruction of an individual series
+from the database will require fewer coefficients (maybe far fewer) in
+terms of the basis than original length of the series.
+
+   <p>The library functions <code>dgelsd</code> and <code>zgelsd</code> are good for
+<a name="index-least-squares-761"></a>finding least squares fits to empirical data. If the matrix parameter
+<var>a</var> is interpreted as a list of inputs and the vector parameter
+<var>b</var> as the list of corresponding output data from some unknown
+linear function of <var>n</var> variables <var>f</var>, then <var>x</var> is the list
+of coefficients whereby <var>f</var> achieves the optimum fit to the data
+in the least squares sense.
+
+   <p>These functions solve a special case of the problem solved by
+<a name="index-generalized-least-squares-762"></a><a name="index-least-squares-763"></a><code>dggglm</code> and <code>zggglm</code> where the parameter <var>B</var> is the
+identity matrix. For the latter functions, the output vector <var>y</var>
+can be interpreted as a measure of the error, and <var>B</var> can be
+chosen to express unequal costs for errors at different points in
+the fitted function.
+
+   <p>Cholesky decompositions obtained by <code>dpptrf</code> and <code>zpptrf</code>
+<a name="index-Cholesky-decomposition-764"></a>are useful for generating correlated random numbers. A population of
+vectors of uncorrelated standard normally distributed random numbers
+can be made to exhibit any correlations to order by multiplying all of
+<a name="index-correlation-765"></a>the vectors by the lower Cholesky factor of the desired covariance
+<a name="index-covariance-matrix-766"></a>matrix.
+
+   </body></html>
+

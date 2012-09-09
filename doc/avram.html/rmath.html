@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>rmath - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="lpsolve.html#lpsolve" title="lpsolve">
+<link rel="next" href="umf.html#umf" title="umf">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="rmath"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="umf.html#umf">umf</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lpsolve.html#lpsolve">lpsolve</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.16 <code>rmath</code></h3>
+
+<p>A selection of mathematical and statistical functions from the GNU R
+math library has a virtual code interface of the form
+
+<pre class="example">     library('rmath',f)
+</pre>
+   <p class="noindent">where <code>f</code> is a character string derived from the name of a
+function in the C language API described in the manual
+<samp><span class="file">R-exts.pdf</span></samp>, available at <a href="http://www.r-project.org">http://www.r-project.org</a>.
+
+   <p>Every function in the library returns a real result in the form of
+<a href="math.html#math">math</a>, but functions differ in the argument types. The arguments
+are tuples of real numbers and booleans that also closely follow the
+native API as explained below.
+
+<ul class="menu">
+<li><a accesskey="1" href="rmath-statistical-functions.html#rmath-statistical-functions">rmath statistical functions</a>
+<li><a accesskey="2" href="rmath-miscellaneous-functions.html#rmath-miscellaneous-functions">rmath miscellaneous functions</a>
+<li><a accesskey="3" href="rmath-exceptions.html#rmath-exceptions">rmath exceptions</a>
+</ul>
+
+   </body></html>
+

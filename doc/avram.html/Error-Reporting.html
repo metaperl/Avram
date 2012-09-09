@@ -1,0 +1,126 @@
+<html lang="en">
+<head>
+<title>Error Reporting - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Library-Reference.html#Library-Reference" title="Library Reference">
+<link rel="prev" href="Version-Management.html#Version-Management" title="Version Management">
+<link rel="next" href="Profiling.html#Profiling" title="Profiling">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Error-Reporting"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Profiling.html#Profiling">Profiling</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Version-Management.html#Version-Management">Version Management</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Library-Reference.html#Library-Reference">Library Reference</a>
+<hr>
+</div>
+
+<h3 class="section">3.6 Error Reporting</h3>
+
+<p><a name="index-error-messages-606"></a>Most of the error reporting by other functions in the library is done by
+way of the functions declared in <samp><span class="file">error.h</span></samp>.  These function
+communicate directly with the user through standard error.  Client
+programs should also use these functions where possible for the sake of
+a uniform interface.
+
+<div class="defun">
+&mdash; Function: void <b>avm_set_program_name</b> (<var>char *argv0</var>)<var><a name="index-avm_005fset_005fprogram_005fname-607"></a></var><br>
+<blockquote><p>The argument to this function should be the address of a null terminated
+string holding the name of the program to be reported in error messages
+that begin with a program name. Typically this string will be the name
+of the program as it was invoked on the command line, possibly with path
+components stripped from it. An alternative would be to set it to the
+name of a virtual code application being evaluated. If this function is
+never called, the name <code>"avram"</code> is used by default. Space for a
+copy of the program name is allocated by this function, and a fatal
+memory overflow error is possible if there is insufficient space available. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: char* <b>avm_program_name</b> ()<var><a name="index-avm_005fprogram_005fname-608"></a></var><br>
+<blockquote><p>This function returns a pointer to a null terminated character string
+holding the program name presently in use. It will be either the name
+most recently set by <code>avm_set_program_name</code>, or the default name
+<code>"avram"</code> if none has been set. The string whose address is
+returned should not be modified by the caller. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_warning</b> (<var>char *message</var>)<var><a name="index-avm_005fwarning-609"></a></var><br>
+<blockquote><p>This function writes the null terminated string whose address is given
+to standard error, prefaced by the program name and followed by a line
+break. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_error</b> (<var>char *message</var>)<var><a name="index-avm_005ferror-610"></a></var><br>
+<blockquote><p>This function writes the null terminated string whose address is given
+to standard error, prefaced by the program name and followed by a line
+break, as <code>avm_warning</code>, but it then terminates the process with an
+exit code of 1. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_fatal_io_error</b> (<var>char *message, char *filename, int reason</var>)<var><a name="index-avm_005ffatal_005fio_005ferror-611"></a></var><br>
+<blockquote><p>This function is useful for reporting errors caused in the course of
+reading or writing files. The message is written to standard error
+prefaced by the program name, and incorporating the name of the relevant
+file. The <var>reason</var> should be the error code obtained from the
+standard <code>errno</code> variable, which will be translated to an
+<a name="index-g_t_0040code_007bstrerror_007d-612"></a>informative message if possible by the standard <code>strerror</code> function
+and appended to the message. After the message is written, the process
+will terminate with an exit code of 1. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_non_fatal_io_error</b> (<var>char *message, char *filename, int reason</var>)<var><a name="index-avm_005fnon_005ffatal_005fio_005ferror-613"></a></var><br>
+<blockquote><p>This function does the same as <code>avm_fatal_io_error</code> except that it
+doesn't exit the program, and allows control to return to the caller,
+which should take appropriate action. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_internal_error</b> (<var>int code</var>)<var><a name="index-avm_005finternal_005ferror-614"></a></var><br>
+<blockquote><p>This function is used to report internal errors and halt the
+program. The error message is written to standard error prefaced by the
+program name and followed by a line break. The code should be a unique
+integer constant (i.e., not one that's used for any other internal
+error), that will be printed as part of the error message as an aid to
+the maintainer.
+
+        <p>This function should be used by client programs only in the event of
+conditions that constitute some violation of a required invariant. It
+indicates to the user that something has gone wrong with the program,
+for which a bug report would be appropriate. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_reclamation_failure</b> (<var>char *entity, counter count</var>)<var><a name="index-avm_005freclamation_005ffailure-615"></a></var><br>
+<blockquote><p>This function is used only by the <code>avm_count</code> functions to report
+unreclaimed storage. The <var>count</var> is the number of units of
+storage left unreclaimed, and the <var>entity</var> is the address of
+a null terminated string describing the type of unreclaimed entity, such
+as <code>"lists"</code> or <code>"branches"</code>. The message is written to
+standard error followed by a line break, but the program is not halted
+and control returns to the caller. 
+</p></blockquote></div>
+
+   </body></html>
+

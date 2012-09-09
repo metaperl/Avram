@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+<title>mpfr constants - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mpfr.html#mpfr" title="mpfr">
+<link rel="prev" href="mpfr-unary-predicates.html#mpfr-unary-predicates" title="mpfr unary predicates">
+<link rel="next" href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions" title="mpfr functions with miscellaneous calling conventions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="mpfr-constants"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions">mpfr functions with miscellaneous calling conventions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-unary-predicates.html#mpfr-unary-predicates">mpfr unary predicates</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.14.6 <code>mpfr</code> constants</h4>
+
+<p>Each of these functions takes a natural number as an argument
+specifying a precision, and returns a mathematical constant evaluated
+to that precision.
+
+     <ul>
+<li><code>const_log2</code>
+<li><code>pi</code>
+<li><code>const_catalan</code>
+<li><code>inf</code>
+<li><code>ninf</code>
+<li><code>nan</code>
+</ul>
+
+   <p>The name of the constant <code>pi</code> has been shortened from
+<code>mpfr_const_pi</code>.  The functions <code>inf</code> and <code>ninf</code> return
+infinity and negative infinity, respectively.
+
+   <p>The encoding of <code>nan</code>, used to represent the results of undefined
+<a name="index-nan-797"></a>computations such as division by zero, is not unique even for a fixed
+precision.  Applications should test for undefined results using
+<code>nan_p</code> rather than by comparing a result to a hard coded
+<code>nan</code> (<a href="mpfr-unary-predicates.html#mpfr-unary-predicates">mpfr unary predicates</a>).
+
+   </body></html>
+

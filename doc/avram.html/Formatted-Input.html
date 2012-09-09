@@ -1,0 +1,168 @@
+<html lang="en">
+<head>
+<title>Formatted Input - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="File-Manipulation.html#File-Manipulation" title="File Manipulation">
+<link rel="prev" href="Raw-Files.html#Raw-Files" title="Raw Files">
+<link rel="next" href="Formatted-Output.html#Formatted-Output" title="Formatted Output">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Formatted-Input"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Formatted-Output.html#Formatted-Output">Formatted Output</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Raw-Files.html#Raw-Files">Raw Files</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.3.3 Formatted Input</h4>
+
+<p>Some functions relating to the input of text files or data files with
+preambles are declared in the header file <samp><span class="file">formin.h</span></samp>. The usage of
+these functions is as follows.
+
+<div class="defun">
+&mdash; Function: list <b>avm_preamble_and_contents</b> (<var>FILE *source, char *filename</var>)<var><a name="index-avm_005fpreamble_005fand_005fcontents-555"></a></var><br>
+<blockquote><p>This function loads a file of either text or data format into memory.
+
+          <dl>
+<dt><var>source</var><dd>should be initialized by the caller as the address of a file
+already open for reading that will be read from its current position. 
+<br><dt><var>filename</var><dd>should be set by the caller to the address of a null terminated
+character string giving the name of the file that will be used if an i/o
+error message needs to be written about it. If it is a <code>NULL</code>
+pointer, standard input is assumed. 
+</dl>
+
+        <p>The result returned by the function will be a list whose <code>head</code>
+<a name="index-preamble-556"></a>represents the preamble of the file and whose <code>tail</code> represents the
+contents. As a side effect, the input file will be closed, unless the
+<var>filename</var> parameter is <code>NULL</code>.
+
+        <p>If the file conforms to the format described in <a href="File-Format.html#File-Format">File Format</a>, the
+preamble is a list of character strings. In the result returned by the
+function, the <code>head</code> field will be a list with one item for each
+line in the file, and each item will be a list of character
+representations as in <a href="Character-Table.html#Character-Table">Character Table</a>, but with the leading hashes
+stripped. The <code>tail</code> will be the list specified by remainder of the
+file according to <a href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>.  If the file has an empty
+preamble but is nevertheless a data file, the <code>head</code> will be a list
+whose <code>head</code> and <code>tail</code> are both <code>NULL</code>.
+
+        <p>If the file does not conform to the format in <a href="File-Format.html#File-Format">File Format</a>, then
+the <code>head</code> of the result will be <code>NULL</code>, and the <code>tail</code>
+will be a list of lists of character representations, with one for each
+line.
+
+        <p>Whether or not the file conforms to the format is determined on the fly,
+so this function is useful for situations in which the format is not
+known in advance. The conventions regarding the preamble and contents
+maintained by this function are the same as those used by virtual code
+applications as described in <a href="Standard-Output-Representation.html#Standard-Output-Representation">Standard Output Representation</a> and
+<a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a>.
+
+        <p>The characters used for line breaks are not explicitly represented in
+<a name="index-line-breaks-557"></a>the result. Depending on the host system, line breaks in text files may
+be represented either by the character code 10, or by the sequence 13
+10. However, in order for the library to deal with binary files in a
+portable way, a line break always corresponds to a 10 as far as this
+function is concerned regardless of the host, and a 13 is treated like
+any other character. Hence, if this function were used on binary files
+that happened to have some 10s in them, the exact contents of a
+file could be reconstructed easily by appending a 10 to all but the last
+line and flattening the list.
+
+        <p>A considerable amount of memory may need to be allocated by this
+function in order to store the file as a list. If not enough memory is
+available, the function prints an error message to standard error and
+aborts rather than returning to the caller. However, i/o errors are not
+fatal, and will cause the function to print a warning but attempt to
+continue. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_load</b> (<var>FILE *source, char *filename, int raw</var>)<var><a name="index-avm_005fload-558"></a></var><br>
+<blockquote><p>Similarly to <code>avm_preamble_and_contents</code>, this function also loads
+a file into memory, but the format is specified in advance.
+
+          <dl>
+<dt><var>source</var><dd>should be set by the caller to the address of an already open file for
+reading, which will be read from its current position. 
+<br><dt><var>filename</var><dd>should be initialized by the caller as a pointer to a null terminated
+string containing the name of the file that will be reported to the user
+in the event of an error reading from it. If it is a <code>NULL</code>
+pointer, standard input is assumed. 
+<br><dt><var>raw</var><dd>is set to a non-zero value by the caller to indicate that the file is
+expected to conform to the format in <a href="File-Format.html#File-Format">File Format</a>. If the file is
+an ordinary text file, then it should be set to zero. 
+</dl>
+
+        <p>In the case of a data file, which is when <var>raw</var> is non-zero,
+the result returned by this function will be a list representing the
+data section of the file and ignoring the preamble. In the case of a
+text file, the result will be a list of lists of character
+representations as per <a href="Character-Table.html#Character-Table">Character Table</a>, with one such list for
+each line in the file. Similar comments about line breaks to those
+mentioned under <code>avm_preamble_and_contents</code> are applicable.
+
+        <p>As a side effect of this function, the <var>source</var> file will be
+closed, unless the <var>filename</var> is a <code>NULL</code> pointer.
+
+        <p>This function is useful when the type of file is known in advance. If a
+data file is indicated by the <var>raw</var> parameter but the format
+is incorrect, an error message is reported and the process
+terminates. The error message will be of the form
+
+     <pre class="display">          <var>program-name</var><code>: invalid raw file format in </code><var>filename</var>
+</pre>
+        <p>Alternatively, if a text file is indicated by the
+<a name="index-g_t_0040code_007binvalid-raw-file-format_007d-559"></a><var>raw</var> parameter, then no attempt is made to test whether it
+could be interpreted as data, even if it could be. This behavior differs
+from that of <code>avm_preamble_and_contents</code>, where a bad data
+file format causes the file to be treated as text, and a valid data file
+format, even in a &ldquo;text&rdquo; file, causes it to be treated as data.
+
+        <p>Memory requirements for this function are significant and will cause the
+process to abort with an error message in the event of insufficient free
+memory. Messages pertaining to i/o errors are also possible and are not
+fatal. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_formin</b> ()<var><a name="index-avm_005finitialize_005fformin-560"></a></var><br>
+<blockquote><p>This function should be called before either of the other functions in
+this section is called, as it initializes some necessary static data
+structures. Results of the other functions are undefined if this one is
+not called first. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_formin</b> ()<var><a name="index-avm_005fcount_005fformin-561"></a></var><br>
+<blockquote><p>This function should be called after the last call to any of the other
+functions in this section, as it is necessary for cleaning up and
+reclaiming some internal data. If any storage remains unreclaimed due to
+memory leaks in these functions or to misuse of them, a warning message
+is written to standard error. If the function <code>avm_count_lists</code> is
+also being used by the client program, it should be called after this
+one. 
+</p></blockquote></div>
+
+   </body></html>
+

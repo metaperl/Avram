@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>mtwist - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="math.html#math" title="math">
+<link rel="next" href="minpack.html#minpack" title="minpack">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="mtwist"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="minpack.html#minpack">minpack</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="math.html#math">math</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.12 <code>mtwist</code></h3>
+
+<p>The <code>mtwist</code> library interfaces to a random number generator
+<a name="index-random-numbers-780"></a>based on the Mersenne Twistor algorithm. The algorithm has good
+properties but is not meant to be cryptographically secure. The
+library functions are of the form
+
+<pre class="example">     library('mtwist',f)
+</pre>
+   <p class="noindent">where <code>f</code> is one of the followng character strings.
+
+<pre class="example">     bern   u_cont   u_disc   u_path   u_enum   w_disc   w_enum
+</pre>
+   <p>Formally they are not mathematical functions because their results
+depend on a pseudo-random number that is not uniquely determined by
+their arguments. The numbers are generated deterministically in a
+sequence starting from a seed derived from the system clock at the
+time <code>avram</code> is launched, and each call uses the next number
+in the sequence. In so doing, it simulates a random draw from a
+uniformly distributed population.
+
+<ul class="menu">
+<li><a accesskey="1" href="mtwist-calling-conventions.html#mtwist-calling-conventions">mtwist calling conventions</a>
+<li><a accesskey="2" href="mtwist-exceptions.html#mtwist-exceptions">mtwist exceptions</a>
+<li><a accesskey="3" href="Additional-mtwist-notes.html#Additional-mtwist-notes">Additional mtwist notes</a>
+</ul>
+
+   </body></html>
+

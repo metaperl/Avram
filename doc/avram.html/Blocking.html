@@ -1,0 +1,65 @@
+<html lang="en">
+<head>
+<title>Blocking - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Concrete-Syntax.html#Concrete-Syntax" title="Concrete Syntax">
+<link rel="prev" href="Bit-String-Encoding.html#Bit-String-Encoding" title="Bit String Encoding">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Blocking"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Bit-String-Encoding.html#Bit-String-Encoding">Bit String Encoding</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.2.2 Blocking</h4>
+
+<p>After the bit string is obtained as described above, it is grouped into
+blocks of six. Continuing with the example, the string
+
+<pre class="example">     111111101011110010001001100010100010100100100
+</pre>
+   <p class="noindent">would be grouped as
+
+<pre class="example">     111111 101011 110010 001001 100010 100010 100100 100
+</pre>
+   <p class="noindent">Because the number of bits isn't a multiple of six, the last group has to
+be padded with zeros, to give
+
+<pre class="example">     111111 101011 110010 001001 100010 100010 100100 100000
+</pre>
+   <p class="noindent">Each of these six bit substrings is then treated as a binary number,
+with the most significant bit on the left. The numbers expressed in
+decimal are
+
+<pre class="example">     63 43 50 9 34 34 36 32
+</pre>
+   <p class="noindent"><a name="index-character-codes-153"></a>The character codes for the characters to be written are obtained by
+adding sixty to each of these numbers, so as to ensure that they will be
+printable characters. The resulting character codes are
+
+<pre class="example">     123 103 110 69 94 94 96 92
+</pre>
+   <p class="noindent">which implies that the tree in the example could be written to a file as
+<code>{gnE^^`\</code>.
+
+   </body></html>
+

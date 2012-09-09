@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>Environment - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
+<link rel="prev" href="Files.html#Files" title="Files">
+<link rel="next" href="Bugs.html#Bugs" title="Bugs">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Environment"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Bugs.html#Bugs">Bugs</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Files.html#Files">Files</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
+<hr>
+</div>
+
+<h3 class="section">1.10 Environment</h3>
+
+<p><a name="index-environment-131"></a><a name="index-g_t_0040code_007bAVMINPUTS_007d-132"></a><a name="index-paths-133"></a>An environment variable <samp><span class="env">AVMINPUTS</span></samp> can be made to store a list of
+directories (using the <samp><span class="command">set</span></samp> or <samp><span class="command">export</span></samp> commands) that
+<code>avram</code> will search for input files. The directories should be
+separated by colons, similarly to the <samp><span class="env">PATH</span></samp> environment variable.
+
+   <p><a name="index-search-paths-134"></a>The search paths in <samp><span class="env">AVMINPUTS</span></samp> apply only to the names of input
+files given on the command line (<a href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>) when
+<code>avram</code> is invoked in parameter mode (<a href="Parameter-Mode.html#Parameter-Mode">Parameter Mode</a>).  They
+do not apply to the name of the virtual code file, which is always
+assumed to be either absolute or relative to the current working
+directory (this assumption being preferable in the case of a script like
+that of <a href="Example-Script.html#Example-Script">Example Script</a>). 
+<a name="index-shell-script-135"></a>
+Starting in the first directory in the list of <samp><span class="env">AVMINPUTS</span></samp>,
+<code>avram</code> searches for a file exactly as its name appears on
+the command line (subject to the expansion of special characters
+by the shell). If it is not found and the name does not contain a
+period, but a command line option of <samp><span class="option">-.EXT</span></samp> has been used,
+<code>avram</code> will then search for a file with that name combined with
+the extension <code>.EXT</code>. If <samp><span class="option">-.EXT</span></samp> has not been used or if no
+<a name="index-g_t_0040code_007bEXT_007d-command-line-option-136"></a>matching file is found with it, <code>avram</code> tries the extensions of
+<kbd>.avm</kbd> and <kbd>.fun</kbd> in that order, provided the given file name
+contained no periods. If no match is found for any of those cases,
+<code>avram</code> proceeds to search the next directory in the list obtained
+from <samp><span class="env">AVMINPUTS</span></samp>, and so on. It stops searching when the first
+match is found. For subsequent input files, the search begins again at
+the first directory.
+
+   <p>If <samp><span class="env">AVMINPUTS</span></samp> is defined, the current working directory is not
+searched for input files unless it is listed. If it is empty or not
+<a name="index-search-paths-137"></a>defined, a default list of search paths is used, currently
+
+<pre class="example">     .:/usr/local/lib/avm:/usr/lib/avm:/lib/avm:/opt/avm:/opt/lib/avm\
+     :/usr/local/share/avm:/usr/share/avm:/share/avm:/opt/avm:/opt/share/avm
+</pre>
+   <p class="noindent">These paths are defined in <code>avram.c</code> and can be changed
+by recompiling it.
+
+   </body></html>
+

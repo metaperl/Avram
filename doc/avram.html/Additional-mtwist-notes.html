@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>Additional mtwist notes - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="mtwist.html#mtwist" title="mtwist">
+<link rel="prev" href="mtwist-exceptions.html#mtwist-exceptions" title="mtwist exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Additional-mtwist-notes"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="mtwist-exceptions.html#mtwist-exceptions">mtwist exceptions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="mtwist.html#mtwist">mtwist</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.12.3 Additional <code>mtwist</code> notes</h4>
+
+<p>Although the <code>mtwist</code> library is &ldquo;external&rdquo;, it requires no
+special configuration on the host because the uniform variate
+generator in the form developed by its original authors is short and
+elegant enough to be packaged easily within the <code>avram</code>
+distribution. All further embellishments are home grown despite the
+advice at the end of <a href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>.
+
+   <p>The <code>u_path</code> function is intended to allow sampling from a large
+population in logarithmic time when it is stored in a balanced tree. A
+left-heavy tree should be constructed initially with the data items
+all at the same level. Thereafter, a result returned by <code>u_path</code>
+with the appropriate dimensions can be used as an index into the tree
+for fast retrieval by the virtual machine's <code>field</code> combinator
+(<a href="Field.html#Field">Field</a>).
+
+   <p>The last three functions, <code>u_enum</code>, <code>w_disc</code>, and
+<code>w_enum</code> use an inversion method with a binary search.  The first
+draw from a given list will take a time asymptotically proportional to
+the length of the list, but subsequent draws from the same list are
+considerably faster due to a persistent cache maintained transparently
+by <code>avram</code>. For lists whose length is up to 2^16, the time
+required for a subsequent draw consists mainly of constant overhead
+with a small logarithmic component in the length of the list. For
+longer lists, the time ramps up linearly by a small factor.
+
+   <p>Information allowing fast draws from up to sixteen lists can be cached
+simultaneously. If an application uses more than sixteen, the cached
+data are replaced in first-in first-out order. The size of the cache
+and the maximum list length for logarithmic time access can be
+adjusted easily by redefining constants in <samp><span class="file">mtwist.c</span></samp> under the
+<code>avram</code> source tree, but will require recompilation.
+
+   </body></html>
+

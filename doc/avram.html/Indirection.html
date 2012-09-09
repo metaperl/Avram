@@ -1,0 +1,177 @@
+<html lang="en">
+<head>
+<title>Indirection - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Lists.html#Lists" title="Lists">
+<link rel="prev" href="Deconstruction-Functions.html#Deconstruction-Functions" title="Deconstruction Functions">
+<link rel="next" href="The-Universal-Function.html#The-Universal-Function" title="The Universal Function">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Indirection"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="The-Universal-Function.html#The-Universal-Function">The Universal Function</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Deconstruction-Functions.html#Deconstruction-Functions">Deconstruction Functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
+<hr>
+</div>
+
+<h4 class="subsection">3.1.7 Indirection</h4>
+
+<p>In some cases it is necessary to build a tree from the top down rather
+<a name="index-pointers-489"></a>than from the bottom up, when it is not known in advance what's on the
+bottom. Although the <code>list</code> type is a pointer itself, these
+situations call for a type of pointers to lists, which are declared as
+the <code>branch</code> type in <samp><span class="file">branches.h</span></samp>. For example, if <code>b</code> is
+declared as a <code>branch</code> and <code>l</code> is declared as a <code>list</code>,
+it would be possible to write <code>b = &amp;l</code>.
+
+   <p>Facilities are also provided for maintaining queues of branches, which
+<a name="index-queues-490"></a>are declared as the <code>branch_queue</code> type. This type is a pointer to
+a structure with two fields, <code>above</code> and <code>following</code>, where
+<code>above</code> is a <code>branch</code> and <code>following</code> is a
+<code>branch_queue</code>.
+
+   <p>These functions are used internally elsewhere in the library and might
+not be necessary for most client programs to use directly.
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_branches</b> ()<var><a name="index-avm_005finitialize_005fbranches-491"></a></var><br>
+<blockquote><p>This must be done once before any of the other branch related functions is
+used, and creates some internal data structures. Results of the other
+functions are undefined if this one isn't called first. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_branches</b> ()<var><a name="index-avm_005fcount_005fbranches-492"></a></var><br>
+<blockquote><p>This function can be used at the end of a run to detect unreclaimed
+storage used for branches or branch queues. If any storage remains
+unreclaimed, a message about unreclaimed branches is written to standard
+error. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_anticipate</b> (<var>branch_queue *front, branch_queue *back, branch operand</var>)<var><a name="index-avm_005fanticipate-493"></a></var><br>
+<blockquote><p>This function provides a simple queueing facility for
+branches. Similarly to the case with <code>avm_enqueue</code>, <code>front</code>
+and <code>back</code> should be initialized to <code>NULL</code> before the first
+call. Each call to this function will enqueue one item to the back,
+assuming enough memory is available, as the following example shows.
+
+     <pre class="example">          front = NULL;
+          back = NULL;
+          l = avm_join(NULL,NULL);
+          anticipate(&amp;front,&amp;back,&amp;(l-&gt;head));
+          anticipate(&amp;front,&amp;back,&amp;(l-&gt;tail));
+</pre>
+        <p>After the above code is executed, these postconditions will hold.
+
+     <pre class="example">          front-&gt;above == &amp;(l-&gt;head)
+          front-&gt;following-&gt;above == &amp;(l-&gt;tail)
+          front-&gt;following == back
+          back-&gt;following == NULL
+</pre>
+        <p>The name &ldquo;anticipate&rdquo; is used because ordinarily the queue contains
+positions in a tree to be filled in later. As usual, only unshared trees should be
+modified in place. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_recoverable_anticipate</b> (<var>branch_queue *front, branch_queue *back, branch operand, int *fault</var>)<var><a name="index-avm_005frecoverable_005fanticipate-494"></a></var><br>
+<blockquote><p>This function is similar to <code>avm_anticipate</code>, except that it will
+not exit with an error message in the event of an overflow error, but
+will simply set <code>*</code><var>fault</var> to a non-zero value and return to the
+caller. If an overflow occurs, nothing about the queue is changed. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_enqueue_branch</b> (<var>branch_queue *front, branch_queue *back, int received_bit</var>)<var><a name="index-avm_005fenqueue_005fbranch-495"></a></var><br>
+<blockquote><p>A slightly higher level interface to the <code>avm_anticipate</code> function
+is provided by this function, which is useful for building a tree from
+<a name="index-trees-496"></a>a string of input bits in a format similar to the one described in
+<a href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>.
+
+        <p>This function should be called the first time with <code>front</code> and
+<code>back</code> having been initialized to represent a queue containing a
+<a name="index-queues-497"></a>single branch pointing to a list known to the caller. The list itself
+need not be allocated or initialized. An easy way of doing so would be
+the following.
+
+     <pre class="example">          front = NULL;
+          back = NULL;
+          avm_anticipate(&amp;front,&amp;back,&amp;my_list);
+</pre>
+        <p>On each call to <code>avm_enqueue_branch</code>, the <var>received_bit</var>
+parameter is examined. If it is zero, nothing will be added to the
+queue, the list referenced by the front branch will be assigned
+<code>NULL</code>, and the front branch will be removed from the queue. If
+<var>received_bit</var> is a non-zero value, the list referenced by
+the front branch will be assigned to point to a newly created unshared
+list node, and two more branches will be appended to the queue. The
+first branch to be appended will point to the head of the newly created
+list node, and the second branch to be appended will point to the tail.
+
+        <p>If the sequence of bits conforms to the required concrete syntax, this
+function can be called for each of them in turn, and at the end of the
+sequence, the queue will be empty and the list referenced by the initial
+branch (i.e., <code>my_list</code>) will be the one specified by the bit
+string. If the sequence of bits does not conform to the required
+concrete syntax, the error can be detected insofar as the emptying of
+the queue will not coincide exactly with the last bit.
+
+        <p>The caller should check for the queue becoming prematurely empty due to
+syntax errors, because no message is reported by
+<code>avm_enqueue_branch</code> in that event, and subsequent attempts to
+enqueue anything are ignored. However, in the event of a memory overflow,
+an error message is reported and the process is terminated. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_recoverable_enqueue_branch</b> (<var>branch_queue *front, branch_queue *back, int received_bit, int *fault</var>)<var><a name="index-avm_005frecoverable_005fenqueue_005fbranch-498"></a></var><br>
+<blockquote><p>This function is similar to <code>avm_enqueue_branch</code> but will leave
+error handling to the caller in the event of insufficient memory to
+enqueue another branch. Instead of printing an error message and
+exiting, it will dispose of the queue, set the <var>fault</var> flag
+to a non-zero value, and return. Although the queue will be reclaimed,
+the lists referenced by the branches in it will persist. The list nodes
+themselves can be reclaimed by disposing of the list whose address was
+stored originally in the front branch. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_dispose_branch_queue</b> (<var>branch_queue front</var>)<var><a name="index-avm_005fdispose_005fbranch_005fqueue-499"></a></var><br>
+<blockquote><p>This function deallocates a branch queue by chasing the <code>following</code>
+fields in each one. It does nothing to the lists referenced by the
+branches in the queue.
+
+        <p>Rather than using <code>free</code> directly, client programs should use this
+function for deallocating branch queues, because it allows better
+performance by interacting with a local internal cache of free memory,
+and because it performs necessary bookkeeping for
+<code>avm_count_branches</code>. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_dispose_branch</b> (<var>branch_queue old</var>)<var><a name="index-avm_005fdispose_005fbranch-500"></a></var><br>
+<blockquote><p>This disposes of a single branch queue node rather than a whole queue. 
+Otherwise, the same comments as those above apply. 
+</p></blockquote></div>
+
+   </body></html>
+

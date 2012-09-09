@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+<title>Interfaces to External Code - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
+<link rel="prev" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link rel="next" href="Vacant-Address-Space.html#Vacant-Address-Space" title="Vacant Address Space">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Interfaces-to-External-Code"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Vacant-Address-Space.html#Vacant-Address-Space">Vacant Address Space</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
+<hr>
+</div>
+
+<h4 class="subsection">2.7.16 Interfaces to External Code</h4>
+
+<p>A few other combinators have been incorporated into the virtual
+machine as alternatives to the style of interactive applications
+described in <a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>. These make it
+possible to interface with external libraries and applications either
+by a simple function call, or by executing a run-time generated
+transducer as described previously. In either case, there is no need
+for any particular command line options to specify interactive
+invocation, nor for the application to be designed that way from the
+outset. Existing virtual code applications may therefore be enhanced
+to make use of these features without radical changes.
+
+   <p>To account for these additional capabilities, it is not entirely
+adequate to continue defining the virtual machine semantics in terms
+of a mathematical function, but it is done nevertheless due to the
+lack of any appealing alternative. Although most library functions are
+in fact functions in the sense that their outputs are determined by
+their arguments, they defy a concise specification within the present
+mathematical framework, especially insofar as they may involve finite
+precision floating point numbers. More problematically, the effect of
+interaction with a shell is neither well defined nor deterministic. 
+The descriptions that follow presuppose a computational procedure
+associated with the following definitions but leave its exact nature
+unspecified.
+
+<ul class="menu">
+<li><a accesskey="1" href="Library-combinator.html#Library-combinator">Library combinator</a>
+<li><a accesskey="2" href="Have-combinator.html#Have-combinator">Have combinator</a>
+<li><a accesskey="3" href="Interaction-combinator.html#Interaction-combinator">Interaction combinator</a>
+</ul>
+
+   </body></html>
+

@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+<title>rmath miscellaneous functions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="rmath.html#rmath" title="rmath">
+<link rel="prev" href="rmath-statistical-functions.html#rmath-statistical-functions" title="rmath statistical functions">
+<link rel="next" href="rmath-exceptions.html#rmath-exceptions" title="rmath exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="rmath-miscellaneous-functions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="rmath-exceptions.html#rmath-exceptions">rmath exceptions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="rmath-statistical-functions.html#rmath-statistical-functions">rmath statistical functions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="rmath.html#rmath">rmath</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.16.2 <code>rmath</code> miscellaneous functions</h4>
+
+<p>Some less frequently used real valued mathematical functions are also
+accessible by the <code>rmath</code> library interface.  The functions with
+<a name="index-gamma-functions-810"></a>names in this group take a single real operand.
+
+<pre class="example">     gammafn         lgammafn        digamma
+     trigamma        tetragamma      pentagamma
+</pre>
+   <p class="noindent">The ones in this group take a pair of real operands
+<a name="index-bessel-functions-811"></a><code>(</code><var>x</var><code>,</code><var>y</var><code>)</code>.
+
+<pre class="example">     beta            lbeta           bessel_j       bessel_y
+</pre>
+   <p class="noindent">Those remaining take a triple of real operands
+<code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code>.
+
+<pre class="example">     bessel_i        bessel_k
+</pre>
+   <p>An alternative and better documented selection of Bessel functions is
+provided by the <code>bes</code> library interface (<a href="bes.html#bes">bes</a>).
+
+   </body></html>
+

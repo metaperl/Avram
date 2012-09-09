@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+<title>complex - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
+<link rel="prev" href="bes.html#bes" title="bes">
+<link rel="next" href="fftw.html#fftw" title="fftw">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="complex"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="fftw.html#fftw">fftw</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="bes.html#bes">bes</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
+<hr>
+</div>
+
+<h3 class="section">D.2 <code>complex</code></h3>
+
+<p>Complex numbers are represented according to the ISO C standard as
+<a name="index-complex-numbers-711"></a>arrays of two IEEE double precision floating point numbers of 8 bytes
+each, with the number representing the real part first.
+
+   <p>A small selection of operations on complex numbers is available by
+function calls of the form <code>library('complex',f)</code>. These
+functions are implemented by the host system's C library.
+
+   <p>One example is <code>library('complex','create')</code> which takes a pair
+of floating point numbers <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> to a complex number
+whose real part is <var>x</var> and whose imaginary part is <var>y</var>. 
+See <a href="math.html#math">math</a> for information about constructing floating point
+numbers.
+
+   <p>Other than that, the <code>complex</code> library functions <code>f</code> fall
+into three main groups, which are the real valued unary operations,
+the complex valued unary operations, and the complex valued binary
+operations. All of these operations are designated by their standard C
+names as documented elsewhere, such as the GNU <code>libc</code> reference
+manual, except as noted.
+
+     <dl>
+<dt>&bull; real valued unary operations<dd>
+     <pre class="example">          
+          creal  cimag  cabs  carg
+</pre>
+     <br><dt>&bull; complex valued unary operations<dd>
+     <pre class="example">          
+          ccos   cexp    clog   conj   csin    csqrt
+          ctan   csinh   ccosh  ctanh  casinh  cacosh
+          catanh casin   cacos  catan
+</pre>
+     <br><dt>&bull; complex valued binary operations<dd>
+     <pre class="example">          
+          cpow  vid  bus  mul  add  sub  div
+</pre>
+     </dl>
+
+   <p>The last four correspond to the C language operators <code>*</code>,
+<code>+</code>, <code>-</code>, and <code>/</code> for complex numbers.  The functions
+named <code>vid</code> and <code>bus</code> are similar to <code>div</code> and
+<code>sub</code>, respectively, but with the operands interchanged. That is,
+
+<pre class="example">     library('complex','vid') (x,y)
+</pre>
+   <p class="noindent">is equivalent to
+
+<pre class="example">     library('complex','div') (y,x)
+</pre>
+   <p>All functions in this library taking complex numbers as input may also
+operate on real numbers, and binary operators can have either or both
+operands real. For real operands, a value of zero is inferred as the
+imaginary part. The result type of the function is the same
+regardless.
+
+   </body></html>
+

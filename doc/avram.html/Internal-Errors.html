@@ -1,0 +1,59 @@
+<html lang="en">
+<head>
+<title>Internal Errors - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
+<link rel="prev" href="Diagnostics.html#Diagnostics" title="Diagnostics">
+<link rel="next" href="i_002fo-Errors.html#i_002fo-Errors" title="i/o Errors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Internal-Errors"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="i_002fo-Errors.html#i_002fo-Errors">i/o Errors</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Diagnostics.html#Diagnostics">Diagnostics</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
+<hr>
+</div>
+
+<h4 class="subsection">1.6.1 Internal Errors</h4>
+
+<p><a name="index-internal-errors-55"></a>Internal errors should never occur unless the
+<code>avram</code> source code has been carelessly modified, except as noted
+in <a href="Bugs.html#Bugs">Bugs</a>. There are two kinds.
+
+     <dl>
+<dt><var>application-name</var><code>: virtual machine internal error (code </code><var>nn</var><code>)</code><dd>Most internal errors would be reported by a message of this form
+if they were to occur. It indicates that some required invariant was
+not maintained. In such cases, the program terminates immediately, and
+any results already produced are suspect. 
+<br><dt><var>application-name</var><code>: </code><var>nn</var><code> unreclaimed </code><var>struct-names</var><dd>A message of this form could be printed at the end of an otherwise successful
+run. <code>avram</code> maintains a count of the number of units allocated
+for various data structures, and checks that they are all reclaimed
+eventually as a safeguard against memory leaks. This message indicates
+that some memory remains unaccounted for. 
+</dl>
+
+   <p><a name="index-bug-reports-56"></a><a name="index-email-57"></a><a name="index-author-58"></a>If a repeatable internal error is discovered, please email a bug
+report and a small representative test case to the author at
+<a href="mailto:avram-support@basis.uklinux.net">avram-support@basis.uklinux.net</a>. Include the version number of <code>avram</code>,
+which you can get by running <kbd>avram --version</kbd>.
+
+   </body></html>
+

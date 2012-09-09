@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+<title>math library conversion functions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="math.html#math" title="math">
+<link rel="prev" href="math-library-predicates.html#math-library-predicates" title="math library predicates">
+<link rel="next" href="math-library-exceptions.html#math-library-exceptions" title="math library exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="math-library-conversion-functions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="math-library-exceptions.html#math-library-exceptions">math library exceptions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="math-library-predicates.html#math-library-predicates">math library predicates</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="math.html#math">math</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.11.3 <code>math</code> library conversion functions</h4>
+
+<p>The conversion function <code>strtod</code> takes a string representing a
+<a name="index-strtod-769"></a>floating point number in C format to its representation. This function
+is the primary means of creating or initializing floating point
+numbers in virtual code. A value of floating point 0.0 is returned if
+the string is not valid, but no exception is raised.
+
+   <p>The conversion <code>asprintf</code> is similar to the one by that name in
+<a name="index-asprintf-770"></a>C, but requires a pair <code>(</code><var>f</var><code>,</code><var>x</var><code>)</code> as an argument.  The
+left side <var>f</var> is a character string containing a C style format
+conversion for exactly one double precision floating point number,
+such as <code>'%0.4e'</code>, and the parameter <var>x</var> is a floating point
+number. The result returned will be a character string expressing the
+number in the specified format.
+
+   </body></html>
+

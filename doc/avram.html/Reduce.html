@@ -1,0 +1,133 @@
+<html lang="en">
+<head>
+<title>Reduce - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
+<link rel="prev" href="Filter.html#Filter" title="Filter">
+<link rel="next" href="Sort.html#Sort" title="Sort">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Reduce"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Sort.html#Sort">Sort</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Filter.html#Filter">Filter</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.13.3 Reduce</h5>
+
+<p><a name="index-g_t_0040code_007breduce_007d-321"></a>In the virtual code fragment shown below, <var>f</var> should be
+regarded as the virtual code for a binary operator, and <var>k</var>
+is a constant.
+
+     <dl>
+<dt><em>T24</em><dd>[[<code>reduce</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code> = <code>((nil,nil),((</code><var>f</var><code>,</code><var>k</var><code>),nil))</code>
+</dl>
+
+<p class="noindent">By constructing a tree in the form shown, the <code>silly</code>
+mnemonic <code>reduce</code> effectively constructs the code for a function
+operating on lists in a particular way.
+
+   <p>The effect of evaluating an application in this form with an argument
+representing a list can be broken down into several cases.
+
+     <ul>
+<li>If the list is empty, then the value of <var>k</var> is the
+result. 
+<li>If the list has only one item, then that item is the result. 
+<li>if the list has exactly two items, the first being <var>x</var> and the
+second being <var>y</var>, then  the result is  <var>f</var><code>
+(</code><var>x</var><code>,</code><var>y</var><code>)</code>. 
+<li>If the list has more than two items and an even number of them, the
+result is that of evaluating the application with the list of values
+obtained by partitioning the list into pairs of adjacent items, and
+evaluating <var>f</var> with each pair. 
+<li>If the list has more than two items and an odd number of them, the
+result is that of evaluating the application with the list of values
+obtained by partitioning the list into pairs of adjacent items excluding
+the last one, evaluating <var>f</var> with each pair, and then
+appending the last item to the list of values. 
+</ul>
+
+<p class="noindent">In the last two cases, evaluation of the application is not necessarily
+finished after just one traversal of the list, because it has to carry
+on until the list is reduced to a single item.
+
+   <p>Some care has been taken to describe this operation in detail because it
+differs from comparable operations common to functional programming
+<a name="index-fold-322"></a>languages, variously known as fold or reduce. All of these operations
+could be used, for example, to compute the summation of a list of
+numbers. The crucial differences are as follows.
+
+     <ul>
+<li>Whereas a fold or a reduce is conventionally either of the left or
+right variety, this <code>reduce</code> is neither. 
+<li>The vacuous case result <var>k</var> is never used at all unless
+the argument is the empty list. 
+<li>This <code>reduce</code> is not very useful if the operator
+<var>f</var> is not associative. 
+</ul>
+
+   <p>The reason for defining the semantics of <code>reduce</code> in this way
+instead of the normal way is that a distributed implementation of this
+<a name="index-distributed-implementation-323"></a>one could work in logarithmic time, so it's worth making it easy for a
+language processor to detect the pattern in case the virtual code is
+ever going to be targeted to such an implementation. Of course, nothing
+prevents the conventional left or right reduction semantics from being
+translated to virtual code by explicit recursion. 
+<a name="index-recursion-324"></a>
+The precise semantics of this operation are as follows, where
+<var>f</var> is not <code>nil</code>, <var>k</var> is unconstrained, and
+<code>pairwise</code> represents a function to be explained presently. 
+<a name="index-g_t_0040code_007biterate_007d-325"></a><a name="index-g_t_0040code_007bpairwise_007d-326"></a><a name="index-g_t_0040code_007bbu_007d-327"></a><a name="index-g_t_0040code_007bright_007d-328"></a>
+     <dl>
+<dt><em>P29</em><dd>([[<code>reduce</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code>) <code>nil</code> = <var>k</var>
+<br><dt><em>P30</em><dd>([[<code>reduce</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = <br>
+&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->
+[[<code>left</code>]] ([[<code>bu(iterate,right)</code>]] [[<code>pairwise</code>]] <var>f</var>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code>
+</dl>
+
+<p class="noindent">The latter property leverages off some virtual machine features and
+<code>silly</code> code that has been defined already. The function
+implemented by [[<code>pairwise</code>]] <var>f</var> is the one that
+partitions its argument into pairs and evaluates <var>f</var> with
+each pair as described above. The combination of that with
+<code>bu(iterate,right)</code> results in an application that repeatedly
+performs [[<code>pairwise</code>]] <var>f</var> while the resulting list
+still has a tail (i.e., a <code>right</code> side), and stops when the list
+has only a single item (i.e., when <code>right</code> is false). The
+<code>left</code> operation then extracts the item.
+
+   <p>For the sake of completeness, it is tedious but straightforward to
+give an exact definition for <code>pairwise</code>. The short version is that
+it can be anything that satisfies these three equations.
+
+     <dl>
+<dt><em>E1</em><dd>([[<code>pairwise</code>]] <var>f</var>) <code>nil</code> = <code>nil</code>
+<br><dt><em>E2</em><dd>([[<code>pairwise</code>]] <var>f</var>) <code>(</code><var>x</var><code>,nil)</code> = <code>(</code><var>x</var><code>,nil)</code>
+<br><dt><em>E3</em><dd>([[<code>pairwise</code>]] <var>f</var>) <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code> =
+<code>(</code><var>f</var><code> (</code><var>x</var><code>,</code><var>y</var><code>),</code>([[<code>pairwise</code>]] <var>f</var>) <var>z</var><code>)</code>
+</dl>
+
+<p class="noindent">For the long version, see <a href="Pairwise.html#Pairwise">Pairwise</a>.
+
+   </body></html>
+

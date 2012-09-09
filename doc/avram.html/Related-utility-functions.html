@@ -1,0 +1,139 @@
+<html lang="en">
+<head>
+<title>Related utility functions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
+<link rel="prev" href="Two-dimensional-arrays.html#Two-dimensional-arrays" title="Two dimensional arrays">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Related-utility-functions"></a>
+<p>
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Two-dimensional-arrays.html#Two-dimensional-arrays">Two dimensional arrays</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">3.1.4.4 Related utility functions</h5>
+
+<p>A small selection of additional functions that are likely to be of use
+to developers concerned with matrix operations has been incorporated
+into the API to save the trouble of reinventing them, although doing
+so would be straightforward. They are described in this section
+without further motivation.
+
+<div class="defun">
+&mdash; Function: void <b>*avm_matrix_transposition</b> (<var>void *matrix, int rows, int cols, size_t item_size</var>)<var><a name="index-g_t_002aavm_005fmatrix_005ftransposition-465"></a></var><br>
+<blockquote><p>This function takes the address of an arbitrary rectangular
+<var>matrix</var> represented as a contiguous array (not a list) and
+transposes it in place. That is, this function transforms
+an <var>m</var> by <var>n</var> matrix to an <var>n</var> by <var>m</var> matrix
+by exchanging the <var>i</var>,<var>j</var>th element with the
+<var>j</var>,<var>i</var>th element for all values of <var>i</var> and <var>j</var>.
+
+        <p>The numbers of rows and columns in the <var>matrix</var> are given by the
+parameters <var>rows</var> and <var>cols</var>, respectively, and the size of
+the entries in bytes is given by <var>item_size</var>.
+
+        <p>The <var>matrix</var> is assumed to be in row major order, but this
+function is applicable to matrices in column major order if the caller
+<a name="index-column-major-order-466"></a>passes the number of columns in <var>rows</var> and the number of rows in
+<var>cols</var>.
+
+        <p>Alternatively, this function can be seen as a conversion between the
+row major and the column major representation of a matrix. An <var>m</var>
+by <var>n</var> matrix in row major order will be transformed to the same
+<var>m</var> by <var>n</var> matrix in column order, or from column order to row
+order.
+
+        <p>A notable feature of this function is that it allocates no memory so
+there is no possibility of a memory overflow even for very large
+matrices, unlike a naive implementation which would involve making a
+temporary copy of the matrix. There is a possibility of a segmentation
+<a name="index-segmentation-fault-467"></a>fault if invalid pointers or dimensions are given. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>*avm_matrix_reflection</b> (<var>int upper_triangular, void *matrix, int n, size_t item_size</var>)<var><a name="index-g_t_002aavm_005fmatrix_005freflection-468"></a></var><br>
+<blockquote><p>This function takes a symmetric square <var>matrix</var> of dimension
+<var>n</var> containing entries of <var>item_size</var> bytes each and fills in
+the redundant entries.
+
+        <p>If <var>upper_triangular</var> is non-zero, the
+upper triangle of the <var>matrix</var> is copied to the lower triangle. If
+<var>upper_triangular</var> is zero, the lower triangular entries are
+copied to the upper triangle.
+
+        <p>These conventions assume row major order. If the <var>matrix</var> is in
+<a name="index-row-major-order-469"></a>column major order, then the caller can either transpose it in place
+<a name="index-column-major-order-470"></a>before and after this function by <code>avm_matrix_transposition</code>, or
+can complement the value of <var>upper_triangular</var>.
+
+        <p>Note that this function may be unnecessary for <code>LAPACK</code> library
+functions that ignore the redundant entries in a symmetric matrix,
+because they can be left uninitialized, but it is included for the
+sake of completeness. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>*avm_row_number_array</b> (<var>counter m, int *fault</var>)<var><a name="index-g_t_002aavm_005frow_005fnumber_005farray-471"></a></var><br>
+<blockquote><p>A fast, memory efficient finite map from natural numbers to their list
+representations can be obtained by using this function as an
+alternative to <code>avm_natural</code> or <code>avm_recoverable_natural</code>
+when repeated evaluations of numbers within a known range are
+required (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a> and <a href="Recoverable-Operations.html#Recoverable-Operations">Recoverable Operations</a>).
+
+        <p>Given a positive integer <var>m</var>, this function allocates and returns
+an array of <var>m</var> lists whose <var>i</var>th entry is the list
+representation of the number <var>i</var> as explained in
+<a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>.
+
+        <p>An amount of memory proportional to <var>m</var> is used for the array and
+its contents. If there is insufficient memory, a <code>NULL</code> value is
+returned and the integer referenced by <var>fault</var> is set to a
+non-zero value. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_dispose_rows</b> (<var>counter m, list *row_number</var>)<var><a name="index-avm_005fdispose_005frows-472"></a></var><br>
+<blockquote><p>This function reclaims an array <var>row_number</var> of size <var>m</var>
+returned by <code>avm_row_number_array</code>, and its contents if any. A
+<code>NULL</code> pointer is allowed as the <var>row_number</var> parameter and
+will have no effect, but an uninitialized pointer will cause a
+<a name="index-segmentation-fault-473"></a>segmentation fault. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_initialize_matcon</b> ()<var>;<a name="index-avm_005finitialize_005fmatcon-474"></a></var><br>
+<blockquote><p>This function initializes some static variables used by the functions
+declared in <samp><span class="file">matcon.h</span></samp> and should be called before any of them is
+called or they might not perform according to specifications. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: void <b>avm_count_matcon</b> ()<var>;<a name="index-avm_005fcount_005fmatcon-475"></a></var><br>
+<blockquote><p>This function frees the static variables allocated by
+<code>avm_initialize_matcon</code> and is used to verify the absence of
+memory leaks. It should be called after the last call to any functions
+in <samp><span class="file">matcon.h</span></samp> but before <code>avm_count_lists</code> if the latter
+is being used (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>). 
+</p></blockquote></div>
+
+   </body></html>
+

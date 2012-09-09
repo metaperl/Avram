@@ -1,0 +1,57 @@
+<html lang="en">
+<head>
+<title>Version - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
+<link rel="prev" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
+<link rel="next" href="Note.html#Note" title="Note">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Version"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Note.html#Note">Note</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.7.1 Version</h5>
+
+<p>A virtual code application with exactly the following definition
+implements a function that returns a constant character string
+regardless of its argument. 
+<a name="index-g_t_0040code_007bversion_007d-280"></a>
+<pre class="example">     version = ((nil,nil),((nil,nil),(nil,((nil,nil),nil))))
+</pre>
+   <p class="noindent">The character string encodes the version number of the installed
+<code>avram</code> executable, for example <code>0.13.0</code>, using the standard
+representation for characters.
+
+   <p>Although such an application is useless by itself, the intended use for
+this feature is to cope with the possibility that future versions of
+<code>avram</code> may include enhancements. Ideally, the maintainer of
+<code>avram</code> will update the version number when new enhancements are
+added. Applications can then detect whether they are available in the
+installed version by using this feature. If a needed enhancement is not
+available, the application can either make allowances or at least
+terminate gracefully.
+
+   </body></html>
+

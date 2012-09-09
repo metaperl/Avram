@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+<title>Primitive types - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
+<link rel="prev" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
+<link rel="next" href="One-dimensional-arrays.html#One-dimensional-arrays" title="One dimensional arrays">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Primitive-types"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="One-dimensional-arrays.html#One-dimensional-arrays">One dimensional arrays</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">3.1.4.1 Primitive types</h5>
+
+<p>A pair of functions in support of this abstraction is prototyped in
+<samp><span class="file">listfuns.h</span></samp>.  These functions will be of interest mainly to
+developers wishing to implement an interface to a new library module
+and make it accessible on the virtual side by way of the
+<code>library</code> combinator (<a href="Library-combinator.html#Library-combinator">Library combinator</a>).
+
+<div class="defun">
+&mdash; Function: void <b>*avm_value_of_list</b> (<var>list operand, list *message, int *fault</var>)<var><a name="index-g_t_002aavm_005fvalue_005fof_005flist-440"></a></var><br>
+<blockquote><p>This function takes an <var>operand</var> representing a value used by a
+library function in the format described above (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>) and returns a pointer to the value.
+
+        <p>The <code>value</code> field in the <var>operand</var> normally will point to the
+block of memory holding the value, and the <var>operand</var> itself will
+be a list of character representations whose binary encodings spell
+out the value as explained above.
+
+        <p>The <code>value</code> field need not be initialized on entry but it will be
+initialized as a side effect of being computed by this function. If it
+has been initialized due to a previous call with the same
+<var>operand</var>, this function is a fast constant time operation.
+
+        <p>The caller should not free the pointer returned by this function
+because a reference to its value will remain in the
+<var>operand</var>. When the <var>operand</var> itself is freed by
+<code>avm_dispose</code> (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>), the value will go with it.
+
+        <p>If an error occurs during the evaluation of this function, the integer
+referenced by <var>fault</var> will be set to a non-zero value, and the
+list referenced by <var>message</var> will be assigned a representation of
+a list of strings describing the error. The <var>message</var> is freshly
+created and should be freed by the caller with <code>avm_dispose</code>
+when no longer needed.
+
+        <p>Possible error messages are <code>&lt;'missing value'&gt;</code>, in the case of
+<a name="index-missing-value-441"></a>an empty <var>operand</var>, <code>&lt;'invalid value'&gt;</code> in the case of an
+<a name="index-invalid-value-442"></a><var>operand</var> that is not a list of character representations, and
+<code>&lt;'memory overflow'&gt;</code> if there was insufficient space to allocate
+the result. 
+</p></blockquote></div>
+
+<div class="defun">
+&mdash; Function: list <b>avm_list_of_value</b> (<var>void *contents, size_t size, int *fault</var>)<var><a name="index-avm_005flist_005fof_005fvalue-443"></a></var><br>
+<blockquote><p>This function performs the inverse operation of
+<code>avm_value_of_list</code>, taking the address of an area of
+contiguously stored data and its <var>size</var> in bytes to a list
+representation. The length of the list returned is equal to the number
+of bytes of data, <var>size</var>, and each item of the list is a character
+representation for the corresponding byte as given by <a href="Character-Table.html#Character-Table">Character Table</a>.
+
+        <p>A copy of the memory area is made so that the original is no longer
+needed and may be freed by the caller. A pointer to this copy is
+returned by subsequent calls to <code>avm_value_of_list</code> when the
+result returned by this function is used as the <var>operand</var>
+parameter.
+
+        <p>If there is insufficient memory to allocate the result, the integer
+referenced by <var>fault</var> is set to a non-zero value, and a copy of
+the message <code>&lt;'memory overflow'&gt;</code> represented as a list is
+returned. This function could also cause a segmentation fault if it is
+<a name="index-segmentation-fault-444"></a>passed an invalid pointer or a <var>size</var> that overruns the storage
+area.  However, it is acceptable to specify a <var>size</var> that is less
+than the actual size of the given memory area to construct a list
+representing only the first part of it. The <var>size</var> must always be
+greater than zero. 
+</p></blockquote></div>
+
+   </body></html>
+

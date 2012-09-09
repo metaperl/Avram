@@ -1,0 +1,67 @@
+<html lang="en">
+<head>
+<title>File Format - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
+<link rel="prev" href="Concrete-Syntax.html#Concrete-Syntax" title="Concrete Syntax">
+<link rel="next" href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data" title="Representation of Numeric and Textual Data">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="File-Format"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>
+<hr>
+</div>
+
+<h3 class="section">2.3 File Format</h3>
+
+<p><a name="index-file-format-154"></a>A virtual code file consists of an optional text preamble, followed by
+the concrete representation for a tree. The latter uses the
+syntax described in the previous section. The purpose of this section is
+to specify the remaining details of the file format.
+
+   <p>The format for virtual code files may also be used for other purposes
+by virtual code applications, as it is automatically detected and parsed
+by <code>avram</code> when used in an input file, and can be automatically
+written to output files at the discretion of the application.
+
+   <p>Other than virtual code files, input files not conforming to this format
+are not an error as far as <code>avram</code> is concerned, because they are
+<a name="index-text-files-155"></a>assumed to be text files. Applications can detect in virtual code
+the assumption that is made and report an error if appropriate.
+
+   <p>Although the data file format includes no checksums or other explicit
+<a name="index-checksums-156"></a>methods of error detection, the concrete syntax itself provides a
+good measure of protection against undetected errors. The probability is
+vanishingly small that a random alteration to any valid encoding leaves
+it intact, because every bit in the sequence either mandates or
+prohibits the occurrence of two more bits somewhere after it. Errors in
+different parts of the file would have to be consistent with one another
+to go unnoticed.
+
+<ul class="menu">
+<li><a accesskey="1" href="Preamble-Section.html#Preamble-Section">Preamble Section</a>
+<li><a accesskey="2" href="Data-Section.html#Data-Section">Data Section</a>
+</ul>
+
+   </body></html>
+

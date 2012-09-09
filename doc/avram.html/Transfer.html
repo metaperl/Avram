@@ -1,0 +1,142 @@
+<html lang="en">
+<head>
+<title>Transfer - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
+<link rel="prev" href="Sort.html#Sort" title="Sort">
+<link rel="next" href="Mapcur.html#Mapcur" title="Mapcur">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Transfer"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Mapcur.html#Mapcur">Mapcur</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Sort.html#Sort">Sort</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.13.5 Transfer</h5>
+
+<p><a name="index-g_t_0040code_007btransfer_007d-331"></a>A particular interpretation is given to virtual code in the following form.
+
+     <dl>
+<dt><em>T26</em><dd>[[<code>transfer</code>]] <var>f</var> = <code>((nil,nil),(nil,(nil,</code><var>f</var><code>)))</code>
+</dl>
+
+<p class="noindent">When code in this form is evaluated with an argument, the tree
+<a name="index-state-transition-function-332"></a><var>f</var> is used as a state transition function, and the argument
+is used as a list to be traversed. The traversal begins with
+<var>f</var> being evaluated on <code>nil</code> to get the initial state
+and the initial output. Thereafter, each item of the list is paired with
+the current state to be evaluated with <var>f</var>, resulting in a
+list of output and the next state. The output resulting from the entire
+application is the cumulative concatenation of all outputs obtained in
+the course of evaluating <var>f</var>. The computation
+terminates when <var>f</var> yields a <code>nil</code> result. If the list
+of inputs runs out before the computation terminates, <code>nil</code> values
+are used as inputs.
+
+   <p>This behavior is specified more precisely in the following property
+of the operator, which applies in the case of non-<code>nil</code> <var>f</var>. 
+<a name="index-g_t_0040code_007btransition_007d-333"></a>
+     <dl>
+<dt><em>P33</em><dd>([[<code>transfer</code>]] <var>f</var>) <var>x</var> =
+([[<code>transition</code>]] <var>f</var>) <code>(nil,(</code><var>f</var><code> nil,</code><var>x</var><code>))</code>
+</dl>
+
+   <p>Much of the <code>transfer</code> semantics is implicit in the meaning of
+<code>transition</code>. For any given application <var>f</var>,
+[[<code>transition</code>]] <var>f</var> is the virtual code for a function
+that takes the list traversal from one configuration to the next. 
+A configuration is represented as a tuple, usually in the form
+<code>(</code><var>previous outputs</var><code>,((</code><var>state</var><code>,</code><var>output</var><code>),(</code><var>next input</var><code>,</code><var>subsequent
+inputs</var><code>)))</code>. A terminal configuration has the form
+<code>(</code><var>previous outputs</var><code>,(nil,(</code><var>next input</var><code>,</code><var>subsequent
+inputs</var><code>)))</code>. A configuration may also have <code>nil</code> in place of the
+pair <code>(</code><var>next input</var><code>,</code><var>subsequent inputs</var><code>)</code> if no more input
+remains.
+
+   <p>In the non-degenerate case, the meaning of [[<code>transition</code>]]
+<var>f</var> is consistent with the following equation.
+
+     <dl>
+<dt><em>E7</em><dd>([[<code>transition</code>]] <var>f</var>) <code>(</code><var>y</var><code>,((</code><var>s</var><code>,</code><var>o</var><code>),(</code><var>i</var><code>,</code><var>x</var><code>)))</code> =<br>
+&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->([[<code>transition</code>]] <var>f</var>) <code>((</code><var>o</var><code>,</code><var>y</var><code>),(</code><var>f</var><code> (</code><var>s</var><code>,</code><var>i</var><code>),</code><var>x</var><code>))</code>
+</dl>
+
+<p class="noindent">That is, the current output <var>o</var> is stored with previous outputs <var>y</var>, the next
+input <var>i</var> is removed from the configuration, and the next state and output
+are obtained from the evaluation of <var>f</var> with the state <var>s</var> and
+the next input <var>i</var>.
+
+   <p>In the case where no input remains, the transition function is
+consistent with the following equation.
+
+     <dl>
+<dt><em>E8</em><dd>([[<code>transition</code>]] <var>f</var>) <code>(</code><var>y</var><code>,((</code><var>s</var><code>,</code><var>o</var><code>),nil))</code> = <br>
+&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->([[<code>transition</code>]] <var>f</var>) <code>((</code><var>o</var><code>,</code><var>y</var><code>),(</code><var>f</var><code> (</code><var>s</var><code>,nil),nil))</code>
+</dl>
+
+<p class="noindent">This case is similar to the previous one except that the <code>nil</code>
+value is used in place of the next input. Note that in either case,
+nothing about <var>f</var> depends on the particular way
+configurations are represented, except that it should have a state as
+its left argument and an input as its right argument.
+
+   <p>Finally, in the case of a terminal configuration, the transition
+function returns the cumulative output.
+
+     <dl>
+<dt><em>E9</em><dd>([[<code>transition</code>]] <var>f</var>) <code>(</code><var>y</var><code>,(nil,</code><var>x</var><code>))</code> =
+[[<code>reduce(cat,nil)</code>]] [[<code>reverse</code>]] <var>y</var>
+</dl>
+
+<p class="noindent">The <code>silly</code> code <code>reduce(cat,nil)</code> has the effect of
+<a name="index-g_t_0040code_007bcat_007d-334"></a><a name="index-concatenation-335"></a>flattening a list of lists into one long list, which is necessary
+insofar as the transition function will have generated not necessarily a
+single output but a list of outputs on each iteration. The <code>cat</code>
+mnemonic stands for list concatenation and is explained in <a href="Cat.html#Cat">Cat</a>. 
+The reversal is necessary to cause the first generated output to be at
+the head of the list. List reversal is a built in operation of the
+virtual machine and is described in <a href="Reverse.html#Reverse">Reverse</a>.
+
+   <p>If such a function as <code>transition</code> seems implausible, its
+implementation in <code>silly</code> can be found in <a href="Transition.html#Transition">Transition</a>.
+
+   <p>It is usually more awkward to express a function in terms of
+a <code>transfer</code> than to code it directly using recursion or other list
+operations. However, this feature is provided by the virtual machine for
+several reasons.
+
+     <ul>
+<li>Functions in this form may be an easier translation target if the
+source is an imperative language. 
+<li>Translating from virtual code to asynchronous circuits or process
+<a name="index-asynchronous-circuits-336"></a>networks has been a research interest of the author, and code in this
+<a name="index-author-337"></a>form lends itself to easy recognition and mapping onto discrete components. 
+<li>The <samp><span class="option">--byte-transducer</span></samp> and <samp><span class="option">--interactive</span></samp> command
+line options to <code>avram</code> cause an application to be invoked in a
+<a name="index-state-transition-function-338"></a>similar manner to the transition function in a <code>transfer</code>
+function, so this feature allows for easy simulation and troubleshooting
+of these applications without actually deploying them. 
+</ul>
+
+   </body></html>
+

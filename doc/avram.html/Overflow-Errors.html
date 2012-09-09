@@ -1,0 +1,63 @@
+<html lang="en">
+<head>
+<title>Overflow Errors - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
+<link rel="prev" href="i_002fo-Errors.html#i_002fo-Errors" title="i/o Errors">
+<link rel="next" href="File-Format-Errors.html#File-Format-Errors" title="File Format Errors">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Overflow-Errors"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="File-Format-Errors.html#File-Format-Errors">File Format Errors</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="i_002fo-Errors.html#i_002fo-Errors">i/o Errors</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
+<hr>
+</div>
+
+<h4 class="subsection">1.6.3 Overflow Errors</h4>
+
+<p>These errors are reported by the application name prefacing one of the
+following messages, except as noted below. 
+<a name="index-overflow-73"></a><a name="index-counter-overflow-74"></a><a name="index-memory-overflow-75"></a>
+     <dl>
+<dt><var>application-name</var><code>: counter overflow (code </code><var>nn</var><code>)</code><dd>An overflow occurred in an unsigned long integer being used as a reference
+counter or something similar. This situation is very unlikely. 
+<br><dt><var>application-name</var><code>: memory overflow (code </code><var>nn</var><code>)</code><dd>There wasn't enough memory to build an internal data structure. The
+most likely cause is an attempt to operate on input
+files that are too large. Standard remedies apply. 
+</dl>
+
+   <p>The memory overflow or counter overflow messages can also be reported
+without the application name preface or a code number. In these cases,
+they arise in the course of evaluating the function given by the
+application, rather than by loading the input files.
+
+   <p>A counter overflow in this case is possible if the application
+attempts to compute the size of a very large, shared structure using
+native integer arithmetic.
+
+   <p><a name="index-g_t_0040command_007bulimit_007d-76"></a>Memory overflows are possible due to insufficient memory for a valid
+purpose, but may also occur due to a non-terminating recursion in the
+virtual machine code. To prevent thrashing or other bad effects from
+runaway code, the <samp><span class="command">ulimit</span></samp> shell command is your friend.
+
+   </body></html>
+

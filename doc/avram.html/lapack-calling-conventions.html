@@ -1,0 +1,146 @@
+<html lang="en">
+<head>
+<title>lapack calling conventions - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="lapack.html#lapack" title="lapack">
+<link rel="prev" href="lapack.html#lapack" title="lapack">
+<link rel="next" href="lapack-exceptions.html#lapack-exceptions" title="lapack exceptions">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="lapack-calling-conventions"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="lapack-exceptions.html#lapack-exceptions">lapack exceptions</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="lapack.html#lapack">lapack</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="lapack.html#lapack">lapack</a>
+<hr>
+</div>
+
+<h4 class="subsection">D.10.1 <code>lapack</code> calling conventions</h4>
+
+<p>A table describing the inputs and outputs to the <code>lapack</code> library
+functions listed by their function names is given in this
+section. Some general points related to most of the functions are
+mentioned first.
+
+     <ul>
+<li>References to vectors, matrices, and packed matrices should be
+understood as their list representations explained in <a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>. Although <code>LAPACK</code> internally uses column order
+arrays, the virtual code library interface exhibits a matrix as a list
+of lists with one inner list for each row. 
+<li>Some functions require a symmetric matrix as an input parameter.  Any
+<a name="index-symmetric-matrices-750"></a>input parameter that is required to be a symmetric matrix may be
+specified optionally either in square form or in triangular form as
+<a name="index-triangular-matrices-751"></a>described in <a href="Two-dimensional-arrays.html#Two-dimensional-arrays">Two dimensional arrays</a>. If a square matrix form is
+used, symmetry is not checked and the lower triangular portion is
+ignored. 
+<li>Some function names are listed in pairs differing only in the first
+letter.  Function names beginning with <code>d</code> pertain to vectors or
+matrices of real numbers (<a href="math.html#math">math</a>), and function names beginning
+with <code>z</code> pertain to complex numbers (<a href="complex.html#complex">complex</a>). The
+specifications of similarly named functions are otherwise identical. 
+</ul>
+
+     <dl>
+<dt><code>dgesvx</code><br><dt><code>zgesvx</code><dd>These library functions take a pair <code>(</code><var>a</var><code>,</code><var>b</var><code>)</code> where
+<var>a</var> is an <var>n</var> by <var>n</var> matrix and <var>b</var> is a vector of
+length <var>n</var>. If <var>a</var> is non-singular, they return a
+vector <var>x</var> such that <var>a</var> <var>x</var><code> = </code><var>b</var>. 
+Otherwise they return an empty list. 
+<br><dt><code>dgelsd</code><br><dt><code>zgelsd</code><dd>These functions generalize those above by taking a pair
+<code>(</code><var>a</var><code>,</code><var>b</var><code>)</code> where <var>a</var> is an <var>m</var> by <var>n</var> matrix
+and <var>b</var> is a vector of length <var>m</var>, with <var>m</var> greater than
+<var>n</var>. They return a vector <var>x</var> of length <var>n</var> to minimize
+the magnitude of <var>b</var><code> - </code><var>a</var> <var>x</var>. 
+<br><dt><code>dgesdd</code><br><dt><code>zgesdd</code><dd>These functions take a list of <var>m</var> time series (i.e., vectors)
+each of length <var>n</var> and return a list of basis vectors each of
+length <var>n</var>. The basis vectors span the set of time series in the
+<a name="index-singular-value-decomposition-752"></a>given list according to the singular value decomposition (i.e., with
+the basis vectors forming a series in order of decreasing
+significance). The number of basis vectors is at most
+<var>min</var><code>(</code><var>m</var><code>,</code><var>n</var><code>)</code> but could be less if the input time
+series aren't linearly independent. An empty list could be returned
+due to lack of convergence. 
+<br><dt><code>dgeevx</code><br><dt><code>zgeevx</code><dd>These functions take a non-symmetric square matrix and
+return a pair <code>(</code><var>e</var><code>,</code><var>v</var><code>)</code> where <var>e</var> is a list of
+eigenvectors and <var>v</var> is a list of eigenvalues, both of which will
+<a name="index-eigenvectors-753"></a>contain only complex numbers. (N.B., both functions return complex
+results even though <code>dgeevx</code> takes real input.) They could also
+return <code>nil</code> due to a lack of convergence. 
+<br><dt><code>dpptrf</code><br><dt><code>zpptrf</code><dd>These functions take a symmetric square matrix and
+return one of the Cholesky factors. The Cholesky factors are a pair
+<a name="index-Cholesky-decomposition-754"></a>of triangular matrices, each equal to the transpose of the other,
+whose product is the original matrix.
+
+          <ul>
+<li>If the input matrix is specified in lower triangular form, the lower
+triangular Cholesky factor is returned. 
+<li>If the input matrix is specified in square or upper triangular form,
+the upper triangular Cholesky factor is returned. 
+<li>In either case, the result is returned in triangular form. 
+</ul>
+     <br><dt><code>dggglm</code><br><dt><code>zggglm</code><dd>The input is a pair of matrices and a vector
+<a name="index-generalized-least-squares-755"></a><a name="index-least-squares-756"></a><code>((</code><var>A</var><code>,</code><var>B</var><code>),</code><var>d</var><code>)</code>. The output is a pair of vectors
+<code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> satisfying <var>A</var><var>x</var><code> +
+</code><var>B</var><var>y</var><code> = </code><var>d</var> for which the magnitude of <var>y</var> is
+minimal. The dimensions all have to be consistent, which means
+the number of rows in <var>A</var> and <var>B</var> is the length of <var>d</var>,
+the number of columns in <var>A</var> is the length of <var>x</var>, and
+the number of columns in <var>B</var> is the length of <var>y</var>. 
+<br><dt><code>dgglse</code><br><dt><code>zgglse</code><dd>The input is of the form <code>((</code><var>A</var><code>,</code><var>c</var><code>),(</code><var>B</var><code>,</code><var>d</var><code>))</code>
+where <var>A</var> and <var>B</var> are matrices and <var>c</var> and <var>d</var> are
+vectors. The output is a vector <var>x</var> to minimize the magnitude of
+<var>A</var><var>x</var><code> - </code><var>c</var> subject to the constraint that
+<var>B</var><var>x</var><code> = </code><var>d</var>. The dimensions have to be consistent,
+which means <var>A</var> has <var>m</var> rows, <var>c</var> has length <var>m</var>,
+<var>B</var> has <var>p</var> rows, <var>d</var> has length <var>p</var>, both <var>A</var> and
+<var>B</var> have <var>n</var> columns, and the output <var>x</var> has length
+<var>n</var>. It is also a requirement that <var>p</var><code> &lt;= </code><var>n</var><code> &lt;=
+</code><var>m</var><code> + </code><var>p</var>. 
+<br><dt><code>dsyevr</code><dd>This function takes a symmetric real matrix and returns a pair
+<code>(</code><var>e</var><code>,</code><var>v</var><code>)</code> where <var>e</var> is a list of eigenvectors and
+<var>v</var> is a list of eigenvalues. Both contain only real numbers. 
+This function is fast and accurate but not as storage efficient as
+possible. If there is insufficient memory, it automatically invokes
+<code>dspev</code>. 
+<br><dt><code>dspev</code><dd>This function takes a symmetric real matrix and returns a pair
+<code>(</code><var>e</var><code>,</code><var>v</var><code>)</code> where <var>e</var> is a list of eigenvectors and
+<var>v</var> is a list of eigenvalues. Both contain only real numbers.  It
+uses roughly half the memory of <code>dsyevr</code> but is not as fast or
+accurate. 
+<br><dt><code>zheevr</code><dd>This function takes a complex Hermitian matrix and returns a pair
+<a name="index-Hermitian-matrix-757"></a><code>(</code><var>e</var><code>,</code><var>v</var><code>)</code> where <var>e</var> is a list of eigenvectors and
+<var>v</var> is a list of eigenvalues. The eigenvectors are complex but the
+eigenvalues are real.
+
+          <ul>
+<li>A Hermitian matrix has <var>Aij</var> equal to the complex conjugate of
+<var>Aji</var>. 
+<li>Although not exactly symmetric, a Hermitian matrix may nevertheless
+be given in either upper or lower triangular form. 
+<li>This function is faster but less storage efficient than <code>zhpev</code>,
+and calls it automatically if it runs out of memory. 
+</ul>
+     <br><dt><code>zhpev</code><dd>This function has the same inputs and approximate outputs as
+<code>zheevr</code> but is slower and more memory efficient because it uses
+only packed matrices. 
+</dl>
+
+   </body></html>
+

@@ -1,0 +1,76 @@
+<html lang="en">
+<head>
+<title>Expedient Error Messages - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link rel="prev" href="Error-Messages.html#Error-Messages" title="Error Messages">
+<link rel="next" href="Computable-Error-Messages.html#Computable-Error-Messages" title="Computable Error Messages">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Expedient-Error-Messages"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Computable-Error-Messages.html#Computable-Error-Messages">Computable Error Messages</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Error-Messages.html#Error-Messages">Error Messages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.15.4 Expedient Error Messages</h5>
+
+<p><a name="index-error-messages-367"></a>Because there are so many ways to cause an invalid deconstruction, this
+message is the most common in practice and therefore the least
+informative. As a matter of convenience, <code>avram</code> takes the liberty
+of a slight departure from the virtual machine specification as written
+hitherto, and employs the following messages when invalid
+deconstructions occur respectively in the cases of recursion,
+transposition, and assignment.
+
+     <ul>
+<li><code>invalid recursion</code>
+<li><code>invalid transpose</code>
+<li><code>invalid assignment</code>
+</ul>
+
+<p class="noindent">That is, this section contradicts and supersedes what is stated at the
+end of <a href="Error-Messages.html#Error-Messages">Error Messages</a> and implied by the operator properties
+<em>P14</em>, <em>P16</em>, and <em>P42</em>. It is also possible that user
+applications may modify the error messages by methods described in
+<a href="Computable-Error-Messages.html#Computable-Error-Messages">Computable Error Messages</a>.
+
+   <p>Whereas these three cases constitute an expedient variation on the
+semantics, there is another sense in which no possible implementation
+could conform faithfully to the specification. When an evaluation can
+not be carried out because of insufficient space on the host machine,
+one of the following error messages may be the result.
+
+     <ul>
+<li><code>memory overflow</code>
+<li><code>counter overflow</code>
+</ul>
+
+<p class="noindent">These messages are treated in the same way as those that are caused by
+programming errors, and propagate to the final result written to
+standard error without any specific consideration by the application
+developer. The latter occurs only in connection with the built in weight
+function (<a href="Weight.html#Weight">Weight</a>). Other messages listed in
+<a href="Application-Programming-Errors.html#Application-Programming-Errors">Application Programming Errors</a> are also of this ilk.
+
+   </body></html>
+

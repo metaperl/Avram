@@ -1,0 +1,138 @@
+<html lang="en">
+<head>
+<title>Line Oriented Interaction - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Output From Interactive Applications">
+<link rel="prev" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Output From Interactive Applications">
+<link rel="next" href="Character-Oriented-Interaction.html#Character-Oriented-Interaction" title="Character Oriented Interaction">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Line-Oriented-Interaction"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Character-Oriented-Interaction.html#Character-Oriented-Interaction">Character Oriented Interaction</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.6.4.1 Line Oriented Interaction</h5>
+
+<p>Within this general pattern, more specific styles of interaction are
+possible. In the simplest one to explain first, the result returned by
+the function is always a data structure of the form
+<a name="index-command-line-231"></a><code>(</code><var>state</var><code>,(</code><var>command lines</var><code>,</code><var>prompts</var><code>))</code>, wherein the
+fields have these interpretations.
+
+     <dl>
+<dt><var>state</var><dd>is a tree incorporating any data in any format that the application
+needs to remember from one invocation to the next. 
+<br><dt><var>command lines</var><dd>is a list of character strings that are piped to the standard input
+stream of a separately spawned process. The process may persist from one
+invocation of the function to the next, or may be spawned each time. 
+<br><dt><var>prompts</var><dd>is a non-empty list of character strings containing a suffix of the text
+expected from the standard output stream of the process as a result of
+sending the command lines to it. 
+</dl>
+
+   <p>On each iteration, <code>avram</code> sends the command line character strings
+<a name="index-spawning-processes-232"></a>to a separately spawned process, with line breaks between them if there
+are more than one command. If a process remains from the previous iteration that
+has not terminated itself, the list of command lines is sent to the same
+process. If no such process already exists, the first string in the list
+of command lines is treated as a shell command and used to spawn the
+<a name="index-g_t_0040code_007bexp_005fpopen_007d-233"></a>process (using the <code>exp_popen</code> library function), and the remaining
+strings are sent to the newly spawned process.
+
+   <p>Normally processes spawned with commands that invoke interactive command
+line interpreters of their own, such as <samp><span class="command">bash</span></samp>, <samp><span class="command">ftp</span></samp> or
+<samp><span class="command">bc</span></samp>, will persist indefinitely unless the command causing them
+to exit is issued or some other event kills them. Processes spawned with
+non-interactive commands, such as <samp><span class="command">ls</span></samp> or <samp><span class="command">pwd</span></samp>, will
+terminate when the last of their initial output has been received.
+
+   <p>In the case of processes that persist after being spawned, <code>avram</code>
+needs some way of knowing when to stop waiting for more output from them
+so that it doesn't get stuck waiting forever. This purpose is served by
+the <var>prompts</var> field. This field could contain a single string
+holding the last thing the process will send before becoming quiescent,
+such as the strings <code>bash$ </code> or <code>ftp&gt; </code> in the above
+examples. Alternatively, a sequence of more than one prompt string can
+be used to indicate that the corresponding sequence of lines must be
+detected. An empty string followed by <code>ftp&gt; </code> would indicate that
+the <code>ftp&gt; </code> prompt is expected to be immediately preceded by a line
+<a name="index-prompts-234"></a>break. There is also the option of using prompt strings to indicate a
+pattern that does not necessarily imply quiescence, but is a more
+convenient point at which to stop reading the output from the process.
+
+   <p>For processes spawned with commands that do not start their own
+interactive command line interpreters, such as <samp><span class="command">ls</span></samp> or
+<samp><span class="command">pwd</span></samp>, it may be preferable to read all the output from them
+until they terminate. To achieve this effect, the list of prompt strings
+should contain only the single string containing only the single
+<code>EOF</code> character (usually code 4) or any other character that is
+certain not to occur in the output of the process. This technique is
+based on the assumption that the process was spawned originally with the
+command in question, not that such a command is sent to an existing
+shell process.
+
+   <p>In any case, when enough output has been received from the process, it
+is collected into a list of received strings including the prompt
+strings at the end (if they were received), and the function is applied
+to the pair <code>(</code><var>state</var><code>,</code><var>received strings</var><code>)</code>. If the cycle is
+to continue, the result returned by the function will include a new
+state, a new list of command lines, and a new list of prompt strings. A
+result of <code>nil</code> will cause the computation to terminate.
+
+   <p>There are some unusual situations that could occur in the course of line
+oriented interaction, and are summarized as follows.
+
+     <ul>
+<li>If the process terminates before any pattern matching the prompt
+strings is received from it, all of the output from the process up to
+the point where it terminated is collected into the <var>received
+strings</var> list and passed to the function. This situation includes cases
+where the process terminates immediately upon being spawned, but not
+abnormal completion of the <code>exp_popen</code> library function, which is
+a fatal error. This feature of the interface is what allows <code>EOF</code>
+to be used for collecting all the output at once from a non-interactive
+command. 
+<li>If the list of <var>command lines</var> is empty, and no process
+currently exists due to a previous iteration, the effect is the same as
+if the process terminates unexpectedly before outputting anything. I.e.,
+the function is applied to a pair containing an empty list of received
+strings. There is no good reason for an application to get into this
+situation. 
+<li>If the list of <var>command lines</var> is empty but a process persists
+from a previous iteration, no output is sent to it, but receiving from
+it proceeds normally. This feature of the interface could be used
+effectively by applications intended to process the received data in
+<a name="index-deadlock-235"></a>parts, but will cause deadlock if the process is already quiescent. 
+<li>All character strings have to consist of lists of valid
+representations of non-null characters according to <a href="Character-Table.html#Character-Table">Character Table</a>, or else there will be some fatal error messages. 
+<li>If the list of <var>prompt strings</var> contains only the empty
+string, <code>avram</code> will not wait to receive anything from the process,
+but will proceed with the next iteration immediately. If this effect is
+intended, care must be taken not to confuse the empty list
+of <var>prompt strings</var> with the list containing the empty string. The former
+indicates character oriented interaction, which is explained next. 
+</ul>
+
+   </body></html>
+

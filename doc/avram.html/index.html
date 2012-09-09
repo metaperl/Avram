@@ -1,0 +1,389 @@
+<html lang="en">
+<head>
+<title>avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="#Top">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<h1 class="settitle">avram - a virtual machine code interpreter</h1>
+<div class="shortcontents">
+<h2>Short Contents</h2>
+<ul>
+<li><a href="index.html#toc_Preface">Preface</a></li>
+<li><a href="index.html#toc_User-Manual">1 User Manual</a></li>
+<li><a href="index.html#toc_Virtual-Machine-Specification">2 Virtual Machine Specification</a></li>
+<li><a href="index.html#toc_Library-Reference">3 Library Reference</a></li>
+<li><a href="index.html#toc_Character-Table">Appendix A Character Table</a></li>
+<li><a href="index.html#toc_Reference-Implementations">Appendix B Reference Implementations</a></li>
+<li><a href="index.html#toc_Changes">Appendix C Changes</a></li>
+<li><a href="index.html#toc_External-Libraries">Appendix D External Libraries</a></li>
+<li><a href="index.html#toc_Copying">GNU GENERAL PUBLIC LICENSE</a></li>
+<li><a href="index.html#toc_Function-Index">Function Index</a></li>
+<li><a href="index.html#toc_Concept-Index">Concept Index</a></li>
+</ul>
+</div>
+
+
+
+   <div class="contents">
+<h2>Table of Contents</h2>
+<ul>
+<li><a name="toc_Preface" href="Preface.html#Preface">Preface</a>
+<li><a name="toc_User-Manual" href="User-Manual.html#User-Manual">1 User Manual</a>
+<ul>
+<li><a href="General-Options.html#General-Options">1.1 General Options</a>
+<li><a href="Modes-of-Operation.html#Modes-of-Operation">1.2 Modes of Operation</a>
+<ul>
+<li><a href="Filter-Mode.html#Filter-Mode">1.2.1 Filter Mode</a>
+<li><a href="Parameter-Mode.html#Parameter-Mode">1.2.2 Parameter Mode</a>
+</li></ul>
+<li><a href="Filter-Mode-Options.html#Filter-Mode-Options">1.3 Filter Mode Options</a>
+<li><a href="Parameter-Mode-Options.html#Parameter-Mode-Options">1.4 Parameter Mode Options</a>
+<li><a href="Command-Line-Syntax.html#Command-Line-Syntax">1.5 Command Line Syntax</a>
+<li><a href="Diagnostics.html#Diagnostics">1.6 Diagnostics</a>
+<ul>
+<li><a href="Internal-Errors.html#Internal-Errors">1.6.1 Internal Errors</a>
+<li><a href="i_002fo-Errors.html#i_002fo-Errors">1.6.2 i/o Errors</a>
+<li><a href="Overflow-Errors.html#Overflow-Errors">1.6.3 Overflow Errors</a>
+<li><a href="File-Format-Errors.html#File-Format-Errors">1.6.4 File Format Errors</a>
+<li><a href="Application-Programming-Errors.html#Application-Programming-Errors">1.6.5 Application Programming Errors</a>
+<li><a href="Configuration-Related-Errors.html#Configuration-Related-Errors">1.6.6 Configuration Related Errors</a>
+<li><a href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">1.6.7 Other Diagnostics and Warnings</a>
+</li></ul>
+<li><a href="Security.html#Security">1.7 Security</a>
+<li><a href="Example-Script.html#Example-Script">1.8 Example Script</a>
+<li><a href="Files.html#Files">1.9 Files</a>
+<li><a href="Environment.html#Environment">1.10 Environment</a>
+<li><a href="Bugs.html#Bugs">1.11 Bugs</a>
+</li></ul>
+<li><a name="toc_Virtual-Machine-Specification" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">2 Virtual Machine Specification</a>
+<ul>
+<li><a href="Raw-Material.html#Raw-Material">2.1 Raw Material</a>
+<li><a href="Concrete-Syntax.html#Concrete-Syntax">2.2 Concrete Syntax</a>
+<ul>
+<li><a href="Bit-String-Encoding.html#Bit-String-Encoding">2.2.1 Bit String Encoding</a>
+<li><a href="Blocking.html#Blocking">2.2.2 Blocking</a>
+</li></ul>
+<li><a href="File-Format.html#File-Format">2.3 File Format</a>
+<ul>
+<li><a href="Preamble-Section.html#Preamble-Section">2.3.1 Preamble Section</a>
+<li><a href="Data-Section.html#Data-Section">2.3.2 Data Section</a>
+</li></ul>
+<li><a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">2.4 Representation of Numeric and Textual Data</a>
+<li><a href="Filter-Mode-Interface.html#Filter-Mode-Interface">2.5 Filter Mode Interface</a>
+<ul>
+<li><a href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once">2.5.1 Loading All of Standard Input at Once</a>
+<ul>
+<li><a href="Standard-Input-Representation.html#Standard-Input-Representation">2.5.1.1 Standard Input Representation</a>
+<li><a href="Standard-Output-Representation.html#Standard-Output-Representation">2.5.1.2 Standard Output Representation</a>
+</li></ul>
+<li><a href="Line-Maps.html#Line-Maps">2.5.2 Line Maps</a>
+<li><a href="Byte-Transducers.html#Byte-Transducers">2.5.3 Byte Transducers</a>
+</li></ul>
+<li><a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">2.6 Parameter Mode Interface</a>
+<ul>
+<li><a href="Input-Data-Structure.html#Input-Data-Structure">2.6.1 Input Data Structure</a>
+<li><a href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications">2.6.2 Input for Mapped Applications</a>
+<li><a href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications">2.6.3 Output From Non-interactive Applications</a>
+<li><a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">2.6.4 Output From Interactive Applications</a>
+<ul>
+<li><a href="Line-Oriented-Interaction.html#Line-Oriented-Interaction">2.6.4.1 Line Oriented Interaction</a>
+<li><a href="Character-Oriented-Interaction.html#Character-Oriented-Interaction">2.6.4.2 Character Oriented Interaction</a>
+<li><a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">2.6.4.3 Mixed Modes of Interaction</a>
+</li></ul>
+</li></ul>
+<li><a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">2.7 Virtual Code Semantics</a>
+<ul>
+<li><a href="A-New-Operator.html#A-New-Operator">2.7.1 A New Operator</a>
+<li><a href="On-Equality.html#On-Equality">2.7.2 On Equality</a>
+<li><a href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties">2.7.3 A Minimal Set of Properties</a>
+<li><a href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">2.7.4 A Simple Lisp Like Language</a>
+<ul>
+<li><a href="Syntax.html#Syntax">2.7.4.1 Syntax</a>
+<li><a href="Semantics.html#Semantics">2.7.4.2 Semantics</a>
+<li><a href="Standard-Library.html#Standard-Library">2.7.4.3 Standard Library</a>
+</li></ul>
+<li><a href="How-_003ccode_003eavram_003c_002fcode_003e-Thinks.html#How-_003ccode_003eavram_003c_002fcode_003e-Thinks">2.7.5 How <code>avram</code> Thinks</a>
+<li><a href="Variable-Freedom.html#Variable-Freedom">2.7.6 Variable Freedom</a>
+<li><a href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">2.7.7 Metrics and Maintenance</a>
+<ul>
+<li><a href="Version.html#Version">2.7.7.1 Version</a>
+<li><a href="Note.html#Note">2.7.7.2 Note</a>
+<li><a href="Profile.html#Profile">2.7.7.3 Profile</a>
+<li><a href="Weight.html#Weight">2.7.7.4 Weight</a>
+</li></ul>
+<li><a href="Deconstruction.html#Deconstruction">2.7.8 Deconstruction</a>
+<ul>
+<li><a href="Field.html#Field">2.7.8.1 Field</a>
+<li><a href="Fan.html#Fan">2.7.8.2 Fan</a>
+</li></ul>
+<li><a href="Recursion.html#Recursion">2.7.9 Recursion</a>
+<ul>
+<li><a href="Recur.html#Recur">2.7.9.1 Recur</a>
+<li><a href="Refer.html#Refer">2.7.9.2 Refer</a>
+</li></ul>
+<li><a href="Assignment.html#Assignment">2.7.10 Assignment</a>
+<li><a href="Predicates.html#Predicates">2.7.11 Predicates</a>
+<ul>
+<li><a href="Compare.html#Compare">2.7.11.1 Compare</a>
+<li><a href="Member.html#Member">2.7.11.2 Member</a>
+</li></ul>
+<li><a href="Iteration.html#Iteration">2.7.12 Iteration</a>
+<li><a href="List-Combinators.html#List-Combinators">2.7.13 List Combinators</a>
+<ul>
+<li><a href="Map.html#Map">2.7.13.1 Map</a>
+<li><a href="Filter.html#Filter">2.7.13.2 Filter</a>
+<li><a href="Reduce.html#Reduce">2.7.13.3 Reduce</a>
+<li><a href="Sort.html#Sort">2.7.13.4 Sort</a>
+<li><a href="Transfer.html#Transfer">2.7.13.5 Transfer</a>
+<li><a href="Mapcur.html#Mapcur">2.7.13.6 Mapcur</a>
+</li></ul>
+<li><a href="List-Functions.html#List-Functions">2.7.14 List Functions</a>
+<ul>
+<li><a href="Cat.html#Cat">2.7.14.1 Cat</a>
+<li><a href="Reverse.html#Reverse">2.7.14.2 Reverse</a>
+<li><a href="Distribute.html#Distribute">2.7.14.3 Distribute</a>
+<li><a href="Transpose.html#Transpose">2.7.14.4 Transpose</a>
+</li></ul>
+<li><a href="Exception-Handling.html#Exception-Handling">2.7.15 Exception Handling</a>
+<ul>
+<li><a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets">2.7.15.1 A Hierarchy of Sets</a>
+<li><a href="Operator-Generalization.html#Operator-Generalization">2.7.15.2 Operator Generalization</a>
+<li><a href="Error-Messages.html#Error-Messages">2.7.15.3 Error Messages</a>
+<li><a href="Expedient-Error-Messages.html#Expedient-Error-Messages">2.7.15.4 Expedient Error Messages</a>
+<li><a href="Computable-Error-Messages.html#Computable-Error-Messages">2.7.15.5 Computable Error Messages</a>
+<li><a href="Exception-Handler-Usage.html#Exception-Handler-Usage">2.7.15.6 Exception Handler Usage</a>
+</li></ul>
+<li><a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">2.7.16 Interfaces to External Code</a>
+<ul>
+<li><a href="Library-combinator.html#Library-combinator">2.7.16.1 Library combinator</a>
+<li><a href="Have-combinator.html#Have-combinator">2.7.16.2 Have combinator</a>
+<li><a href="Interaction-combinator.html#Interaction-combinator">2.7.16.3 Interaction combinator</a>
+</li></ul>
+<li><a href="Vacant-Address-Space.html#Vacant-Address-Space">2.7.17 Vacant Address Space</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Library-Reference" href="Library-Reference.html#Library-Reference">3 Library Reference</a>
+<ul>
+<li><a href="Lists.html#Lists">3.1 Lists</a>
+<ul>
+<li><a href="Simple-Operations.html#Simple-Operations">3.1.1 Simple Operations</a>
+<li><a href="Recoverable-Operations.html#Recoverable-Operations">3.1.2 Recoverable Operations</a>
+<li><a href="List-Transformations.html#List-Transformations">3.1.3 List Transformations</a>
+<li><a href="Type-Conversions.html#Type-Conversions">3.1.4 Type Conversions</a>
+<ul>
+<li><a href="Primitive-types.html#Primitive-types">3.1.4.1 Primitive types</a>
+<li><a href="One-dimensional-arrays.html#One-dimensional-arrays">3.1.4.2 One dimensional arrays</a>
+<li><a href="Two-dimensional-arrays.html#Two-dimensional-arrays">3.1.4.3 Two dimensional arrays</a>
+<li><a href="Related-utility-functions.html#Related-utility-functions">3.1.4.4 Related utility functions</a>
+</li></ul>
+<li><a href="Comparison.html#Comparison">3.1.5 Comparison</a>
+<li><a href="Deconstruction-Functions.html#Deconstruction-Functions">3.1.6 Deconstruction Functions</a>
+<li><a href="Indirection.html#Indirection">3.1.7 Indirection</a>
+<li><a href="The-Universal-Function.html#The-Universal-Function">3.1.8 The Universal Function</a>
+</li></ul>
+<li><a href="Characters-and-Strings.html#Characters-and-Strings">3.2 Characters and Strings</a>
+<li><a href="File-Manipulation.html#File-Manipulation">3.3 File Manipulation</a>
+<ul>
+<li><a href="File-Names.html#File-Names">3.3.1 File Names</a>
+<li><a href="Raw-Files.html#Raw-Files">3.3.2 Raw Files</a>
+<li><a href="Formatted-Input.html#Formatted-Input">3.3.3 Formatted Input</a>
+<li><a href="Formatted-Output.html#Formatted-Output">3.3.4 Formatted Output</a>
+</li></ul>
+<li><a href="Invocation.html#Invocation">3.4 Invocation</a>
+<ul>
+<li><a href="Command-Line-Parsing.html#Command-Line-Parsing">3.4.1 Command Line Parsing</a>
+<li><a href="Execution-Modes.html#Execution-Modes">3.4.2 Execution Modes</a>
+</li></ul>
+<li><a href="Version-Management.html#Version-Management">3.5 Version Management</a>
+<li><a href="Error-Reporting.html#Error-Reporting">3.6 Error Reporting</a>
+<li><a href="Profiling.html#Profiling">3.7 Profiling</a>
+<li><a href="Emulation-Primitives.html#Emulation-Primitives">3.8 Emulation Primitives</a>
+<ul>
+<li><a href="Lists-of-Pairs-of-Ports.html#Lists-of-Pairs-of-Ports">3.8.1 Lists of Pairs of Ports</a>
+<li><a href="Ports-and-Packets.html#Ports-and-Packets">3.8.2 Ports and Packets</a>
+<li><a href="Instruction-Stacks.html#Instruction-Stacks">3.8.3 Instruction Stacks</a>
+</li></ul>
+<li><a href="External-Library-Maintenance.html#External-Library-Maintenance">3.9 External Library Maintenance</a>
+<ul>
+<li><a href="Calling-existing-library-functions.html#Calling-existing-library-functions">3.9.1 Calling existing library functions</a>
+<li><a href="Implementing-new-library-functions.html#Implementing-new-library-functions">3.9.2 Implementing new library functions</a>
+<li><a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">3.9.3 Working around library misfeatures</a>
+<ul>
+<li><a href="Inept-excess-verbiage.html#Inept-excess-verbiage">3.9.3.1 Inept excess verbiage</a>
+<li><a href="Memory-leaks.html#Memory-leaks">3.9.3.2 Memory leaks</a>
+<li><a href="Suicidal-exception-handling.html#Suicidal-exception-handling">3.9.3.3 Suicidal exception handling</a>
+</li></ul>
+</li></ul>
+</li></ul>
+<li><a name="toc_Character-Table" href="Character-Table.html#Character-Table">Appendix A Character Table</a>
+<li><a name="toc_Reference-Implementations" href="Reference-Implementations.html#Reference-Implementations">Appendix B Reference Implementations</a>
+<ul>
+<li><a href="Pairwise.html#Pairwise">B.1 Pairwise</a>
+<li><a href="Insert.html#Insert">B.2 Insert</a>
+<li><a href="Replace.html#Replace">B.3 Replace</a>
+<li><a href="Transition.html#Transition">B.4 Transition</a>
+</li></ul>
+<li><a name="toc_Changes" href="Changes.html#Changes">Appendix C Changes</a>
+<li><a name="toc_External-Libraries" href="External-Libraries.html#External-Libraries">Appendix D External Libraries</a>
+<ul>
+<li><a href="bes.html#bes">D.1 <code>bes</code></a>
+<ul>
+<li><a href="Bessel-function-calling-conventions.html#Bessel-function-calling-conventions">D.1.1 Bessel function calling conventions</a>
+<li><a href="Bessel-function-errors.html#Bessel-function-errors">D.1.2 Bessel function errors</a>
+</li></ul>
+<li><a href="complex.html#complex">D.2 <code>complex</code></a>
+<li><a href="fftw.html#fftw">D.3 <code>fftw</code></a>
+<li><a href="glpk.html#glpk">D.4 <code>glpk</code></a>
+<ul>
+<li><a href="glpk-input-parameters.html#glpk-input-parameters">D.4.1 <code>glpk</code> input parameters</a>
+<li><a href="glpk-output.html#glpk-output">D.4.2 <code>glpk</code> output</a>
+<li><a href="glpk-errors.html#glpk-errors">D.4.3 <code>glpk</code> errors</a>
+<li><a href="Additional-glpk-notes.html#Additional-glpk-notes">D.4.4 Additional <code>glpk</code> notes</a>
+</li></ul>
+<li><a href="gsldif.html#gsldif">D.5 <code>gsldif</code></a>
+<ul>
+<li><a href="gsldif-input-parameters.html#gsldif-input-parameters">D.5.1 <code>gsldif</code> input parameters</a>
+<li><a href="gsldif-output.html#gsldif-output">D.5.2 <code>gsldif</code> output</a>
+<li><a href="gsldif-exceptions.html#gsldif-exceptions">D.5.3 <code>gsldif</code> exceptions</a>
+<li><a href="Additional-gsldif-notes.html#Additional-gsldif-notes">D.5.4 Additional <code>gsldif</code> notes</a>
+</li></ul>
+<li><a href="gslevu.html#gslevu">D.6 <code>gslevu</code></a>
+<ul>
+<li><a href="gslevu-calling-conventions.html#gslevu-calling-conventions">D.6.1 <code>gslevu</code> calling conventions</a>
+<li><a href="gslevu-exceptions.html#gslevu-exceptions">D.6.2 <code>gslevu</code> exceptions</a>
+</li></ul>
+<li><a href="gslint.html#gslint">D.7 <code>gslint</code></a>
+<ul>
+<li><a href="gslint-input-parameters.html#gslint-input-parameters">D.7.1 <code>gslint</code> input parameters</a>
+<li><a href="gslint-output.html#gslint-output">D.7.2 <code>gslint</code> output</a>
+<li><a href="gslint-exceptions.html#gslint-exceptions">D.7.3 <code>gslint</code> exceptions</a>
+<li><a href="Additional-gslint-notes.html#Additional-gslint-notes">D.7.4 Additional <code>gslint</code> notes</a>
+</li></ul>
+<li><a href="harminv.html#harminv">D.8 <code>harminv</code></a>
+<ul>
+<li><a href="harminv-input-parameters.html#harminv-input-parameters">D.8.1 <code>harminv</code> input parameters</a>
+<li><a href="harminv-output.html#harminv-output">D.8.2 <code>harminv</code> output</a>
+<li><a href="harminv-exceptions.html#harminv-exceptions">D.8.3 <code>harminv</code> exceptions</a>
+<li><a href="Additional-harminv-notes.html#Additional-harminv-notes">D.8.4 Additional <code>harminv</code> notes</a>
+</li></ul>
+<li><a href="kinsol.html#kinsol">D.9 <code>kinsol</code></a>
+<ul>
+<li><a href="kinsol-input-parameters.html#kinsol-input-parameters">D.9.1 <code>kinsol</code> input parameters</a>
+<li><a href="kinsol-output.html#kinsol-output">D.9.2 <code>kinsol</code> output</a>
+<li><a href="kinsol-exceptions.html#kinsol-exceptions">D.9.3 <code>kinsol</code> exceptions</a>
+<li><a href="Additional-kinsol-notes.html#Additional-kinsol-notes">D.9.4 Additional <code>kinsol</code> notes</a>
+</li></ul>
+<li><a href="lapack.html#lapack">D.10 <code>lapack</code></a>
+<ul>
+<li><a href="lapack-calling-conventions.html#lapack-calling-conventions">D.10.1 <code>lapack</code> calling conventions</a>
+<li><a href="lapack-exceptions.html#lapack-exceptions">D.10.2 <code>lapack</code> exceptions</a>
+<li><a href="Additional-lapack-notes.html#Additional-lapack-notes">D.10.3 Additional <code>lapack</code> notes</a>
+</li></ul>
+<li><a href="math.html#math">D.11 <code>math</code></a>
+<ul>
+<li><a href="math-library-operators.html#math-library-operators">D.11.1 <code>math</code> library operators</a>
+<li><a href="math-library-predicates.html#math-library-predicates">D.11.2 <code>math</code> library predicates</a>
+<li><a href="math-library-conversion-functions.html#math-library-conversion-functions">D.11.3 <code>math</code> library conversion functions</a>
+<li><a href="math-library-exceptions.html#math-library-exceptions">D.11.4 <code>math</code> library exceptions</a>
+<li><a href="Additional-math-library-notes.html#Additional-math-library-notes">D.11.5 Additional <code>math</code> library notes</a>
+</li></ul>
+<li><a href="mtwist.html#mtwist">D.12 <code>mtwist</code></a>
+<ul>
+<li><a href="mtwist-calling-conventions.html#mtwist-calling-conventions">D.12.1 <code>mtwist</code> calling conventions</a>
+<li><a href="mtwist-exceptions.html#mtwist-exceptions">D.12.2 <code>mtwist</code> exceptions</a>
+<li><a href="Additional-mtwist-notes.html#Additional-mtwist-notes">D.12.3 Additional <code>mtwist</code> notes</a>
+</li></ul>
+<li><a href="minpack.html#minpack">D.13 <code>minpack</code></a>
+<ul>
+<li><a href="minpack-calling-conventions.html#minpack-calling-conventions">D.13.1 <code>minpack</code> calling conventions</a>
+<li><a href="minpack-exceptions.html#minpack-exceptions">D.13.2 <code>minpack</code> exceptions</a>
+<li><a href="Additional-minpack-notes.html#Additional-minpack-notes">D.13.3 Additional <code>minpack</code> notes</a>
+</li></ul>
+<li><a href="mpfr.html#mpfr">D.14 <code>mpfr</code></a>
+<ul>
+<li><a href="mpfr-binary-operators.html#mpfr-binary-operators">D.14.1 <code>mpfr</code> binary operators</a>
+<li><a href="mpfr-unary-operators.html#mpfr-unary-operators">D.14.2 <code>mpfr</code> unary operators</a>
+<li><a href="mpfr-binary-operators-with-a-natural-operand.html#mpfr-binary-operators-with-a-natural-operand">D.14.3 <code>mpfr</code> binary operators with a natural operand</a>
+<li><a href="mpfr-binary-predicates.html#mpfr-binary-predicates">D.14.4 <code>mpfr</code> binary predicates</a>
+<li><a href="mpfr-unary-predicates.html#mpfr-unary-predicates">D.14.5 <code>mpfr</code> unary predicates</a>
+<li><a href="mpfr-constants.html#mpfr-constants">D.14.6 <code>mpfr</code> constants</a>
+<li><a href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions">D.14.7 <code>mpfr</code> functions with miscellaneous calling conventions</a>
+<li><a href="mpfr-conversion-functions.html#mpfr-conversion-functions">D.14.8 <code>mpfr</code> conversion functions</a>
+<li><a href="mpfr-exceptions.html#mpfr-exceptions">D.14.9 <code>mpfr</code> exceptions</a>
+<li><a href="Additional-mpfr-notes.html#Additional-mpfr-notes">D.14.10 Additional <code>mpfr</code> notes</a>
+</li></ul>
+<li><a href="lpsolve.html#lpsolve">D.15 <code>lpsolve</code></a>
+<ul>
+<li><a href="lpsolve-calling-conventions.html#lpsolve-calling-conventions">D.15.1 <code>lpsolve</code> calling conventions</a>
+<li><a href="lpsolve-return-values.html#lpsolve-return-values">D.15.2 <code>lpsolve</code> return values</a>
+<li><a href="lpsolve-errors.html#lpsolve-errors">D.15.3 <code>lpsolve</code> errors</a>
+</li></ul>
+<li><a href="rmath.html#rmath">D.16 <code>rmath</code></a>
+<ul>
+<li><a href="rmath-statistical-functions.html#rmath-statistical-functions">D.16.1 <code>rmath</code> statistical functions</a>
+<li><a href="rmath-miscellaneous-functions.html#rmath-miscellaneous-functions">D.16.2 <code>rmath</code> miscellaneous functions</a>
+<li><a href="rmath-exceptions.html#rmath-exceptions">D.16.3 <code>rmath</code> exceptions</a>
+</li></ul>
+<li><a href="umf.html#umf">D.17 <code>umf</code></a>
+<ul>
+<li><a href="umf-input-parameters.html#umf-input-parameters">D.17.1 <code>umf</code> input parameters</a>
+<li><a href="umf-output.html#umf-output">D.17.2 <code>umf</code> output</a>
+<li><a href="umf-exceptions.html#umf-exceptions">D.17.3 <code>umf</code> exceptions</a>
+<li><a href="Additional-umf-notes.html#Additional-umf-notes">D.17.4 Additional <code>umf</code> notes</a>
+</li></ul>
+</li></ul>
+<li><a name="toc_Copying" href="Copying.html#Copying">GNU GENERAL PUBLIC LICENSE</a>
+<ul>
+<li><a href="Copying.html#Copying">Preamble</a>
+<li><a href="Copying.html#Copying">How to Apply These Terms to Your New Programs</a>
+</li></ul>
+<li><a name="toc_Function-Index" href="Function-Index.html#Function-Index">Function Index</a>
+<li><a name="toc_Concept-Index" href="Concept-Index.html#Concept-Index">Concept Index</a>
+</li></ul>
+</div>
+
+<!-- All the nodes can be updated using the EMACS command -->
+<!-- texinfo-every-node-update, which is normally bound to C-c C-u C-e. -->
+<div class="node">
+<a name="Top"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Preface.html#Preface">Preface</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="../index.html#dir">(dir)</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="../index.html#dir">(dir)</a>
+<hr>
+</div>
+
+<!-- All the menus can be updated with the EMACS command -->
+<!-- texinfo-all-menus-update, which is normally bound to C-c C-u C-a. -->
+<ul class="menu">
+<li><a accesskey="1" href="Preface.html#Preface">Preface</a>:                         project aims and scope
+<li><a accesskey="2" href="User-Manual.html#User-Manual">User Manual</a>:                     command line options and usage
+<li><a accesskey="3" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>:   a guide for compiler writers
+<li><a accesskey="4" href="Library-Reference.html#Library-Reference">Library Reference</a>:               how to reuse or enhance <code>avram</code>
+<li><a accesskey="5" href="Character-Table.html#Character-Table">Character Table</a>:                 representations for ASCII characters
+<li><a accesskey="6" href="Reference-Implementations.html#Reference-Implementations">Reference Implementations</a>:       constructive computability proofs
+<li><a accesskey="7" href="Changes.html#Changes">Changes</a>:                         recent updates to the manual
+<li><a accesskey="8" href="External-Libraries.html#External-Libraries">External Libraries</a>:              specifications and calling conventions
+<li><a accesskey="9" href="Copying.html#Copying">Copying</a>:                         license terms
+<li><a href="Function-Index.html#Function-Index">Function Index</a>:                  for the shared library API
+<li><a href="Concept-Index.html#Concept-Index">Concept Index</a>
+</ul>
+
+   </body></html>
+

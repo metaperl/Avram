@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+<title>Computable Error Messages - avram - a virtual machine code interpreter</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="avram - a virtual machine code interpreter">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
+<link rel="prev" href="Expedient-Error-Messages.html#Expedient-Error-Messages" title="Expedient Error Messages">
+<link rel="next" href="Exception-Handler-Usage.html#Exception-Handler-Usage" title="Exception Handler Usage">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Computable-Error-Messages"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Exception-Handler-Usage.html#Exception-Handler-Usage">Exception Handler Usage</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Expedient-Error-Messages.html#Expedient-Error-Messages">Expedient Error Messages</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
+<hr>
+</div>
+
+<h5 class="subsubsection">2.7.15.5 Computable Error Messages</h5>
+
+<p>The automatic generation and reporting of error messages provides a
+reasonable default behavior for applications that do not consider
+exceptional conditions. All applications and their input data are
+ordinarily members of the bottom level set in the hierarchy
+(<a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets">A Hierarchy of Sets</a>).  The error messages caused by invalid
+operations on this level are on the first level above the bottom, which
+are recognized as such and written to standard error without
+intervention from the application. However, there are two drawbacks to
+this style of dealing with exceptions. 
+<a name="index-exceptions-368"></a>
+     <ul>
+<li>An application developer may wish to translate error messages
+into terms that are meaningful to the user, not only by literally
+translating them from English to the local vernacular, but perhaps by
+relating the particular exceptional condition to application specific
+causes. While it is convenient for the &ldquo;back end&rdquo; code not to be
+required to intervene in the error reporting, it would be most
+inconvenient for it not to be able to do so. 
+<li>Some application specific errors might not correspond directly to any of
+the particular conditions detected automatically due to invalid
+operations, for example a semantic error in a syntactically correct
+input file. It might be convenient in such cases for an application to
+be able to define its own error messages but still have them reported
+automatically like the built in messages. 
+</ul>
+
+   <p>These situations suggest a need for some ability on the part of an
+application to operate on error messages themselves. Based on the
+operator semantics given so far, such an application is inexpressible,
+because for any application <var>f</var><code>_0</code> and error message
+<var>x</var><code>_1</code><!-- /@w -->, property <em>P44</em> stipulates <var>f</var><code>_0 </code><var>x</var><code>_1</code> =
+<var>x</var><code>_1</code>, meaning that the resulting error message is
+unchanged. Therefore, we need to define another basic property of the
+operator.
+
+   <p>The following form of virtual code is used in applications that may need
+to operate on error messages. 
+<a name="index-g_t_0040code_007bguard_007d-369"></a>
+     <dl>
+<dt><em>T32</em><dd>[[<code>guard</code>]] <code>(</code><var>f</var><code>,</code><var>g</var><code>)</code> = <code>((nil,</code><var>f</var><code>),</code><var>g</var><code>)</code>
+</dl>
+
+<p class="noindent">Code in this form has the following semantics.
+
+     <dl>
+<dt><em>P53</em><dd>([[<code>guard</code>]] <code>(</code><var>f</var><code>,</code><var>g</var><code>)</code>)<code>_</code><var>n</var>
+<var>x</var><code>_</code><var>p</var> =
+<var>g</var><code>_(</code><var>n</var><code>+1) </code><var>f</var><code>_</code><var>n</var> <var>x</var><code>_</code><var>p</var>
+</dl>
+
+<p class="noindent">The intuitive explanation is that <var>f</var> is the main part of the
+application, and <var>g</var> is the part of the application that
+operates on the error message that comes from <var>f</var> if an
+exception occurs while it is being evaluated (i.e., the &ldquo;exception
+handler&rdquo;). Typically the exception handler code implements a function
+that takes an error message as an argument and returns an error message
+as a result.
+
+   <p>Where there is no exception, the exception handler
+<var>g</var><code>_(</code><var>n</var><code>+1)</code> is never used, because its argument will be
+on level <var>n</var>, and therefore unaffected by an application on
+level <var>n</var><code>+1</code>.
+
+   <p>Exception handlers may have their own exception handlers, which will be
+invoked if the evaluation of the exception handler causes a further
+exception. Such an exception corresponds semantically to a value on the
+next level of the hierarchy of sets.
+
+   </body></html>
+

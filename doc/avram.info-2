@@ -4601,8 +4601,8 @@ future.
 
 File: avram.info,  Node: Copying,  Next: Function Index,  Prev: External Libraries,  Up: Top
 
-GNU GENERAL PUBLIC LICENSE
-**************************
+Appendix E GNU GENERAL PUBLIC LICENCE
+*************************************
 
                          Version 2, June 1991
 
@@ -4611,6 +4611,15 @@ GNU GENERAL PUBLIC LICENSE
 
      Everyone is permitted to copy and distribute verbatim copies
      of this license document, but changing it is not allowed.
+
+* Menu:
+
+* Preamble::
+* Terms and Conditions::
+* How to Apply::
+
+
+File: avram.info,  Node: Preamble,  Next: Terms and Conditions,  Up: Copying
 
 Preamble
 ========
@@ -4663,7 +4672,12 @@ patent must be licensed for everyone's free use or not licensed at all.
    The precise terms and conditions for copying, distribution and
 modification follow.
 
-    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+File: avram.info,  Node: Terms and Conditions,  Next: How to Apply,  Prev: Preamble,  Up: Copying
+
+TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+===============================================================
+
   1. This License applies to any program or other work which contains a
      notice placed by the copyright holder saying it may be distributed
      under the terms of this General Public License.  The "Program",
@@ -4893,6 +4907,9 @@ modification follow.
      ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
 
                       END OF TERMS AND CONDITIONS
+
+File: avram.info,  Node: How to Apply,  Prev: Terms and Conditions,  Up: Copying
+
 How to Apply These Terms to Your New Programs
 =============================================
 

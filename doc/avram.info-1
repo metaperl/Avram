@@ -66,11 +66,11 @@ for "Applicative ViRtuAl Machine".  Notable features are
 
         * `minpack'  (non-linear optimization)
 
-          `http://ftp.netlib.org/minpack'
+          `http://www.netlib.org/minpack'
 
         * `lapack'   (linear algebra)
 
-          `http://ftp.netlib.org/lapack'
+          `http://www.netlib.org/lapack'
 
         * `fftw'     (fast fourier transforms)
 
@@ -86,11 +86,11 @@ for "Applicative ViRtuAl Machine".  Notable features are
 
         * `glpk'     (linear programming by the simplex method)
 
-          `http://tech.groups.yahoo.com/group/lp_solve/'
+          `http://www.gnu.org/software/glpk'
 
         * `lpsolve'      (mixed integer linear programming)
 
-          `http://www.llnl.gov/CASC/sundials/'
+          `http://sourceforge.net/projects/lpsolve/'
 
         * `kinsol'   (constrained non-linear optimization)
 
@@ -698,9 +698,10 @@ two kinds.
      message indicates that some memory remains unaccounted for.
 
    If a repeatable internal error is discovered, please email a bug
-report and a small representative test case to the author at
-<avram-support@basis.uklinux.net>. Include the version number of
-`avram', which you can get by running `avram --version'.
+report and a small representative test case to
+<ursala-users@freelists.org> or file an issue on the Avram github page.
+Include the version number of `avram', which you can get by running
+`avram --version'.
 
 
 File: avram.info,  Node: i/o Errors,  Next: Overflow Errors,  Prev: Internal Errors,  Up: Diagnostics
@@ -1133,7 +1134,8 @@ observed on some systems including Irix and 2.4 series Linux kernels
 that the `avram' process is killed automatically for attempting to
 allocate too much memory rather than given the chance to recover.
 
-   Please send bug reports to <avram-support@basis.uklinux.net>.
+   Please send bug reports to <ursala-users@freelists.org> or file an
+issue on the Avram github page.
 
 
 File: avram.info,  Node: Virtual Machine Specification,  Next: Library Reference,  Prev: User Manual,  Up: Top

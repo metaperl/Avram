@@ -4,7 +4,7 @@ avram.texinfo.
 This file documents the `avram' command which is a virtual machine code
 interpreter
 
-   Copyright (C) 2000, 2003, 2006-2010 Dennis Furey Permission is
+   Copyright (C) 2000, 2003, 2006-2010, 2012 Dennis Furey Permission is
 granted to make and distribute verbatim copies of this manual provided
 the copyright notice and this permission notice are preserved on all
 copies.

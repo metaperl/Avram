@@ -4,7 +4,7 @@ avram.texinfo.
 This file documents the `avram' command which is a virtual machine code
 interpreter
 
-   Copyright (C) 2000, 2003, 2006-2010 Dennis Furey Permission is
+   Copyright (C) 2000, 2003, 2006-2010, 2012 Dennis Furey Permission is
 granted to make and distribute verbatim copies of this manual provided
 the copyright notice and this permission notice are preserved on all
 copies.
@@ -21,236 +21,236 @@ translation approved by the Free Software Foundation.
 
 
 Indirect:
-avram.info-1: 883
-avram.info-2: 292875
+avram.info-1: 889
+avram.info-2: 292881
 
 Tag Table:
 (Indirect)
-Node: Top883
-Node: Preface1723
-Node: User Manual7736
-Node: General Options9944
-Node: Modes of Operation12718
-Node: Filter Mode13395
-Node: Parameter Mode15097
-Node: Filter Mode Options17375
-Node: Parameter Mode Options20278
-Node: Command Line Syntax25299
-Node: Diagnostics28799
-Node: Internal Errors30175
-Node: i/o Errors31473
-Node: Overflow Errors32950
-Node: File Format Errors34349
-Node: Application Programming Errors36750
-Node: Configuration Related Errors37714
-Node: Other Diagnostics and Warnings41121
-Node: Security42255
-Node: Example Script44793
-Node: Files46986
-Node: Environment47574
-Node: Bugs49667
-Node: Virtual Machine Specification51488
-Node: Raw Material52640
-Node: Concrete Syntax58107
-Node: Bit String Encoding59588
-Node: Blocking62178
-Node: File Format63220
-Node: Preamble Section64767
-Node: Data Section65321
-Node: Representation of Numeric and Textual Data65875
-Node: Filter Mode Interface69035
-Node: Loading All of Standard Input at Once69904
-Node: Standard Input Representation70789
-Node: Standard Output Representation74126
-Node: Line Maps76531
-Node: Byte Transducers77309
-Node: Parameter Mode Interface79567
-Node: Input Data Structure80283
-Node: Input for Mapped Applications84798
-Node: Output From Non-interactive Applications88749
-Node: Output From Interactive Applications90389
-Node: Line Oriented Interaction92272
-Node: Character Oriented Interaction98383
-Node: Mixed Modes of Interaction100412
-Node: Virtual Code Semantics102438
-Node: A New Operator103790
-Node: On Equality104746
-Node: A Minimal Set of Properties106932
-Node: A Simple Lisp Like Language109859
-Ref: A Simple Lisp Like Language-Footnote-1110732
-Node: Syntax111020
-Node: Semantics112070
-Node: Standard Library113410
-Node: How `avram' Thinks114863
-Node: Variable Freedom119350
-Node: Metrics and Maintenance122794
-Node: Version123277
-Node: Note124301
-Node: Profile125394
-Node: Weight126655
-Node: Deconstruction128204
-Node: Field128735
-Node: Fan130675
-Node: Recursion131343
-Node: Recur131896
-Node: Refer132848
-Node: Assignment134336
-Node: Predicates138810
-Node: Compare139431
-Node: Member140417
-Node: Iteration141458
-Node: List Combinators143024
-Node: Map143747
-Node: Filter144534
-Node: Reduce145492
-Node: Sort149578
-Node: Transfer152044
-Node: Mapcur156532
-Node: List Functions157003
-Node: Cat157544
-Node: Reverse158067
-Node: Distribute158617
-Node: Transpose159371
-Node: Exception Handling160310
-Node: A Hierarchy of Sets161417
-Node: Operator Generalization163458
-Node: Error Messages166755
-Node: Expedient Error Messages170284
-Node: Computable Error Messages172068
-Node: Exception Handler Usage175297
-Node: Interfaces to External Code179070
-Node: Library combinator180794
-Node: Have combinator182852
-Ref: Have combinator-Footnote-1185994
-Node: Interaction combinator186183
-Node: Vacant Address Space191518
-Node: Library Reference195437
-Node: Lists198682
-Node: Simple Operations199774
-Node: Recoverable Operations209943
-Node: List Transformations212817
-Node: Type Conversions217720
-Node: Primitive types219905
-Node: One dimensional arrays223450
-Node: Two dimensional arrays226801
-Node: Related utility functions238150
-Node: Comparison242896
-Node: Deconstruction Functions246367
-Node: Indirection248336
-Node: The Universal Function254982
-Node: Characters and Strings257261
-Node: File Manipulation266816
-Node: File Names267397
-Node: Raw Files272273
-Node: Formatted Input276112
-Node: Formatted Output283032
-Node: Invocation292423
-Node: Command Line Parsing292875
-Node: Execution Modes301039
-Node: Version Management305608
-Node: Error Reporting309725
-Node: Profiling313970
-Node: Emulation Primitives319280
-Node: Lists of Pairs of Ports320465
-Node: Ports and Packets322788
-Ref: Ports and Packets-Footnote-1329087
-Node: Instruction Stacks329279
-Node: External Library Maintenance337007
-Node: Calling existing library functions337855
-Node: Implementing new library functions341174
-Node: Working around library misfeatures348385
-Node: Inept excess verbiage349309
-Node: Memory leaks352376
-Node: Suicidal exception handling360764
-Node: Character Table367456
-Node: Reference Implementations382439
-Node: Pairwise383617
-Node: Insert384946
-Node: Replace386604
-Node: Transition388717
-Node: Changes390170
-Node: External Libraries390667
-Node: bes393776
-Node: Bessel function calling conventions394319
-Node: Bessel function errors396881
-Node: complex397327
-Node: fftw399368
-Node: glpk401382
-Node: glpk input parameters402321
-Node: glpk output404153
-Node: glpk errors404835
-Node: Additional glpk notes405447
-Node: gsldif405998
-Node: gsldif input parameters406517
-Node: gsldif output407343
-Node: gsldif exceptions407983
-Node: Additional gsldif notes408362
-Node: gslevu409103
-Node: gslevu calling conventions409872
-Node: gslevu exceptions410462
-Node: gslint410983
-Node: gslint input parameters411461
-Node: gslint output413368
-Node: gslint exceptions414324
-Node: Additional gslint notes415079
-Node: harminv416405
-Node: harminv input parameters416966
-Node: harminv output418029
-Node: harminv exceptions419235
-Node: Additional harminv notes420549
-Node: kinsol421458
-Node: kinsol input parameters422902
-Node: kinsol output425678
-Node: kinsol exceptions426620
-Node: Additional kinsol notes427505
-Node: lapack429690
-Node: lapack calling conventions430507
-Node: lapack exceptions436332
-Node: Additional lapack notes437037
-Node: math438787
-Node: math library operators439565
-Node: math library predicates440592
-Node: math library conversion functions441302
-Node: math library exceptions442258
-Node: Additional math library notes443344
-Node: mtwist444216
-Node: mtwist calling conventions445224
-Node: mtwist exceptions448377
-Node: Additional mtwist notes449294
-Node: minpack451232
-Node: minpack calling conventions451752
-Node: minpack exceptions452990
-Node: Additional minpack notes453668
-Node: mpfr455434
-Node: mpfr binary operators457141
-Node: mpfr unary operators458401
-Node: mpfr binary operators with a natural operand459489
-Node: mpfr binary predicates460941
-Node: mpfr unary predicates461814
-Node: mpfr constants462247
-Node: mpfr functions with miscellaneous calling conventions463144
-Ref: mpfr functions with miscellaneous calling conventions-Footnote-1464449
-Node: mpfr conversion functions464602
-Node: mpfr exceptions466616
-Node: Additional mpfr notes467321
-Node: lpsolve468175
-Node: lpsolve calling conventions468693
-Node: lpsolve return values470144
-Node: lpsolve errors470607
-Node: rmath470981
-Node: rmath statistical functions471754
-Node: rmath miscellaneous functions475426
-Node: rmath exceptions476259
-Node: umf476632
-Node: umf input parameters478374
-Node: umf output481166
-Node: umf exceptions481819
-Node: Additional umf notes482846
-Node: Copying483508
-Node: Preamble484029
-Node: Terms and Conditions486656
-Node: How to Apply500043
-Node: Function Index503060
-Node: Concept Index518635
+Node: Top889
+Node: Preface1729
+Node: User Manual7742
+Node: General Options9950
+Node: Modes of Operation12724
+Node: Filter Mode13401
+Node: Parameter Mode15103
+Node: Filter Mode Options17381
+Node: Parameter Mode Options20284
+Node: Command Line Syntax25305
+Node: Diagnostics28805
+Node: Internal Errors30181
+Node: i/o Errors31479
+Node: Overflow Errors32956
+Node: File Format Errors34355
+Node: Application Programming Errors36756
+Node: Configuration Related Errors37720
+Node: Other Diagnostics and Warnings41127
+Node: Security42261
+Node: Example Script44799
+Node: Files46992
+Node: Environment47580
+Node: Bugs49673
+Node: Virtual Machine Specification51494
+Node: Raw Material52646
+Node: Concrete Syntax58113
+Node: Bit String Encoding59594
+Node: Blocking62184
+Node: File Format63226
+Node: Preamble Section64773
+Node: Data Section65327
+Node: Representation of Numeric and Textual Data65881
+Node: Filter Mode Interface69041
+Node: Loading All of Standard Input at Once69910
+Node: Standard Input Representation70795
+Node: Standard Output Representation74132
+Node: Line Maps76537
+Node: Byte Transducers77315
+Node: Parameter Mode Interface79573
+Node: Input Data Structure80289
+Node: Input for Mapped Applications84804
+Node: Output From Non-interactive Applications88755
+Node: Output From Interactive Applications90395
+Node: Line Oriented Interaction92278
+Node: Character Oriented Interaction98389
+Node: Mixed Modes of Interaction100418
+Node: Virtual Code Semantics102444
+Node: A New Operator103796
+Node: On Equality104752
+Node: A Minimal Set of Properties106938
+Node: A Simple Lisp Like Language109865
+Ref: A Simple Lisp Like Language-Footnote-1110738
+Node: Syntax111026
+Node: Semantics112076
+Node: Standard Library113416
+Node: How `avram' Thinks114869
+Node: Variable Freedom119356
+Node: Metrics and Maintenance122800
+Node: Version123283
+Node: Note124307
+Node: Profile125400
+Node: Weight126661
+Node: Deconstruction128210
+Node: Field128741
+Node: Fan130681
+Node: Recursion131349
+Node: Recur131902
+Node: Refer132854
+Node: Assignment134342
+Node: Predicates138816
+Node: Compare139437
+Node: Member140423
+Node: Iteration141464
+Node: List Combinators143030
+Node: Map143753
+Node: Filter144540
+Node: Reduce145498
+Node: Sort149584
+Node: Transfer152050
+Node: Mapcur156538
+Node: List Functions157009
+Node: Cat157550
+Node: Reverse158073
+Node: Distribute158623
+Node: Transpose159377
+Node: Exception Handling160316
+Node: A Hierarchy of Sets161423
+Node: Operator Generalization163464
+Node: Error Messages166761
+Node: Expedient Error Messages170290
+Node: Computable Error Messages172074
+Node: Exception Handler Usage175303
+Node: Interfaces to External Code179076
+Node: Library combinator180800
+Node: Have combinator182858
+Ref: Have combinator-Footnote-1186000
+Node: Interaction combinator186189
+Node: Vacant Address Space191524
+Node: Library Reference195443
+Node: Lists198688
+Node: Simple Operations199780
+Node: Recoverable Operations209949
+Node: List Transformations212823
+Node: Type Conversions217726
+Node: Primitive types219911
+Node: One dimensional arrays223456
+Node: Two dimensional arrays226807
+Node: Related utility functions238156
+Node: Comparison242902
+Node: Deconstruction Functions246373
+Node: Indirection248342
+Node: The Universal Function254988
+Node: Characters and Strings257267
+Node: File Manipulation266822
+Node: File Names267403
+Node: Raw Files272279
+Node: Formatted Input276118
+Node: Formatted Output283038
+Node: Invocation292429
+Node: Command Line Parsing292881
+Node: Execution Modes301045
+Node: Version Management305614
+Node: Error Reporting309731
+Node: Profiling313976
+Node: Emulation Primitives319286
+Node: Lists of Pairs of Ports320471
+Node: Ports and Packets322794
+Ref: Ports and Packets-Footnote-1329093
+Node: Instruction Stacks329285
+Node: External Library Maintenance337013
+Node: Calling existing library functions337861
+Node: Implementing new library functions341180
+Node: Working around library misfeatures348391
+Node: Inept excess verbiage349315
+Node: Memory leaks352382
+Node: Suicidal exception handling360770
+Node: Character Table367462
+Node: Reference Implementations382445
+Node: Pairwise383623
+Node: Insert384952
+Node: Replace386610
+Node: Transition388723
+Node: Changes390176
+Node: External Libraries390673
+Node: bes393782
+Node: Bessel function calling conventions394325
+Node: Bessel function errors396887
+Node: complex397333
+Node: fftw399374
+Node: glpk401388
+Node: glpk input parameters402327
+Node: glpk output404159
+Node: glpk errors404841
+Node: Additional glpk notes405453
+Node: gsldif406004
+Node: gsldif input parameters406523
+Node: gsldif output407349
+Node: gsldif exceptions407989
+Node: Additional gsldif notes408368
+Node: gslevu409109
+Node: gslevu calling conventions409878
+Node: gslevu exceptions410468
+Node: gslint410989
+Node: gslint input parameters411467
+Node: gslint output413374
+Node: gslint exceptions414330
+Node: Additional gslint notes415085
+Node: harminv416411
+Node: harminv input parameters416972
+Node: harminv output418035
+Node: harminv exceptions419241
+Node: Additional harminv notes420555
+Node: kinsol421464
+Node: kinsol input parameters422908
+Node: kinsol output425684
+Node: kinsol exceptions426626
+Node: Additional kinsol notes427511
+Node: lapack429696
+Node: lapack calling conventions430513
+Node: lapack exceptions436338
+Node: Additional lapack notes437043
+Node: math438793
+Node: math library operators439571
+Node: math library predicates440598
+Node: math library conversion functions441308
+Node: math library exceptions442264
+Node: Additional math library notes443350
+Node: mtwist444222
+Node: mtwist calling conventions445230
+Node: mtwist exceptions448383
+Node: Additional mtwist notes449300
+Node: minpack451238
+Node: minpack calling conventions451758
+Node: minpack exceptions452996
+Node: Additional minpack notes453674
+Node: mpfr455440
+Node: mpfr binary operators457147
+Node: mpfr unary operators458407
+Node: mpfr binary operators with a natural operand459495
+Node: mpfr binary predicates460947
+Node: mpfr unary predicates461820
+Node: mpfr constants462253
+Node: mpfr functions with miscellaneous calling conventions463150
+Ref: mpfr functions with miscellaneous calling conventions-Footnote-1464455
+Node: mpfr conversion functions464608
+Node: mpfr exceptions466622
+Node: Additional mpfr notes467327
+Node: lpsolve468181
+Node: lpsolve calling conventions468699
+Node: lpsolve return values470150
+Node: lpsolve errors470613
+Node: rmath470987
+Node: rmath statistical functions471760
+Node: rmath miscellaneous functions475432
+Node: rmath exceptions476265
+Node: umf476638
+Node: umf input parameters478380
+Node: umf output481172
+Node: umf exceptions481825
+Node: Additional umf notes482852
+Node: Copying483514
+Node: Preamble484035
+Node: Terms and Conditions486662
+Node: How to Apply500049
+Node: Function Index503066
+Node: Concept Index518641
 
 End Tag Table

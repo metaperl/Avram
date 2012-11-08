@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(avram,0.11.0,avram-support@basis.uklinux.net)
+AC_INIT(avram,0.13.0,ursala-users@freelists.org)
 dnl Every other copy of the package version number gets its value from here
 AM_INIT_AUTOMAKE(avram, 0.13.0)
 AM_CONFIG_HEADER(config.h)
@@ -86,6 +86,8 @@ AM_PATH_LIBGCRYPT(
 dnl allow for a non-root installation
 LDFLAGS="$LDFLAGS -L$HOME/lib"
 CPPFLAGS="$CPPFLAGS -I$HOME/include"
+CPPFLAGS="$CPPFLAGS -I/usr/local/include"
+LDFLAGS="$LDFLAGS -L/usr/local/lib $LIBLTDL"
 dnl LDFLAGS="$LDFLAGS -L$HOME/lib $LIBLTDL"
 dnl CPPFLAGS="$CPPFLAGS -I$HOME/include $LTDLINCL"
 

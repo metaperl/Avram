@@ -1,119 +1,152 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>rmath statistical functions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="rmath.html#rmath" title="rmath">
-<link rel="prev" href="rmath.html#rmath" title="rmath">
-<link rel="next" href="rmath-miscellaneous-functions.html#rmath-miscellaneous-functions" title="rmath miscellaneous functions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="rmath-statistical-functions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="rmath-miscellaneous-functions.html#rmath-miscellaneous-functions">rmath miscellaneous functions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="rmath.html#rmath">rmath</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="rmath.html#rmath">rmath</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.16.1 rmath statistical functions</title>
 
-<h4 class="subsection">D.16.1 <code>rmath</code> statistical functions</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.16.1 rmath statistical functions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.16.1 rmath statistical functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="rmath-statistical-functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="rmath.html#rmath" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="rmath-miscellaneous-functions.html#rmath-miscellaneous-functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="rmath.html#rmath" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="rmath-statistical-functions-1"></a>
+<h3 class="subsection">D.16.1 <code>rmath</code> statistical functions</h3>
 
 <p>Functions for evaluating random draws, density, cumulative probability
 and inverse cumulative probability are provided for some of the more
 frequently used probability distributions, which are chi-squared,
 non-central chi-squared, exponential, lognormal, normal, poisson,
-Student's t, and uniform.
-
-   <p>Each distribution is known by an abbreviated name and specified by one
-<a name="index-distributions-806"></a><a name="index-probability-distributions-807"></a><a name="index-statistical-distributions-808"></a>or two real parameters as listed below. Names of distributions in this
+Student&rsquo;s t, and uniform.
+</p>
+<p>Each distribution is known by an abbreviated name and specified by one
+<a name="index-distributions"></a>
+<a name="index-probability-distributions"></a>
+<a name="index-statistical-distributions"></a>
+or two real parameters as listed below. Names of distributions in this
 table form the stem of a library function name.  The names of the
 parameters such as <var>mu</var> and <var>sigma</var> are not explicitly
 mentioned when invoking the functions, but are listed here for
 reference.  The precise definitions of the distribution functions and
 interpretations of these parameters can be found in standard texts on
 probability and statistics.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">chisq         <var>df</var>
+nchisq        <var>df</var>, <var>lambda</var>
+exp           <var>scale</var>
+lnorm         <var>logmean</var>, <var>logsd</var>
+norm          <var>mu</var>, <var>sigma</var>
+pois          <var>lambda</var>
+t             <var>n</var>
+unif          <var>a</var>, <var>b</var>
+</pre></td></tr></table>
 
-<pre class="example">     chisq         <var>df</var>
-     nchisq        <var>df</var>, <var>lambda</var>
-     exp           <var>scale</var>
-     lnorm         <var>logmean</var>, <var>logsd</var>
-     norm          <var>mu</var>, <var>sigma</var>
-     pois          <var>lambda</var>
-     t             <var>n</var>
-     unif          <var>a</var>, <var>b</var>
-</pre>
-   <p>The virtual code interface follows a naming convention similar to the
+<p>The virtual code interface follows a naming convention similar to the
 native API, in that function names beginning with <code>r</code> represent
 random draws from a distribution, with the argument to the function
 being the parameters specifying the distribution. Functions in this
 first group return a random draw from a distribution described by a
 single real parameter.
+</p>
+<ul>
+<li> <code>rchisq</code>
+</li><li> <code>rexp</code>
+</li><li> <code>rpois</code>
+</li><li> <code>rt</code>
+</li></ul>
 
-     <ul>
-<li><code>rchisq</code>
-<li><code>rexp</code>
-<li><code>rpois</code>
-<li><code>rt</code>
-</ul>
+<p>These next functions return random draws from distributions specified
+by a pair of parameters, <code>(<var>x</var>,<var>y</var>)</code>.
+</p>
+<ul>
+<li> <code>rnchisq</code>
+</li><li> <code>rlnorm</code>
+</li><li> <code>rnorm</code>
+</li><li> <code>runif</code>
+</li></ul>
 
-<p class="noindent">These next functions return random draws from distributions specified
-by a pair of parameters, <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code>.
-
-     <ul>
-<li><code>rnchisq</code>
-<li><code>rlnorm</code>
-<li><code>rnorm</code>
-<li><code>runif</code>
-</ul>
-
-   <p>Functions whose names begin with <code>d</code> evaluate the probability
+<p>Functions whose names begin with <code>d</code> evaluate the probability
 density of a distribution at a given point. They require at least two
 real arguments, the first being the point whose probability density is
 sought, and the remaining ones being the parameters that specify the
 distribution. A boolean operand, which is <code>nil</code> for false and
 <code>(nil,nil)</code> for true, requests the logarithm of the density when
 true.
-
-   <p>Functions with names in the following group take a triple with two
-real operands and a boolean, <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>a</var><code>))</code>, and
+</p>
+<p>Functions with names in the following group take a triple with two
+real operands and a boolean, <code>(<var>x</var>,(<var>y</var>,<var>a</var>))</code>, and
 return a probabiity density.
+</p>
+<ul>
+<li> <code>dchisq</code>
+</li><li> <code>dexp</code>
+</li><li> <code>dpois</code>
+</li><li> <code>dt</code>
+</li></ul>
 
-     <ul>
-<li><code>dchisq</code>
-<li><code>dexp</code>
-<li><code>dpois</code>
-<li><code>dt</code>
-</ul>
-
-<p class="noindent">The next functions pertain to distributions requiring two paramters to
+<p>The next functions pertain to distributions requiring two paramters to
 specify them, so they take a quadruple with three real operands and a
-boolean, <code>(</code><var>x</var><code>,(</code><var>y</var><code>,(</code><var>z</var><code>,</code><var>a</var><code>)))</code>.
+boolean, <code>(<var>x</var>,(<var>y</var>,(<var>z</var>,<var>a</var>)))</code>.
+</p>
+<ul>
+<li> <code>dnchisq</code>
+</li><li> <code>dlnorm</code>
+</li><li> <code>dnorm</code>
+</li><li> <code>dunif</code>
+</li></ul>
 
-     <ul>
-<li><code>dnchisq</code>
-<li><code>dlnorm</code>
-<li><code>dnorm</code>
-<li><code>dunif</code>
-</ul>
-
-   <p>Functions whose names begin with <code>p</code> or <code>q</code> obtain
-<a name="index-cumulative-probability-809"></a>cumulative probabilities or inverse cumulative probabilities
+<p>Functions whose names begin with <code>p</code> or <code>q</code> obtain
+<a name="index-cumulative-probability"></a>
+cumulative probabilities or inverse cumulative probabilities
 respectively for a specified distribution. They require one real
 operand to identify the point whose probability or inverse probability
 is sought, and other real operands to parameterize the distribution,
@@ -121,31 +154,55 @@ as above. There are also two boolean operands. The first is true in
 order to request a probability or inverse probability with respect to
 the lower tail as opposed to the upper, and the other is true to
 indicate that probabilities are to be expressed logarithmically.
+</p>
+<p>The argument to these functions is a quadruple with two real operands
+and two booleans, <code>(<var>x</var>,(<var>y</var>,(<var>a</var>,<var>b</var>)))</code>.
+</p>
+<ul>
+<li> <code>pchisq</code>, <code>qchisq</code>
+</li><li> <code>pexp</code>, <code>qexp</code>
+</li><li> <code>ppois</code>, <code>qpois</code>
+</li><li> <code>pt</code>, <code>qt</code>
+</li></ul>
 
-   <p>The argument to these functions is a quadruple with two real operands
-and two booleans, <code>(</code><var>x</var><code>,(</code><var>y</var><code>,(</code><var>a</var><code>,</code><var>b</var><code>)))</code>.
-
-     <ul>
-<li><code>pchisq</code>, <code>qchisq</code>
-<li><code>pexp</code>, <code>qexp</code>
-<li><code>ppois</code>, <code>qpois</code>
-<li><code>pt</code>, <code>qt</code>
-</ul>
-
-<p class="noindent">The remaining functions pertain to distributions parameterized by two
+<p>The remaining functions pertain to distributions parameterized by two
 real operands. These take a quintuple with three real operands and two
-booleans, <code>(</code><var>x</var><code>,(</code><var>y</var><code>,(</code><var>z</var><code>,(</code><var>a</var><code>,</code><var>b</var><code>))))</code>.
-
-     <ul>
-<li><code>pnchisq</code>,
+booleans, <code>(<var>x</var>,(<var>y</var>,(<var>z</var>,(<var>a</var>,<var>b</var>))))</code>.
+</p>
+<ul>
+<li> <code>pnchisq</code>,
 <code>qnchisq</code>
-<li><code>plnorm</code>,
+</li><li> <code>plnorm</code>,
 <code>qlnorm</code>
-<li><code>pnorm</code>,
+</li><li> <code>pnorm</code>,
 <code>qnorm</code>
-<li><code>punif</code>,
+</li><li> <code>punif</code>,
 <code>qunif</code>
-</ul>
+</li></ul>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="rmath.html#rmath" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="rmath-miscellaneous-functions.html#rmath-miscellaneous-functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="rmath.html#rmath" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

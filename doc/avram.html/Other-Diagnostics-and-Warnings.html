@@ -1,52 +1,103 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Other Diagnostics and Warnings - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link rel="prev" href="Configuration-Related-Errors.html#Configuration-Related-Errors" title="Configuration Related Errors">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.6.7 Other Diagnostics and Warnings</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.6.7 Other Diagnostics and Warnings">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.6.7 Other Diagnostics and Warnings">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Other-Diagnostics-and-Warnings"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Configuration-Related-Errors.html#Configuration-Related-Errors">Configuration Related Errors</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Configuration-Related-Errors.html#Configuration-Related-Errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Security.html#Security" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Other-Diagnostics-and-Warnings-1"></a>
+<h3 class="subsection">1.6.7 Other Diagnostics and Warnings</h3>
 
-<h4 class="subsection">1.6.7 Other Diagnostics and Warnings</h4>
-
-     <dl>
-<dt><code>avram: multiple -.EXT options; all but last ignored</code><dd><a name="index-g_t_0040code_007bmultiple-_002d_002eEXT-options_007d-108"></a><a name="index-extensions-109"></a><a name="index-file-extensions-110"></a><a name="index-extensions-111"></a><a name="index-file-name-extensions-112"></a><a name="index-file-name-suffixes-113"></a>This message is written when more than one default extension is given as
+<dl compact="compact">
+<dt> <code>avram: multiple -.EXT options; all but last ignored</code></dt>
+<dd><a name="index-multiple-_002d_002eEXT-options"></a>
+<a name="index-extensions-1"></a>
+<a name="index-file-extensions"></a>
+<a name="index-extensions-2"></a>
+<a name="index-file-name-extensions-1"></a>
+<a name="index-file-name-suffixes-1"></a>
+<p>This message is written when more than one default extension is given as
 a command line parameter.  At most one default extension is allowed. If
 more than one is given, only the last one is used. The error is
 non-fatal and <code>avram</code> will try to continue. If you need more
 than one default extension, consider using the hard coded default
-extensions of <samp><span class="file">.fun</span></samp> and <samp><span class="file">.avm</span></samp>, or hacking the shell script
-in which the <code>avram</code> command line appears. 
-<br><dt><var>application name</var><code>: empty operator</code><dd>This message probably means that the virtual code file is corrupt or
-invalid. 
-<br><dt>usage summary<dd><a name="index-g_t_0040code_007bhelp_007d-command-line-option-114"></a>For any errors in usage not covered by other diagnostics, such as
+extensions of &lsquo;<tt>.fun</tt>&rsquo; and &lsquo;<tt>.avm</tt>&rsquo;, or hacking the shell script
+in which the <code>avram</code> command line appears.
+</p></dd>
+<dt> <code><var>application name</var>: empty operator</code></dt>
+<dd><p>This message probably means that the virtual code file is corrupt or
+invalid.
+</p></dd>
+<dt> usage summary</dt>
+<dd><a name="index-help-command-line-option-1"></a>
+<p>For any errors in usage not covered by other diagnostics, such as
 incompatible combinations of options, <code>avram</code> prints a message to
 standard error giving a brief summary of options, similar to the output
-from <kbd>avram --help</kbd>. (See <a href="General-Options.html#General-Options">General Options</a>.) 
+from <kbd>avram --help</kbd>. (See <a href="General-Options.html#General-Options">General Options</a>.)
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

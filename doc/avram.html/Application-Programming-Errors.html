@@ -1,59 +1,105 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Application Programming Errors - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link rel="prev" href="File-Format-Errors.html#File-Format-Errors" title="File Format Errors">
-<link rel="next" href="Configuration-Related-Errors.html#Configuration-Related-Errors" title="Configuration Related Errors">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.6.5 Application Programming Errors</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.6.5 Application Programming Errors">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.6.5 Application Programming Errors">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Application-Programming-Errors"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Configuration-Related-Errors.html#Configuration-Related-Errors">Configuration Related Errors</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Format-Errors.html#File-Format-Errors">File Format Errors</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
-<hr>
-</div>
-
-<h4 class="subsection">1.6.5 Application Programming Errors</h4>
-
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="File-Format-Errors.html#File-Format-Errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Configuration-Related-Errors.html#Configuration-Related-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Application-Programming-Errors-1"></a>
+<h3 class="subsection">1.6.5 Application Programming Errors</h3>
 <p>A further class of application crashes results from miscellaneous bugs
 in the application. These require the application to be debugged and
 have no user level explanation or workaround, but are listed here for
 reference. These messages are not normally prefaced by the application
 name when reported unless the application elects to do so, except for
 the <code>invalid profile identifier</code> message.
+</p>
+<ul>
+<li> <code>invalid recursion</code>
+<a name="index-invalid-recursion"></a>
+</li><li> <code>invalid comparison</code>
+<a name="index-invalid-comparison"></a>
+</li><li> <code>invalid deconstruction</code>
+<a name="index-invalid-deconstruction"></a>
+</li><li> <code>invalid transpose</code>
+<a name="index-invalid-transpose"></a>
+</li><li> <code>invalid membership</code>
+<a name="index-invalid-membership"></a>
+</li><li> <code>invalid distribution</code>
+<a name="index-invalid-distribution"></a>
+</li><li> <code>invalid concatenation</code>
+<a name="index-invalid-concatenation"></a>
+</li><li> <code>invalid assignment</code>
+<a name="index-invalid-assignment"></a>
+</li><li> <code>unrecognized combinator (code <var>nn</var>)</code>
+<a name="index-unrecognized-combinator"></a>
+</li><li> <code><var>application-name</var>: invalid profile identifier</code>
+<a name="index-invalid-profile-identifier"></a>
+</li><li> <code>unsupported hook</code>
+<a name="index-unsupported-hook"></a>
+</li></ul>
 
-     <ul>
-<li><code>invalid recursion</code>
-<a name="index-g_t_0040code_007binvalid-recursion_007d-83"></a><li><code>invalid comparison</code>
-<a name="index-g_t_0040code_007binvalid-comparison_007d-84"></a><li><code>invalid deconstruction</code>
-<a name="index-g_t_0040code_007binvalid-deconstruction_007d-85"></a><li><code>invalid transpose</code>
-<a name="index-g_t_0040code_007binvalid-transpose_007d-86"></a><li><code>invalid membership</code>
-<a name="index-g_t_0040code_007binvalid-membership_007d-87"></a><li><code>invalid distribution</code>
-<a name="index-g_t_0040code_007binvalid-distribution_007d-88"></a><li><code>invalid concatenation</code>
-<a name="index-g_t_0040code_007binvalid-concatenation_007d-89"></a><li><code>invalid assignment</code>
-<a name="index-g_t_0040code_007binvalid-assignment_007d-90"></a><li><code>unrecognized combinator (code </code><var>nn</var><code>)</code>
-<a name="index-g_t_0040code_007bunrecognized-combinator_007d-91"></a><li><var>application-name</var><code>: invalid profile identifier</code>
-<a name="index-g_t_0040code_007binvalid-profile-identifier_007d-92"></a><li><code>unsupported hook</code>
-<a name="index-g_t_0040code_007bunsupported-hook_007d-93"></a></ul>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

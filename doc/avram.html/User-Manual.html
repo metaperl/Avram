@@ -1,59 +1,92 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>User Manual - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="prev" href="Preface.html#Preface" title="Preface">
-<link rel="next" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="User-Manual"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Preface.html#Preface">Preface</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 1. User Manual</title>
 
-<h2 class="chapter">1 User Manual</h2>
+<meta name="description" content="avram - a virtual machine code interpreter: 1. User Manual">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1. User Manual">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="User-Manual"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Preface.html#Preface" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="General-Options.html#General-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Preface.html#Preface" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="User-Manual-1"></a>
+<h1 class="chapter">1. User Manual</h1>
 
 <p>This chapter provides the basic information on how to use <code>avram</code>
 to execute virtual machine code applications.
-
-   <p><code>avram</code> is invoked
+</p>
+<p><code>avram</code> is invoked
 by typing a command at a shell prompt in one of these three forms.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><kbd>avram</kbd> [<em>general options</em>]
+<kbd>avram</kbd> [<em>filter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>]
+<kbd>avram</kbd> [<em>parameter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>] [<em>parameters</em>]
+</pre></td></tr></table>
 
-<pre class="display">     <kbd>avram</kbd> [<em>general options</em>]
-     <kbd>avram</kbd> [<em>filter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>]
-     <kbd>avram</kbd> [<em>parameter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>] [<em>parameters</em>]
-</pre>
-   <p class="noindent">In the second case, <code>avram</code> reads from standard input, and may
+<p>In the second case, <code>avram</code> reads from standard input, and may
 of course appear as part of commands such as
-<a name="index-standard-input-7"></a>
-<pre class="display">     <kbd>avram</kbd> [<em>filter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>] &lt; <var>inputfile</var>
-     <var>anothercommand</var> | <kbd>avram</kbd> [<em>filter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>]
-</pre>
-   <p class="noindent">When <code>avram</code> is invoked with the name of an input file (with a
+<a name="index-standard-input"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><kbd>avram</kbd> [<em>filter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>] &lt; <var>inputfile</var>
+<var>anothercommand</var> | <kbd>avram</kbd> [<em>filter mode options</em>] <var>codefile</var>[<kbd>.avm</kbd>]
+</pre></td></tr></table>
+
+<p>When <code>avram</code> is invoked with the name of an input file (with a
 default extension <kbd>.avm</kbd>), it reads virtual machine code from the
 file and executes it on the host machine.
-
-   <p><a name="index-functional-programming-8"></a>The virtual code format used by <code>avram</code> is designed
+</p>
+<a name="index-functional-programming-1"></a>
+<p>The virtual code format used by <code>avram</code> is designed
 to support the features of functional or applicative programming
 languages. Although this chapter documents only the usage of
 <code>avram</code> and not the internals, it will be helpful to keep in mind
@@ -61,23 +94,60 @@ that the virtual machine code expresses a mathematical function rather
 than a program in the conventional sense. As such, it performs no action
 directly, but may be applied in a choice of ways by the user of
 <code>avram</code> according to the precise operation required.
-
-   <p>The following sections provide information in greater detail about
+</p>
+<p>The following sections provide information in greater detail about
 usage and diagnostics.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="General-Options.html#General-Options">1.1 General Options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             getting help and version information
+</td></tr>
+<tr><td align="left" valign="top"><a href="Modes-of-Operation.html#Modes-of-Operation">1.2 Modes of Operation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          stream processing or file oriented
+</td></tr>
+<tr><td align="left" valign="top"><a href="Filter-Mode-Options.html#Filter-Mode-Options">1.3 Filter Mode Options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         how to run a stream processor
+</td></tr>
+<tr><td align="left" valign="top"><a href="Parameter-Mode-Options.html#Parameter-Mode-Options">1.4 Parameter Mode Options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      how to have an application use files
+</td></tr>
+<tr><td align="left" valign="top"><a href="Command-Line-Syntax.html#Command-Line-Syntax">1.5 Command Line Syntax</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         application-independent conventions
+</td></tr>
+<tr><td align="left" valign="top"><a href="Diagnostics.html#Diagnostics">1.6 Diagnostics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 explanation of error messages
+</td></tr>
+<tr><td align="left" valign="top"><a href="Security.html#Security">1.7 Security</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    running untrusted applications
+</td></tr>
+<tr><td align="left" valign="top"><a href="Example-Script.html#Example-Script">1.8 Example Script</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              how to unburden the end users
+</td></tr>
+<tr><td align="left" valign="top"><a href="Files.html#Files">1.9 Files</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       miscellaneous files used
+</td></tr>
+<tr><td align="left" valign="top"><a href="Environment.html#Environment">1.10 Environment</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 environment variables
+</td></tr>
+<tr><td align="left" valign="top"><a href="Bugs.html#Bugs">1.11 Bugs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        hall of shame
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="General-Options.html#General-Options">General Options</a>:              getting help and version information
-<li><a accesskey="2" href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>:           stream processing or file oriented
-<li><a accesskey="3" href="Filter-Mode-Options.html#Filter-Mode-Options">Filter Mode Options</a>:          how to run a stream processor
-<li><a accesskey="4" href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>:       how to have an application use files
-<li><a accesskey="5" href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>:          application-independent conventions
-<li><a accesskey="6" href="Diagnostics.html#Diagnostics">Diagnostics</a>:                  explanation of error messages
-<li><a accesskey="7" href="Security.html#Security">Security</a>:                     running untrusted applications
-<li><a accesskey="8" href="Example-Script.html#Example-Script">Example Script</a>:               how to unburden the end users
-<li><a accesskey="9" href="Files.html#Files">Files</a>:                        miscellaneous files used
-<li><a href="Environment.html#Environment">Environment</a>:                  environment variables
-<li><a href="Bugs.html#Bugs">Bugs</a>:                         hall of shame
-</ul>
 
-   </body></html>
 
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Preface.html#Preface" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="General-Options.html#General-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Preface.html#Preface" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

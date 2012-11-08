@@ -1,105 +1,160 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Comparison - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Lists.html#Lists" title="Lists">
-<link rel="prev" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
-<link rel="next" href="Deconstruction-Functions.html#Deconstruction-Functions" title="Deconstruction Functions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.1.5 Comparison</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.1.5 Comparison">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.1.5 Comparison">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Comparison"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Deconstruction-Functions.html#Deconstruction-Functions">Deconstruction Functions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Related-utility-functions.html#Related-utility-functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Deconstruction-Functions.html#Deconstruction-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Lists.html#Lists" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Comparison-1"></a>
+<h3 class="subsection">3.1.5 Comparison</h3>
 
-<h4 class="subsection">3.1.5 Comparison</h4>
-
-<p>The file <samp><span class="file">compare.h</span></samp> contains a few function declarations
+<p>The file &lsquo;<tt>compare.h</tt>&rsquo; contains a few function declarations
 pertaining to the computation of the comparison predicate described in
 <a href="Compare.html#Compare">Compare</a>. Some of the work is done by static functions in
-<samp><span class="file">compare.c</span></samp> that are not recommended entry points to the library.
-
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_compare</b> ()<var><a name="index-avm_005finitialize_005fcompare-476"></a></var><br>
-<blockquote><p><a name="index-g_t_0040code_007bcompare_007d-477"></a>This function should be called once before the first call to
+&lsquo;<tt>compare.c</tt>&rsquo; that are not recommended entry points to the library.
+</p>
+<dl>
+<dt><a name="index-avm_005finitialize_005fcompare"></a><u>Function:</u> void <b>avm_initialize_compare</b><i> ()</i></dt>
+<dd><a name="index-compare-1"></a>
+<p>This function should be called once before the first call to
 <code>avm_comparison</code>, as it initializes some necessary internal data
-structures. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_compare</b> ()<var><a name="index-avm_005fcount_005fcompare-478"></a></var><br>
-<blockquote><p>This function can be used to check for memory leaks, by detecting
+structures.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005fcompare"></a><u>Function:</u> void <b>avm_count_compare</b><i> ()</i></dt>
+<dd><p>This function can be used to check for memory leaks, by detecting
 unreclaimed storage at the end of a run. The data structures relevant to
 comparison that could be reported as unreclaimed are known as &ldquo;decision&rdquo;
 nodes, but these should always be handled properly by the library
 without intervention. If <code>avm_count_lists</code> is also being used, the
-call to this function must precede it. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_comparison</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005fcomparison-479"></a></var><br>
-<blockquote><p>This function takes a list operand representing a pair of trees and
+call to this function must precede it.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcomparison"></a><u>Function:</u> list <b>avm_comparison</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function takes a list operand representing a pair of trees and
 returns a list representing the logical value of their equality. If the
 operand is <code>NULL</code>, a message of invalid comparison is returned and
-the <code>*</code><var>fault</var> is set to a non-zero value. If the <code>head</code> of the
+the <code>*<var>fault</var></code> is set to a non-zero value. If the <code>head</code> of the
 operand is unequal to the <code>tail</code>, a <code>NULL</code> value is
 returned. If they are equal, a list is returned whose <code>head</code> and
 <code>tail</code> are both <code>NULL</code>. The equality in question is structural
-<a name="index-pointer-equality-480"></a>rather than pointer equality.
-
-        <p>The list operand to this function may be modified by this function, but
+<a name="index-pointer-equality-1"></a>
+rather than pointer equality.
+</p>
+<p>The list operand to this function may be modified by this function, but
 not in a way that should make any difference to a client program. If two
 lists are found to be equal, or if even two sublists are found to be
 equal in the course of the comparison, one of them is deallocated and
 made to point to the other. This action saves memory and may make
 subsequent comparisons faster. However, it could disrupt client programs
-<a name="index-pointers-481"></a>that happen to be holding stale list pointers.
-
-        <p><a name="index-discontiguous-field-482"></a>As of <code>avram</code> version 0.6.0, a logical field called
+<a name="index-pointers-3"></a>
+that happen to be holding stale list pointers.
+</p>
+<a name="index-discontiguous-field"></a>
+<p>As of <code>avram</code> version 0.6.0, a logical field called
 <code>discontiguous</code> has been added to the <code>node</code> record type
 declared in <code>lists.h</code>, which is checked by the comparison
 function. If a list node has its <code>discontiguous</code> field set to a
 non-zero value, and if it also has a non-null <code>value</code> field, then
-it won't be deallocated in the course of comparison even if it is
+it won&rsquo;t be deallocated in the course of comparison even if it is
 found to be equal to something else. This feature can be used by
 client modules to create lists in which value fields refer to data
 structures that are meant to exist independently of them. See
-<samp><span class="file">mpfr.c</span></samp> for an example.
-
-        <p>This function is likely to have better performance and memory usage than
+&lsquo;<tt>mpfr.c</tt>&rsquo; for an example.
+</p>
+<p>This function is likely to have better performance and memory usage than
 a naive implementation of comparison, for the above reasons and also
 because of optimizations pertaining to comparison of lists representing
 characters. Moreover, it is not subject to stack overflow exceptions
-<a name="index-recursion-483"></a>because it is not written in a recursive style. 
-</p></blockquote></div>
+<a name="index-recursion-4"></a>
+because it is not written in a recursive style.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_binary_comparison</b> (<var>list left_operand, list right_operand, int *fault</var>)<var>;<a name="index-avm_005fbinary_005fcomparison-484"></a></var><br>
-<blockquote><p>This function is the same as <code>avm_comparison</code> except that it
+<dl>
+<dt><a name="index-avm_005fbinary_005fcomparison"></a><u>Function:</u> list <b>avm_binary_comparison</b><i> (list <var>left_operand</var>, list <var>right_operand</var>, int *<var>fault</var>);</i></dt>
+<dd><p>This function is the same as <code>avm_comparison</code> except that it
 allows the left and right operands to be passed as separate lists
 rather than taking them from the <code>head</code> and the <code>tail</code> of a
-single list. 
-</p></blockquote></div>
+single list.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Related-utility-functions.html#Related-utility-functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Deconstruction-Functions.html#Deconstruction-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Lists.html#Lists" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

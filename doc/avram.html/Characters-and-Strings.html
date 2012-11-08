@@ -1,248 +1,301 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Characters and Strings - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Library-Reference.html#Library-Reference" title="Library Reference">
-<link rel="prev" href="Lists.html#Lists" title="Lists">
-<link rel="next" href="File-Manipulation.html#File-Manipulation" title="File Manipulation">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.2 Characters and Strings</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.2 Characters and Strings">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.2 Characters and Strings">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Characters-and-Strings"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Lists.html#Lists">Lists</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Library-Reference.html#Library-Reference">Library Reference</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="The-Universal-Function.html#The-Universal-Function" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Characters-and-Strings-1"></a>
+<h2 class="section">3.2 Characters and Strings</h2>
 
-<h3 class="section">3.2 Characters and Strings</h3>
-
-<p><a name="index-character-strings-506"></a>If a C program is to interact with a virtual code application by
+<a name="index-character-strings-4"></a>
+<p>If a C program is to interact with a virtual code application by
 exchanging text, it uses the representation for characters described in
 <a href="Character-Table.html#Character-Table">Character Table</a>.  This convention would be inconvenient without a
 suitable API, so the functions in this section address the need. These
-functions are declared in the header file <samp><span class="file">chrcodes.h</span></samp>.
-
-   <p>Some of these functions have two forms, with one of them having the
+functions are declared in the header file &lsquo;<tt>chrcodes.h</tt>&rsquo;.
+</p>
+<p>Some of these functions have two forms, with one of them having the
 word <code>standard</code> as part of its name. The reason is to cope with
 multiple character encodings. Versions of <code>avram</code> prior to 0.1.0
-<a name="index-character-encodings-507"></a><a name="index-multiple-character-encodings-508"></a>used a different character encoding than the one documented in
+<a name="index-character-encodings"></a>
+<a name="index-multiple-character-encodings"></a>
+used a different character encoding than the one documented in
 <a href="Character-Table.html#Character-Table">Character Table</a>. The functions described in <a href="Version-Management.html#Version-Management">Version Management</a> can be used to select backward compatible operation with
 the older character encoding. The normal forms of the functions in
 this section will use the older character set if a backward
 compatibility mode is indicated, whereas the standard forms will use
 the character encoding documented in <a href="Character-Table.html#Character-Table">Character Table</a> regardless.
-
-   <p>Standard encodings should always be assumed for library and function
-<a name="index-standard-character-encoding-509"></a>names associated with the <code>library</code> combinator (<a href="Calling-existing-library-functions.html#Calling-existing-library-functions">Calling existing library functions</a>), and for values of lists defined by
+</p>
+<p>Standard encodings should always be assumed for library and function
+<a name="index-standard-character-encoding"></a>
+names associated with the <code>library</code> combinator (<a href="Calling-existing-library-functions.html#Calling-existing-library-functions">Calling existing library functions</a>), and for values of lists defined by
 <code>avm_list_of_value</code> (<a href="Primitive-types.html#Primitive-types">Primitive types</a>), but version
 dependent encodings should be used for all other purposes such as
 error messages. Alternatively, the normal version dependent forms of
 the functions below can be used safely in any case if backward
-<a name="index-backward-compatability-510"></a>compatibility is not an issue. This distinction is viewed as a
+<a name="index-backward-compatability"></a>
+compatibility is not an issue. This distinction is viewed as a
 transitional feature of the API that will be discontinued eventually
 when support for the old character set is withdrawn and the
 <code>standard</code> forms are be removed.
-
-<div class="defun">
-&mdash; Function: list <b>avm_character_representation</b> (<var>int character</var>)<var><a name="index-avm_005fcharacter_005frepresentation-511"></a></var><br>
-        </div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_standard_character_representation</b> (<var>int character</var>)<var><a name="index-avm_005fstandard_005fcharacter_005frepresentation-512"></a></var><br>
-<blockquote><p>This function takes an integer character code and returns a copy of
+</p>
+<dl>
+<dt><a name="index-avm_005fcharacter_005frepresentation"></a><u>Function:</u> list <b>avm_character_representation</b><i> (int <var>character</var>)</i></dt>
+</dl>
+<dl>
+<dt><a name="index-avm_005fstandard_005fcharacter_005frepresentation"></a><u>Function:</u> list <b>avm_standard_character_representation</b><i> (int <var>character</var>)</i></dt>
+<dd><p>This function takes an integer character code and returns a copy of
 the list representing it, as per the table in <a href="Character-Table.html#Character-Table">Character Table</a>. Because the copy is shared, no memory is allocated by this
 function so there is no possibility of overflow. Nevertheless, it is
 the responsibility of the caller dispose of the list when it is no
 longer needed by <code>avm_dispose</code>, just as if the copy were not
 shared (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>). For performance reasons, this
 function is implemented as a macro. If the argument is outside the
-range of zero to 255, it is masked into that range. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: int <b>avm_character_code</b> (<var>list operand</var>)<var><a name="index-avm_005fcharacter_005fcode-513"></a></var><br>
-        </div>
-
-<div class="defun">
-&mdash; Function: int <b>avm_standard_character_code</b> (<var>list operand</var>)<var><a name="index-avm_005fstandard_005fcharacter_005fcode-514"></a></var><br>
-<blockquote><p>This function takes a list as an argument and returns the corresponding
+range of zero to 255, it is masked into that range.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcharacter_005fcode"></a><u>Function:</u> int <b>avm_character_code</b><i> (list <var>operand</var>)</i></dt>
+</dl>
+<dl>
+<dt><a name="index-avm_005fstandard_005fcharacter_005fcode"></a><u>Function:</u> int <b>avm_standard_character_code</b><i> (list <var>operand</var>)</i></dt>
+<dd><p>This function takes a list as an argument and returns the corresponding
 character code, as per <a href="Character-Table.html#Character-Table">Character Table</a>. If the argument does not
-represent any character, a value of <code>-1</code> is returned. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_strung</b> (<var>char *string</var>)<var><a name="index-avm_005fstrung-515"></a></var><br>
-        </div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_standard_strung</b> (<var>char *string</var>)<var><a name="index-avm_005fstandard_005fstrung-516"></a></var><br>
-<blockquote><p>This function takes a pointer to a null terminated character string and
+represent any character, a value of <code>-1</code> is returned.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fstrung"></a><u>Function:</u> list <b>avm_strung</b><i> (char *<var>string</var>)</i></dt>
+</dl>
+<dl>
+<dt><a name="index-avm_005fstandard_005fstrung"></a><u>Function:</u> list <b>avm_standard_strung</b><i> (char *<var>string</var>)</i></dt>
+<dd><p>This function takes a pointer to a null terminated character string and
 returns the list obtained by translating each character into its list
 representation and enqueuing them together. Memory needs to be allocated
-for the result, and if there isn't enough available, an error message is
+for the result, and if there isn&rsquo;t enough available, an error message is
 written to standard error and the process is terminated. This function
 is useful to initialize lists from hard coded strings at the beginning
 of a run, as in this example.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">hello_string = avm_strung(&quot;hello&quot;);
+</pre></td></tr></table>
 
-     <pre class="example">          hello_string = avm_strung("hello");
-</pre>
-        <p>This form initializes a single string, but to initialize a one line
+<p>This form initializes a single string, but to initialize a one line
 message suitable for writing to a file, it would have to be a list of
 strings, as in this example.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">hello_message = avm_join(avm_strung(&quot;hello&quot;),NULL);
+</pre></td></tr></table>
 
-     <pre class="example">          hello_message = avm_join(avm_strung("hello"),NULL);
-</pre>
-        <p>The latter form is used internally by the library for initializing
-most of the various error messages that can be returned by other functions. 
-</p></blockquote></div>
+<p>The latter form is used internally by the library for initializing
+most of the various error messages that can be returned by other functions.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_recoverable_strung</b> (<var>char *string, int *fault</var>)<var>;<a name="index-avm_005frecoverable_005fstrung-517"></a></var><br>
-        </div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_recoverable_standard_strung</b> (<var>char *string, int *fault</var>)<var>;<a name="index-avm_005frecoverable_005fstandard_005fstrung-518"></a></var><br>
-<blockquote><p>This function is like <code>avm_strung</code> except that if it runs out of memory
+<dl>
+<dt><a name="index-avm_005frecoverable_005fstrung"></a><u>Function:</u> list <b>avm_recoverable_strung</b><i> (char *<var>string</var>, int *<var>fault</var>);</i></dt>
+</dl>
+<dl>
+<dt><a name="index-avm_005frecoverable_005fstandard_005fstrung"></a><u>Function:</u> list <b>avm_recoverable_standard_strung</b><i> (char *<var>string</var>, int *<var>fault</var>);</i></dt>
+<dd><p>This function is like <code>avm_strung</code> except that if it runs out of memory
 it sets the integer referenced by <var>fault</var> to a non-zero value and returns
-instead of terminating the process. 
-</p></blockquote></div>
+instead of terminating the process.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: char <b>*avm_unstrung</b> (<var>list string, list *message, int *fault</var>)<var><a name="index-g_t_002aavm_005funstrung-519"></a></var><br>
-        </div>
-
-<div class="defun">
-&mdash; Function: char <b>*avm_standard_unstrung</b> (<var>list string, list *message, int *fault</var>)<var><a name="index-g_t_002aavm_005fstandard_005funstrung-520"></a></var><br>
-<blockquote><p>This function performs an inverse operation to
+<dl>
+<dt><a name="index-_002aavm_005funstrung"></a><u>Function:</u> char <b>*avm_unstrung</b><i> (list <var>string</var>, list *<var>message</var>, int *<var>fault</var>)</i></dt>
+</dl>
+<dl>
+<dt><a name="index-_002aavm_005fstandard_005funstrung"></a><u>Function:</u> char <b>*avm_standard_unstrung</b><i> (list <var>string</var>, list *<var>message</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function performs an inverse operation to
 <code>avm_recoverable_strung</code>, taking a list representing a character
 string to the character string in ASCII null terminated form as per
 the standard C representation. Memory is allocated for the result by
 this function which should be freed by the caller.
-
-        <p>In the event of an exception, the integer referenced by <code>fault</code>
+</p>
+<p>In the event of an exception, the integer referenced by <code>fault</code>
 is assigned a non-zero value and an error message represented as a
 list is assigned to the list referenced by <code>message</code>. The error
 message should be reclaimed by the caller with <code>avm_dispose</code>
 (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a> if it is non-empty. Possible error messages
 are <code>&lt;'memory overflow'&gt;</code>, <code>&lt;'counter overflow'&gt;</code>, and
-<code>&lt;'invalid text format'&gt;</code>. 
-</p></blockquote></div>
+<code>&lt;'invalid text format'&gt;</code>.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_scanned_list</b> (<var>char *string</var>)<var><a name="index-avm_005fscanned_005flist-521"></a></var><br>
-<blockquote><p>An application that makes use of virtual code snippets or data that are
+<dl>
+<dt><a name="index-avm_005fscanned_005flist"></a><u>Function:</u> list <b>avm_scanned_list</b><i> (char *<var>string</var>)</i></dt>
+<dd><p>An application that makes use of virtual code snippets or data that are
 known at compile time can use this function to initialize them. The
 argument is a string in the format described in <a href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>,
 and the result is the list representing it. For example, the program
 discussed in <a href="Example-Script.html#Example-Script">Example Script</a> could be hard coded into a C program
 by pasting the data from its virtual code file into an expression of
 this form.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">cat_program = avm_scanned_list(&quot;sKYQNTP\\&quot;);
+</pre></td></tr></table>
 
-     <pre class="example">          cat_program = avm_scanned_list("sKYQNTP\\");
-</pre>
-        <p>Note that the backslash character in the original data has to be
+<p>Note that the backslash character in the original data has to be
 preceded by an extra backslash in the C source, because backslashes
 usually mean something in C character constants.
-
-        <p>The <code>avm_scanned_list</code> function needs to allocate memory. If there
-isn't enough memory available, it writes a message to standard error and
-causes the process to exit. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_multiscanned</b> (<var>char **strings</var>)<var><a name="index-avm_005fmultiscanned-522"></a></var><br>
-<blockquote><p>Sometimes it may be useful to initialize very large lists from
+</p>
+<p>The <code>avm_scanned_list</code> function needs to allocate memory. If there
+isn&rsquo;t enough memory available, it writes a message to standard error and
+causes the process to exit.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fmultiscanned"></a><u>Function:</u> list <b>avm_multiscanned</b><i> (char **<var>strings</var>)</i></dt>
+<dd><p>Sometimes it may be useful to initialize very large lists from
 strings, but some C compilers impose limitations on the maximum length
 of a string constant, and the ISO standard for C requires only 512
 bytes.  This function serves a similar purpose to
 <code>avm_scanned_list</code>, but allows the argument to be a pointer to a
 null terminated array of strings instead of one long string, thereby
 circumventing this limitation in the compiler.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">char *code[] = {&quot;sKYQ&quot;,&quot;NTP\\&quot;,NULL};
+...
+cat_program = avm_multiscanned(code);
+</pre></td></tr></table>
 
-     <pre class="example">          char *code[] = {"sKYQ","NTP\\",NULL};
-          ...
-          cat_program = avm_multiscanned(code);
-</pre>
-        <p>If there is insufficient memory to allocate the list this function needs
+<p>If there is insufficient memory to allocate the list this function needs
 to create, it causes an error message to be written to standard error,
-and then kills the process. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: char* <b>avm_prompt</b> (<var>list prompt_strings</var>)<var><a name="index-avm_005fprompt-523"></a></var><br>
-<blockquote><p>This function takes a list representing a list of character strings, and
+and then kills the process.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fprompt"></a><u>Function:</u> char* <b>avm_prompt</b><i> (list <var>prompt_strings</var>)</i></dt>
+<dd><p>This function takes a list representing a list of character strings, and
 returns its translation to a character string with the sequence 13 10
 used as a separator. For example, given a tree of this form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">some_message = avm_join(
+   avm_strung(&quot;hay&quot;),
+   avm_join(
+      avm_strung(&quot;you&quot;),
+      NULL));
+</pre></td></tr></table>
 
-     <pre class="example">          some_message = avm_join(
-             avm_strung("hay"),
-             avm_join(
-                avm_strung("you"),
-                NULL));
-</pre>
-        <p>the result returned by <code>prompt_strings(some_message)</code> would be a
+<p>the result returned by <code>prompt_strings(some_message)</code> would be a
 pointer to a null terminated character string equivalent to the C constant
-<code>"hay\13\10you"</code>.
-
-        <p>Error messages are printed and the process terminated in the event of
+<code>&quot;hay\13\10you&quot;</code>.
+</p>
+<p>Error messages are printed and the process terminated in the event of
 either a memory overflow or an invalid character representation.
-
-        <p>This function is used by <code>avram</code> in the evaluation of interactive
-<a name="index-interactive-applications-524"></a>virtual code applications, whose output has to be compared to the output
+</p>
+<p>This function is used by <code>avram</code> in the evaluation of interactive
+<a name="index-interactive-applications-2"></a>
+virtual code applications, whose output has to be compared to the output
 from a shell command in this format. The separator is chosen to be
-compatible with the <code>expect</code> library. 
-</p></blockquote></div>
+compatible with the <code>expect</code> library.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: char* <b>avm_recoverable_prompt</b> (<var>list prompt_strings, list *message, int *fault</var>)<var><a name="index-avm_005frecoverable_005fprompt-525"></a></var><br>
-<blockquote><p>This function performs the same operation as <code>avm_prompt</code> but
+<dl>
+<dt><a name="index-avm_005frecoverable_005fprompt"></a><u>Function:</u> char* <b>avm_recoverable_prompt</b><i> (list <var>prompt_strings</var>, list *<var>message</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function performs the same operation as <code>avm_prompt</code> but
 allows the caller to handle exceptional conditions. If an exception
 such as a memory overflow occurs, the integer referenced by
 <code>fault</code> is assigned a non-zero value and a representation of the
 error message as a list of strings is assigned to the list referenced
 by <code>message</code>.
-
-        <p>This function is used to by <code>avram</code> to evaluate the
+</p>
+<p>This function is used to by <code>avram</code> to evaluate the
 <code>interact</code> combinator (<a href="Interaction-combinator.html#Interaction-combinator">Interaction combinator</a>), when
-terminating in the event of an error would be inappropriate. 
-</p></blockquote></div>
+terminating in the event of an error would be inappropriate.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_chrcodes</b> ()<var><a name="index-avm_005finitialize_005fchrcodes-526"></a></var><br>
-<blockquote><p>This function has to be called before any of the other character
+<dl>
+<dt><a name="index-avm_005finitialize_005fchrcodes"></a><u>Function:</u> void <b>avm_initialize_chrcodes</b><i> ()</i></dt>
+<dd><p>This function has to be called before any of the other character
 conversion functions in this section, or else their results are
 undefined. It performs the initialization of various internal data
-structures. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_chrcodes</b> ()<var><a name="index-avm_005fcount_005fchrcodes-527"></a></var><br>
-<blockquote><p>This function can be called at the end of a run, after the last call to
+structures.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005fchrcodes"></a><u>Function:</u> void <b>avm_count_chrcodes</b><i> ()</i></dt>
+<dd><p>This function can be called at the end of a run, after the last call to
 any of the other functions in this section, but before
 <code>avm_count_lists</code> if that function is also being used. The purpose
 of this function is to detect and report memory leaks. If any memory
 associated with any of these functions has not been reclaimed by the
 client program, a message giving the number of unreclaimed lists will be
-written to standard error. 
-</p></blockquote></div>
+written to standard error.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="The-Universal-Function.html#The-Universal-Function" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

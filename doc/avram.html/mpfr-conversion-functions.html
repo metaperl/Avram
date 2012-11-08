@@ -1,74 +1,136 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>mpfr conversion functions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="mpfr.html#mpfr" title="mpfr">
-<link rel="prev" href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions" title="mpfr functions with miscellaneous calling conventions">
-<link rel="next" href="mpfr-exceptions.html#mpfr-exceptions" title="mpfr exceptions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="mpfr-conversion-functions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="mpfr-exceptions.html#mpfr-exceptions">mpfr exceptions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions">mpfr functions with miscellaneous calling conventions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.14.8 mpfr conversion functions</title>
 
-<h4 class="subsection">D.14.8 <code>mpfr</code> conversion functions</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.14.8 mpfr conversion functions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.14.8 mpfr conversion functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="mpfr-conversion-functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr-exceptions.html#mpfr-exceptions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr.html#mpfr" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="mpfr-conversion-functions-1"></a>
+<h3 class="subsection">D.14.8 <code>mpfr</code> conversion functions</h3>
 
 <p>The functions described in this section convert between <code>mpfr</code>
 numbers and character strings, naturals, or standard IEEE floating
 point format (in their list representations). Where these functions
-have similar or equivalent counterparts in the <code>mpfr</code> library's
+have similar or equivalent counterparts in the <code>mpfr</code> library&rsquo;s
 native API, the names have been changed for mnemonic reasons.
-
-     <dl>
-<dt><code>dbl2mp</code><dd>The input is a standard floating point number as in <a href="math.html#math">math</a>. The
+</p>
+<dl compact="compact">
+<dt> <code>dbl2mp</code></dt>
+<dd><p>The input is a standard floating point number as in <a href="math.html#math"><code>math</code></a>. The
 result is an <code>mpfr</code> number equal to the input with a
-fixed precision, currently set to 160 bits. 
-<br><dt><code>mp2dbl</code><dd>The input is an <code>mpfr</code> number, and the output is the best
+fixed precision, currently set to 160 bits.
+</p></dd>
+<dt> <code>mp2dbl</code></dt>
+<dd><p>The input is an <code>mpfr</code> number, and the output is the best
 possible approximation to it by a standard a double precision
-number. 
-<br><dt><code>str2mp</code><dd>The input is a pair <code>(</code><var>prec</var><code>,</code><var>s</var><code>)</code>, where <var>prec</var> is a
+number.
+</p></dd>
+<dt> <code>str2mp</code></dt>
+<dd><p>The input is a pair <code>(<var>prec</var>,<var>s</var>)</code>, where <var>prec</var> is a
 natural number specifying the precision, and <var>s</var> is a string
 expressing a floating point number in C format. The output is an
-<code>mpfr</code> number with the specified precision. 
-<br><dt><code>mp2str</code><dd>The input is an <code>mpfr</code> number, and the output is a character
-string expressing the number in exponential decimal notation. 
+<code>mpfr</code> number with the specified precision.
+</p></dd>
+<dt> <code>mp2str</code></dt>
+<dd><p>The input is an <code>mpfr</code> number, and the output is a character
+string expressing the number in exponential decimal notation.
 Sufficiently many decimal digits are included in the string to express
-the full precision. 
-<br><dt><code>nat2mp</code><dd>The input is a natural number represented as described in
+the full precision.
+</p></dd>
+<dt> <code>nat2mp</code></dt>
+<dd><p>The input is a natural number represented as described in
 <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>,
 and the output is an <code>mpfr</code> number of sufficient precision to
-express the natural number exactly. 
+express the natural number exactly.
+</p></dd>
 </dl>
 
-   <p>The <code>mp2str</code> function enhances the native <code>mpfr_get_str</code>
+<p>The <code>mp2str</code> function enhances the native <code>mpfr_get_str</code>
 function by properly formatting the output string rather than only
 listing the digits of the mantissa.
-
-   <p>The <code>nat2mp</code> function does not rely on the <code>mpfr</code> native
+</p>
+<p>The <code>nat2mp</code> function does not rely on the <code>mpfr</code> native
 integer conversion functions, so natural numbers with any number of
 bits up to <code>MP_PREC_MAX</code> can be used losslessly. There is
 currently no conversion in the other direction.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr-exceptions.html#mpfr-exceptions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr.html#mpfr" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

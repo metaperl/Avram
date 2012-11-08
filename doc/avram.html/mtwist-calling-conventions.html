@@ -1,68 +1,106 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>mtwist calling conventions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="mtwist.html#mtwist" title="mtwist">
-<link rel="prev" href="mtwist.html#mtwist" title="mtwist">
-<link rel="next" href="mtwist-exceptions.html#mtwist-exceptions" title="mtwist exceptions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="mtwist-calling-conventions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="mtwist-exceptions.html#mtwist-exceptions">mtwist exceptions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="mtwist.html#mtwist">mtwist</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="mtwist.html#mtwist">mtwist</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.12.1 mtwist calling conventions</title>
 
-<h4 class="subsection">D.12.1 <code>mtwist</code> calling conventions</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.12.1 mtwist calling conventions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.12.1 mtwist calling conventions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="mtwist-calling-conventions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mtwist.html#mtwist" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mtwist-exceptions.html#mtwist-exceptions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mtwist.html#mtwist" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="mtwist-calling-conventions-1"></a>
+<h3 class="subsection">D.12.1 <code>mtwist</code> calling conventions</h3>
 
 <p>All of the functions in this library simulate a random draw from a
 distribution. There is a choice of distribution statistics depending
 on the function used.
-
-     <dl>
-<dt><code>bern</code><dd>takes a floating point number <var>p</var> between 0 and 1, encoded as in
-<a href="math.html#math">math</a>, and returns a boolean value, either <code>(nil,nil)</code> for
+</p>
+<dl compact="compact">
+<dt> <code>bern</code></dt>
+<dd><p>takes a floating point number <var>p</var> between 0 and 1, encoded as in
+<a href="math.html#math"><code>math</code></a>, and returns a boolean value, either <code>(nil,nil)</code> for
 true or <code>nil</code> for false. A true value is returned only if a
 random draw from a uniform distribution ranging from 0 to 1 is less
 than <var>p</var>.  This function therefore simulates a draw from a
 Bernoulli distribution. A <code>nil</code> value of <var>p</var> is treated as
-1/2. 
-<br><dt><code>u_cont</code><dd>takes a floating point number <var>x</var> as an
+1/2.
+</p></dd>
+<dt> <code>u_cont</code></dt>
+<dd><p>takes a floating point number <var>x</var> as an
 argument, and returns a random draw from a continuous uniform
 distribution ranging from 0 to <var>x</var>. A <code>nil</code> value of <var>x</var>
-is treated as unity. 
-<br><dt><code>u_disc</code><dd>simulates a draw from a uniform discrete distribution whose domain
+is treated as unity.
+</p></dd>
+<dt> <code>u_disc</code></dt>
+<dd><p>simulates a draw from a uniform discrete distribution whose domain
 is the set of natural numbers from 0 to <var>n</var> - 1. The number <var>n</var>
 is given as a parameter to this function, and the retuned value
 is the draw.
-
-          <ul>
-<li>The returned value will have at most 64 bits regardless of <var>n</var>. 
-<li>Natural numbers are encoded as described in
-<a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>. 
-<li>If a value of 0 is passed for <var>n</var>, the full 64 bit range is
-used. 
-</ul>
-     <br><dt><code>u_path</code><dd>takes a pair of natural numbers <code>(</code><var>n</var><code>,</code><var>m</var><code>)</code> and returns a
+</p>
+<ul>
+<li>
+The returned value will have at most 64 bits regardless of <var>n</var>.
+</li><li>
+Natural numbers are encoded as described in
+<a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>.
+</li><li>
+If a value of 0 is passed for <var>n</var>, the full 64 bit range is
+used.
+</li></ul>
+</dd>
+<dt> <code>u_path</code></dt>
+<dd><p>takes a pair of natural numbers <code>(<var>n</var>,<var>m</var>)</code> and returns a
 randomly chosen tree (<a href="Raw-Material.html#Raw-Material">Raw Material</a>) with 1 leaf and <var>n</var>
 non-leaves each having either a left or a right descendent but not
 both. The number <var>m</var> constrains the result to fall within the
@@ -70,25 +108,56 @@ first <var>m</var> - 1 trees of this form enumerated by exhausting all
 possibilities at lower levels before admitting a right descendent at a
 higher level. Within these criteria, all possible results are equally
 probable. Both numbers are masked to 64 bits, but if <var>m</var> is zero,
-it is treated as 2^<var>n</var>. 
-<br><dt><code>u_enum</code><dd>simulates a random draw from a uniform discrete distribution whose
+it is treated as 2^<var>n</var>.
+</p></dd>
+<dt> <code>u_enum</code></dt>
+<dd><p>simulates a random draw from a uniform discrete distribution whose
 domain is enumerated. The argument to the function is a non-empty list,
 and the result is an item selected from the list, with all choices
-being equally probable. 
-<br><dt><code>w_disc</code><dd>simulates a random draw from a non-uniform, or &ldquo;weighted&rdquo; discrete
+being equally probable.
+</p></dd>
+<dt> <code>w_disc</code></dt>
+<dd><p>simulates a random draw from a non-uniform, or &ldquo;weighted&rdquo; discrete
 distribution whose domain is a set of consecutive natural numbers
 starting from zero. The argument to the function is a list giving the
 probability of each outcome starting from zero as a floating point
-number. Probabilities must be non-negative but needn't be normalized. 
-<br><dt><code>w_enum</code><dd>simulates a random draw from a non-uniform, or &ldquo;weighted&rdquo; discrete
+number. Probabilities must be non-negative but needn&rsquo;t be normalized.
+</p></dd>
+<dt> <code>w_enum</code></dt>
+<dd><p>simulates a random draw from a non-uniform, or &ldquo;weighted&rdquo; discrete
 distribution with an arbitrary domain enumerated in the argument. The
-argument is a list of pairs <code>&lt;(</code><var>x</var><code>,</code><var>p</var><code>)..&gt;</code>, where
+argument is a list of pairs <code>&lt;(<var>x</var>,<var>p</var>)..&gt;</code>, where
 <var>x</var> is a possible outcome and <var>p</var> is its probability. The
 result returned is one of the values of <var>x</var> from the input list
 chosen at random according to the associated
-probability. Probabilities must be non-negative but needn't be
-normalized. 
+probability. Probabilities must be non-negative but needn&rsquo;t be
+normalized.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mtwist.html#mtwist" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mtwist-exceptions.html#mtwist-exceptions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mtwist.html#mtwist" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

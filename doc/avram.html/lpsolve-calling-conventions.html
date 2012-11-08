@@ -1,76 +1,130 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>lpsolve calling conventions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="lpsolve.html#lpsolve" title="lpsolve">
-<link rel="prev" href="lpsolve.html#lpsolve" title="lpsolve">
-<link rel="next" href="lpsolve-return-values.html#lpsolve-return-values" title="lpsolve return values">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="lpsolve-calling-conventions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="lpsolve-return-values.html#lpsolve-return-values">lpsolve return values</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="lpsolve.html#lpsolve">lpsolve</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="lpsolve.html#lpsolve">lpsolve</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.15.1 lpsolve calling conventions</title>
 
-<h4 class="subsection">D.15.1 <code>lpsolve</code> calling conventions</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.15.1 lpsolve calling conventions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.15.1 lpsolve calling conventions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="lpsolve-calling-conventions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="lpsolve.html#lpsolve" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="lpsolve-return-values.html#lpsolve-return-values" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="lpsolve.html#lpsolve" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="lpsolve-calling-conventions-1"></a>
+<h3 class="subsection">D.15.1 <code>lpsolve</code> calling conventions</h3>
 
 <p>The library is able to solve linear and mixed integer programming
 problems, depending on which function is selected. The
-<a name="index-linear-programming-804"></a>function to call the linear programming solver is of the form
+<a name="index-linear-programming-2"></a>
+function to call the linear programming solver is of the form
+</p>
+<ul>
+<li> <code>library('lpsolve','stdform')</code>
+</li></ul>
 
-     <ul>
-<li><code>library('lpsolve','stdform')</code>
-</ul>
+<a name="index-mixed-integer-programming-1"></a>
+<p>and the mixed integer programming functions are of the form
+</p>
+<ul>
+<li> <code>library('lpsolve','iform')</code>
+</li><li> <code>library('lpsolve','bform')</code>
+</li><li> <code>library('lpsolve','biform')</code>
+</li></ul>
 
-<p class="noindent"><a name="index-mixed-integer-programming-805"></a>and the mixed integer programming functions are of the form
-
-     <ul>
-<li><code>library('lpsolve','iform')</code>
-<li><code>library('lpsolve','bform')</code>
-<li><code>library('lpsolve','biform')</code>
-</ul>
-
-<p class="noindent">The argument to the <code>stdform</code> function represents a triple
-<code>(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>))</code>, which has the same interpretation
-described in <a href="glpk-input-parameters.html#glpk-input-parameters">glpk input parameters</a>. The arguments to the <code>iform</code>,
+<p>The argument to the <code>stdform</code> function represents a triple
+<code>(<var>c</var>,(<var>m</var>,<var>y</var>))</code>, which has the same interpretation
+described in <a href="glpk-input-parameters.html#glpk-input-parameters"><code>glpk</code> input parameters</a>. The arguments to the <code>iform</code>,
 <code>bform</code>, and <code>biform</code> functions are tuples
-<code>(</code><var>i</var><code>,(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>)))</code>
-<code>(</code><var>b</var><code>,(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>)))</code>, and
-<code>((</code><var>b</var><code>,</code><var>i</var><code>),(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>)))</code>, respectively, where
+<code>(<var>i</var>,(<var>c</var>,(<var>m</var>,<var>y</var>)))</code>
+<code>(<var>b</var>,(<var>c</var>,(<var>m</var>,<var>y</var>)))</code>, and
+<code>((<var>b</var>,<var>i</var>),(<var>c</var>,(<var>m</var>,<var>y</var>)))</code>, respectively, where
 <var>c</var>, <var>m</var>, and <var>y</var> are as above, and
+</p>
+<ul>
+<li> <var>b</var> is a list of binary variable column indices
+</li><li> <var>i</var> is a list of integer variable column indices
+</li></ul>
 
-     <ul>
-<li><var>b</var> is a list of binary variable column indices
-<li><var>i</var> is a list of integer variable column indices
-</ul>
-
-<p class="noindent">where column indices pertain to the constraint matrix, and are
+<p>where column indices pertain to the constraint matrix, and are
 numbered from zero.  Specifying some or all variables as integers
 directs the solver to seek only solutions in which those variables
 have integer values, and specifying any as binary directs the solver
 to seek only solutions in which those variables have values of zero or
 one.  The IEEE floating point representation is used for all variables
-regardless (<a href="math.html#math">math</a>).
+regardless (<a href="math.html#math"><code>math</code></a>).
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="lpsolve.html#lpsolve" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="lpsolve-return-values.html#lpsolve-return-values" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="lpsolve.html#lpsolve" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

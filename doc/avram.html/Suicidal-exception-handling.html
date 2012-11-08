@@ -1,179 +1,238 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Suicidal exception handling - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Working around library misfeatures">
-<link rel="prev" href="Memory-leaks.html#Memory-leaks" title="Memory leaks">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Suicidal-exception-handling"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Memory-leaks.html#Memory-leaks">Memory leaks</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3.9.3.3 Suicidal exception handling</title>
 
-<h5 class="subsubsection">3.9.3.3 Suicidal exception handling</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 3.9.3.3 Suicidal exception handling">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.9.3.3 Suicidal exception handling">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Suicidal-exception-handling"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Memory-leaks.html#Memory-leaks" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Suicidal-exception-handling-1"></a>
+<h4 class="subsubsection">3.9.3.3 Suicidal exception handling</h4>
 
 <p>An inconvenient characteristic of some external library functions is
 to terminate the program rather than returning an error status to the
-caller for routine events such as a failure of memory allocation. 
+caller for routine events such as a failure of memory allocation.
 Although in many cases there is no simple workaround for this
 behavior, memory allocation failures at least can be detected and
 preventive action taken by using the functions described in this
 section.
-
-   <p>The general approach is to use memory management functions from
-<samp><span class="file">mwrap.h</span></samp> as described previously (<a href="Memory-leaks.html#Memory-leaks">Memory leaks</a>), while
+</p>
+<p>The general approach is to use memory management functions from
+&lsquo;<tt>mwrap.h</tt>&rsquo; as described previously (<a href="Memory-leaks.html#Memory-leaks">Memory leaks</a>), while
 additionally registering a return destination for a non-local jump to
-<a name="index-non_002dlocal-jumps-691"></a>be taken in the event of a memory overflow. The jump is taken when an
+<a name="index-non_002dlocal-jumps"></a>
+be taken in the event of a memory overflow. The jump is taken when an
 external library function calls <code>malloc</code> or <code>realloc</code>
 unsuccessfully.  The jump avoids passing control back to the library
 function, thereby denying it the opportunity to abort, but restores
 the context to that of the jump destination almost as if the library
 function and all of its intervening callers had returned normally.
-
-   <p>The interface is similar to that of the standard <code>setjmp</code>
-<a name="index-setjmp-692"></a>function defined in the system header file <code>setjmp.h</code>, and in
+</p>
+<p>The interface is similar to that of the standard <code>setjmp</code>
+<a name="index-setjmp"></a>
+function defined in the system header file <code>setjmp.h</code>, and in
 fact is built on it, but differs in that the client module does not
 explicitly refer to jump buffers. Instead, the <code>mwrap</code> module
 internally maintains a stack of return destinations.
-
-   <p>If a jump is taken, it always goes to the most recently registered
+</p>
+<p>If a jump is taken, it always goes to the most recently registered
 destination. It may revert to the previously registered destination
 only when the current one is cleared. This organization provides the
 necessary flexibility for multiple clients and recursion, but it
 necessitates a protocol whereby each registration of a destination
 must be explicitly cleared exactly once.
-
-   <p>The following functions implement these two features.
-
-<div class="defun">
-&mdash; Function: int <b>avm_setjmp</b> ()<var><a name="index-avm_005fsetjmp-693"></a></var><br>
-<blockquote><p>This function specifies the point to which control will pass by a
+</p>
+<p>The following functions implement these two features.
+</p>
+<dl>
+<dt><a name="index-avm_005fsetjmp"></a><u>Function:</u> int <b>avm_setjmp</b><i> ()</i></dt>
+<dd><p>This function specifies the point to which control will pass by a
 non-local jump if there is insufficient memory to complete a
 subsequent <code>malloc</code> or <code>realloc</code> operation. Only the
 operations that take place while memory is being managed due to
 <code>avm_manage_memory</code> are affected (<a href="Memory-leaks.html#Memory-leaks">Memory leaks</a>).
-
-        <p>The function returns zero when it is called normally and successfully
+</p>
+<p>The function returns zero when it is called normally and successfully
 registers the return point.
-
-        <p>It returns a non-zero value when it has been entered by a non-local
+</p>
+<p>It returns a non-zero value when it has been entered by a non-local
 jump (i.e., when <code>malloc</code> or <code>realloc</code> has reported
 insufficient memory while memory management is active), or when the
 return point could not be successfully registered due to insufficient
 memory. The client need not distinguish between these two cases,
 because both correspond to memory overflows and the destination must
 be cleared by <code>avm_clearjmp</code> regardless.
-
-        <p>When a non-zero value is returned due to this function being reached
+</p>
+<p>When a non-zero value is returned due to this function being reached
 by a non-local jump, it has the side effects of reclaiming all managed
 memory by calling <code>avm_free_managed_memory</code> and disabling memory
-management by calling <code>avm_dont_manage_memory</code>. 
-</p></blockquote></div>
+management by calling <code>avm_dont_manage_memory</code>.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_clearjmp</b> ()<var><a name="index-avm_005fclearjmp-694"></a></var><br>
-<blockquote><p>This function cancels the effect of <code>avm_setjmp ()</code> by preventing
+<dl>
+<dt><a name="index-avm_005fclearjmp"></a><u>Function:</u> void <b>avm_clearjmp</b><i> ()</i></dt>
+<dd><p>This function cancels the effect of <code>avm_setjmp ()</code> by preventing
 further non-local jumps to its destination if the destination was
 successfully registered, or by acknowledging unsuccessful registration
 otherwise. It should be called before exiting any function that calls
-<code>avm_setjmp ()</code> or anomalous results may ensue. 
-</p></blockquote></div>
+<code>avm_setjmp ()</code> or anomalous results may ensue.
+</p></dd></dl>
 
-   <p>The memory management functions <code>avm_manage_memory</code> and
+<p>The memory management functions <code>avm_manage_memory</code> and
 <code>avm_dont_manage_memory</code> can be useful with or without
 <code>avm_setjmp</code>, depending on how much of a workaround is needed for
 a given library. If a library does not abort on memory overflows,
 there is no need to use <code>avm_setjmp</code>, while it may still be
 appropriate to use the other functions against memory leaks.
-
-   <p>Calling <code>avm_clearjmp</code> is particularly important if a client
-module with memory management that doesn't use <code>avm_setjmp</code> is
+</p>
+<p>Calling <code>avm_clearjmp</code> is particularly important if a client
+module with memory management that doesn&rsquo;t use <code>avm_setjmp</code> is
 invoked subsequently to one that does, so that memory overflows in the
-latter won't cause an attempted jump to a stale destination.
-
-   <p>A further complication that arises from careful consideration of these
+latter won&rsquo;t cause an attempted jump to a stale destination.
+</p>
+<p>A further complication that arises from careful consideration of these
 issues is the situation of a client module that does not intend to use
 <code>avm_setjmp</code> but is called (perhaps indirectly) by one that
 does. The latter will have registered a return destination that
 remains active and valid even if the former refrains from doing so,
-thereby allowing a branch to be taken that should have been prevented. 
+thereby allowing a branch to be taken that should have been prevented.
 Although it is an unusual situation, it can be accommodated by the
 following function.
-
-<div class="defun">
-&mdash; Function: void <b>avm_setnonjump</b> ()<var><a name="index-avm_005fsetnonjump-695"></a></var><br>
-<blockquote><p>This function temporarily inhibits non-local jumps to destinations
+</p>
+<dl>
+<dt><a name="index-avm_005fsetnonjump"></a><u>Function:</u> void <b>avm_setnonjump</b><i> ()</i></dt>
+<dd><p>This function temporarily inhibits non-local jumps to destinations
 previously registered by <code>avm_setjmp</code> until the next time
 <code>avm_clearjmp</code> is called. Thereafter, any previously registered
-destinations are reinstated. 
-</p></blockquote></div>
+destinations are reinstated.
+</p></dd></dl>
 
-   <p>A sketch of how some of these functions might be used to cope with
+<p>A sketch of how some of these functions might be used to cope with
 library functions that would otherwise terminate the program in the
 event of a memory overflow is shown below. The GNU <code>libc</code>
-<a name="index-non_002dlocal-jumps-696"></a>reference manual contains a related discussion of non-local jumps.
+<a name="index-non_002dlocal-jumps-1"></a>
+reference manual contains a related discussion of non-local jumps.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#include &lt;avm/mwrap.h&gt;
+...
 
-<pre class="example">     #include &lt;avm/mwrap.h&gt;
-     ...
-     
-     int
-     function foobar (foo, bar)
-     ...
-     {
-     char *my_data;
-     
-       my_data = (char *) malloc (100);
-       if (avm_setjmp () != 0)
-         {
-           avm_clearjmp ();
-           avm_turn_on_stdout ();       /* reaching here */
-           free (my_data);              /* means malloc  */
-           return ABNORMAL_STATUS;      /* failed below  */
-         }
-       avm_turn_off_stdout ();
-       avm_manage_memory ();
-       ...
-       call_library_functions (foo, bar);    /* may jump */
-       ...                                   /* to above */
-       avm_free_managed_memory ();
-       avm_turn_on_stdout ();
-       avm_clearjmp ();
-       free (my_data);            /* reaching here means */
-       return OK_STATUS;          /* jumping wasn't done */
-     }
-</pre>
-   <p>Portability issues with these functions are not well known at this
-<a name="index-portability-697"></a>writing. If the configuration script for <code>avram</code> fails to detect
+int
+function foobar (foo, bar)
+...
+{
+char *my_data;
+
+  my_data = (char *) malloc (100);
+  if (avm_setjmp () != 0)
+    {
+      avm_clearjmp ();
+      avm_turn_on_stdout ();       /* reaching here */
+      free (my_data);              /* means malloc  */
+      return ABNORMAL_STATUS;      /* failed below  */
+    }
+  avm_turn_off_stdout ();
+  avm_manage_memory ();
+  ...
+  call_library_functions (foo, bar);    /* may jump */
+  ...                                   /* to above */
+  avm_free_managed_memory ();
+  avm_turn_on_stdout ();
+  avm_clearjmp ();
+  free (my_data);            /* reaching here means */
+  return OK_STATUS;          /* jumping wasn't done */
+}
+</pre></td></tr></table>
+
+<p>Portability issues with these functions are not well known at this
+<a name="index-portability-1"></a>
+writing. If the configuration script for <code>avram</code> fails to detect
 the required features in <code>setjmp.h</code> on the host system,
 conditional compilation directives will disable the functions
-<code>avm_setjmp</code>, <code>avm_clearjmp</code>, and <code>avm_setnonjmp</code>. 
+<code>avm_setjmp</code>, <code>avm_clearjmp</code>, and <code>avm_setnonjmp</code>.
 However, it may still be possible for the other <code>avm_</code>* memory
 management functions to be configured.
-
-   <p>If <code>setjmp</code> is not configured, the <code>avm_setjmp</code> function
+</p>
+<p>If <code>setjmp</code> is not configured, the <code>avm_setjmp</code> function
 is still callable but will always return a value of zero, and will
 provide no protection against external library functions aborting the
 program. The other two will perform no operation and return.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Memory-leaks.html#Memory-leaks" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

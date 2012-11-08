@@ -1,138 +1,189 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>List Transformations - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Lists.html#Lists" title="Lists">
-<link rel="prev" href="Recoverable-Operations.html#Recoverable-Operations" title="Recoverable Operations">
-<link rel="next" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.1.3 List Transformations</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.1.3 List Transformations">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.1.3 List Transformations">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="List-Transformations"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Recoverable-Operations.html#Recoverable-Operations">Recoverable Operations</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Lists.html#Lists">Lists</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Recoverable-Operations.html#Recoverable-Operations" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Lists.html#Lists" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="List-Transformations-1"></a>
+<h3 class="subsection">3.1.3 List Transformations</h3>
 
-<h4 class="subsection">3.1.3 List Transformations</h4>
-
-<p>Some functions declared in <samp><span class="file">listfuns.h</span></samp> are used to implement the
+<p>Some functions declared in &lsquo;<tt>listfuns.h</tt>&rsquo; are used to implement the
 operations described in <a href="List-Functions.html#List-Functions">List Functions</a>. These functions are able
 to report error messages in the event of overflow or other exceptional
-<a name="index-overflow-423"></a><a name="index-exceptions-424"></a><a name="index-error-messages-425"></a>conditions, as described in <a href="Error-Messages.html#Error-Messages">Error Messages</a>. The error messages are
+<a name="index-overflow-3"></a>
+<a name="index-exceptions-4"></a>
+<a name="index-error-messages-2"></a>
+conditions, as described in <a href="Error-Messages.html#Error-Messages">Error Messages</a>. The error messages are
 represented as lists and returned to the caller. The occurrence of an
-error can be detected by the <code>*</code><var>fault</var> flag being set to a
+error can be detected by the <code>*<var>fault</var></code> flag being set to a
 non-zero value. None of these functions ever causes a program exit except
 in the event of an internal error.
-
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_listfuns</b> ()<var><a name="index-avm_005finitialize_005flistfuns-426"></a></var><br>
-<blockquote><p>This has to be called before any of the other functions in this section
-is called. It initializes the error message lists, among other things. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_listfuns</b> ()<var><a name="index-avm_005fcount_005flistfuns-427"></a></var><br>
-<blockquote><p>At the end of a run, a call to this function can verify that no
+</p>
+<dl>
+<dt><a name="index-avm_005finitialize_005flistfuns"></a><u>Function:</u> void <b>avm_initialize_listfuns</b><i> ()</i></dt>
+<dd><p>This has to be called before any of the other functions in this section
+is called. It initializes the error message lists, among other things.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005flistfuns"></a><u>Function:</u> void <b>avm_count_listfuns</b><i> ()</i></dt>
+<dd><p>At the end of a run, a call to this function can verify that no
 unreclaimed storage attributable to these functions persists. If it
 does, a warning is printed to standard error. If <code>avm_count_lists</code>
-is also used, it must be called after this function. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_reversal</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005freversal-428"></a></var><br>
-<blockquote><p>The reversal of the list is returned by this function if no overflow
-occurs. A non-zero <code>*</code><var>fault</var> and an error message are returned
-otherwise. The original <var>operand</var> still exists in its original
+is also used, it must be called after this function.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005freversal"></a><u>Function:</u> list <b>avm_reversal</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><p>The reversal of the list is returned by this function if no overflow
+occurs. A non-zero <code>*<var>fault</var></code> and an error message are returned
+otherwise. The original <code><var>operand</var></code> still exists in its original
 order after this function is called. The amount of additional storage
 allocated is proportional only to the length of the list, not the size
-of its contents. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_distribution</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005fdistribution-429"></a></var><br>
-<blockquote><p>This function performs the operation described in <a href="Distribute.html#Distribute">Distribute</a>. The
+of its contents.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fdistribution"></a><u>Function:</u> list <b>avm_distribution</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function performs the operation described in <a href="Distribute.html#Distribute">Distribute</a>. The
 invalid distribution message is returned in the event of a <code>NULL</code>
 operand. Otherwise, the returned value is the distributed list. In any event,
-the <var>operand</var> is unaffected. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_concatenation</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005fconcatenation-430"></a></var><br>
-<blockquote><p><a name="index-concatenation-431"></a>The <var>operand</var> is treated as a pair of lists to be concatenated, with the
+the <code><var>operand</var></code> is unaffected.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fconcatenation"></a><u>Function:</u> list <b>avm_concatenation</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><a name="index-concatenation-2"></a>
+<p>The <code><var>operand</var></code> is treated as a pair of lists to be concatenated, with the
 left one in the <code>head</code> field and the right one in the <code>tail</code>
 field. The invalid concatenation message is returned in the event of a
-<code>NULL</code> <var>operand</var>. The result returned otherwise is the concatenation
-of the lists, but the given <var>operand</var> still exists unchanged. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_transposition</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005ftransposition-432"></a></var><br>
-<blockquote><p>The operation performed by this function corresponds to that of
+<code>NULL</code> <code><var>operand</var></code>. The result returned otherwise is the concatenation
+of the lists, but the given <code><var>operand</var></code> still exists unchanged.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005ftransposition"></a><u>Function:</u> list <b>avm_transposition</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><p>The operation performed by this function corresponds to that of
 <a href="Transpose.html#Transpose">Transpose</a>. Unlike other functions in this section, the operand
 passed to this function is deallocated, and must not be referenced
-<a name="index-g_t_0040code_007btranspose_007d-433"></a>thereafter. The transposed list is accessible as the returned value of
-this function. If the original <var>operand</var> is still needed
+<a name="index-transpose-2"></a>
+thereafter. The transposed list is accessible as the returned value of
+this function. If the original <code><var>operand</var></code> is still needed
 after a call to <code>avm_transposition</code>, only a copy of it should be
 passed to it, obtained from <code>avm_copied</code>. The invalid transpose
 error message is the result if the operand does not represent a list of equal
-length lists. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_membership</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005fmembership-434"></a></var><br>
-<blockquote><p>This function computes the membership predicate described in
-<a name="index-g_t_0040code_007bmember_007d-435"></a><a href="Member.html#Member">Member</a>. The operand is a list in which the <code>tail</code> field is
+length lists.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fmembership"></a><u>Function:</u> list <b>avm_membership</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function computes the membership predicate described in
+<a name="index-member-1"></a>
+<a href="Member.html#Member">Member</a>. The operand is a list in which the <code>tail</code> field is
 a list that will be searched for the item in the <code>head</code>. If the
 item is not found, a <code>NULL</code> list is returned, but otherwise a list
 with <code>NULL</code> <code>head</code> and <code>tail</code> fields is returned. If the
 operand is <code>NULL</code>, an error message of invalid membership is
-returned and <code>*</code><var>fault</var> is set to a non-zero value.
-
-        <p>The <code>avm_membership</code> function calls <code>avm_binary_comparison</code>
+returned and <code>*<var>fault</var></code> is set to a non-zero value.
+</p>
+<p>The <code>avm_membership</code> function calls <code>avm_binary_comparison</code>
 in order to compare lists, so the same efficiency and side-effect
 considerations are relevant to both (<a href="Comparison.html#Comparison">Comparison</a>). It is not
 necessary to <code>#include</code> the header file <code>compare.h</code> or to
 call <code>avm_initialize_compare</code> in order to use
-<code>avm_membership</code>, because they will be done automatically. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_binary_membership</b> (<var>list operand, list members, int *fault</var>)<var>;<a name="index-avm_005fbinary_005fmembership-436"></a></var><br>
-<blockquote><p>This function is the same as <code>avm_membership</code> except that it
+<code>avm_membership</code>, because they will be done automatically.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fbinary_005fmembership"></a><u>Function:</u> list <b>avm_binary_membership</b><i> (list <var>operand</var>, list <var>members</var>, int *<var>fault</var>);</i></dt>
+<dd><p>This function is the same as <code>avm_membership</code> except that it
 allows the element and the set of members to be passed as separate
-lists instead of being the head and the tail of the same list. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_measurement</b> (<var>list operand, int *fault</var>)<var><a name="index-avm_005fmeasurement-437"></a></var><br>
-<blockquote><p>This function implements the operation described in <a href="Weight.html#Weight">Weight</a>, which
+lists instead of being the head and the tail of the same list.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fmeasurement"></a><u>Function:</u> list <b>avm_measurement</b><i> (list <var>operand</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function implements the operation described in <a href="Weight.html#Weight">Weight</a>, which
 pertains to the weight of a tree. The returned value of this function is
 a list encoding the weight as a binary number, unless a counter overflow
-occurs, in which case it's an error message. As noted previously, the
+occurs, in which case it&rsquo;s an error message. As noted previously, the
 weight of a tree can easily be exponentially larger than the amount of
-<a name="index-native-integer-arithmetic-438"></a>memory it occupies, but this function uses native integer arithmetic for
+<a name="index-native-integer-arithmetic-1"></a>
+memory it occupies, but this function uses native integer arithmetic for
 performance reasons. Hence, a counter overflow is a real
-possibility. 
-</p></blockquote></div>
+possibility.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Recoverable-Operations.html#Recoverable-Operations" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Lists.html#Lists" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

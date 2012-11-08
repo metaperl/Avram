@@ -1,111 +1,164 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Bessel function calling conventions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="bes.html#bes" title="bes">
-<link rel="prev" href="bes.html#bes" title="bes">
-<link rel="next" href="Bessel-function-errors.html#Bessel-function-errors" title="Bessel function errors">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: D.1.1 Bessel function calling conventions</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: D.1.1 Bessel function calling conventions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.1.1 Bessel function calling conventions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Bessel-function-calling-conventions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Bessel-function-errors.html#Bessel-function-errors">Bessel function errors</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="bes.html#bes">bes</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="bes.html#bes">bes</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="bes.html#bes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Bessel-function-errors.html#Bessel-function-errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="bes.html#bes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Bessel-function-calling-conventions-1"></a>
+<h3 class="subsection">D.1.1 Bessel function calling conventions</h3>
 
-<h4 class="subsection">D.1.1 Bessel function calling conventions</h4>
-
-<p><a name="index-bessel-functions-709"></a>The virtual code interface simplifies the gsl C language API by
+<a name="index-bessel-functions"></a>
+<p>The virtual code interface simplifies the gsl C language API by
 excluding the facilities for error estimates, omitting certain array
 valued functions, and subsuming sets of related functions
 within common ones where possible.
-
-   <p>The functions with names in the following group take an argument of
+</p>
+<p>The functions with names in the following group take an argument of
 the form <code>(n,x)</code>, where <code>n</code> identifies the member of the
 function family, and <code>x</code> is the argument to the function.
-
-     <ul>
-<li><code>J</code>
+</p>
+<ul>
+<li> <code>J</code>
 regular cylindrical Bessel functions
-<li><code>Y</code>
+</li><li> <code>Y</code>
 irregular cylindrical Bessel functions
-<li><code>I</code>
+</li><li> <code>I</code>
 regular modified cylindrical Bessel functions
-<li><code>K</code>
+</li><li> <code>K</code>
 irregular modified cylindrical Bessel functions
-</ul>
+</li></ul>
 
-   <p>For these functions, <code>n</code> can be either a natural number encoded
+<p>For these functions, <code>n</code> can be either a natural number encoded
 as in <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>, or a floating
-point number encoded as in <a href="math.html#math">math</a>. The latter case specifies
+point number encoded as in <a href="math.html#math"><code>math</code></a>. The latter case specifies
 functions of a fractional order. The relevant gsl function is called
 based on the value and type of the parameter.
-
-   <p>Two further related families of functions follow the same calling
+</p>
+<p>Two further related families of functions follow the same calling
 convention.
-
-     <ul>
-<li><code>Isc</code>
+</p>
+<ul>
+<li> <code>Isc</code>
 scaled regular modified cylindrical Bessel functions
-<li><code>Ksc</code>
+</li><li> <code>Ksc</code>
 scaled irregular modified cylindrical Bessel functions
-</ul>
+</li></ul>
 
-<p class="noindent">The foregoing functions are related to those above by an exponential scale
+<p>The foregoing functions are related to those above by an exponential scale
 factor as documented in the gsl reference manual.
-
-   <p>Functions with names in the following group also take an argument of
+</p>
+<p>Functions with names in the following group also take an argument of
 the form <code>(n,x)</code>, but are not defined for fractional orders and
 so require a natural number for <code>n</code>.
-
-     <ul>
-<li><code>j</code>
+</p>
+<ul>
+<li> <code>j</code>
 regular spherical Bessel functions
-<li><code>y</code>
+</li><li> <code>y</code>
 irregular spherical Bessel functions
-<li><code>isc</code>
+</li><li> <code>isc</code>
 regular modified spherical Bessel functions
-<li><code>ksc</code>
+</li><li> <code>ksc</code>
 irregular modified spherical Bessel functions
-</ul>
+</li></ul>
 
-   <p>The functions in the remaining group follow idiosyncratic calling
+<p>The functions in the remaining group follow idiosyncratic calling
 conventions.
-
-     <ul>
-<li><code>zJ0</code>, <code>zJ1</code>
+</p>
+<ul>
+<li> <code>zJ0</code>, <code>zJ1</code>
 These take a natural number <code>n</code> and return the <code>n</code>th root of
 the regular cylindrical Bessel functions of order 0 or 1,
-respectively. 
-<li><code>zJnu</code>
+respectively.
+</li><li> <code>zJnu</code>
 This takes a pair <code>(nu,n)</code> where <code>nu</code> is the (fractional)
 order of a regular cylindrical Bessel function, <code>n</code> is a natural
-number. It returns the <code>n</code>th zero of the function. 
-<li><code>lnKnu</code>
+number. It returns the <code>n</code>th zero of the function.
+</li><li> <code>lnKnu</code>
 This takes a pair of floating point numbers <code>(nu,x)</code> where
 <code>nu</code> is the (fractional) order of an irregular modified
 cylindrical Bessel and <code>x</code> is the argument to the function,
-and it returns the natural log of the function. 
-</ul>
+and it returns the natural log of the function.
+</li></ul>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="bes.html#bes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Bessel-function-errors.html#Bessel-function-errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="bes.html#bes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

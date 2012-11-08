@@ -1,56 +1,95 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Syntax - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="A Simple Lisp Like Language">
-<link rel="prev" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="A Simple Lisp Like Language">
-<link rel="next" href="Semantics.html#Semantics" title="Semantics">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Syntax"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Semantics.html#Semantics">Semantics</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.4.1 Syntax</title>
 
-<h5 class="subsubsection">2.7.4.1 Syntax</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.4.1 Syntax">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.4.1 Syntax">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Syntax"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Semantics.html#Semantics" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Syntax-1"></a>
+<h4 class="subsubsection">2.7.4.1 Syntax</h4>
 
 <p><code>silly</code> has no reserved words, but it has equals signs, commas and
 parentheses built in. A concise but ambiguous grammar for it can be given
-as follows. 
-<a name="index-syntax-253"></a><a name="index-grammar-254"></a>
-<pre class="display">     
-     <var>program</var> ::= <var>declaration</var>*
-     
-     <var>declaration</var> ::= <var>identifier</var> <code>=</code> <var>expression</var>
-     
-</pre>
-   <p class="noindent"><a name="index-precedence-255"></a><a name="index-operator-precedence-256"></a>The real grammar is consistent with this one but enforces right
+as follows.
+<a name="index-syntax"></a>
+<a name="index-grammar"></a>
+</p><table><tr><td>&nbsp;</td><td><pre class="display">
+<var>program</var> ::= <var>declaration</var>*
+
+<var>declaration</var> ::= <var>identifier</var> <code>=</code> <var>expression</var>
+
+</pre></td></tr></table>
+<a name="index-precedence"></a>
+<a name="index-operator-precedence"></a>
+<p>The real grammar is consistent with this one but enforces right
 associativity for binary operations and higher precedence for juxtaposition
 without intervening white space.
-
-   <p>The declaration of any identifier must be unique and must precede its
+</p>
+<p>The declaration of any identifier must be unique and must precede its
 occurrence in any expression. Hence, cyclic dependences between
 declarations and &ldquo;recursive&rdquo; declarations are not allowed.
+</p>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

@@ -1,37 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Virtual Machine Specification - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="prev" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="next" href="Library-Reference.html#Library-Reference" title="Library Reference">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Virtual-Machine-Specification"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Library-Reference.html#Library-Reference">Library Reference</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="User-Manual.html#User-Manual">User Manual</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2. Virtual Machine Specification</title>
 
-<h2 class="chapter">2 Virtual Machine Specification</h2>
+<meta name="description" content="avram - a virtual machine code interpreter: 2. Virtual Machine Specification">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2. Virtual Machine Specification">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Virtual-Machine-Specification"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Bugs.html#Bugs" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Raw-Material.html#Raw-Material" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Virtual-Machine-Specification-1"></a>
+<h1 class="chapter">2. Virtual Machine Specification</h1>
 
 <p>This chapter contains a description of the virtual machine implemented
 by <code>avram</code>, from the point of view of a person wishing to write a
@@ -41,16 +70,31 @@ picture. Topics covered in this chapter include data representations,
 virtual code semantics, and file formats. A toy programming language is
 introduced for illustrative purposes. The sections in this chapter might
 not make sense if read out of order the first time through.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="Raw-Material.html#Raw-Material">2.1 Raw Material</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                
+</td></tr>
+<tr><td align="left" valign="top"><a href="Concrete-Syntax.html#Concrete-Syntax">2.2 Concrete Syntax</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="File-Format.html#File-Format">2.3 File Format</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 
+</td></tr>
+<tr><td align="left" valign="top"><a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">2.4 Representation of Numeric and Textual Data</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Filter-Mode-Interface.html#Filter-Mode-Interface">2.5 Filter Mode Interface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       
+</td></tr>
+<tr><td align="left" valign="top"><a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">2.6 Parameter Mode Interface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    
+</td></tr>
+<tr><td align="left" valign="top"><a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">2.7 Virtual Code Semantics</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="Raw-Material.html#Raw-Material">Raw Material</a>
-<li><a accesskey="2" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>
-<li><a accesskey="3" href="File-Format.html#File-Format">File Format</a>
-<li><a accesskey="4" href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>
-<li><a accesskey="5" href="Filter-Mode-Interface.html#Filter-Mode-Interface">Filter Mode Interface</a>
-<li><a accesskey="6" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>
-<li><a accesskey="7" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
-</ul>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

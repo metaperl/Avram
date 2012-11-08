@@ -1,117 +1,184 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Operator Generalization - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
-<link rel="prev" href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets" title="A Hierarchy of Sets">
-<link rel="next" href="Error-Messages.html#Error-Messages" title="Error Messages">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Operator-Generalization"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Error-Messages.html#Error-Messages">Error Messages</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets">A Hierarchy of Sets</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.15.2 Operator Generalization</title>
 
-<h5 class="subsubsection">2.7.15.2 Operator Generalization</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.15.2 Operator Generalization">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.15.2 Operator Generalization">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Operator-Generalization"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Error-Messages.html#Error-Messages" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handling.html#Exception-Handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Operator-Generalization-1"></a>
+<h4 class="subsubsection">2.7.15.2 Operator Generalization</h4>
 
 <p>Each set in the hierarchy induces a structure preserving <code>cons</code>
-<a name="index-g_t_0040code_007bcons_007d-351"></a>operator, denoted <code>cons_</code><var>n</var> for the <var>n</var>th level
+<a name="index-cons-2"></a>
+operator, denoted <code>cons_<var>n</var></code> for the <code><var>n</var></code>th level
 set, and satisfying this equation.
-
-     <dl>
-<dt><em>E10</em><dd><code>cons_</code><var>n</var><code>(</code><var>x</var><code>_</code><var>n</var><code>,</code><var>y</var><code>_</code><var>n</var><code>)</code> =
-<code>(cons(</code><var>x</var><code>,</code><var>y</var><code>))_</code><var>n</var>
+</p>
+<dl compact="compact">
+<dt> <em>E10</em></dt>
+<dd><p><code>cons_<var>n</var>(<var>x</var>_<var>n</var>,<var>y</var>_<var>n</var>)</code> =
+<code>(cons(<var>x</var>,<var>y</var>))_<var>n</var></code>
+</p></dd>
 </dl>
 
-<p class="noindent">It will be convenient to generalize all of these <code>cons</code> operators to be
+<p>It will be convenient to generalize all of these <code>cons</code> operators to be
 defined on members of other sets than their own.
-
-     <dl>
-<dt><em>E11</em><dd>For <var>m</var> greater than <var>n</var>,
-&nbsp;<!-- /@w --> &nbsp;<!-- /@w --> &nbsp;<!-- /@w --> <code>cons_</code><var>n</var><code>(</code><var>x</var><code>_</code><var>m</var><code>,</code><var>y</var><code>_</code><var>p</var><code>)</code> =
-<var>x</var><code>_</code><var>m</var>
+</p>
+<dl compact="compact">
+<dt> <em>E11</em></dt>
+<dd><p>For <code><var>m</var></code> greater than <code><var>n</var></code>,
+      <code>cons_<var>n</var>(<var>x</var>_<var>m</var>,<var>y</var>_<var>p</var>)</code> =
+<code><var>x</var>_<var>m</var></code>
+</p></dd>
 </dl>
 
-<p class="noindent">In this equation, <var>p</var> is unrestricted. The intuition is that
+<p>In this equation, <code><var>p</var></code> is unrestricted. The intuition is that
 if the left operand of a <code>cons</code> is the result of a computation that
 went wrong due to an exceptional condition (more exceptional than
-<var>n</var>, the level already in effect), then the exceptional
+<code><var>n</var></code>, the level already in effect), then the exceptional
 result becomes the whole result.
-
-   <p>It is tempting to hazard a slightly stronger statement, which is that
-this equation holds even if <var>y</var><code>_</code><var>p</var> is equal to some
-expression <var>f</var> <var>x</var> that is undefined according to the
+</p>
+<p>It is tempting to hazard a slightly stronger statement, which is that
+this equation holds even if <code><var>y</var>_<var>p</var></code> is equal to some
+expression <code><var>f</var> <var>x</var></code> that is undefined according to the
 operator semantics. This stipulation would correspond to an
-implementation in which the right operand isn't evaluated after an error
+implementation in which the right operand isn&rsquo;t evaluated after an error
 is detected in the left, but there are two problems with it.
-
-     <ul>
-<li>This semantics might unreasonably complicate a concurrent
+</p>
+<ul>
+<li> This semantics might unreasonably complicate a concurrent
 implementation of the virtual machine. If evaluation leads to
 non-termination in some cases where the result is undefined (as it certainly
-would in any possible implementation consistent with cases where it's
+would in any possible implementation consistent with cases where it&rsquo;s
 defined), then the mechanism that evaluates the right side of a pair
-must be interruptible in case an exception is detected in the left. 
-<li>It is beyond the expressive power of the present mathematical
+must be interruptible in case an exception is detected in the left.
+</li><li> It is beyond the expressive power of the present mathematical
 framework to make such a statement, because it entails universal
 quantification over non-members of the constructed sets, which includes
-<a name="index-universal-quantification-352"></a>almost everything. 
-</ul>
+<a name="index-universal-quantification-2"></a>
+almost everything.
+</li></ul>
 
-<p class="noindent">Nevertheless, the implementation in <code>avram</code> is sequential and does
+<p>Nevertheless, the implementation in <code>avram</code> is sequential and does
 indeed behave as proposed, with no practical difficulty. As for any
 deficiency in the theory, it could be banished by recasting the
 semantics in terms of a calculus of expressions with formal rules of
 manipulation. An operand to the <code>cons</code> operator would be identified
 not with a member of a semantic domain, but with the expression used to
 write it down, and then even &ldquo;undefinedness&rdquo; could be
-<a name="index-undefined-expressions-353"></a>defined. However, the present author's preference in computing as in
-<a name="index-author-354"></a>life is to let some things remain a mystery rather than to abandon the
+<a name="index-undefined-expressions-1"></a>
+defined. However, the present author&rsquo;s preference in computing as in
+<a name="index-author-2"></a>
+life is to let some things remain a mystery rather than to abandon the
 quest for meaning entirely.
-
-   <p>A comparable condition applies in cases where the right side of a pair
+</p>
+<p>A comparable condition applies in cases where the right side of a pair
 represents an exceptional result.
-
-     <dl>
-<dt><em>E12</em><dd>For <var>m</var> greater than <var>n</var>,
-&nbsp;<!-- /@w --> &nbsp;<!-- /@w --> <code>cons_</code><var>n</var><code>(</code><var>x</var><code>_</code><var>n</var><code>,</code><var>y</var><code>_</code><var>m</var><code>)</code> =
-<var>y</var><code>_</code><var>m</var>
+</p>
+<dl compact="compact">
+<dt> <em>E12</em></dt>
+<dd><p>For <code><var>m</var></code> greater than <code><var>n</var></code>,
+    <code>cons_<var>n</var>(<var>x</var>_<var>n</var>,<var>y</var>_<var>m</var>)</code> =
+<code><var>y</var>_<var>m</var></code>
+</p></dd>
 </dl>
 
-   <p>Whereas an infinitude of <code>cons</code> operators has been needed, it will
-<a name="index-g_t_0040code_007bcons_007d-355"></a>be possible to get by with only one invisible operator, as before, by
+<p>Whereas an infinitude of <code>cons</code> operators has been needed, it will
+<a name="index-cons-3"></a>
+be possible to get by with only one invisible operator, as before, by
 generalizing it in the following way to operands on any level of the
 hierarchy.
-
-     <dl>
-<dt><em>P43</em><dd><var>f</var><code>_</code><var>n</var> <var>x</var><code>_</code><var>n</var> = <code>(</code><var>f</var> <var>x</var><code>)_</code><var>n</var>
-<br><dt><em>P44</em><dd>For distinct <var>n</var> and <var>m</var>, &nbsp;<!-- /@w --><var>f</var><code>_</code><var>n</var> <var>x</var><code>_</code><var>m</var> = <var>x</var><code>_</code><var>m</var>
+</p>
+<dl compact="compact">
+<dt> <em>P43</em></dt>
+<dd><p><code><var>f</var>_<var>n</var> <var>x</var>_<var>n</var></code> = <code>(<var>f</var> <var>x</var>)_<var>n</var></code>
+</p></dd>
+<dt> <em>P44</em></dt>
+<dd><p>For distinct <code><var>n</var></code> and <code><var>m</var></code>,  <code><var>f</var>_<var>n</var> <var>x</var>_<var>m</var></code> = <code><var>x</var>_<var>m</var></code>
+</p></dd>
 </dl>
 
-<p class="noindent">That is, the result of evaluating two operands on the same level is the
+<p>That is, the result of evaluating two operands on the same level is the
 image relative to that level of the result of their respective images on
 the bottom level, but the result of evaluating two operands on different
 levels is the same as the right operand.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Error-Messages.html#Error-Messages" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handling.html#Exception-Handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

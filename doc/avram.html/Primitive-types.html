@@ -1,104 +1,161 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Primitive types - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
-<link rel="prev" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
-<link rel="next" href="One-dimensional-arrays.html#One-dimensional-arrays" title="One dimensional arrays">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Primitive-types"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="One-dimensional-arrays.html#One-dimensional-arrays">One dimensional arrays</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3.1.4.1 Primitive types</title>
 
-<h5 class="subsubsection">3.1.4.1 Primitive types</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 3.1.4.1 Primitive types">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.1.4.1 Primitive types">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Primitive-types"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="One-dimensional-arrays.html#One-dimensional-arrays" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Primitive-types-1"></a>
+<h4 class="subsubsection">3.1.4.1 Primitive types</h4>
 
 <p>A pair of functions in support of this abstraction is prototyped in
-<samp><span class="file">listfuns.h</span></samp>.  These functions will be of interest mainly to
+&lsquo;<tt>listfuns.h</tt>&rsquo;.  These functions will be of interest mainly to
 developers wishing to implement an interface to a new library module
 and make it accessible on the virtual side by way of the
 <code>library</code> combinator (<a href="Library-combinator.html#Library-combinator">Library combinator</a>).
-
-<div class="defun">
-&mdash; Function: void <b>*avm_value_of_list</b> (<var>list operand, list *message, int *fault</var>)<var><a name="index-g_t_002aavm_005fvalue_005fof_005flist-440"></a></var><br>
-<blockquote><p>This function takes an <var>operand</var> representing a value used by a
+</p>
+<dl>
+<dt><a name="index-_002aavm_005fvalue_005fof_005flist"></a><u>Function:</u> void <b>*avm_value_of_list</b><i> (list <var>operand</var>, list *<var>message</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function takes an <var>operand</var> representing a value used by a
 library function in the format described above (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>) and returns a pointer to the value.
-
-        <p>The <code>value</code> field in the <var>operand</var> normally will point to the
+</p>
+<p>The <code>value</code> field in the <var>operand</var> normally will point to the
 block of memory holding the value, and the <var>operand</var> itself will
 be a list of character representations whose binary encodings spell
 out the value as explained above.
-
-        <p>The <code>value</code> field need not be initialized on entry but it will be
+</p>
+<p>The <code>value</code> field need not be initialized on entry but it will be
 initialized as a side effect of being computed by this function. If it
 has been initialized due to a previous call with the same
 <var>operand</var>, this function is a fast constant time operation.
-
-        <p>The caller should not free the pointer returned by this function
+</p>
+<p>The caller should not free the pointer returned by this function
 because a reference to its value will remain in the
 <var>operand</var>. When the <var>operand</var> itself is freed by
 <code>avm_dispose</code> (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>), the value will go with it.
-
-        <p>If an error occurs during the evaluation of this function, the integer
+</p>
+<p>If an error occurs during the evaluation of this function, the integer
 referenced by <var>fault</var> will be set to a non-zero value, and the
 list referenced by <var>message</var> will be assigned a representation of
 a list of strings describing the error. The <var>message</var> is freshly
 created and should be freed by the caller with <code>avm_dispose</code>
 when no longer needed.
-
-        <p>Possible error messages are <code>&lt;'missing value'&gt;</code>, in the case of
-<a name="index-missing-value-441"></a>an empty <var>operand</var>, <code>&lt;'invalid value'&gt;</code> in the case of an
-<a name="index-invalid-value-442"></a><var>operand</var> that is not a list of character representations, and
+</p>
+<p>Possible error messages are <code>&lt;'missing value'&gt;</code>, in the case of
+<a name="index-missing-value"></a>
+an empty <var>operand</var>, <code>&lt;'invalid value'&gt;</code> in the case of an
+<a name="index-invalid-value"></a>
+<var>operand</var> that is not a list of character representations, and
 <code>&lt;'memory overflow'&gt;</code> if there was insufficient space to allocate
-the result. 
-</p></blockquote></div>
+the result.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_list_of_value</b> (<var>void *contents, size_t size, int *fault</var>)<var><a name="index-avm_005flist_005fof_005fvalue-443"></a></var><br>
-<blockquote><p>This function performs the inverse operation of
+
+<dl>
+<dt><a name="index-avm_005flist_005fof_005fvalue"></a><u>Function:</u> list <b>avm_list_of_value</b><i> (void *<var>contents</var>, size_t <var>size</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function performs the inverse operation of
 <code>avm_value_of_list</code>, taking the address of an area of
 contiguously stored data and its <var>size</var> in bytes to a list
 representation. The length of the list returned is equal to the number
 of bytes of data, <var>size</var>, and each item of the list is a character
 representation for the corresponding byte as given by <a href="Character-Table.html#Character-Table">Character Table</a>.
-
-        <p>A copy of the memory area is made so that the original is no longer
+</p>
+<p>A copy of the memory area is made so that the original is no longer
 needed and may be freed by the caller. A pointer to this copy is
 returned by subsequent calls to <code>avm_value_of_list</code> when the
 result returned by this function is used as the <var>operand</var>
 parameter.
-
-        <p>If there is insufficient memory to allocate the result, the integer
+</p>
+<p>If there is insufficient memory to allocate the result, the integer
 referenced by <var>fault</var> is set to a non-zero value, and a copy of
 the message <code>&lt;'memory overflow'&gt;</code> represented as a list is
 returned. This function could also cause a segmentation fault if it is
-<a name="index-segmentation-fault-444"></a>passed an invalid pointer or a <var>size</var> that overruns the storage
+<a name="index-segmentation-fault-2"></a>
+passed an invalid pointer or a <var>size</var> that overruns the storage
 area.  However, it is acceptable to specify a <var>size</var> that is less
 than the actual size of the given memory area to construct a list
 representing only the first part of it. The <var>size</var> must always be
-greater than zero. 
-</p></blockquote></div>
+greater than zero.
+</p></dd></dl>
 
-   </body></html>
 
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="One-dimensional-arrays.html#One-dimensional-arrays" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

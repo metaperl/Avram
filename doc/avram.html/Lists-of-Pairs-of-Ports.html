@@ -1,91 +1,144 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Lists of Pairs of Ports - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
-<link rel="prev" href="Emulation-Primitives.html#Emulation-Primitives" title="Emulation Primitives">
-<link rel="next" href="Ports-and-Packets.html#Ports-and-Packets" title="Ports and Packets">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.8.1 Lists of Pairs of Ports</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.8.1 Lists of Pairs of Ports">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.8.1 Lists of Pairs of Ports">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Lists-of-Pairs-of-Ports"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Ports-and-Packets.html#Ports-and-Packets">Ports and Packets</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Emulation-Primitives.html#Emulation-Primitives" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Ports-and-Packets.html#Ports-and-Packets" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Emulation-Primitives.html#Emulation-Primitives" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Lists-of-Pairs-of-Ports-1"></a>
+<h3 class="subsection">3.8.1 Lists of Pairs of Ports</h3>
 
-<h4 class="subsection">3.8.1 Lists of Pairs of Ports</h4>
-
-<p><a name="index-g_t_0040code_007bport_007d-628"></a>A <code>port</code> is the name given to a type of pointer used in the library
+<a name="index-port"></a>
+<p>A <code>port</code> is the name given to a type of pointer used in the library
 as the address of a place where a computational result yet to be
 evaluated will be sent. Ports are discussed further in <a href="Ports-and-Packets.html#Ports-and-Packets">Ports and Packets</a>,
 but are mentioned here because it is sometimes necessary to employ a
 list of pairs of them. A pointer to such a list is declared as a
 <code>portal</code> type. It refers to a structure of the form
-<a name="index-g_t_0040code_007bportal_007d-629"></a><a name="index-g_t_0040code_007bport_005fpair_007d-630"></a>
-<pre class="example">     struct port_pair
-     {
-       port left;
-       port right;
-       portal alters;
-     }
-</pre>
-   <p>A small selection of functions for <code>portal</code> memory management is
-declared as follows in the header file <samp><span class="file">portals.h</span></samp>. For reasons of
+<a name="index-portal"></a>
+<a name="index-port_005fpair"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">struct port_pair
+{
+  port left;
+  port right;
+  portal alters;
+}
+</pre></td></tr></table>
+
+<p>A small selection of functions for <code>portal</code> memory management is
+declared as follows in the header file &lsquo;<tt>portals.h</tt>&rsquo;. For reasons of
 C-ness, the type declarations themselves are forced to be in
-<samp><span class="file">lists.h</span></samp>.
-
-<div class="defun">
-&mdash; Function: portal <b>avm_new_portal</b> (<var>portal alters</var>)<var><a name="index-avm_005fnew_005fportal-631"></a></var><br>
-<blockquote><p>This function is used to create storage for a new <code>port_pair</code>
+&lsquo;<tt>lists.h</tt>&rsquo;.
+</p>
+<dl>
+<dt><a name="index-avm_005fnew_005fportal"></a><u>Function:</u> portal <b>avm_new_portal</b><i> (portal <var>alters</var>)</i></dt>
+<dd><p>This function is used to create storage for a new <code>port_pair</code>
 structure, and returns a <code>portal</code> pointer to it if successful. If
-the storage can't be allocated, a <code>NULL</code> pointer is returned. 
+the storage can&rsquo;t be allocated, a <code>NULL</code> pointer is returned.
 The <code>alters</code> field of the result is initialized as the given
-parameter supplied by the caller. All other fields are filled with zeros. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_seal</b> (<var>portal fate</var>)<var><a name="index-avm_005fseal-632"></a></var><br>
-<blockquote><p>This function performs the reclamation of storage associated with
+parameter supplied by the caller. All other fields are filled with zeros.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fseal"></a><u>Function:</u> void <b>avm_seal</b><i> (portal <var>fate</var>)</i></dt>
+<dd><p>This function performs the reclamation of storage associated with
 <code>portal</code> pointers, either by freeing them or by consigning them
 temporarily to a local cache for performance reasons. Client programs
 should use only this function for disposing of <code>portal</code> storage
 rather than using <code>free</code> directly, so as to allow accurate record
-keeping. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_portals</b> ()<var><a name="index-avm_005finitialize_005fportals-633"></a></var><br>
-<blockquote><p>This function should be called by a client program prior to calling
+keeping.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005finitialize_005fportals"></a><u>Function:</u> void <b>avm_initialize_portals</b><i> ()</i></dt>
+<dd><p>This function should be called by a client program prior to calling
 either of the above memory management functions in order to initialize
-some local variables. Anomalous results are possible otherwise. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_portals</b> ()<var><a name="index-avm_005fcount_005fportals-634"></a></var><br>
-<blockquote><p>This function should be called at the end of a run or after the last
+some local variables. Anomalous results are possible otherwise.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005fportals"></a><u>Function:</u> void <b>avm_count_portals</b><i> ()</i></dt>
+<dd><p>This function should be called at the end of a run or after the last
 call to any of the other functions in this section as a way of detecting
 memory leaks associated with <code>portal</code> pointers. A warning message
-will be written to standard error if any remains unreclaimed. 
-</p></blockquote></div>
+will be written to standard error if any remains unreclaimed.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Emulation-Primitives.html#Emulation-Primitives" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Ports-and-Packets.html#Ports-and-Packets" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Emulation-Primitives.html#Emulation-Primitives" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

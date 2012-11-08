@@ -1,48 +1,80 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>kinsol - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
-<link rel="prev" href="harminv.html#harminv" title="harminv">
-<link rel="next" href="lapack.html#lapack" title="lapack">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="kinsol"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="lapack.html#lapack">lapack</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="harminv.html#harminv">harminv</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.9 kinsol</title>
 
-<h3 class="section">D.9 <code>kinsol</code></h3>
+<meta name="description" content="avram - a virtual machine code interpreter: D.9 kinsol">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.9 kinsol">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="kinsol"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Additional-harminv-notes.html#Additional-harminv-notes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="kinsol-input-parameters.html#kinsol-input-parameters" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="kinsol-1"></a>
+<h2 class="section">D.9 <code>kinsol</code></h2>
 
 <p>The <code>kinsol</code> library (<a href="http://www.llnl.gov/CASC/sundials/">http://www.llnl.gov/CASC/sundials/</a>)
 contains sophisticated routines for non-linear optimization and
-<a name="index-optimization-738"></a><a name="index-non_002dlinear-optimization-739"></a>constrained non-linear optimization, some of which are available to
-<a name="index-constrained-non_002dlinear-optimization-740"></a>virtual code applications by way of functions expressed as shown.
+<a name="index-optimization"></a>
+<a name="index-non_002dlinear-optimization"></a>
+constrained non-linear optimization, some of which are available to
+<a name="index-constrained-non_002dlinear-optimization"></a>
+virtual code applications by way of functions expressed as shown.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('kinsol',k)
+</pre></td></tr></table>
 
-<pre class="example">     library('kinsol',k)
-</pre>
-   <p class="noindent">The function name <code>k</code> is a string of the form
-<code>'</code><var>xy</var><code>_</code><var>zzzzz</var><code>'</code>. The field <var>zzzzz</var> specifies
+<p>The function name <code>k</code> is a string of the form
+<code>'<var>xy</var>_<var>zzzzz</var>'</code>. The field <var>zzzzz</var> specifies
 the optimization algorithm, which can be one of <code>dense</code>,
 <code>gmres</code>, <code>bicgs</code>, or <code>tfqmr</code>, following the names used
 by the API for <code>kinsol</code> in C. The field <var>y</var> determines
@@ -51,23 +83,52 @@ supplied Jacobian, or <code>d</code> for finite differences computed by
 <code>kinsol</code>. The remaining field <var>x</var> is either <code>c</code> for
 constrained optimization, or <code>u</code> for unconstrained. Hence, the
 whole function name can be one of sixteen possible alternatives.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">cd_dense   cd_gmres   cd_bicgs   cd_tfqmr
+ud_dense   ud_gmres   ud_bicgs   ud_tfqmr
+cj_dense   cj_gmres   cj_bicgs   cj_tfqmr
+uj_dense   uj_gmres   uj_bicgs   uj_tfqmr
+</pre></td></tr></table>
 
-<pre class="example">     cd_dense   cd_gmres   cd_bicgs   cd_tfqmr
-     ud_dense   ud_gmres   ud_bicgs   ud_tfqmr
-     cj_dense   cj_gmres   cj_bicgs   cj_tfqmr
-     uj_dense   uj_gmres   uj_bicgs   uj_tfqmr
-</pre>
-   <p>More specific information about the optimization algorithms can be
+<p>More specific information about the optimization algorithms can be
 found in the <code>kinsol</code> documentation at the above
 address. Different algorithms may perform better on different
 problems.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="kinsol-input-parameters.html#kinsol-input-parameters">D.9.1 <code>kinsol</code> input parameters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="kinsol-output.html#kinsol-output">D.9.2 <code>kinsol</code> output</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="kinsol-exceptions.html#kinsol-exceptions">D.9.3 <code>kinsol</code> exceptions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="Additional-kinsol-notes.html#Additional-kinsol-notes">D.9.4 Additional <code>kinsol</code> notes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="kinsol-input-parameters.html#kinsol-input-parameters">kinsol input parameters</a>
-<li><a accesskey="2" href="kinsol-output.html#kinsol-output">kinsol output</a>
-<li><a accesskey="3" href="kinsol-exceptions.html#kinsol-exceptions">kinsol exceptions</a>
-<li><a accesskey="4" href="Additional-kinsol-notes.html#Additional-kinsol-notes">Additional kinsol notes</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Additional-harminv-notes.html#Additional-harminv-notes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="kinsol-input-parameters.html#kinsol-input-parameters" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

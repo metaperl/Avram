@@ -1,92 +1,170 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Representation of Numeric and Textual Data - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
-<link rel="prev" href="File-Format.html#File-Format" title="File Format">
-<link rel="next" href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Filter Mode Interface">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Representation-of-Numeric-and-Textual-Data"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Filter-Mode-Interface.html#Filter-Mode-Interface">Filter Mode Interface</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Format.html#File-Format">File Format</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.4 Representation of Numeric and Textual Data</title>
 
-<h3 class="section">2.4 Representation of Numeric and Textual Data</h3>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.4 Representation of Numeric and Textual Data">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.4 Representation of Numeric and Textual Data">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Representation-of-Numeric-and-Textual-Data"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Data-Section.html#Data-Section" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Representation-of-Numeric-and-Textual-Data-1"></a>
+<h2 class="section">2.4 Representation of Numeric and Textual Data</h2>
 
 <p>As noted already, virtual code applications are specified by functions
 operating on elements of a set having the properties described in
 <a href="Raw-Material.html#Raw-Material">Raw Material</a>, which are convenient to envision as ordered binary trees or
-<a name="index-trees-158"></a><a name="index-g_t_0040code_007bnil_007d-159"></a>pairs of <code>nil</code>. However, virtual code applications normally deal
+<a name="index-trees-2"></a>
+<a name="index-nil-1"></a>
+pairs of <code>nil</code>. However, virtual code applications normally deal
 with numeric or textual data, for example when they refer to the
 contents of a text file. It is therefore necessary for the application
 and the virtual machine emulator to agree on a way of describing textual
 or numeric data with these trees.
-
-   <p>The purpose of this section is to explain the basic data structures used
+</p>
+<p>The purpose of this section is to explain the basic data structures used
 in the exchange of information between <code>avram</code> and a virtual code
 application.  For example, an explanation is needed for statements like
-&ldquo;an application invoked with the <samp><span class="option">--baz</span></samp> option is expected to
-return a pair <code>(</code><var>foo</var><code>,</code><var>bar</var><code>)</code>, where <var>foo</var> is a
-<a name="index-strings-160"></a><a name="index-character-strings-161"></a><a name="index-lists-162"></a>list of character strings <small class="dots">...</small>&rdquo;, that are made subsequently in this
+&ldquo;an application invoked with the &lsquo;<samp>--baz</samp>&rsquo; option is expected to
+return a pair <code>(<var>foo</var>,<var>bar</var>)</code>, where <code><var>foo</var></code> is a
+<a name="index-strings"></a>
+<a name="index-character-strings"></a>
+<a name="index-lists-2"></a>
+list of character strings &hellip;&rdquo;, that are made subsequently in this
 document. Such statements should be understood as referring to the trees
 representing the pairs, lists, character strings, etc., according to the
 conventions explained below.
-
-     <dl>
-<dt><em>Characters</em><dd><a name="index-character-codes-163"></a>An arbitrarily chosen set of 256 trees is used to represent the
+</p>
+<dl compact="compact">
+<dt> <em>Characters</em></dt>
+<dd><a name="index-character-codes-1"></a>
+<p>An arbitrarily chosen set of 256 trees is used to represent the
 character set. They are listed in <a href="Character-Table.html#Character-Table">Character Table</a>. For example,
 the letter <code>A</code> is represented by
 <code>(nil,(((nil,(nil,(nil,nil))),nil),(nil,nil)))</code>.  That means that
 when an application wants the letter <code>A</code> written to a text file, it
-returns something with this tree in it. 
-<br><dt><em>Booleans</em><dd><a name="index-booleans-164"></a>The value of <code>false</code> is represented by <code>nil</code>, and the value of
-<code>true</code> is represented by <code>(nil,nil)</code>. 
-<br><dt><em>Pairs</em><dd><a name="index-pairs-165"></a>Given any two items of data <var>x1</var> and <var>x2</var>, having the respective
-representations <var>r1</var> and <var>r2</var>, the pair <code>(</code><var>x1</var><code>,</code><var>x2</var><code>)</code> has the
-representation <code>cons(</code><var>r1</var><code>,</code><var>r2</var><code>)</code>. 
-<br><dt><em>Lists</em><dd><a name="index-lists-166"></a>A list of the items <var>x1</var>, <var>x2</var> <small class="dots">...</small> <var>xn</var> with respective
+returns something with this tree in it.
+</p></dd>
+<dt> <em>Booleans</em></dt>
+<dd><a name="index-booleans"></a>
+<p>The value of <code>false</code> is represented by <code>nil</code>, and the value of
+<code>true</code> is represented by <code>(nil,nil)</code>.
+</p></dd>
+<dt> <em>Pairs</em></dt>
+<dd><a name="index-pairs"></a>
+<p>Given any two items of data <var>x1</var> and <var>x2</var>, having the respective
+representations <var>r1</var> and <var>r2</var>, the pair <code>(<var>x1</var>,<var>x2</var>)</code> has the
+representation <code>cons(<var>r1</var>,<var>r2</var>)</code>.
+</p></dd>
+<dt> <em>Lists</em></dt>
+<dd><a name="index-lists-3"></a>
+<p>A list of the items <var>x1</var>, <var>x2</var> &hellip; <var>xn</var> with respective
 representations <var>r1</var> through <var>rn</var> is represented by the tree
-<code>cons(</code><var>r1</var><code>,cons(</code><var>r2</var><code>...cons(</code><var>rn</var><code>,nil)...))</code>. In other words,
+<code>cons(<var>r1</var>,cons(<var>r2</var>&hellip;cons(<var>rn</var>,nil)&hellip;))</code>. In other words,
 lists are represented as pairs whose left sides are the heads and whose
 right sides are the tails. The empty list is identified with
-<code>nil</code>. Lists of arbitrary finite length can be accommodated. 
-<br><dt><em>Naturals</em><dd><a name="index-naturals-167"></a>A number of the form <var>b0</var><code> + 2</code><var>b1</var><code> + 4</code><var>b2</var><code> + ... +
-2^n </code><var>bn</var>, where each <var>b</var><code>i</code> is <code>0</code> or <code>1</code>, is
+<code>nil</code>. Lists of arbitrary finite length can be accommodated.
+</p></dd>
+<dt> <em>Naturals</em></dt>
+<dd><a name="index-naturals"></a>
+<p>A number of the form <code><var>b0</var> + 2<var>b1</var> + 4<var>b2</var> + &hellip; +
+2^n <var>bn</var></code>, where each <code><var>b</var>i</code> is <code>0</code> or <code>1</code>, is
 represented by a tree of the form
-<code>cons(</code><var>t0</var><code>,cons(</code><var>t1</var><code>...cons(</code><var>tn</var><code>,nil)...))</code>
-where each <var>t</var><code>i</code> is <code>nil</code> if the corresponding
-<var>b</var><code>i</code> is <code>0</code>, and <code>(nil,nil)</code> otherwise. Note that
-the numbers <var>b</var><code>i</code> are exactly the bits written in the binary
-expansion of the number, with <var>b0</var> being the least significant
-bit. 
-<br><dt><em>Strings</em><dd><a name="index-strings-168"></a><a name="index-character-strings-169"></a>are represented as lists of characters. 
+<code>cons(<var>t0</var>,cons(<var>t1</var>&hellip;cons(<var>tn</var>,nil)&hellip;))</code>
+where each <code><var>t</var>i</code> is <code>nil</code> if the corresponding
+<code><var>b</var>i</code> is <code>0</code>, and <code>(nil,nil)</code> otherwise. Note that
+the numbers <code><var>b</var>i</code> are exactly the bits written in the binary
+expansion of the number, with <code><var>b0</var></code> being the least significant
+bit.
+</p></dd>
+<dt> <em>Strings</em></dt>
+<dd><a name="index-strings-1"></a>
+<a name="index-character-strings-1"></a>
+<p>are represented as lists of characters.
+</p></dd>
 </dl>
 
-   <p><a name="index-types-170"></a><code>avram</code> imposes no more of a &ldquo;type discipline&rdquo; than necessary to
+<a name="index-types"></a>
+<p><code>avram</code> imposes no more of a &ldquo;type discipline&rdquo; than necessary to
 a workable interface between it and an application.  This selection of
 types and constructors should not be seen as constraining what a
 compiler writer may wish to have in a source language.
+</p>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Data-Section.html#Data-Section" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

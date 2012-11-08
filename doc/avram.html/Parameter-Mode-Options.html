@@ -1,70 +1,117 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Parameter Mode Options - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="prev" href="Filter-Mode-Options.html#Filter-Mode-Options" title="Filter Mode Options">
-<link rel="next" href="Command-Line-Syntax.html#Command-Line-Syntax" title="Command Line Syntax">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.4 Parameter Mode Options</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.4 Parameter Mode Options">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.4 Parameter Mode Options">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Parameter-Mode-Options"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Filter-Mode-Options.html#Filter-Mode-Options">Filter Mode Options</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
-<hr>
-</div>
-
-<h3 class="section">1.4 Parameter Mode Options</h3>
-
-<p><a name="index-parameter-mode-30"></a>The parameter mode options are listed below. Except as otherwise
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Filter-Mode-Options.html#Filter-Mode-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Command-Line-Syntax.html#Command-Line-Syntax" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Parameter-Mode-Options-1"></a>
+<h2 class="section">1.4 Parameter Mode Options</h2>
+<a name="index-parameter-mode-1"></a>
+<p>The parameter mode options are listed below. Except as otherwise
 noted, any combination of parameter mode options may be selected
 together, and except as noted, the settings of these options can be
 varied without breaking the application.
-
-     <dl>
-<dt><code>-q, --quiet</code><dd><a name="index-g_t_0040code_007bquiet_007d-command-line-option-31"></a><code>avram</code> normally informs the user when writing an output file with
+</p>
+<dl compact="compact">
+<dt> <code>-q, --quiet</code></dt>
+<dd><a name="index-quiet-command-line-option"></a>
+<p><code>avram</code> normally informs the user when writing an output file with
 a short message to standard output. This option suppresses such
 messages. This option is compatible with any application and any other
-parameter mode option except <samp><span class="option">-a</span></samp>. 
-<br><dt><code>-a, --ask-to-overwrite</code><dd><a name="index-g_t_0040code_007bask_002dto_002doverwrite_007d-command-line-option-32"></a>Selecting this option will cause <code>avram</code> to ask permission
+parameter mode option except &lsquo;<samp>-a</samp>&rsquo;.
+</p></dd>
+<dt> <code>-a, --ask-to-overwrite</code></dt>
+<dd><a name="index-ask_002dto_002doverwrite-command-line-option"></a>
+<p>Selecting this option will cause <code>avram</code> to ask permission
 interactively before overwriting an existing file, and to refrain from
 overwriting it without permission, in which case the contents that
-were to be written will be lost. This option overrides <samp><span class="option">-q</span></samp> and is
-compatible with any other parameter mode option or application. 
-<br><dt><code>-.EXT</code><dd><a name="index-g_t_0040code_007bEXT_007d-command-line-option-33"></a><a name="index-default-file-extensions-34"></a><a name="index-extensions-35"></a><a name="index-file-name-extensions-36"></a><a name="index-file-name-suffixes-37"></a>An option beginning with a dash followed by a period specifies a
-default extension for input file names. If <code>avram</code> doesn't find a
-file named on the command line, and the filename doesn't already
+were to be written will be lost. This option overrides &lsquo;<samp>-q</samp>&rsquo; and is
+compatible with any other parameter mode option or application.
+</p></dd>
+<dt> <code>-.EXT</code></dt>
+<dd><a name="index-EXT-command-line-option"></a>
+<a name="index-default-file-extensions"></a>
+<a name="index-extensions"></a>
+<a name="index-file-name-extensions"></a>
+<a name="index-file-name-suffixes"></a>
+<p>An option beginning with a dash followed by a period specifies a
+default extension for input file names. If <code>avram</code> doesn&rsquo;t find a
+file named on the command line, and the filename doesn&rsquo;t already
 contain a period, <code>avram</code> will try to find a file having a similar
 name but with the default extension appended. The default extension given
 by this option takes precedence over the hard coded default extensions
 of <kbd>.fun</kbd> and <kbd>.avm</kbd>. At most one default extension can be supplied. This
 option is compatible with any other parameter mode option and
-compatible with any application. 
-<br><dt><code>-d, --default-to-stdin</code><dd><a name="index-g_t_0040code_007bdefault_002dto_002dstdin_007d-command-line-option-38"></a><a name="index-standard-input-39"></a>If no filename parameter appears on the command line (other than the
+compatible with any application.
+</p></dd>
+<dt> <code>-d, --default-to-stdin</code></dt>
+<dd><a name="index-default_002dto_002dstdin-command-line-option"></a>
+<a name="index-standard-input-2"></a>
+<p>If no filename parameter appears on the command line (other than the
 name of the virtual code file), this option directs <code>avram</code> to read
 the contents of standard input as if it were specified as a command line
 parameter. (Standard input can also be specified explicitly as a
 dash. See <a href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>.) This option is compatible with any
-application and any other parameter mode option except <samp><span class="option">-m</span></samp>. 
-<br><dt><code>-m, --map-to-each-file</code><dd><a name="index-g_t_0040code_007bmap_002dto_002deach_002dfile_007d-command-line-option-40"></a>Normally <code>avram</code> loads the entire contents of all files named on
+application and any other parameter mode option except &lsquo;<samp>-m</samp>&rsquo;.
+</p></dd>
+<dt> <code>-m, --map-to-each-file</code></dt>
+<dd><a name="index-map_002dto_002deach_002dfile-command-line-option"></a>
+<p>Normally <code>avram</code> loads the entire contents of all files named on
 the command line into memory so as to evaluate the virtual machine
 code application on all of them together. This option can be used to
 save memory in the case of applications that operate on multiple files
@@ -72,16 +119,23 @@ independently. It causes <code>avram</code> to load only one file at a time
 and to perform the relevant evaluation and output before loading the
 next one. Application specific options and standard input (if
 specified) are read only once and reused. This option is incompatible
-with <samp><span class="option">-d</span></samp>, and not necessarily compatible with all applications,
-although some may work both with and without it. 
-<br><dt><code>-i, --interactive</code><dd><a name="index-g_t_0040code_007binteractive_007d-command-line-option-41"></a><a name="index-interactive-applications-42"></a>This option is used in the case of applications that interact with
+with &lsquo;<samp>-d</samp>&rsquo;, and not necessarily compatible with all applications,
+although some may work both with and without it.
+</p></dd>
+<dt> <code>-i, --interactive</code></dt>
+<dd><a name="index-interactive-command-line-option"></a>
+<a name="index-interactive-applications"></a>
+<p>This option is used in the case of applications that interact with
 other programs through shell commands. An application that is meant to
 be invoked in this way requires this option and will not work without
 it, nor will applications that are not of this type work with it. This
-option is implied by <samp><span class="option">-t</span></samp> and <samp><span class="option">-s</span></samp>, and is compatible with any
-other parameter mode option. 
-<br><dt><code>-s, --step</code><dd><a name="index-g_t_0040code_007bstep_007d-command-line-option-43"></a>This option is used in the case of applications that interact with
-other programs through shell commands, similarly to <samp><span class="option">-i</span></samp>, and
+option is implied by &lsquo;<samp>-t</samp>&rsquo; and &lsquo;<samp>-s</samp>&rsquo;, and is compatible with any
+other parameter mode option.
+</p></dd>
+<dt> <code>-s, --step</code></dt>
+<dd><a name="index-step-command-line-option"></a>
+<p>This option is used in the case of applications that interact with
+other programs through shell commands, similarly to &lsquo;<samp>-i</samp>&rsquo;, and
 can substitute for it (see above). The option has the additional
 effect of causing shell commands issued by <code>avram</code> on behalf of
 the application to be written with their results to standard output,
@@ -89,8 +143,11 @@ and to cause <code>avram</code> to pause after displaying each shell command
 until a key is pressed.  This capability may be useful for debugging
 or auditing purposes but does not otherwise alter the effects of the
 application.  This option is compatible with any other parameter mode
-option. 
-<br><dt><code>-t, --trace</code><dd><a name="index-g_t_0040code_007btrace_007d-command-line-option-44"></a>This option is used in the case of applications that interact with
+option.
+</p></dd>
+<dt> <code>-t, --trace</code></dt>
+<dd><a name="index-trace-command-line-option"></a>
+<p>This option is used in the case of applications that interact with
 other programs through shell commands, but only by way of the
 <code>interact</code> combinator, for which it provides developers a means
 of low level debugging, particularly deadlock detection. When this
@@ -98,14 +155,42 @@ option is selected, a verbose trace of all characters exchanged
 between the functional transducer and the external application are
 written to standard output, along with some additional control flow
 diagnostics. This option is compatible with any other parameter mode
-option. 
-<br><dt><code>-p, --parameterized</code><dd><a name="index-g_t_0040code_007bparameterized_007d-command-line-option-45"></a>Normally <code>avram</code> tries to guess whether to operate in filter mode
+option.
+</p></dd>
+<dt> <code>-p, --parameterized</code></dt>
+<dd><a name="index-parameterized-command-line-option"></a>
+<p>Normally <code>avram</code> tries to guess whether to operate in filter mode
 or parameter mode based on the options used and the parameters. If
 there are no parameters and no options, it will default to filter
 mode, and try to read standard input. However, if this option is
 selected, it will use parameter mode (and therefore not try to read
-standard input unless required). 
+standard input unless required).
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Filter-Mode-Options.html#Filter-Mode-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Command-Line-Syntax.html#Command-Line-Syntax" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

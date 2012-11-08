@@ -7,7 +7,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Vendor:		Dennis Furey 
-Packager:	Dennis Furey avram-support@basis.uklinux.net
+Packager:	Dennis Furey ursala-users@freelists.org
 URL:		http://www.lsbu.ac.uk/~fureyd/avram
 Source:         %{name}-%{version}.tar.gz
 #Patch:		

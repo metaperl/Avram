@@ -1,40 +1,70 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Iteration - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
-<link rel="prev" href="Predicates.html#Predicates" title="Predicates">
-<link rel="next" href="List-Combinators.html#List-Combinators" title="List Combinators">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.12 Iteration</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.12 Iteration">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.12 Iteration">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Iteration"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="List-Combinators.html#List-Combinators">List Combinators</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Predicates.html#Predicates">Predicates</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Member.html#Member" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Iteration-1"></a>
+<h3 class="subsection">2.7.12 Iteration</h3>
 
-<h4 class="subsection">2.7.12 Iteration</h4>
-
-<p><a name="index-recursion-314"></a><a name="index-g_t_0040code_007biterate_007d-315"></a>One of many alternatives to recursion provided by the virtual machine is
+<a name="index-recursion-1"></a>
+<a name="index-iterate"></a>
+<p>One of many alternatives to recursion provided by the virtual machine is
 iteration, which allows an operation to be repeated until a condition is
 met. If the source language is imperative, this feature provides an easy
 means of translating loop statements to virtual code. In languages that allow
@@ -42,35 +72,65 @@ functions to be treated as data, iteration can be regarded as a function
 that takes a predicate and a function as arguments, and returns a
 function that applies the given function repeatedly to its argument
 until the predicate is refuted.
-
-   <p>Iterative applications are expressed in virtual code by the pattern shown below.
-
-     <dl>
-<dt><em>T21</em><dd>[[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code> = <code>((nil,nil),(nil,(</code><var>p</var><code>,</code><var>f</var><code>)))</code>
+</p>
+<p>Iterative applications are expressed in virtual code by the pattern shown below.
+</p>
+<dl compact="compact">
+<dt> <em>T21</em></dt>
+<dd><p>[[<code>iterate</code>]] <code>(<var>p</var>,<var>f</var>)</code> = <code>((nil,nil),(nil,(<var>p</var>,<var>f</var>)))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">In the <code>silly</code> language, the <code>iterate</code> mnemonic plays the role
+<p>In the <code>silly</code> language, the <code>iterate</code> mnemonic plays the role
 of the function that takes the virtual code for a predicate
-<var>p</var> and a function <var>f</var> as arguments, and returns
+<code><var>p</var></code> and a function <code><var>f</var></code> as arguments, and returns
 the virtual code for an iterating function.
-
-   <p>The code for an iterating function is recognized as such by the virtual
-machine emulator only if the subtrees <var>f</var> and <var>p</var> are other
+</p>
+<p>The code for an iterating function is recognized as such by the virtual
+machine emulator only if the subtrees <code><var>f</var></code> and <code><var>p</var></code> are other
 than <code>nil</code>. The resulting function tests the argument
-<var>x</var> with <var>p</var> and returns <var>x</var> if the
+<code><var>x</var></code> with <code><var>p</var></code> and returns <code><var>x</var></code> if the
 predicate is false.
-
-     <dl>
-<dt><em>P22</em><dd>([[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>x</var> = <var>x</var> if <var>p</var> <var>x</var> = <code>nil</code>
+</p>
+<dl compact="compact">
+<dt> <em>P22</em></dt>
+<dd><p>([[<code>iterate</code>]] <code>(<var>p</var>,<var>f</var>)</code>) <code><var>x</var></code> = <code><var>x</var></code> if <code><var>p</var> <var>x</var></code> = <code>nil</code>
+</p></dd>
 </dl>
 
-<p class="noindent">If the predicate turns out to be true, <var>f</var> is applied to
-<var>x</var>, and then another iteration is performed.
-
-     <dl>
-<dt><em>P23</em><dd>([[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>x</var> =
-([[<code>iterate</code>]] <code>(</code><var>p</var><code>,</code><var>f</var><code>)</code>) <var>f</var> <var>x</var> if <var>p</var> <var>x</var> is a non-<code>nil</code> tree
+<p>If the predicate turns out to be true, <code><var>f</var></code> is applied to
+<code><var>x</var></code>, and then another iteration is performed.
+</p>
+<dl compact="compact">
+<dt> <em>P23</em></dt>
+<dd><p>([[<code>iterate</code>]] <code>(<var>p</var>,<var>f</var>)</code>) <code><var>x</var></code> =
+([[<code>iterate</code>]] <code>(<var>p</var>,<var>f</var>)</code>) <code><var>f</var> <var>x</var></code> if <code><var>p</var> <var>x</var></code> is a non-<code>nil</code> tree
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Member.html#Member" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

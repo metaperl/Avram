@@ -1,38 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>umf input parameters - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="umf.html#umf" title="umf">
-<link rel="prev" href="umf.html#umf" title="umf">
-<link rel="next" href="umf-output.html#umf-output" title="umf output">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="umf-input-parameters"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="umf-output.html#umf-output">umf output</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="umf.html#umf">umf</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="umf.html#umf">umf</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.17.1 umf input parameters</title>
 
-<h4 class="subsection">D.17.1 <code>umf</code> input parameters</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.17.1 umf input parameters">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.17.1 umf input parameters">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="umf-input-parameters"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="umf.html#umf" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="umf-output.html#umf-output" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="umf.html#umf" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="umf-input-parameters-1"></a>
+<h3 class="subsection">D.17.1 <code>umf</code> input parameters</h3>
 
 <p>For a square matrix <var>A</var> and a column vector <var>b</var>, the
 <code>umf</code> functions find the solution <var>x</var> to the matrix equation
@@ -40,63 +68,92 @@ Up:&nbsp;<a rel="up" accesskey="u" href="umf.html#umf">umf</a>
 transpose of <var>A</var>, or its conjugate transpose. As noted above, the
 choice is determined by whether the the function name is of the form
 *<code>_a_</code>*, *<code>_t_</code>*, or *<code>_c_</code>* respectively.
-
-   <p>The argument to any of these functions is a pair
-<code>(</code><var>A</var><code>,</code><var>b</var><code>)</code>, where <var>A</var> represents the matrix
+</p>
+<p>The argument to any of these functions is a pair
+<code>(<var>A</var>,<var>b</var>)</code>, where <var>A</var> represents the matrix
 mentioned above and <var>b</var> represents the column vector.
-
-   <p>The parameter <var>b</var> is required to be a list of numbers whose length
+</p>
+<p>The parameter <var>b</var> is required to be a list of numbers whose length
 matches the number of rows in the matrix. The numbers are either real
-numbers for the <code>di_</code>* functions (<a href="math.html#math">math</a>), or complex
-for the <code>zi_</code>* functions (<a href="complex.html#complex">complex</a>).
-
-   <p>There is a choice of representations for the parameter <var>A</var>,
+numbers for the <code>di_</code>* functions (<a href="math.html#math"><code>math</code></a>), or complex
+for the <code>zi_</code>* functions (<a href="complex.html#complex"><code>complex</code></a>).
+</p>
+<p>There is a choice of representations for the parameter <var>A</var>,
 depending on whether the function being called is one of the *<code>_trp</code>
 functions or one of the *<code>_col</code> functions.
-
-   <p>For the *<code>_trp</code> functions, <var>A</var> is represented as a non-empty
-list of triples <code>&lt;((</code><var>i</var><code>,</code><var>j</var><code>),</code><var>v</var><code>)...&gt;</code>, where each
+</p>
+<p>For the *<code>_trp</code> functions, <var>A</var> is represented as a non-empty
+list of triples <code>&lt;((<var>i</var>,<var>j</var>),<var>v</var>)...&gt;</code>, where each
 item of the list corresponds to a non-zero entry in the matrix.
-
-     <ul>
-<li>The parameters <var>i</var> and <var>j</var> are natural numbers as in
+</p>
+<ul>
+<li>
+The parameters <var>i</var> and <var>j</var> are natural numbers as in
 <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>. 
-<li>The value <var>v</var> is a real number for the <code>di_</code>*<code>_trp</code> functions or a
-complex number for the <code>zi_</code>*<code>_trp</code> functions. 
-<li>The presence of a triple ((<var>i</var>,<var>j</var>),<var>v</var>) in the list
+</li><li>
+The value <var>v</var> is a real number for the <code>di_</code>*<code>_trp</code> functions or a
+complex number for the <code>zi_</code>*<code>_trp</code> functions.
+</li><li>
+The presence of a triple ((<var>i</var>,<var>j</var>),<var>v</var>) in the list
 signifies that the <var>i</var>,<var>j</var>-th entry in the matrix <var>A</var>
-(numbered from zero) has a value of <var>v</var>. 
-</ul>
+(numbered from zero) has a value of <var>v</var>.
+</li></ul>
 
-   <p>For the *<code>_col</code> functions, the representation of <var>A</var> is more
+<p>For the *<code>_col</code> functions, the representation of <var>A</var> is more
 complicated but has a slight advantage in memory usage. It may also
 have an advantage in speed unless more time is wasted on the virtual
 side transforming a matrix to this representation than it saves.
-
-   <p>In this case, <var>A</var> is represented by a triple of the form
-<code>((</code><var>p</var><code>,</code><var>i</var><code>),</code><var>v</var><code>)</code>. The parameters <var>p</var> and <var>i</var>
+</p>
+<p>In this case, <var>A</var> is represented by a triple of the form
+<code>((<var>p</var>,<var>i</var>),<var>v</var>)</code>. The parameters <var>p</var> and <var>i</var>
 are lists of natural numbers. The parameter <var>v</var> is a list of real
 numbers for the <code>di_</code>*<code>_col</code> functions and complex numbers
 for the <code>zi_</code>*<code>_col</code> functions. They have the following
 interpretations.
-
-     <ul>
-<li><var>v</var>
+</p>
+<ul>
+<li> <var>v</var>
 is the list of non-zero entries in the matrix in
-<a name="index-column-major-order-815"></a>column major order. 
-<li><var>i</var>
+<a name="index-column-major-order-4"></a>
+column major order.
+</li><li> <var>i</var>
 has the same length as <var>v</var>, and each item of <var>i</var> is the row
-index of the corresponding item in <var>v</var>, numbered from zero. 
-<li><var>p</var>
+index of the corresponding item in <var>v</var>, numbered from zero.
+</li><li> <var>p</var>
 has the length of the number of columns in the matrix, and each
 item identifies the starting position of a column in <var>v</var> and
-<var>i</var>, numbered from zero. 
-</ul>
+<var>i</var>, numbered from zero.
+</li></ul>
 
-<p class="noindent">The first item of <var>p</var> is always zero. Further explanation of this
+<p>The first item of <var>p</var> is always zero. Further explanation of this
 format in terms of an array representation can be found in the file
-<samp><span class="file">UMFPACK_UserGuide.pdf</span></samp>, available from the <code>umf</code> library
+&lsquo;<tt>UMFPACK_UserGuide.pdf</tt>&rsquo;, available from the <code>umf</code> library
 home page at <a href="http://www.cise.ufl.edu/research/sparse/SuiteSparse/current/SuiteSparse/">http://www.cise.ufl.edu/research/sparse/SuiteSparse/current/SuiteSparse/</a>.
+</p>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="umf.html#umf" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="umf-output.html#umf-output" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="umf.html#umf" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

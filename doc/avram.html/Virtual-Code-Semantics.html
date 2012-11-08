@@ -1,36 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Virtual Code Semantics - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
-<link rel="prev" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Virtual-Code-Semantics"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7 Virtual Code Semantics</title>
 
-<h3 class="section">2.7 Virtual Code Semantics</h3>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7 Virtual Code Semantics">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7 Virtual Code Semantics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Virtual-Code-Semantics"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-New-Operator.html#A-New-Operator" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Virtual-Code-Semantics-1"></a>
+<h2 class="section">2.7 Virtual Code Semantics</h2>
 
 <p>As the previous sections explain, virtual code applications are defined
 in terms of mathematical functions. Up until this point, the discussion
@@ -38,33 +68,74 @@ has focused on the interface between the function and the virtual
 machine interpreter, by detailing the arguments passed to the functions under
 various circumstances and the results they are expected to return in
 order to achieve various effects.
-
-   <p>The purpose of this section is to complete the picture by explaining how
+</p>
+<p>The purpose of this section is to complete the picture by explaining how
 a given computable function can be expressed in virtual code,
-considering only functions operating on the trees described in <a href="Raw-Material.html#Raw-Material">Raw Material</a>. 
+considering only functions operating on the trees described in <a href="Raw-Material.html#Raw-Material">Raw Material</a>.
 Functions manipulating trees of <code>nil</code> are undoubtedly a frivolous
 and abstract subject in themselves. One is obliged to refer back to the
 previous sections if in need of motivation.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="A-New-Operator.html#A-New-Operator">2.7.1 A New Operator</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="On-Equality.html#On-Equality">2.7.2 On Equality</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 
+</td></tr>
+<tr><td align="left" valign="top"><a href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties">2.7.3 A Minimal Set of Properties</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">2.7.4 A Simple Lisp Like Language</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="How-avram-Thinks.html#How-avram-Thinks">2.7.5 How <code>avram</code> Thinks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     
+</td></tr>
+<tr><td align="left" valign="top"><a href="Variable-Freedom.html#Variable-Freedom">2.7.6 Variable Freedom</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            
+</td></tr>
+<tr><td align="left" valign="top"><a href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">2.7.7 Metrics and Maintenance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     
+</td></tr>
+<tr><td align="left" valign="top"><a href="Deconstruction.html#Deconstruction">2.7.8 Deconstruction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="Recursion.html#Recursion">2.7.9 Recursion</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   
+</td></tr>
+<tr><td align="left" valign="top"><a href="Assignment.html#Assignment">2.7.10 Assignment</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Predicates.html#Predicates">2.7.11 Predicates</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Iteration.html#Iteration">2.7.12 Iteration</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   
+</td></tr>
+<tr><td align="left" valign="top"><a href="List-Combinators.html#List-Combinators">2.7.13 List Combinators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            
+</td></tr>
+<tr><td align="left" valign="top"><a href="List-Functions.html#List-Functions">2.7.14 List Functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="Exception-Handling.html#Exception-Handling">2.7.15 Exception Handling</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">2.7.16 Interfaces to External Code</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> 
+</td></tr>
+<tr><td align="left" valign="top"><a href="Vacant-Address-Space.html#Vacant-Address-Space">2.7.17 Vacant Address Space</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="A-New-Operator.html#A-New-Operator">A New Operator</a>
-<li><a accesskey="2" href="On-Equality.html#On-Equality">On Equality</a>
-<li><a accesskey="3" href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties">A Minimal Set of Properties</a>
-<li><a accesskey="4" href="A-Simple-Lisp-Like-Language.html#A-Simple-Lisp-Like-Language">A Simple Lisp Like Language</a>
-<li><a accesskey="5" href="How-_003ccode_003eavram_003c_002fcode_003e-Thinks.html#How-_003ccode_003eavram_003c_002fcode_003e-Thinks">How <code>avram</code> Thinks</a>
-<li><a accesskey="6" href="Variable-Freedom.html#Variable-Freedom">Variable Freedom</a>
-<li><a accesskey="7" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
-<li><a accesskey="8" href="Deconstruction.html#Deconstruction">Deconstruction</a>
-<li><a accesskey="9" href="Recursion.html#Recursion">Recursion</a>
-<li><a href="Assignment.html#Assignment">Assignment</a>
-<li><a href="Predicates.html#Predicates">Predicates</a>
-<li><a href="Iteration.html#Iteration">Iteration</a>
-<li><a href="List-Combinators.html#List-Combinators">List Combinators</a>
-<li><a href="List-Functions.html#List-Functions">List Functions</a>
-<li><a href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
-<li><a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>
-<li><a href="Vacant-Address-Space.html#Vacant-Address-Space">Vacant Address Space</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-New-Operator.html#A-New-Operator" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

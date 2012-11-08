@@ -1,85 +1,126 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Exception Handler Usage - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
-<link rel="prev" href="Computable-Error-Messages.html#Computable-Error-Messages" title="Computable Error Messages">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Exception-Handler-Usage"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Computable-Error-Messages.html#Computable-Error-Messages">Computable Error Messages</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.15.6 Exception Handler Usage</title>
 
-<h5 class="subsubsection">2.7.15.6 Exception Handler Usage</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.15.6 Exception Handler Usage">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.15.6 Exception Handler Usage">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Exception-Handler-Usage"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Computable-Error-Messages.html#Computable-Error-Messages" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handling.html#Exception-Handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Exception-Handler-Usage-1"></a>
+<h4 class="subsubsection">2.7.15.6 Exception Handler Usage</h4>
 
 <p>One way for this feature of the virtual machine to be used is to
 intercept and translate error messages to a more meaningful form. An
 application guarded as shown below causes messages of invalid deconstruction
 to be changed to <code>'syntax error'</code>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><code>main = guard(
+   application,
+   conditional(
+      bu(compare,('invalid deconstruction',nil)),
+      (constant ('syntax error',nil),identity)))</code>
+</pre></td></tr></table>
 
-<pre class="display">     <code>main = guard(
-        application,
-        conditional(
-           bu(compare,('invalid deconstruction',nil)),
-           (constant ('syntax error',nil),identity)))</code>
-</pre>
-   <p class="noindent">The conditional compares its argument to the error message for an
-<a name="index-deconstruction-370"></a>invalid deconstruction, and if it matches, the syntax error message is
+<p>The conditional compares its argument to the error message for an
+<a name="index-deconstruction-2"></a>
+invalid deconstruction, and if it matches, the syntax error message is
 returned, but otherwise the original message is returned. Note that an
 error message must be in the form of a list of character strings, so
 that it can be printed.  Although the message of <code>'syntax error'</code>
-might not be very informative, at least it looks less like a crash. 
+might not be very informative, at least it looks less like a crash.
 A real application should of course strive to do better than that.
-
-   <p>Exception handling features of the virtual machine can also be adapted
+</p>
+<p>Exception handling features of the virtual machine can also be adapted
 by applications to raise their own exceptions with customized messages.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">error_messenger =
+   guard(compose(compare,constant nil),constant ('syntax error',nil))
+</pre></td></tr></table>
 
-<pre class="example">     error_messenger =
-        guard(compose(compare,constant nil),constant ('syntax error',nil))
-</pre>
-   <p class="noindent">This code fragment implements a function that causes a message of
+<p>This code fragment implements a function that causes a message of
 <code>'syntax error'</code> to be reported for any possible input.  This code
 works by first causing an invalid comparison and then substituting its
 own error message. A function that always causes an error is not useful
 in itself, but might be used as part of an application in the following
 form.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">main = conditional(validation,(application,error_messenger))
+</pre></td></tr></table>
 
-<pre class="example">     main = conditional(validation,(application,error_messenger))
-</pre>
-   <p class="noindent">In this case, the application checks the validity of the input with a
+<p>In this case, the application checks the validity of the input with a
 predicate, and invokes the error messenger if it is invalid.
-
-   <p>Although the previous examples return a fixed error message for each
+</p>
+<p>Although the previous examples return a fixed error message for each
 possible kind of error, it is also possible to have error messages
-that depend on the input data, as the next example shows. 
-<a name="index-g_t_0040code_007bbu_007d-371"></a><a name="index-g_t_0040code_007bguard_007d-372"></a><a name="index-g_t_0040code_007bidentity_007d-373"></a><a name="index-g_t_0040code_007bapply_007d-374"></a><a name="index-g_t_0040code_007bhired_007d-375"></a>
-<pre class="example">     main = (hired apply)(
-        compose(
-           bu(guard,some_application),
-           (hired constant)(constant 'invalid input was:',identity)),
-        identity)
-</pre>
-   <p class="noindent">If the application causes an exception for any reason, the error message
+that depend on the input data, as the next example shows.
+<a name="index-bu-2"></a>
+<a name="index-guard-1"></a>
+<a name="index-identity-1"></a>
+<a name="index-apply-1"></a>
+<a name="index-hired-1"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">main = (hired apply)(
+   compose(
+      bu(guard,some_application),
+      (hired constant)(constant 'invalid input was:',identity)),
+   identity)
+</pre></td></tr></table>
+  
+
+<p>If the application causes an exception for any reason, the error message
 returned will include a complete listing of the input, prefaced by the
 words <code>'invalid input was:'</code>. This particular example works only if
 the input is a list of character strings, but could be adapted for other
@@ -88,9 +129,12 @@ first identity. The formatting function would take the relevant data
 type to a list of character strings. Another possible variation would be to
 concatenate the invalid input listing with the error message that was
 generated, rather than just replacing it.
-
-   <p>As the last example may suggest, exception handlers turn out to be an
-<a name="index-debugging-376"></a><a name="index-functional-programming-377"></a><a name="index-imperative-programming-378"></a>essential debugging tool for functional programs, making them as easy to
+</p>
+<p>As the last example may suggest, exception handlers turn out to be an
+<a name="index-debugging"></a>
+<a name="index-functional-programming-4"></a>
+<a name="index-imperative-programming-2"></a>
+essential debugging tool for functional programs, making them as easy to
 debug as imperative programs if not more so. This example forms the
 basis for a higher order function that wraps any given function with an
 exception handler that prints the argument causing it to crash. For
@@ -102,6 +146,30 @@ of exception handlers that concatenate their messages with previously
 generated messages can show something like a parameter stack dump when a
 recursively defined function crashes. These are all matters for a language
 designer and are not pursued further in this document.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Computable-Error-Messages.html#Computable-Error-Messages" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handling.html#Exception-Handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

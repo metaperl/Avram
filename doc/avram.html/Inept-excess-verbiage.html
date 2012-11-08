@@ -1,110 +1,165 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Inept excess verbiage - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Working around library misfeatures">
-<link rel="prev" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Working around library misfeatures">
-<link rel="next" href="Memory-leaks.html#Memory-leaks" title="Memory leaks">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Inept-excess-verbiage"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Memory-leaks.html#Memory-leaks">Memory leaks</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3.9.3.1 Inept excess verbiage</title>
 
-<h5 class="subsubsection">3.9.3.1 Inept excess verbiage</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 3.9.3.1 Inept excess verbiage">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.9.3.1 Inept excess verbiage">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Inept-excess-verbiage"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Memory-leaks.html#Memory-leaks" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Inept-excess-verbiage-1"></a>
+<h4 class="subsubsection">3.9.3.1 Inept excess verbiage</h4>
 
 <p>Although the author of a library function may take pride in putting
 its activities on display, it should be assumed that virtual code
 applications running on <code>avram</code> have other agendas for the
 console, so the library interface module should prevent direct output
 from the external library.
-
-   <p>More thoughtful API's may have a verbosity setting, which should be
-<a name="index-verbosity-setting-677"></a>used in preference to this workaround, but failing that, it is easy to
+</p>
+<p>More thoughtful API&rsquo;s may have a verbosity setting, which should be
+<a name="index-verbosity-setting"></a>
+used in preference to this workaround, but failing that, it is easy to
 dispense with console output generated by calls to external library
 functions by using some combination of the following functions.
-
-<div class="defun">
-&mdash; Function: void <b>avm_turn_off_stdout</b> ()<var><a name="index-avm_005fturn_005foff_005fstdout-678"></a></var><br>
-<blockquote><p>Calling this function will suppress all output to the standard output
-stream until the next time <code>avm_turn_on_stdout</code> is called. 
+</p>
+<dl>
+<dt><a name="index-avm_005fturn_005foff_005fstdout"></a><u>Function:</u> void <b>avm_turn_off_stdout</b><i> ()</i></dt>
+<dd><p>Calling this function will suppress all output to the standard output
+stream until the next time <code>avm_turn_on_stdout</code> is called.
 Additional calls to this function without intervening calls to
 <code>avm_turn_on_stdout</code> may be made safely with no effect.  The
 standard output stream is flushed as a side effect of calling this
-function. 
-</p></blockquote></div>
+function.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_turn_on_stdout</b> ()<var><a name="index-avm_005fturn_005fon_005fstdout-679"></a></var><br>
-<blockquote><p>Calling this function will allow output to the standard output
+<dl>
+<dt><a name="index-avm_005fturn_005fon_005fstdout"></a><u>Function:</u> void <b>avm_turn_on_stdout</b><i> ()</i></dt>
+<dd><p>Calling this function will allow output to the standard output
 stream to resume if it has been suppressed previously by a call to
 <code>avm_turn_off_stdout</code>. If <code>avm_turn_off_stdout</code> has not been
 previously called, this function has no effect. Any output that would
 have been sent to <code>stdout</code> during the time it was turned off will
-be lost. 
-</p></blockquote></div>
+be lost.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_turn_off_stderr</b> ()<var><a name="index-avm_005fturn_005foff_005fstderr-680"></a></var><br>
-<blockquote><p>This function performs a similar service to that of
-<code>avm_turn_off_stdout</code> but pertains to the standard error stream. 
+<dl>
+<dt><a name="index-avm_005fturn_005foff_005fstderr"></a><u>Function:</u> void <b>avm_turn_off_stderr</b><i> ()</i></dt>
+<dd><p>This function performs a similar service to that of
+<code>avm_turn_off_stdout</code> but pertains to the standard error stream.
 The standard error and the standard output streams are controlled
-independently even if both of them are piped to the same console. 
-</p></blockquote></div>
+independently even if both of them are piped to the same console.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_turn_on_stderr</b> ()<var><a name="index-avm_005fturn_005fon_005fstderr-681"></a></var><br>
-<blockquote><p>This function performs a similar service to that of
-<code>avm_turn_on_stdout</code> but pertains to the standard error stream. 
-</p></blockquote></div>
+<dl>
+<dt><a name="index-avm_005fturn_005fon_005fstderr"></a><u>Function:</u> void <b>avm_turn_on_stderr</b><i> ()</i></dt>
+<dd><p>This function performs a similar service to that of
+<code>avm_turn_on_stdout</code> but pertains to the standard error stream.
+</p></dd></dl>
 
-   <p>As an example, the following code fragment will prevent any output to
+<p>As an example, the following code fragment will prevent any output to
 standard output taking place as a side effect of <code>blather</code>, but
 will allow error messages to standard error. Note that ouput should
 not be left permanently turned off.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">...
+#include &lt;avm/mwrap.h&gt;
+...
 
-<pre class="example">     ...
-     #include &lt;avm/mwrap.h&gt;
-     ...
-     
-     x = y + z;
-     avm_turn_off_stdout ();
-     w = blather (foo, bar, baz);
-     avm_turn_on_stdout ();
-     return w;
-     ...
-</pre>
-   <p>One possible issue with these functions is that they rely on a
+x = y + z;
+avm_turn_off_stdout ();
+w = blather (foo, bar, baz);
+avm_turn_on_stdout ();
+return w;
+...
+</pre></td></tr></table>
+
+<p>One possible issue with these functions is that they rely on a
 feature of the GNU C library that might not be portable to non-GNU
-<a name="index-portability-682"></a>systems and has not been widely tested on other platforms.
-
-   <p>Another issue is that a library function could be both careless enough
+<a name="index-portability"></a>
+systems and has not been widely tested on other platforms.
+</p>
+<p>Another issue is that a library function could be both careless enough
 to clutter the console unconditionally and meticulous enough to check
 for I/O errors after each attempted write. Writing while the output
 stream is disabled will return an I/O error to the caller (i.e., to
 the verbose library function) for appropriate action, which could
 include terminating the process.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Memory-leaks.html#Memory-leaks" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

@@ -1,64 +1,108 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>General Options - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="prev" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="next" href="Modes-of-Operation.html#Modes-of-Operation" title="Modes of Operation">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.1 General Options</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.1 General Options">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.1 General Options">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="General-Options"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="User-Manual.html#User-Manual">User Manual</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
-<hr>
-</div>
-
-<h3 class="section">1.1 General Options</h3>
-
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="General-Options-1"></a>
+<h2 class="section">1.1 General Options</h2>
 <p>Regardless of whatever other command line parameters are given,
 <code>avram</code> accepts the following parameters:
-
-   <p><a name="index-help-9"></a><a name="index-emulation-10"></a><a name="index-g_t_0040code_007bhelp_007d-command-line-option-11"></a><a name="index-g_t_0040code_007bemulation_007d-command-line-option-12"></a>
-     <dl>
-<dt><code>-h, --help</code><dd>Show a summary of options and exit. 
-<br><dt><code>-V,-v, --version</code><dd>Show the version of program and a short copyleft message and exit. 
-<br><dt><code>--emulation=</code><var>version</var><dd>Be backward compatible with an older version of <code>avram</code>.  This
+</p>
+<a name="index-help"></a>
+<a name="index-emulation"></a>
+<a name="index-help-command-line-option"></a>
+<a name="index-emulation-command-line-option"></a>
+<dl compact="compact">
+<dt> <code>-h, --help</code></dt>
+<dd><p>Show a summary of options and exit.
+</p></dd>
+<dt> <code>-V,-v, --version</code></dt>
+<dd><p>Show the version of program and a short copyleft message and exit.
+</p></dd>
+<dt> <code>--emulation=<var>version</var></code></dt>
+<dd><p>Be backward compatible with an older version of <code>avram</code>.  This
 option should include a valid version number, for example
 <kbd>0.13.0</kbd>, which is the version of <code>avram</code> to be
 emulated. It can make virtual code applications future proof, assuming
 that future versions of <code>avram</code> correctly support backward
 compatibility. It may be used in conjunction with any other option in
-any mode of operation. 
-<a name="index-web-page-13"></a><a name="index-home-page-14"></a><a name="index-url-15"></a>This copy of the user manual has not been updated since version 0.13.0 of
+any mode of operation.
+<a name="index-web-page"></a>
+<a name="index-home-page"></a>
+<a name="index-url"></a>
+This copy of the user manual has not been updated since version 0.13.0 of
 <code>avram</code>, so it is unable to document incompatibilities with later
 versions. The latest version of the manual may be found at
-<a href="http://www.lsbu.ac.uk/~fureyd/avram">http://www.lsbu.ac.uk/~fureyd/avram</a>. 
-<br><dt><code>-e, --external-libraries</code><dd><a name="index-g_t_0040code_007bexternal_002dlibraries_007d-16"></a>Show a list of libraries with which <code>avram</code> has been linked and
+<a href="http://www.lsbu.ac.uk/~fureyd/avram">http://www.lsbu.ac.uk/~fureyd/avram</a>.
+</p></dd>
+<dt> <code>-e, --external-libraries</code></dt>
+<dd><a name="index-external_002dlibraries"></a>
+<p>Show a list of libraries with which <code>avram</code> has been linked and
 whose functions therefore could be called from virtual machine
 programs. This growing list currently includes selected functions from
 <code>fftw</code>, <code>glpk</code>, <code>gsl</code>, <code>kinsol</code>, <code>lapack</code>,
 <code>minpack</code>, <code>mpfr</code>, <code>lpsolve</code>, <code>Rmath</code> and <code>ufsparse</code>
-(see <a href="Preface.html#Preface">Preface</a>) which are documented further in <a href="External-Libraries.html#External-Libraries">External Libraries</a>. 
-<br><dt><code>-j, --jail</code><dd><a name="index-g_t_0040code_007bjail_007d-17"></a>This option disables execution of shell commands by virtual code
+(see <a href="Preface.html#Preface">Preface</a>) which are documented further in <a href="External-Libraries.html#External-Libraries">External Libraries</a>.
+</p></dd>
+<dt> <code>-j, --jail</code></dt>
+<dd><a name="index-jail"></a>
+<p>This option disables execution of shell commands by virtual code
 applications, which is normally possible by default even for nominally
 non-interactive applications (see <a href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>). A
 virtual code application attempting to spawn a shell (using the
@@ -66,8 +110,11 @@ virtual code application attempting to spawn a shell (using the
 encounter an exception rather than successful completion of the
 operation. This option is provided as a security feature for running
 untrusted code (see <a href="Security.html#Security">Security</a>), and is incompatible with
-<samp><span class="option">-i</span></samp>, <samp><span class="option">-t</span></samp>, and <samp><span class="option">-s</span></samp>. 
-<br><dt><code>-f, --force-text-input</code><dd><a name="index-g_t_0040code_007bforce_002dtext_002dinput_007d-command-line-option-18"></a>Normally <code>avram</code> will try to guess by looking at a file whether it
+&lsquo;<samp>-i</samp>&rsquo;, &lsquo;<samp>-t</samp>&rsquo;, and &lsquo;<samp>-s</samp>&rsquo;.
+</p></dd>
+<dt> <code>-f, --force-text-input</code></dt>
+<dd><a name="index-force_002dtext_002dinput-command-line-option"></a>
+<p>Normally <code>avram</code> will try to guess by looking at a file whether it
 is an ordinary text file or one that has been written in the virtual
 code file format, and choose a different internal representation
 accordingly. An application may require one representation or the
@@ -75,8 +122,33 @@ other. This option tells <code>avram</code> to treat all input files other
 than the virtual code file (named in the first command line parameter)
 as text files regardless of whether or not it would be possible to
 interpret them otherwise. This option may be used in combination with
-any other option. 
+any other option.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

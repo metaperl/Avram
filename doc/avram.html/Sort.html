@@ -1,96 +1,162 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Sort - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
-<link rel="prev" href="Reduce.html#Reduce" title="Reduce">
-<link rel="next" href="Transfer.html#Transfer" title="Transfer">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.13.4 Sort</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.13.4 Sort">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.13.4 Sort">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Sort"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Transfer.html#Transfer">Transfer</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Reduce.html#Reduce">Reduce</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Reduce.html#Reduce" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Transfer.html#Transfer" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Sort-1"></a>
+<h4 class="subsubsection">2.7.13.4 Sort</h4>
 
-<h5 class="subsubsection">2.7.13.4 Sort</h5>
-
-<p><a name="index-g_t_0040code_007bsort_007d-329"></a>Sorting is a frequently used operation that has the following standard
+<a name="index-sort"></a>
+<p>Sorting is a frequently used operation that has the following standard
 representation in virtual code.
-
-     <dl>
-<dt><em>T25</em><dd>[[<code>sort</code>]] <var>p</var> = <code>((nil,nil),((</code><var>p</var><code>,nil),(nil,nil)))</code>
+</p>
+<dl compact="compact">
+<dt> <em>T25</em></dt>
+<dd><p>[[<code>sort</code>]] <code><var>p</var></code> = <code>((nil,nil),((<var>p</var>,nil),(nil,nil)))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">When an application in this form is evaluated with an operand
+<p>When an application in this form is evaluated with an operand
 representing a list, the result is a sorted version of the list.
-
-   <p>The way a list is sorted depends on what order is of interest. For
+</p>
+<p>The way a list is sorted depends on what order is of interest. For
 example, numbers could be sorted in ascending or descending order,
 character strings could be sorted lexically or by length, etc.. The
-value of <var>p</var> is therefore needed in sorting applications to
+value of <code><var>p</var></code> is therefore needed in sorting applications to
 specify the order. It contains the virtual code for a partial order
 relational operator. This operator can be evaluated with any pair of
 items selected from a list, and should have a value of true if the left
 one should precede the right under the ordering. For example, if numbers
-were to be sorted in ascending order, then <var>p</var> would compute
+were to be sorted in ascending order, then <code><var>p</var></code> would compute
 the &ldquo;less or equal&rdquo; relation, returning true if its operand were a
 pair of numbers in which the left is less or equal to the right.
-
-   <p>The virtual code semantics for sorting applications is given by these
-two properties, wherein <var>p</var> is a non-<code>nil</code> tree, and
-<code>insert</code> is a <code>silly</code> mnemonic to be defined next. 
-<a name="index-g_t_0040code_007binsert_007d-330"></a>
-     <dl>
-<dt><em>P31</em><dd>([[<code>sort</code>]] <var>p</var>) <code>nil</code> = <code>nil</code>
-<br><dt><em>P32</em><dd>([[<code>sort</code>]] <var>p</var>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = ([[<code>insert</code>]] <var>p</var>)
-<code>(</code><var>x</var><code>,</code>([[<code>sort</code>]] <var>p</var>) <var>y</var><code>)</code>
+</p>
+<p>The virtual code semantics for sorting applications is given by these
+two properties, wherein <code><var>p</var></code> is a non-<code>nil</code> tree, and
+<code>insert</code> is a <code>silly</code> mnemonic to be defined next.
+<a name="index-insert"></a>
+</p>
+<dl compact="compact">
+<dt> <em>P31</em></dt>
+<dd><p>([[<code>sort</code>]] <code><var>p</var></code>) <code>nil</code> = <code>nil</code>
+</p></dd>
+<dt> <em>P32</em></dt>
+<dd><p>([[<code>sort</code>]] <code><var>p</var></code>) <code>(<var>x</var>,<var>y</var>)</code> = ([[<code>insert</code>]] <code><var>p</var></code>)
+<code>(<var>x</var>,</code>([[<code>sort</code>]] <code><var>p</var></code>) <code><var>y</var>)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">These properties say that the empty list is already sorted, and
+<p>These properties say that the empty list is already sorted, and
 a non-empty list is sorted if its tail is sorted and the head is then
 inserted in the proper place. This specification of sorting has nothing
 to do with the sorting algorithm that <code>avram</code> really uses.
-
-   <p>The meaning of insertion is convenient to specify in virtual code
+</p>
+<p>The meaning of insertion is convenient to specify in virtual code
 itself. It should satisfy these three equations.
-
-     <dl>
-<dt><em>E4</em><dd>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,nil)</code> = <code>(</code><var>x</var><code>,nil)</code>
-<br><dt><em>E5</em><dd>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code> =
-<code>(</code><var>y</var><code>,</code>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,</code><var>z</var><code>))</code>
-if <var>p</var><code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = <code>nil</code>
-<br><dt><em>E6</em><dd>([[<code>insert</code>]] <var>p</var>) <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>)</code>) =
-<code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code> if <var>p</var><code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> is a non-<code>nil</code> tree
+</p>
+<dl compact="compact">
+<dt> <em>E4</em></dt>
+<dd><p>([[<code>insert</code>]] <code><var>p</var></code>) <code>(<var>x</var>,nil)</code> = <code>(<var>x</var>,nil)</code>
+</p></dd>
+<dt> <em>E5</em></dt>
+<dd><p>([[<code>insert</code>]] <code><var>p</var></code>) <code>(<var>x</var>,(<var>y</var>,<var>z</var>))</code> =
+<code>(<var>y</var>,</code>([[<code>insert</code>]] <code><var>p</var></code>) <code>(<var>x</var>,<var>z</var>))</code>
+if <code><var>p</var>(<var>x</var>,<var>y</var>)</code> = <code>nil</code>
+</p></dd>
+<dt> <em>E6</em></dt>
+<dd><p>([[<code>insert</code>]] <code><var>p</var></code>) <code>(<var>x</var>,(<var>y</var>,<var>z</var>)</code>) =
+<code>(<var>x</var>,(<var>y</var>,<var>z</var>))</code> if <code><var>p</var>(<var>x</var>,<var>y</var>)</code> is a non-<code>nil</code> tree
+</p></dd>
 </dl>
 
-<p class="noindent">Intuitively, the right argument, whether <code>nil</code> or
-<code>(</code><var>y</var><code>,</code><var>z</var><code>)</code>, represents a list that is already sorted. The
-left argument <var>x</var> therefore only needs to be compared to the
-head element, <var>y</var> to ascertain whether or not it belongs at
+<p>Intuitively, the right argument, whether <code>nil</code> or
+<code>(<var>y</var>,<var>z</var>)</code>, represents a list that is already sorted. The
+left argument <code><var>x</var></code> therefore only needs to be compared to the
+head element, <code><var>y</var></code> to ascertain whether or not it belongs at
 the beginning. If not, it should be inserted into the tail.
-
-   <p>A possible implementation of <code>insert</code> in <code>silly</code> is given in
+</p>
+<p>A possible implementation of <code>insert</code> in <code>silly</code> is given in
 <a href="Insert.html#Insert">Insert</a>.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Reduce.html#Reduce" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Transfer.html#Transfer" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

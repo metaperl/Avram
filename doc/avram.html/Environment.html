@@ -1,76 +1,136 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Environment - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="prev" href="Files.html#Files" title="Files">
-<link rel="next" href="Bugs.html#Bugs" title="Bugs">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.10 Environment</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.10 Environment">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.10 Environment">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Environment"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Bugs.html#Bugs">Bugs</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Files.html#Files">Files</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Files.html#Files" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Bugs.html#Bugs" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Environment-1"></a>
+<h2 class="section">1.10 Environment</h2>
 
-<h3 class="section">1.10 Environment</h3>
-
-<p><a name="index-environment-131"></a><a name="index-g_t_0040code_007bAVMINPUTS_007d-132"></a><a name="index-paths-133"></a>An environment variable <samp><span class="env">AVMINPUTS</span></samp> can be made to store a list of
-directories (using the <samp><span class="command">set</span></samp> or <samp><span class="command">export</span></samp> commands) that
+<a name="index-environment-3"></a>
+<a name="index-AVMINPUTS-2"></a>
+<a name="index-paths-2"></a>
+<p>An environment variable <code>AVMINPUTS</code> can be made to store a list of
+directories (using the <code>set</code> or <code>export</code> commands) that
 <code>avram</code> will search for input files. The directories should be
-separated by colons, similarly to the <samp><span class="env">PATH</span></samp> environment variable.
-
-   <p><a name="index-search-paths-134"></a>The search paths in <samp><span class="env">AVMINPUTS</span></samp> apply only to the names of input
+separated by colons, similarly to the <code>PATH</code> environment variable.
+</p>
+<a name="index-search-paths-1"></a>
+<p>The search paths in <code>AVMINPUTS</code> apply only to the names of input
 files given on the command line (<a href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>) when
 <code>avram</code> is invoked in parameter mode (<a href="Parameter-Mode.html#Parameter-Mode">Parameter Mode</a>).  They
 do not apply to the name of the virtual code file, which is always
 assumed to be either absolute or relative to the current working
 directory (this assumption being preferable in the case of a script like
-that of <a href="Example-Script.html#Example-Script">Example Script</a>). 
-<a name="index-shell-script-135"></a>
-Starting in the first directory in the list of <samp><span class="env">AVMINPUTS</span></samp>,
+that of <a href="Example-Script.html#Example-Script">Example Script</a>).
+<a name="index-shell-script-1"></a>
+</p>
+<p>Starting in the first directory in the list of <code>AVMINPUTS</code>,
 <code>avram</code> searches for a file exactly as its name appears on
 the command line (subject to the expansion of special characters
 by the shell). If it is not found and the name does not contain a
-period, but a command line option of <samp><span class="option">-.EXT</span></samp> has been used,
+period, but a command line option of &lsquo;<samp>-.EXT</samp>&rsquo; has been used,
 <code>avram</code> will then search for a file with that name combined with
-the extension <code>.EXT</code>. If <samp><span class="option">-.EXT</span></samp> has not been used or if no
-<a name="index-g_t_0040code_007bEXT_007d-command-line-option-136"></a>matching file is found with it, <code>avram</code> tries the extensions of
+the extension <code>.EXT</code>. If &lsquo;<samp>-.EXT</samp>&rsquo; has not been used or if no
+<a name="index-EXT-command-line-option-1"></a>
+matching file is found with it, <code>avram</code> tries the extensions of
 <kbd>.avm</kbd> and <kbd>.fun</kbd> in that order, provided the given file name
 contained no periods. If no match is found for any of those cases,
 <code>avram</code> proceeds to search the next directory in the list obtained
-from <samp><span class="env">AVMINPUTS</span></samp>, and so on. It stops searching when the first
+from <code>AVMINPUTS</code>, and so on. It stops searching when the first
 match is found. For subsequent input files, the search begins again at
 the first directory.
-
-   <p>If <samp><span class="env">AVMINPUTS</span></samp> is defined, the current working directory is not
+</p>
+<p>If <code>AVMINPUTS</code> is defined, the current working directory is not
 searched for input files unless it is listed. If it is empty or not
-<a name="index-search-paths-137"></a>defined, a default list of search paths is used, currently
+<a name="index-search-paths-2"></a>
+defined, a default list of search paths is used, currently
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">.:/usr/local/lib/avm:/usr/lib/avm:/lib/avm:/opt/avm:/opt/lib/avm\
+:/usr/local/share/avm:/usr/share/avm:/share/avm:/opt/avm:/opt/share/avm
+</pre></td></tr></table>
 
-<pre class="example">     .:/usr/local/lib/avm:/usr/lib/avm:/lib/avm:/opt/avm:/opt/lib/avm\
-     :/usr/local/share/avm:/usr/share/avm:/share/avm:/opt/avm:/opt/share/avm
-</pre>
-   <p class="noindent">These paths are defined in <code>avram.c</code> and can be changed
+<p>These paths are defined in <code>avram.c</code> and can be changed
 by recompiling it.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Files.html#Files" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Bugs.html#Bugs" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

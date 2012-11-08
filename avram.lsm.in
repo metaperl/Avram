@@ -20,8 +20,8 @@ The package includes a toy compiler for a simple lisp-like language
 as a proof of concept.
 @configure_input@
 Keywords:	[virtual machine functional programming interpreter]
-Author: 	avram-support@basis.uklinux.net (Dennis Furey)
-Maintained-by:	avram-support@basis.uklinux.net (Dennis Furey)
+Author: 	ursala-users@freelists.org (Dennis Furey)
+Maintained-by:	ursala-users@freelists.org (Dennis Furey)
 Primary-site:	http://www.lsbu.ac.uk/~fureyd/avram
 		1.8M avram-@VERSION@.tar.gz
 		1449  avram.lsm

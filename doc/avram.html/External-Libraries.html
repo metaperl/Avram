@@ -1,108 +1,187 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>External Libraries - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="prev" href="Changes.html#Changes" title="Changes">
-<link rel="next" href="Copying.html#Copying" title="Copying">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="External-Libraries"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Copying.html#Copying">Copying</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Changes.html#Changes">Changes</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D. External Libraries</title>
 
-<h2 class="appendix">Appendix D External Libraries</h2>
+<meta name="description" content="avram - a virtual machine code interpreter: D. External Libraries">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D. External Libraries">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="External-Libraries"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Changes.html#Changes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="bes.html#bes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Changes.html#Changes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="External-Libraries-1"></a>
+<h1 class="appendix">D. External Libraries</h1>
 
 <p>Various functions are callable from virtual code applications by way
 of the <code>library</code> combinator as explained in <a href="Library-combinator.html#Library-combinator">Library combinator</a>. An expression (shown in <code>silly</code> syntax) of the form
 <code>library('foo','bar') x</code> applies a function named <code>'bar'</code>
 from a library named <code>'foo'</code> to an argument <code>x</code>.
-
-   <p>A brief overview of the libraries and functions can always be had by
+</p>
+<p>A brief overview of the libraries and functions can always be had by
 executing
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">$ avram --external-libraries
+</pre></td></tr></table>
 
-<pre class="example">     $ avram --external-libraries
-</pre>
-   <p class="noindent">The listing displayed by this command may show some that are not
+<p>The listing displayed by this command may show some that are not
 included here if this version of the documentation is not current or
 your installation has been locally enhanced. It may also lack some
 that are documented here if your installation is not fully equipped.
-
-   <p>Although the overview from the command line is adequate for a
+</p>
+<p>Although the overview from the command line is adequate for a
 reminder, it is not informative enough to explain how each function
 should be used. The purpose of this section is to provide this
 information in greater detail.
-
-   <p>Some general comments are applicable to all libraries.
-
-   <p>Each library documented in this section can generate error messages in
-the event of exceptional conditions, that are documented individually. 
-In addition to those, it's also possible for any library function to
+</p>
+<p>Some general comments are applicable to all libraries.
+</p>
+<p>Each library documented in this section can generate error messages in
+the event of exceptional conditions, that are documented individually.
+In addition to those, it&rsquo;s also possible for any library function to
 return error messages of
-<a name="index-unrecognized-library-703"></a><a name="index-unrecognized-function-name-704"></a>
-<pre class="example">     &lt;'unrecognized library'&gt;
-     &lt;'unrecognized <var>xxxx</var> function name'&gt;
-</pre>
-   <p class="noindent">where <var>xxxx</var> is the name of a library.  These indicate either that
+<a name="index-unrecognized-library"></a>
+<a name="index-unrecognized-function-name"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;'unrecognized library'&gt;
+&lt;'unrecognized <var>xxxx</var> function name'&gt;
+</pre></td></tr></table>
+
+<p>where <var>xxxx</var> is the name of a library.  These indicate either that
 the library name is invalid, or the library name is valid but the
-function name is invalid, or that they're both valid but the library
-wasn't detected on the host when <code>avram</code> was compiled. A virtual
+function name is invalid, or that they&rsquo;re both valid but the library
+wasn&rsquo;t detected on the host when <code>avram</code> was compiled. A virtual
 code application can always avoid these errors by testing for the
 availability of a function using the <code>have</code> combinator (<a href="Have-combinator.html#Have-combinator">Have combinator</a>).
+</p>
+<p>In addition, any library function that operates on numerical values or
+lists thereof can return these messages in cases of invalid input.
+<a name="index-missing-value-1"></a>
+<a name="index-invalid-value-1"></a>
+<a name="index-bad-vector-specification"></a>
+<a name="index-bad-matrix-specification"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;'missing value'&gt;
+&lt;'invalid value'&gt;
+&lt;'bad vector specification'&gt;
+&lt;'bad matrix specification'&gt;
+</pre></td></tr></table>
 
-   <p>In addition, any library function that operates on numerical values or
-lists thereof can return these messages in cases of invalid input. 
-<a name="index-missing-value-705"></a><a name="index-invalid-value-706"></a><a name="index-bad-vector-specification-707"></a><a name="index-bad-matrix-specification-708"></a>
-<pre class="example">     &lt;'missing value'&gt;
-     &lt;'invalid value'&gt;
-     &lt;'bad vector specification'&gt;
-     &lt;'bad matrix specification'&gt;
-</pre>
-   <p class="noindent">These messages indicate that an input parameter that was required to
+<p>These messages indicate that an input parameter that was required to
 be a valid representation of a floating point number, a vector,
-or a matrix was something other than that (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>). 
+or a matrix was something other than that (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>).
 The last could also occur if a parameter that is required to be
 a square matrix has unequal numbers of rows and columns.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="bes.html#bes">D.1 <code>bes</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       Bessel functions
+</td></tr>
+<tr><td align="left" valign="top"><a href="complex.html#complex">D.2 <code>complex</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   native complex arithmetic
+</td></tr>
+<tr><td align="left" valign="top"><a href="fftw.html#fftw">D.3 <code>fftw</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      fast Fourier transforms
+</td></tr>
+<tr><td align="left" valign="top"><a href="glpk.html#glpk">D.4 <code>glpk</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      simplex linear programming
+</td></tr>
+<tr><td align="left" valign="top"><a href="gsldif.html#gsldif">D.5 <code>gsldif</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    numerical differentiation
+</td></tr>
+<tr><td align="left" valign="top"><a href="gslevu.html#gslevu">D.6 <code>gslevu</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    series acceleration
+</td></tr>
+<tr><td align="left" valign="top"><a href="gslint.html#gslint">D.7 <code>gslint</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    numerical integration
+</td></tr>
+<tr><td align="left" valign="top"><a href="harminv.html#harminv">D.8 <code>harminv</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   harmonic inversion
+</td></tr>
+<tr><td align="left" valign="top"><a href="kinsol.html#kinsol">D.9 <code>kinsol</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    constrained non-linear optimization
+</td></tr>
+<tr><td align="left" valign="top"><a href="lapack.html#lapack">D.10 <code>lapack</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    linear algebra
+</td></tr>
+<tr><td align="left" valign="top"><a href="math.html#math">D.11 <code>math</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      native floating point arithmetic
+</td></tr>
+<tr><td align="left" valign="top"><a href="mtwist.html#mtwist">D.12 <code>mtwist</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    random number generation
+</td></tr>
+<tr><td align="left" valign="top"><a href="minpack.html#minpack">D.13 <code>minpack</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   non-linear optimization
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr.html#mpfr">D.14 <code>mpfr</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      arbitrary precision arithmetic
+</td></tr>
+<tr><td align="left" valign="top"><a href="lpsolve.html#lpsolve">D.15 <code>lpsolve</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   mixed integer programming
+</td></tr>
+<tr><td align="left" valign="top"><a href="rmath.html#rmath">D.16 <code>rmath</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     statistical and special functions
+</td></tr>
+<tr><td align="left" valign="top"><a href="umf.html#umf">D.17 <code>umf</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       sparse matrices
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="bes.html#bes">bes</a>:        Bessel functions
-<li><a accesskey="2" href="complex.html#complex">complex</a>:    native complex arithmetic
-<li><a accesskey="3" href="fftw.html#fftw">fftw</a>:       fast Fourier transforms
-<li><a accesskey="4" href="glpk.html#glpk">glpk</a>:       simplex linear programming
-<li><a accesskey="5" href="gsldif.html#gsldif">gsldif</a>:     numerical differentiation
-<li><a accesskey="6" href="gslevu.html#gslevu">gslevu</a>:     series acceleration
-<li><a accesskey="7" href="gslint.html#gslint">gslint</a>:     numerical integration
-<li><a accesskey="8" href="harminv.html#harminv">harminv</a>:    harmonic inversion
-<li><a accesskey="9" href="kinsol.html#kinsol">kinsol</a>:     constrained non-linear optimization
-<li><a href="lapack.html#lapack">lapack</a>:     linear algebra
-<li><a href="math.html#math">math</a>:       native floating point arithmetic
-<li><a href="mtwist.html#mtwist">mtwist</a>:     random number generation
-<li><a href="minpack.html#minpack">minpack</a>:    non-linear optimization
-<li><a href="mpfr.html#mpfr">mpfr</a>:       arbitrary precision arithmetic
-<li><a href="lpsolve.html#lpsolve">lpsolve</a>:    mixed integer programming
-<li><a href="rmath.html#rmath">rmath</a>:      statistical and special functions
-<li><a href="umf.html#umf">umf</a>:        sparse matrices
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Changes.html#Changes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="bes.html#bes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Changes.html#Changes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

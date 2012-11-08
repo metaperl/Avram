@@ -1,61 +1,102 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>gslevu - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
-<link rel="prev" href="gsldif.html#gsldif" title="gsldif">
-<link rel="next" href="gslint.html#gslint" title="gslint">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: D.6 gslevu</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: D.6 gslevu">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.6 gslevu">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="gslevu"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="gslint.html#gslint">gslint</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="gsldif.html#gsldif">gsldif</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
-<hr>
-</div>
-
-<h3 class="section">D.6 <code>gslevu</code></h3>
-
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Additional-gsldif-notes.html#Additional-gsldif-notes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gslevu-calling-conventions.html#gslevu-calling-conventions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="gslevu-1"></a>
+<h2 class="section">D.6 <code>gslevu</code></h2>
 <p>This library exports a pair of functions of the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('gslevu','accel')
 
-<pre class="example">     library('gslevu','accel')
-     
-     library('gslevu','utrunc')
-</pre>
-   <p class="noindent">that take a list of real numbers <var>x</var> to a pair of real numbers
-<code>(</code><var>s</var><code>,</code><var>e</var><code>)</code>.
+library('gslevu','utrunc')
+</pre></td></tr></table>
 
-   <p>The idea is that <var>x</var> represents the first few terms of an infinite
-<a name="index-infinite-series-722"></a>series whose sum converges, but only very slowly. The functions
-<a name="index-convergence-723"></a>extrapolate an estimate of the infinite summation by the Levin
-<a name="index-Levin-u_002dtransform-724"></a>u-transform as documented in the GNU Scientific Library reference
+<p>that take a list of real numbers <var>x</var> to a pair of real numbers
+<code>(<var>s</var>,<var>e</var>)</code>.
+</p>
+<p>The idea is that <var>x</var> represents the first few terms of an infinite
+<a name="index-infinite-series"></a>
+series whose sum converges, but only very slowly. The functions
+<a name="index-convergence"></a>
+extrapolate an estimate of the infinite summation by the Levin
+<a name="index-Levin-u_002dtransform"></a>
+u-transform as documented in the GNU Scientific Library reference
 manual.
-
-   <p>For well behaved series, considerably fewer terms are needed for an
+</p>
+<p>For well behaved series, considerably fewer terms are needed for an
 accurate estimate than a direct summation would require.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="gslevu-calling-conventions.html#gslevu-calling-conventions">D.6.1 <code>gslevu</code> calling conventions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="gslevu-exceptions.html#gslevu-exceptions">D.6.2 <code>gslevu</code> exceptions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="gslevu-calling-conventions.html#gslevu-calling-conventions">gslevu calling conventions</a>
-<li><a accesskey="2" href="gslevu-exceptions.html#gslevu-exceptions">gslevu exceptions</a>
-</ul>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

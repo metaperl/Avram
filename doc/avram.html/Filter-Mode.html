@@ -1,70 +1,134 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Filter Mode - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Modes-of-Operation.html#Modes-of-Operation" title="Modes of Operation">
-<link rel="prev" href="Modes-of-Operation.html#Modes-of-Operation" title="Modes of Operation">
-<link rel="next" href="Parameter-Mode.html#Parameter-Mode" title="Parameter Mode">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.2.1 Filter Mode</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.2.1 Filter Mode">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.2.1 Filter Mode">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Filter-Mode"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Parameter-Mode.html#Parameter-Mode">Parameter Mode</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode.html#Parameter-Mode" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Filter-Mode-1"></a>
+<h3 class="subsection">1.2.1 Filter Mode</h3>
 
-<h4 class="subsection">1.2.1 Filter Mode</h4>
-
-<p><a name="index-filter-mode-21"></a><a name="index-modes-22"></a>In filter mode, the argument to the function given by the virtual code
+<a name="index-filter-mode"></a>
+<a name="index-modes-2"></a>
+<p>In filter mode, the argument to the function given by the virtual code
 is taken from standard input, and the result is written to standard
 output, except for error messages resulting from a failure to evaluate
-the function, which are written to standard error. 
-See <a href="Diagnostics.html#Diagnostics">Diagnostics</a>. Filter mode is indicated whenever these three
+the function, which are written to standard error.
+See section <a href="Diagnostics.html#Diagnostics">Diagnostics</a>. Filter mode is indicated whenever these three
 conditions are all met.
-
-     <ul>
-<li>Either at least one of the filter mode options appears on the command
+</p>
+<ul>
+<li>
+Either at least one of the filter mode options appears on the command
 line preceding the first filename parameter, or there are no options at
-all. See <a href="Filter-Mode-Options.html#Filter-Mode-Options">Filter Mode Options</a>. 
-<li>Exactly one filename parameter appears on the command line,
-which is the name of the virtual machine code file. 
-<li>Either the filename comes last on the command line, or the
-<samp><span class="option">--unparameterized</span></samp> option precedes it, causing
-everything following it to be ignored. 
-</ul>
-
-<p class="noindent">Examples:
-
-     <dl>
-<dt><kbd>avram mynewapp &lt; inputfilename</kbd><dd><a name="index-standard-input-23"></a>In this example, filter mode is recognized by default because there are
+all. See section <a href="Filter-Mode-Options.html#Filter-Mode-Options">Filter Mode Options</a>.
+</li><li>
+Exactly one filename parameter appears on the command line,
+which is the name of the virtual machine code file.
+</li><li>
+Either the filename comes last on the command line, or the
+&lsquo;<samp>--unparameterized</samp>&rsquo; option precedes it, causing
+everything following it to be ignored.
+</li></ul>
+ 
+<p>Examples:
+</p>
+<dl compact="compact">
+<dt> <kbd>avram mynewapp &lt; inputfilename</kbd></dt>
+<dd><a name="index-standard-input-1"></a>
+<p>In this example, filter mode is recognized by default because there are
 no options or input files on the command line to indicate
 otherwise. (The input file redirected into standard input is not treated
-by the shell as a command line argument.) 
-<br><dt><kbd>cat somefile | avram -r coolprog &gt; outputfile</kbd><dd>In this example, the <samp><span class="option">-r</span></samp> option gives it away, being one of the
+by the shell as a command line argument.)
+</p></dd>
+<dt> <kbd>cat somefile | avram -r coolprog &gt; outputfile</kbd></dt>
+<dd><p>In this example, the &lsquo;<samp>-r</samp>&rsquo; option gives it away, being one of the
 filter mode options, in addition to the fact that there are no input
-file parameters or application-specific options. 
-<br><dt><kbd>avram -u devilmaycare.avm --bogusoption ignoredparameter</kbd><dd>In this case, filter mode is forced by the <samp><span class="option">-u</span></samp>
-option despite indications to the contrary. 
+file parameters or application-specific options.
+</p></dd>
+<dt> <kbd>avram -u devilmaycare.avm --bogusoption ignoredparameter</kbd></dt>
+<dd><p>In this case, filter mode is forced by the &lsquo;<samp>-u</samp>&rsquo;
+option despite indications to the contrary.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode.html#Parameter-Mode" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

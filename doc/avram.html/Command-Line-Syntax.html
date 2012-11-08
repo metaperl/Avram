@@ -1,115 +1,194 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Command Line Syntax - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="prev" href="Parameter-Mode-Options.html#Parameter-Mode-Options" title="Parameter Mode Options">
-<link rel="next" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.5 Command Line Syntax</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.5 Command Line Syntax">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.5 Command Line Syntax">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Command-Line-Syntax"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Diagnostics.html#Diagnostics">Diagnostics</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
-<hr>
-</div>
-
-<h3 class="section">1.5 Command Line Syntax</h3>
-
-<p><a name="index-command-line-46"></a>The command line parameters that follow the virtual code file name
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Parameter-Mode-Options.html#Parameter-Mode-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Command-Line-Syntax-1"></a>
+<h2 class="section">1.5 Command Line Syntax</h2>
+<a name="index-command-line"></a>
+<p>The command line parameters that follow the virtual code file name
 when <code>avram</code> is used in parameter mode (<a href="Parameter-Mode.html#Parameter-Mode">Parameter Mode</a>) are dependent on the
 specific application. However, all supported applications are
 constrained for implementation reasons to observe certain uniform
 conventions regarding their command line parameters, which are
 documented here to avoid needless duplication.
-
-   <p><a name="index-shell-47"></a><a name="index-file-parameters-48"></a><a name="index-input-files-49"></a>The shell divides the command line into "arguments" separated by white
+</p>
+<a name="index-shell"></a>
+<a name="index-file-parameters"></a>
+<a name="index-input-files"></a>
+<p>The shell divides the command line into &quot;arguments&quot; separated by white
 space.  Arguments containing white space or special characters used by
 the shell must be quoted or protected as usual. File names with wild
 cards in them are expanded by the shell before <code>avram</code> sees them.
-
-   <p><code>avram</code> then extracts from the sequence of arguments a sequence of
+</p>
+<p><code>avram</code> then extracts from the sequence of arguments a sequence of
 filenames and a sequence of options. Each option consists of a keyword and an
 optional parameter list. Filenames, keywords, and parameter lists are
 distinguished according to the following criteria.
-
-     <ol type=1 start=1>
-<li>An argument is treated as a keyword iff it meets these three
+</p>
+<ol>
+<li>
+An argument is treated as a keyword iff it meets these three
 conditions.
 
-          <ol type=a start=1>
-<li>It starts with a dash. 
-<li>It doesn't contain an equals sign. 
-<li>It doesn't consist solely of a dash.
-          </ol>
+<ol>
+<li>
+It starts with a dash.
+</li><li>
+It doesn&rsquo;t contain an equals sign.
+</li><li>
+It doesn&rsquo;t consist solely of a dash.
+</li></ol>
 
-     <li>An argument is treated as a parameter list iff it meets these four
+</li><li>
+An argument is treated as a parameter list iff it meets these four
 conditions.
 
-          <ol type=a start=1>
-<li>It doesn't begin with a dash. 
-<li>It either begins with an equals sign or doesn't contain one. 
-<li>It immediately follows an argument beginning with a dash, not
-containing an equals sign and not consisting solely of a dash. 
-<li>At least one of the following is true.
-               <ol type=1 start=1>
-<li>It doesn't contain a period, tilde, or path separator. 
-<a name="index-path-separators-50"></a><li>It contains a comma. 
-<li>It can be interpreted as a C formatted floating point number.
-               </ol>
-          </ol>
+<ol>
+<li>
+It doesn&rsquo;t begin with a dash.
+</li><li>
+It either begins with an equals sign or doesn&rsquo;t contain one.
+</li><li>
+It immediately follows an argument beginning with a dash, not
+containing an equals sign and not consisting solely of a dash.
+</li><li>
+At least one of the following is true.
+<ol>
+<li>
+It doesn&rsquo;t contain a period, tilde, or path separator.
+<a name="index-path-separators"></a>
+</li><li>
+It contains a comma.
+</li><li>
+It can be interpreted as a C formatted floating point number.
+</li></ol>
+</li></ol>
 
-     <li>An argument is treated as an input file name iff it meets these four
+</li><li>
+An argument is treated as an input file name iff it meets these four
 conditions.
 
-          <ol type=a start=1>
-<li>It doesn't begin with a dash. 
-<li>It doesn't contain an equals sign. 
-<li>It doesn't contain a comma. 
-<li>At least one of the following is true.
-               <ol type=1 start=1>
-<li>It contains a period, tilde, or path separator. 
-<li>It doesn't immediately follow an argument beginning with a dash, not
+<ol>
+<li>
+It doesn&rsquo;t begin with a dash.
+</li><li>
+It doesn&rsquo;t contain an equals sign.
+</li><li>
+It doesn&rsquo;t contain a comma.
+</li><li>
+At least one of the following is true.
+<ol>
+<li>
+It contains a period, tilde, or path separator.
+</li><li>
+It doesn&rsquo;t immediately follow an argument beginning with a dash, not
 consisting solely of a dash, and not containing an equals sign.
-               </ol>
-          </ol>
+</li></ol>
+</li></ol>
 
-     <li>If an argument contains an equals sign but doesn't begin with one,
+</li><li>
+If an argument contains an equals sign but doesn&rsquo;t begin with one,
 the part on the left of the first equals sign is treated as a
-keyword and the part on the right is treated as a parameter list. 
-<li>An argument consisting solely of a dash is taken to represent the
-standard input file. 
-<li>An argument not fitting any of the above classifications is an error.
-        </ol>
+keyword and the part on the right is treated as a parameter list.
+</li><li>
+An argument consisting solely of a dash is taken to represent the
+standard input file.
+</li><li>
+An argument not fitting any of the above classifications is an error.
+</li></ol>
 
-   <p>These conventions are needed for <code>avram</code> to detect input file names
+<p>These conventions are needed for <code>avram</code> to detect input file names
 in a general, position independent way, so that it can preload the files
 on behalf of the application. Many standard Unix utilities follow these
-<a name="index-Unix-51"></a>conventions to a large extent, the exceptions being those that employ
+<a name="index-Unix-2"></a>
+conventions to a large extent, the exceptions being those that employ
 non-filename arguments without distinguishing syntax, and use positional
 or other ad hoc methods of command line interpretation. A drop-in
 replacement for such an application could nevertheless be implemented
 using <code>avram</code> with an appropriate wrapper script, similar to the
 approach recommended in <a href="Example-Script.html#Example-Script">Example Script</a>, but with suitable keywords
 inserted prior to the ambiguous arguments.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Parameter-Mode-Options.html#Parameter-Mode-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

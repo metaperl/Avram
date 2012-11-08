@@ -1,63 +1,105 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Recur - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Recursion.html#Recursion" title="Recursion">
-<link rel="prev" href="Recursion.html#Recursion" title="Recursion">
-<link rel="next" href="Refer.html#Refer" title="Refer">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.9.1 Recur</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.9.1 Recur">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.9.1 Recur">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Recur"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Refer.html#Refer">Refer</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Recursion.html#Recursion">Recursion</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Recursion.html#Recursion">Recursion</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Recursion.html#Recursion" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Refer.html#Refer" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Recursion.html#Recursion" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Recur-1"></a>
+<h4 class="subsubsection">2.7.9.1 Recur</h4>
 
-<h5 class="subsubsection">2.7.9.1 Recur</h5>
-
-<p><a name="index-g_t_0040code_007bmeta_007d-298"></a><a name="index-g_t_0040code_007brecur_007d-299"></a>A generalization of the form denoted by <code>meta</code> in <code>silly</code> is
+<a name="index-meta-1"></a>
+<a name="index-recur"></a>
+<p>A generalization of the form denoted by <code>meta</code> in <code>silly</code> is
 recognized by the virtual machine and allows a slightly more efficient
-encoding of recursive applications. An expression <code>recur </code><var>p</var>
+encoding of recursive applications. An expression <code>recur <var>p</var></code>
 has the representation indicated by this theorem,
-
-     <dl>
-<dt><em>T15</em><dd>[[<code>recur</code>]] <var>p</var> = <code>(((nil,</code><var>p</var><code>),nil),nil)</code>
+</p>
+<dl compact="compact">
+<dt> <em>T15</em></dt>
+<dd><p>[[<code>recur</code>]] <code><var>p</var></code> = <code>(((nil,<var>p</var>),nil),nil)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">which implies that [[<code>meta</code>]] = [[<code>recur</code>]] <code>(nil,nil)</code>.
-
-   <p>If <var>p</var> is non-<code>nil</code>, a tree of the form [[<code>recur</code>]]
-<var>p</var> is interpreted as follows. Note that <em>P4</em> is
-equivalent to the special case of this property for which <var>p</var>
+<p>which implies that [[<code>meta</code>]] = [[<code>recur</code>]] <code>(nil,nil)</code>.
+</p>
+<p>If <code><var>p</var></code> is non-<code>nil</code>, a tree of the form [[<code>recur</code>]]
+<code><var>p</var></code> is interpreted as follows. Note that <em>P4</em> is
+equivalent to the special case of this property for which <code><var>p</var></code>
 is <code>(nil,nil)</code>.
-
-     <dl>
-<dt><em>P14</em><dd>([[<code>recur</code>]] <var>p</var>) <var>x</var> = [[<code>meta</code>]] ([[<code>field</code>]] <var>p</var>) <var>x</var>
+</p>
+<dl compact="compact">
+<dt> <em>P14</em></dt>
+<dd><p>([[<code>recur</code>]] <code><var>p</var></code>) <code><var>x</var></code> = [[<code>meta</code>]] ([[<code>field</code>]] <code><var>p</var></code>) <code><var>x</var></code>
+</p></dd>
 </dl>
 
-   <p>The rationale is that <code>meta</code> would very frequently be composed with
-a deconstruction <code>field </code><var>p</var>, so the virtual machine saves some
+<p>The rationale is that <code>meta</code> would very frequently be composed with
+a deconstruction <code>field <var>p</var></code>, so the virtual machine saves some
 time and space by allowing the two of them to be encoded in a smaller
 tree with the combined meaning.
+</p>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

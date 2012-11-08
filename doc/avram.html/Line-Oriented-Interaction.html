@@ -1,75 +1,112 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Line Oriented Interaction - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Output From Interactive Applications">
-<link rel="prev" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Output From Interactive Applications">
-<link rel="next" href="Character-Oriented-Interaction.html#Character-Oriented-Interaction" title="Character Oriented Interaction">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Line-Oriented-Interaction"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Character-Oriented-Interaction.html#Character-Oriented-Interaction">Character Oriented Interaction</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.6.4.1 Line Oriented Interaction</title>
 
-<h5 class="subsubsection">2.6.4.1 Line Oriented Interaction</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.6.4.1 Line Oriented Interaction">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.6.4.1 Line Oriented Interaction">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Line-Oriented-Interaction"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Oriented-Interaction.html#Character-Oriented-Interaction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Line-Oriented-Interaction-1"></a>
+<h4 class="subsubsection">2.6.4.1 Line Oriented Interaction</h4>
 
 <p>Within this general pattern, more specific styles of interaction are
 possible. In the simplest one to explain first, the result returned by
 the function is always a data structure of the form
-<a name="index-command-line-231"></a><code>(</code><var>state</var><code>,(</code><var>command lines</var><code>,</code><var>prompts</var><code>))</code>, wherein the
+<a name="index-command-line-4"></a>
+<code>(<var>state</var>,(<var>command lines</var>,<var>prompts</var>))</code>, wherein the
 fields have these interpretations.
-
-     <dl>
-<dt><var>state</var><dd>is a tree incorporating any data in any format that the application
-needs to remember from one invocation to the next. 
-<br><dt><var>command lines</var><dd>is a list of character strings that are piped to the standard input
+</p>
+<dl compact="compact">
+<dt> <var>state</var></dt>
+<dd><p>is a tree incorporating any data in any format that the application
+needs to remember from one invocation to the next.
+</p></dd>
+<dt> <var>command lines</var></dt>
+<dd><p>is a list of character strings that are piped to the standard input
 stream of a separately spawned process. The process may persist from one
-invocation of the function to the next, or may be spawned each time. 
-<br><dt><var>prompts</var><dd>is a non-empty list of character strings containing a suffix of the text
+invocation of the function to the next, or may be spawned each time.
+</p></dd>
+<dt> <var>prompts</var></dt>
+<dd><p>is a non-empty list of character strings containing a suffix of the text
 expected from the standard output stream of the process as a result of
-sending the command lines to it. 
+sending the command lines to it.
+</p></dd>
 </dl>
 
-   <p>On each iteration, <code>avram</code> sends the command line character strings
-<a name="index-spawning-processes-232"></a>to a separately spawned process, with line breaks between them if there
+<p>On each iteration, <code>avram</code> sends the command line character strings
+<a name="index-spawning-processes-1"></a>
+to a separately spawned process, with line breaks between them if there
 are more than one command. If a process remains from the previous iteration that
 has not terminated itself, the list of command lines is sent to the same
 process. If no such process already exists, the first string in the list
 of command lines is treated as a shell command and used to spawn the
-<a name="index-g_t_0040code_007bexp_005fpopen_007d-233"></a>process (using the <code>exp_popen</code> library function), and the remaining
+<a name="index-exp_005fpopen-1"></a>
+process (using the <code>exp_popen</code> library function), and the remaining
 strings are sent to the newly spawned process.
-
-   <p>Normally processes spawned with commands that invoke interactive command
-line interpreters of their own, such as <samp><span class="command">bash</span></samp>, <samp><span class="command">ftp</span></samp> or
-<samp><span class="command">bc</span></samp>, will persist indefinitely unless the command causing them
+</p>
+<p>Normally processes spawned with commands that invoke interactive command
+line interpreters of their own, such as <code>bash</code>, <code>ftp</code> or
+<code>bc</code>, will persist indefinitely unless the command causing them
 to exit is issued or some other event kills them. Processes spawned with
-non-interactive commands, such as <samp><span class="command">ls</span></samp> or <samp><span class="command">pwd</span></samp>, will
+non-interactive commands, such as <code>ls</code> or <code>pwd</code>, will
 terminate when the last of their initial output has been received.
-
-   <p>In the case of processes that persist after being spawned, <code>avram</code>
+</p>
+<p>In the case of processes that persist after being spawned, <code>avram</code>
 needs some way of knowing when to stop waiting for more output from them
-so that it doesn't get stuck waiting forever. This purpose is served by
+so that it doesn&rsquo;t get stuck waiting forever. This purpose is served by
 the <var>prompts</var> field. This field could contain a single string
 holding the last thing the process will send before becoming quiescent,
 such as the strings <code>bash$ </code> or <code>ftp&gt; </code> in the above
@@ -77,13 +114,14 @@ examples. Alternatively, a sequence of more than one prompt string can
 be used to indicate that the corresponding sequence of lines must be
 detected. An empty string followed by <code>ftp&gt; </code> would indicate that
 the <code>ftp&gt; </code> prompt is expected to be immediately preceded by a line
-<a name="index-prompts-234"></a>break. There is also the option of using prompt strings to indicate a
+<a name="index-prompts"></a>
+break. There is also the option of using prompt strings to indicate a
 pattern that does not necessarily imply quiescence, but is a more
 convenient point at which to stop reading the output from the process.
-
-   <p>For processes spawned with commands that do not start their own
-interactive command line interpreters, such as <samp><span class="command">ls</span></samp> or
-<samp><span class="command">pwd</span></samp>, it may be preferable to read all the output from them
+</p>
+<p>For processes spawned with commands that do not start their own
+interactive command line interpreters, such as <code>ls</code> or
+<code>pwd</code>, it may be preferable to read all the output from them
 until they terminate. To achieve this effect, the list of prompt strings
 should contain only the single string containing only the single
 <code>EOF</code> character (usually code 4) or any other character that is
@@ -91,20 +129,20 @@ certain not to occur in the output of the process. This technique is
 based on the assumption that the process was spawned originally with the
 command in question, not that such a command is sent to an existing
 shell process.
-
-   <p>In any case, when enough output has been received from the process, it
+</p>
+<p>In any case, when enough output has been received from the process, it
 is collected into a list of received strings including the prompt
 strings at the end (if they were received), and the function is applied
-to the pair <code>(</code><var>state</var><code>,</code><var>received strings</var><code>)</code>. If the cycle is
+to the pair <code>(<var>state</var>,<var>received strings</var>)</code>. If the cycle is
 to continue, the result returned by the function will include a new
 state, a new list of command lines, and a new list of prompt strings. A
 result of <code>nil</code> will cause the computation to terminate.
-
-   <p>There are some unusual situations that could occur in the course of line
+</p>
+<p>There are some unusual situations that could occur in the course of line
 oriented interaction, and are summarized as follows.
-
-     <ul>
-<li>If the process terminates before any pattern matching the prompt
+</p>
+<ul>
+<li> If the process terminates before any pattern matching the prompt
 strings is received from it, all of the output from the process up to
 the point where it terminated is collected into the <var>received
 strings</var> list and passed to the function. This situation includes cases
@@ -112,27 +150,52 @@ where the process terminates immediately upon being spawned, but not
 abnormal completion of the <code>exp_popen</code> library function, which is
 a fatal error. This feature of the interface is what allows <code>EOF</code>
 to be used for collecting all the output at once from a non-interactive
-command. 
-<li>If the list of <var>command lines</var> is empty, and no process
+command.
+</li><li> If the list of <var>command lines</var> is empty, and no process
 currently exists due to a previous iteration, the effect is the same as
 if the process terminates unexpectedly before outputting anything. I.e.,
 the function is applied to a pair containing an empty list of received
 strings. There is no good reason for an application to get into this
-situation. 
-<li>If the list of <var>command lines</var> is empty but a process persists
+situation.
+</li><li> If the list of <var>command lines</var> is empty but a process persists
 from a previous iteration, no output is sent to it, but receiving from
 it proceeds normally. This feature of the interface could be used
 effectively by applications intended to process the received data in
-<a name="index-deadlock-235"></a>parts, but will cause deadlock if the process is already quiescent. 
-<li>All character strings have to consist of lists of valid
-representations of non-null characters according to <a href="Character-Table.html#Character-Table">Character Table</a>, or else there will be some fatal error messages. 
-<li>If the list of <var>prompt strings</var> contains only the empty
+<a name="index-deadlock"></a>
+parts, but will cause deadlock if the process is already quiescent.
+</li><li> All character strings have to consist of lists of valid
+representations of non-null characters according to <a href="Character-Table.html#Character-Table">Character Table</a>, or else there will be some fatal error messages.
+</li><li> If the list of <var>prompt strings</var> contains only the empty
 string, <code>avram</code> will not wait to receive anything from the process,
 but will proceed with the next iteration immediately. If this effect is
 intended, care must be taken not to confuse the empty list
 of <var>prompt strings</var> with the list containing the empty string. The former
-indicates character oriented interaction, which is explained next. 
-</ul>
+indicates character oriented interaction, which is explained next.
+</li></ul>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Oriented-Interaction.html#Character-Oriented-Interaction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

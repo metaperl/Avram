@@ -1,62 +1,136 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>i/o Errors - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link rel="prev" href="Internal-Errors.html#Internal-Errors" title="Internal Errors">
-<link rel="next" href="Overflow-Errors.html#Overflow-Errors" title="Overflow Errors">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.6.2 i/o Errors</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.6.2 i/o Errors">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.6.2 i/o Errors">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
-<a name="i%2fo-Errors"></a>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="i_002fo-Errors"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Overflow-Errors.html#Overflow-Errors">Overflow Errors</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Internal-Errors.html#Internal-Errors">Internal Errors</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
-<hr>
-</div>
-
-<h4 class="subsection">1.6.2 i/o Errors</h4>
-
-<p><a name="index-i_002fo-errors-59"></a>These error messages are prefaced with the name of the
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Internal-Errors.html#Internal-Errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Overflow-Errors.html#Overflow-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="i_002fo-Errors-1"></a>
+<h3 class="subsection">1.6.2 i/o Errors</h3>
+<a name="index-i_002fo-errors"></a>
+<p>These error messages are prefaced with the name of the
 application. A further explanation as to the
-<a name="index-g_t_0040code_007bstrerror_007d-60"></a>reason, obtained from the standard <code>strerror()</code> utility, is
+<a name="index-strerror"></a>
+reason, obtained from the standard <code>strerror()</code> utility, is
 appended to the messages below if possible.
-
-     <dl>
-<dt><var>application-name</var><code>: can't read </code><var>filename</var><dd><a name="index-file-names-61"></a><a name="index-g_t_0040code_007bcan_0027t-read_007d-62"></a><a name="index-environment-63"></a><a name="index-g_t_0040code_007bAVMINPUTS_007d-64"></a>A file was not able to be opened for reading, typically because it was
+</p>
+<dl compact="compact">
+<dt> <code><var>application-name</var>: can't read <var>filename</var></code></dt>
+<dd><a name="index-file-names"></a>
+<a name="index-can_0027t-read"></a>
+<a name="index-environment-1"></a>
+<a name="index-AVMINPUTS"></a>
+<p>A file was not able to be opened for reading, typically because it was
 not found or because the user does not have permission. The file name is
 displayed with special characters expanded but without any default
 extensions or search paths that may have been tried. If you think a file
 exists and should have been found, there may be a problem with your
-<samp><span class="env">AVMINPUTS</span></samp> environment variable (<a href="Environment.html#Environment">Environment</a>). 
-<br><dt><var>application-name</var><code>: can't write </code><var>filename</var><dd><a name="index-g_t_0040code_007bcan_0027t-write_007d-65"></a>A file was not able to be opened for writing. 
-<br><dt><var>application-name</var><code>: can't write to </code><var>filename</var><dd>A file was successfully opened for writing but became impossible to
-write thereafter. 
-<br><dt><var>application-name</var><code>: can't spawn </code><var>command</var><dd><a name="index-shell-66"></a><a name="index-expect-67"></a><a name="index-libexpect-68"></a><a name="index-g_t_0040code_007bcan_0027t-spawn_007d-69"></a><a name="index-g_t_0040code_007bexp_005fpopen_007d-70"></a><a name="index-spawning-processes-71"></a>An attempt to execute a shell command on behalf of an interactive
+<code>AVMINPUTS</code> environment variable (<a href="Environment.html#Environment">Environment</a>).
+</p></dd>
+<dt> <code><var>application-name</var>: can't write <var>filename</var></code></dt>
+<dd><a name="index-can_0027t-write"></a>
+<p>A file was not able to be opened for writing.
+</p></dd>
+<dt> <code><var>application-name</var>: can't write to <var>filename</var></code></dt>
+<dd><p>A file was successfully opened for writing but became impossible to
+write thereafter.
+</p></dd>
+<dt> <code><var>application-name</var>: can't spawn <var>command</var></code></dt>
+<dd><a name="index-shell-1"></a>
+<a name="index-expect"></a>
+<a name="index-libexpect"></a>
+<a name="index-can_0027t-spawn"></a>
+<a name="index-exp_005fpopen"></a>
+<a name="index-spawning-processes"></a>
+<p>An attempt to execute a shell command on behalf of an interactive
 application failed during the <code>exp_popen()</code> call to the
-<code>libexpect</code> library. 
-<br><dt><var>application-name</var><code>: can't close </code><var>filename</var><dd><a name="index-g_t_0040code_007bcan_0027t-close_007d-72"></a>A call to the standard C procedure <code>fclose()</code> failed due to
+<code>libexpect</code> library.
+</p></dd>
+<dt> <code><var>application-name</var>: can't close <var>filename</var></code></dt>
+<dd><a name="index-can_0027t-close"></a>
+<p>A call to the standard C procedure <code>fclose()</code> failed due to
 unforeseen circumstances. The error is non-fatal but the file should be
-checked for missing data. 
+checked for missing data.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Internal-Errors.html#Internal-Errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Overflow-Errors.html#Overflow-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

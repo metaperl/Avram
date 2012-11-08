@@ -1,40 +1,69 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Exception Handling - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
-<link rel="prev" href="List-Functions.html#List-Functions" title="List Functions">
-<link rel="next" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Interfaces to External Code">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.15 Exception Handling</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.15 Exception Handling">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.15 Exception Handling">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Exception-Handling"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="List-Functions.html#List-Functions">List Functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Transpose.html#Transpose" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Exception-Handling-1"></a>
+<h3 class="subsection">2.7.15 Exception Handling</h3>
 
-<h4 class="subsection">2.7.15 Exception Handling</h4>
-
-<p><a name="index-exceptions-348"></a>In quite a few cases, the properties given for the operator up to this
+<a name="index-exceptions-2"></a>
+<p>In quite a few cases, the properties given for the operator up to this
 point do not imply any particular result. A good example would be an
 expression such as [[<code>left</code>]] <code>nil</code>, which appears to
 represent the left side of an empty pair. It can be argued that
@@ -45,15 +74,45 @@ mistake, and in any case, the virtual machine emulator should be
 designed to do something reasonable about them if only for the sake of
 reporting the error.  The chosen remedy for this situation addresses the
 need for error reporting, and also turns out to be useful in other ways.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets">2.7.15.1 A Hierarchy of Sets</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         
+</td></tr>
+<tr><td align="left" valign="top"><a href="Operator-Generalization.html#Operator-Generalization">2.7.15.2 Operator Generalization</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     
+</td></tr>
+<tr><td align="left" valign="top"><a href="Error-Messages.html#Error-Messages">2.7.15.3 Error Messages</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              
+</td></tr>
+<tr><td align="left" valign="top"><a href="Expedient-Error-Messages.html#Expedient-Error-Messages">2.7.15.4 Expedient Error Messages</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    
+</td></tr>
+<tr><td align="left" valign="top"><a href="Computable-Error-Messages.html#Computable-Error-Messages">2.7.15.5 Computable Error Messages</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   
+</td></tr>
+<tr><td align="left" valign="top"><a href="Exception-Handler-Usage.html#Exception-Handler-Usage">2.7.15.6 Exception Handler Usage</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets">A Hierarchy of Sets</a>
-<li><a accesskey="2" href="Operator-Generalization.html#Operator-Generalization">Operator Generalization</a>
-<li><a accesskey="3" href="Error-Messages.html#Error-Messages">Error Messages</a>
-<li><a accesskey="4" href="Expedient-Error-Messages.html#Expedient-Error-Messages">Expedient Error Messages</a>
-<li><a accesskey="5" href="Computable-Error-Messages.html#Computable-Error-Messages">Computable Error Messages</a>
-<li><a accesskey="6" href="Exception-Handler-Usage.html#Exception-Handler-Usage">Exception Handler Usage</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Transpose.html#Transpose" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

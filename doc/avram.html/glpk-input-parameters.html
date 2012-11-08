@@ -1,81 +1,135 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>glpk input parameters - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="glpk.html#glpk" title="glpk">
-<link rel="prev" href="glpk.html#glpk" title="glpk">
-<link rel="next" href="glpk-output.html#glpk-output" title="glpk output">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="glpk-input-parameters"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="glpk-output.html#glpk-output">glpk output</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="glpk.html#glpk">glpk</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="glpk.html#glpk">glpk</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.4.1 glpk input parameters</title>
 
-<h4 class="subsection">D.4.1 <code>glpk</code> input parameters</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.4.1 glpk input parameters">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.4.1 glpk input parameters">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="glpk-input-parameters"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="glpk.html#glpk" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="glpk-output.html#glpk-output" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="glpk.html#glpk" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="glpk-input-parameters-1"></a>
+<h3 class="subsection">D.4.1 <code>glpk</code> input parameters</h3>
 
 <p>The argument must be a triple of the form,
-<code>(</code><var>c</var><code>,(</code><var>m</var><code>,</code><var>y</var><code>))</code>, subject to the following specification.
-
-     <ul>
-<li><var>c</var>
+<code>(<var>c</var>,(<var>m</var>,<var>y</var>))</code>, subject to the following specification.
+</p>
+<ul>
+<li> <var>c</var>
 is a list of cost function coefficients as floating point numbers (see
-<a href="math.html#math">math</a>). There should be one item of <var>c</var> for each variable in
+<a href="math.html#math"><code>math</code></a>). There should be one item of <var>c</var> for each variable in
 the linear programming problem (Note that there is no additive
 constant, which would require one extra).
 
-     <p>The interpretation of <var>c</var> is that an assignment of non-negative
+<p>The interpretation of <var>c</var> is that an assignment of non-negative
 values to the variables <var>x</var> is sought to make the vector inner
-product <var>c</var> <var>x</var> as small as possible. 
-<li><var>m</var>
+product <var>c</var> <var>x</var> as small as possible.
+</p></li><li> <var>m</var>
 is a sparse matrix represented as a list of triples in the form
-<a name="index-sparse-matrix-715"></a>
-     <pre class="example">          &lt;((<var>i</var>,<var>j</var>),<var>a</var>)...&gt;
-</pre>
-     <p class="noindent">where <var>i</var> and <var>j</var> are row and column indices as natural
+<a name="index-sparse-matrix"></a>
+
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;((<var>i</var>,<var>j</var>),<var>a</var>)...&gt;
+</pre></td></tr></table>
+
+<p>where <var>i</var> and <var>j</var> are row and column indices as natural
 numbers starting from 0 and <var>a</var> is a non-zero floating point
-number. The presence of a triple <code>((</code><var>i</var><code>,</code><var>j</var><code>),</code><var>a</var><code>)</code> in
+number. The presence of a triple <code>((<var>i</var>,<var>j</var>),<var>a</var>)</code> in
 the list indicates that the <var>i</var>,<var>j</var>-th entry in the matrix has
 a value of <var>a</var>.  Missing combinations of <var>i</var> and <var>j</var>
 indicate that the corresponding entry is zero.
-
-     <p>The interpretation of <var>m</var> is that together with <var>y</var> it
+</p>
+<p>The interpretation of <var>m</var> is that together with <var>y</var> it
 specifies a system of equations the variables in the solution <var>x</var>
-must satisfy simultaneously, as explained below. 
-<li><var>y</var>
+must satisfy simultaneously, as explained below.
+</p></li><li> <var>y</var>
 is a list of floating point numbers, with one number for each distinct value of
 <var>i</var> in <var>m</var>, above, needed to complete the equations.
 
-     <p>The interpretation of <var>y</var> is that in matrix notation, the
+<p>The interpretation of <var>y</var> is that in matrix notation, the
 condition <var>m</var> <var>x</var> = <var>y</var> must be met by any acceptable
 solution <var>x</var>.
-
-     <p>To put it another way, for each distinct value of <var>i</var>, the <var>i</var>-th item
+</p>
+<p>To put it another way, for each distinct value of <var>i</var>, the <var>i</var>-th item
 of <var>y</var> has to equal the sum over all <var>j</var> of <var>xj</var> <var>a</var>,
 where <var>a</var> is the real number appearing in the triple
-<code>((</code><var>i</var><code>,</code><var>j</var><code>),</code><var>a</var><code>)</code> in <var>m</var>, if any, and <var>xj</var> is
-the <var>j</var>-th variable of the solution. 
-</ul>
+<code>((<var>i</var>,<var>j</var>),<var>a</var>)</code> in <var>m</var>, if any, and <var>xj</var> is
+the <var>j</var>-th variable of the solution.
+</p></li></ul>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="glpk.html#glpk" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="glpk-output.html#glpk-output" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="glpk.html#glpk" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

@@ -1,109 +1,200 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Input Data Structure - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
-<link rel="prev" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
-<link rel="next" href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications" title="Input for Mapped Applications">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Input-Data-Structure"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications">Input for Mapped Applications</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.6.1 Input Data Structure</title>
 
-<h4 class="subsection">2.6.1 Input Data Structure</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.6.1 Input Data Structure">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.6.1 Input Data Structure">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Input-Data-Structure"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Input-Data-Structure-1"></a>
+<h3 class="subsection">2.6.1 Input Data Structure</h3>
 
 <p>The data structure that is used as the argument to the parameter mode
 application incorporates all the information about the command line and
-<a name="index-environment-202"></a><a name="index-command-line-203"></a>the environment variables. It is in the form of a triple
-<code>((</code><var>files</var><code>,</code><var>options</var><code>),</code><var>environs</var><code>)</code>. The fields have
+<a name="index-environment-4"></a>
+<a name="index-command-line-1"></a>
+the environment variables. It is in the form of a triple
+<code>((<var>files</var>,<var>options</var>),<var>environs</var>)</code>. The fields have
 these interpretations.
-
-     <dl>
-<dt><var>files</var><dd>is a list of quadruples
-<code>((</code><var>date</var><code>,</code><var>path</var><code>),(</code><var>preamble</var><code>,</code><var>contents</var><code>))</code>, with
+</p>
+<dl compact="compact">
+<dt> <var>files</var></dt>
+<dd><p>is a list of quadruples
+<code>((<var>date</var>,<var>path</var>),(<var>preamble</var>,<var>contents</var>))</code>, with
 one quadruple for each input file named on the command line (but not the
 virtual code file or the <code>avram</code> executable).  The list will be in
 the same order as the filenames on the command line, and is not affected
 by options interspersed with them. The fields in each item have the
 following interpretations.
-
-          <dl>
-<dt><var>date</var><dd>is the time stamp of the file in as a character string in the usual
-<a name="index-time-stamp-204"></a><a name="index-date-205"></a><a name="index-system-time-206"></a><a name="index-current-time-207"></a><a name="index-Unix-208"></a>Unix format, for example, <code>Fri Jan 19 14:34:44 GMT 2001</code>. If the
+</p>
+<dl compact="compact">
+<dt> <var>date</var></dt>
+<dd><p>is the time stamp of the file in as a character string in the usual
+<a name="index-time-stamp"></a>
+<a name="index-date"></a>
+<a name="index-system-time"></a>
+<a name="index-current-time"></a>
+<a name="index-Unix-5"></a>
+Unix format, for example, <code>Fri Jan 19 14:34:44 GMT 2001</code>. If the
 file corresponds to standard input, the current system time and date are
-used. 
-<br><dt><var>path</var><dd>is the full path of the file, expressed as a list of strings. If the
-<a name="index-file-names-209"></a><a name="index-paths-210"></a><a name="index-absolute-path-211"></a><a name="index-relative-path-212"></a>file corresponds to standard input, the list is empty. Otherwise, the
+used.
+</p></dd>
+<dt> <var>path</var></dt>
+<dd><p>is the full path of the file, expressed as a list of strings. If the
+<a name="index-file-names-1"></a>
+<a name="index-paths-3"></a>
+<a name="index-absolute-path"></a>
+<a name="index-relative-path"></a>
+file corresponds to standard input, the list is empty. Otherwise, the
 first string in the list is the file name. The next is the name of the
-file's parent directory, if any. The next is the parent of the parent,
+file&rsquo;s parent directory, if any. The next is the parent of the parent,
 and so on. The root directory is indicated by the empty string, so that
 any path ending with the empty string is an absolute path, while any path
 ending with a non-empty string is relative to the current working
-directory.  Path separators (i.e., slashes) are omitted. 
-<br><dt><var>preamble</var><dd>In the case of a text file, or any file not conforming to the format in
-<a name="index-preamble-213"></a><a href="File-Format.html#File-Format">File Format</a>, this field is <code>nil</code>. Otherwise, this field contains
+directory.  Path separators (i.e., slashes) are omitted.
+</p></dd>
+<dt> <var>preamble</var></dt>
+<dd><p>In the case of a text file, or any file not conforming to the format in
+<a name="index-preamble-3"></a>
+<a href="File-Format.html#File-Format">File Format</a>, this field is <code>nil</code>. Otherwise, this field contains
 the preamble of the file expressed as a list of strings, or contains
 just the empty string if the file has no preamble. Any leading hashes in
-the preamble of the file are stripped. 
-<br><dt><var>contents</var><dd>In the case of a text file (as indicated by the <var>preamble</var> field), this
-<a name="index-text-files-214"></a>field will contain a list of character strings, with each line of the file
+the preamble of the file are stripped.
+</p></dd>
+<dt> <var>contents</var></dt>
+<dd><p>In the case of a text file (as indicated by the <var>preamble</var> field), this
+<a name="index-text-files-2"></a>
+field will contain a list of character strings, with each line of the file
 contained in a character string. Otherwise, it can contain data in any
 format, which are obtained by converting the data section of the file
-to a tree. 
+to a tree.
+</p></dd>
 </dl>
-     <br><dt><var>options</var><dd>is a list of quadruples of the form
-<code>((</code><var>position</var><code>,</code><var>longform</var><code>),(</code><var>keyword</var><code>,</code><var>params</var><code>))</code>
+</dd>
+<dt> <var>options</var></dt>
+<dd><p>is a list of quadruples of the form
+<code>((<var>position</var>,<var>longform</var>),(<var>keyword</var>,<var>params</var>))</code>
 with one quadruple for each option appearing on the command line after
 the name of the virtual code file.
-
-          <dl>
-<dt><var>position</var><dd>is a natural number indicating the position of the option on the command
-<a name="index-naturals-215"></a><a name="index-command-line-216"></a>line. The position numbers of all the options will form an ascending
+</p>
+<dl compact="compact">
+<dt> <var>position</var></dt>
+<dd><p>is a natural number indicating the position of the option on the command
+<a name="index-naturals-1"></a>
+<a name="index-command-line-2"></a>
+line. The position numbers of all the options will form an ascending
 sequence, but not necessarily consecutive nor starting with zero.  The
 missing numbers in the sequence will correspond to the positions of the
 file names on the command line, allowing their positions to be inferred by
-applications for which the position matters. 
-<br><dt><var>longform</var><dd>is a boolean value which is true if the option starts with two or more
-<a name="index-booleans-217"></a>dashes but false otherwise. 
-<br><dt><var>keyword</var><dd>is the key word of the option expressed as a character string. For example
+applications for which the position matters.
+</p></dd>
+<dt> <var>longform</var></dt>
+<dd><p>is a boolean value which is true if the option starts with two or more
+<a name="index-booleans-1"></a>
+dashes but false otherwise.
+</p></dd>
+<dt> <var>keyword</var></dt>
+<dd><p>is the key word of the option expressed as a character string. For example
 in the case of a command line option <kbd>--foo=bar,baz</kbd>, the keyword is
-<code>foo</code>. Leading dashes are stripped. 
-<br><dt><var>params</var><dd>is a list of character strings identifying the parameters for the
+<code>foo</code>. Leading dashes are stripped.
+</p></dd>
+<dt> <var>params</var></dt>
+<dd><p>is a list of character strings identifying the parameters for the
 command line option in question. In the case of an option of the form
 <kbd>--foo=bar,baz</kbd>, the first character string in the list will be
 <code>bar</code> and the next will be <code>baz</code>. The same applies if the
 option is written <kbd>--foo bar,baz</kbd> or <kbd>--foo =bar,baz</kbd>. If there
-are no parameters associated with the option, the list is empty. 
+are no parameters associated with the option, the list is empty.
+</p></dd>
 </dl>
-     <br><dt><var>environs</var><dd>is a list of pairs of character strings, with one pair in the list for
-<a name="index-environment-218"></a>each environment variable. The identifier is the left string in the
+</dd>
+<dt> <var>environs</var></dt>
+<dd><p>is a list of pairs of character strings, with one pair in the list for
+<a name="index-environment-5"></a>
+each environment variable. The identifier is the left string in the
 pair, and the value is the right.  For example, if the environment
 contains the definition <code>OSTYPE=linux-gnu</code>, there will be a pair in
 the list whose left side is the string <code>OSTYPE</code> and whose
-right side is the string <code>linux-gnu</code>. 
+right side is the string <code>linux-gnu</code>.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

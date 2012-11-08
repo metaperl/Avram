@@ -1,38 +1,68 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Parameter Mode - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Modes-of-Operation.html#Modes-of-Operation" title="Modes of Operation">
-<link rel="prev" href="Filter-Mode.html#Filter-Mode" title="Filter Mode">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.2.2 Parameter Mode</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.2.2 Parameter Mode">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.2.2 Parameter Mode">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Parameter-Mode"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Filter-Mode.html#Filter-Mode">Filter Mode</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Modes-of-Operation.html#Modes-of-Operation">Modes of Operation</a>
-<hr>
-</div>
-
-<h4 class="subsection">1.2.2 Parameter Mode</h4>
-
-<p><a name="index-parameter-mode-24"></a>In parameter mode, the argument to the function given by the virtual
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Filter-Mode.html#Filter-Mode" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Filter-Mode-Options.html#Filter-Mode-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Parameter-Mode-1"></a>
+<h3 class="subsection">1.2.2 Parameter Mode</h3>
+<a name="index-parameter-mode"></a>
+<p>In parameter mode, the argument to the function given by the virtual
 code is a data structure containing environment variables and command
 line parameters including files, application specific options, and
 possibly standard input. The result obtained by evaluating the
@@ -40,37 +70,71 @@ function is either a data structure representing a set of files to be
 written, which may include standard output, or a sequence of shell
 commands to be executed, or a combination of both. Parameter mode is
 indicated whenever either of these conditions is met.
-
-     <ul>
-<li>Any of the parameter mode options appears on the
-command line preceding the first filename parameter. 
-See <a href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>. 
-<li>At least one additional filename parameter or option follows the first
-filename parameter, and the option <samp><span class="option">--unparameterized</span></samp> does not
-precede it. 
-</ul>
-
-<p class="noindent">Examples:
-
-     <dl>
-<dt><kbd>avram --map-to-each-file prettyprinter.avm *.c *.h --extra-pretty</kbd><dd>In this example, parameter mode is indicated both by the parameter
-mode option <samp><span class="option">--map-to-each-file</span></samp> and by the presence of input
-file names and the <samp><span class="option">--extra-pretty</span></samp> option. The latter is
+</p>
+<ul>
+<li>
+Any of the parameter mode options appears on the
+command line preceding the first filename parameter.
+See section <a href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>.
+</li><li>
+At least one additional filename parameter or option follows the first
+filename parameter, and the option &lsquo;<samp>--unparameterized</samp>&rsquo; does not
+precede it.
+</li></ul>
+ 
+<p>Examples:
+</p>
+<dl compact="compact">
+<dt> <kbd>avram --map-to-each-file prettyprinter.avm *.c *.h --extra-pretty</kbd></dt>
+<dd><p>In this example, parameter mode is indicated both by the parameter
+mode option &lsquo;<samp>--map-to-each-file</samp>&rsquo; and by the presence of input
+file names and the &lsquo;<samp>--extra-pretty</samp>&rsquo; option. The latter is
 specific to the hypothetical <code>prettyprinter.avm</code> virtual code
 application, as indicated by its position on the command line, and is
-therefore passed to it by <code>avram</code>. 
-<br><dt><kbd>cat ~/specfile | avram reportgenerator -v - /var/log/syslog</kbd><dd>In this example, a hypothetical parameter mode application
-<code>reportgenerator</code> is able to read <samp><span class="file">~/specfile</span></samp> from standard
-input because of the <code>-</code> used as a parameter. 
-<br><dt><kbd>avram --parameterized grepenv</kbd><dd>In this example, a hypothetical application that searches shell
+therefore passed to it by <code>avram</code>.
+</p></dd>
+<dt> <kbd>cat ~/specfile | avram reportgenerator -v - /var/log/syslog</kbd></dt>
+<dd><p>In this example, a hypothetical parameter mode application
+<code>reportgenerator</code> is able to read &lsquo;<tt>~/specfile</tt>&rsquo; from standard
+input because of the <code>-</code> used as a parameter.
+</p></dd>
+<dt> <kbd>avram --parameterized grepenv</kbd></dt>
+<dd><p>In this example, a hypothetical application that searches shell
 variables is invoked in parameter mode even with no input files or
-application specific options, because of the  <samp><span class="option">--parameterized</span></samp>
+application specific options, because of the  &lsquo;<samp>--parameterized</samp>&rsquo;
 option. Parameter mode invocation is required by the application to give
-it access to the environment. 
-<br><dt><kbd>avram grepenv --search-targets=PATH,MANPATH</kbd><dd>This example shows an application specific option with both a keyword
+it access to the environment.
+</p></dd>
+<dt> <kbd>avram grepenv --search-targets=PATH,MANPATH</kbd></dt>
+<dd><p>This example shows an application specific option with both a keyword
 and a parameter list. They suffice to indicate parameter mode without
-an explicit <samp><span class="option">--parameterized</span></samp> option. 
+an explicit &lsquo;<samp>--parameterized</samp>&rsquo; option.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Filter-Mode.html#Filter-Mode" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Filter-Mode-Options.html#Filter-Mode-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Modes-of-Operation.html#Modes-of-Operation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

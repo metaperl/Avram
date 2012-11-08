@@ -1,59 +1,119 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Internal Errors - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link rel="prev" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link rel="next" href="i_002fo-Errors.html#i_002fo-Errors" title="i/o Errors">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.6.1 Internal Errors</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.6.1 Internal Errors">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.6.1 Internal Errors">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Internal-Errors"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="i_002fo-Errors.html#i_002fo-Errors">i/o Errors</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Diagnostics.html#Diagnostics">Diagnostics</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
-<hr>
-</div>
-
-<h4 class="subsection">1.6.1 Internal Errors</h4>
-
-<p><a name="index-internal-errors-55"></a>Internal errors should never occur unless the
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="i_002fo-Errors.html#i_002fo-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Internal-Errors-1"></a>
+<h3 class="subsection">1.6.1 Internal Errors</h3>
+<a name="index-internal-errors"></a>
+<p>Internal errors should never occur unless the
 <code>avram</code> source code has been carelessly modified, except as noted
 in <a href="Bugs.html#Bugs">Bugs</a>. There are two kinds.
-
-     <dl>
-<dt><var>application-name</var><code>: virtual machine internal error (code </code><var>nn</var><code>)</code><dd>Most internal errors would be reported by a message of this form
+</p>
+<dl compact="compact">
+<dt> <code><var>application-name</var>: virtual machine internal error (code <var>nn</var>)</code></dt>
+<dd><p>Most internal errors would be reported by a message of this form
 if they were to occur. It indicates that some required invariant was
 not maintained. In such cases, the program terminates immediately, and
-any results already produced are suspect. 
-<br><dt><var>application-name</var><code>: </code><var>nn</var><code> unreclaimed </code><var>struct-names</var><dd>A message of this form could be printed at the end of an otherwise successful
+any results already produced are suspect.
+</p></dd>
+<dt> <code><var>application-name</var>: <var>nn</var> unreclaimed <var>struct-names</var></code></dt>
+<dd><p>A message of this form could be printed at the end of an otherwise successful
 run. <code>avram</code> maintains a count of the number of units allocated
 for various data structures, and checks that they are all reclaimed
 eventually as a safeguard against memory leaks. This message indicates
-that some memory remains unaccounted for. 
+that some memory remains unaccounted for.
+</p></dd>
 </dl>
 
-   <p><a name="index-bug-reports-56"></a><a name="index-email-57"></a><a name="index-author-58"></a>If a repeatable internal error is discovered, please email a bug
-report and a small representative test case to the author at
-<a href="mailto:avram-support@basis.uklinux.net">avram-support@basis.uklinux.net</a>. Include the version number of <code>avram</code>,
-which you can get by running <kbd>avram --version</kbd>.
+<a name="index-bug-reports"></a>
+<a name="index-email"></a>
+<a name="index-author"></a>
+<p>If a repeatable internal error is discovered, please email a bug
+report and a small representative test case to
+<a href="mailto:ursala-users@freelists.org">ursala-users@freelists.org</a> or file an issue on the Avram
+github page. Include the version number of <code>avram</code>, which you can
+get by running <kbd>avram --version</kbd>.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="i_002fo-Errors.html#i_002fo-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

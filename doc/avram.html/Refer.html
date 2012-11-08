@@ -1,80 +1,146 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Refer - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Recursion.html#Recursion" title="Recursion">
-<link rel="prev" href="Recur.html#Recur" title="Recur">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.9.2 Refer</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.9.2 Refer">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.9.2 Refer">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Refer"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Recur.html#Recur">Recur</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Recursion.html#Recursion">Recursion</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Recur.html#Recur" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Assignment.html#Assignment" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Recursion.html#Recursion" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Refer-1"></a>
+<h4 class="subsubsection">2.7.9.2 Refer</h4>
 
-<h5 class="subsubsection">2.7.9.2 Refer</h5>
-
-<p><a name="index-g_t_0040code_007brefer_007d-300"></a>In the style of recursive programming compelled by the available
+<a name="index-refer"></a>
+<p>In the style of recursive programming compelled by the available
 <code>meta</code> primitive, a function effectively requires a copy of its own
 machine code as its left argument. Bringing about that state of
 affairs is an interesting party trick.
-
-   <p><a name="index-g_t_0040code_007bbu_007d-301"></a>If we had a definition of <code>bu</code> in the standard library implying
-
-     <dl>
-<dt><em>T16</em><dd>([[<code>bu</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code>) <var>x</var> = <var>f</var><code>(</code><var>k</var><code>,</code><var>x</var><code>)</code>
+</p>
+<a name="index-bu"></a>
+<p>If we had a definition of <code>bu</code> in the standard library implying
+</p>
+<dl compact="compact">
+<dt> <em>T16</em></dt>
+<dd><p>([[<code>bu</code>]] <code>(<var>f</var>,<var>k</var>)</code>) <code><var>x</var></code> = <code><var>f</var>(<var>k</var>,<var>x</var>)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">which for the sake of concreteness can be done like this,
+<p>which for the sake of concreteness can be done like this,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">bu = (hired compose)(
+        left,
+        (hired couple)(compose(constant,right),constant identity))
+</pre></td></tr></table>
 
-<pre class="example">     bu = (hired compose)(
-             left,
-             (hired couple)(compose(constant,right),constant identity))
-</pre>
-   <p class="noindent">then a definition of <code>refer</code> as
+<p>then a definition of <code>refer</code> as
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">refer = (hired bu)(identity,identity)
+</pre></td></tr></table>
 
-<pre class="example">     refer = (hired bu)(identity,identity)
-</pre>
-   <p class="noindent">would be consistent with the following property of the operator.
-
-     <dl>
-<dt><em>P15</em><dd>([[<code>refer</code>]] <var>f</var>) <var>x</var> = <var>f</var><code> (</code><var>f</var><code>,</code><var>x</var><code>)</code>
+<p>would be consistent with the following property of the operator.
+</p>
+<dl compact="compact">
+<dt> <em>P15</em></dt>
+<dd><p>([[<code>refer</code>]] <code><var>f</var></code>) <code><var>x</var></code> = <code><var>f</var> (<var>f</var>,<var>x</var>)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">The proof, as always, is a matter of routine calculation in the manner
+<p>The proof, as always, is a matter of routine calculation in the manner
 of the section on how <code>avram</code> thinks.
-
-   <p>However, this pattern would occur so frequently in recursively defined
+</p>
+<p>However, this pattern would occur so frequently in recursively defined
 functions as to be a significant waste of space and time. Therefore,
 rather than requiring it to be defined in terms of other operations, the
 virtual machine specification recognizes a pattern of the form below with
 respect to property <em>P15</em>,
-
-     <dl>
-<dt><em>T17</em><dd>[[<code>refer</code>]] <var>f</var> = <code>(((</code><var>f</var><code>,nil),nil),nil)</code>
+</p>
+<dl compact="compact">
+<dt> <em>T17</em></dt>
+<dd><p>[[<code>refer</code>]] <code><var>f</var></code> = <code>(((<var>f</var>,nil),nil),nil)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">and takes the property to be true by definition of the operator. A
+<p>and takes the property to be true by definition of the operator. A
 definition of <code>refer</code> consistent with <em>T17</em> is therefore to
-<a name="index-standard-library-302"></a>be found in the standard library, not the definition proposed above.
+<a name="index-standard-library"></a>
+be found in the standard library, not the definition proposed above.
+</p>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Recur.html#Recur" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Assignment.html#Assignment" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Recursion.html#Recursion" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

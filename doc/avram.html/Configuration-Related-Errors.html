@@ -1,38 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Configuration Related Errors - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Diagnostics.html#Diagnostics" title="Diagnostics">
-<link rel="prev" href="Application-Programming-Errors.html#Application-Programming-Errors" title="Application Programming Errors">
-<link rel="next" href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings" title="Other Diagnostics and Warnings">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Configuration-Related-Errors"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">Other Diagnostics and Warnings</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Application-Programming-Errors.html#Application-Programming-Errors">Application Programming Errors</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Diagnostics.html#Diagnostics">Diagnostics</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 1.6.6 Configuration Related Errors</title>
 
-<h4 class="subsection">1.6.6 Configuration Related Errors</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 1.6.6 Configuration Related Errors">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.6.6 Configuration Related Errors">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Configuration-Related-Errors"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Application-Programming-Errors.html#Application-Programming-Errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Configuration-Related-Errors-1"></a>
+<h3 class="subsection">1.6.6 Configuration Related Errors</h3>
 
 <p>The source code distribution of <code>avram</code> incorporates a flexible
 configuration script allowing it to be installed on a variety of
@@ -41,46 +69,96 @@ anticipated that new features may be added to <code>avram</code> from time to
 time. Some problems may therefore occur due to features not being
 supported at your site for either of these reasons. The following error
 messages are relevant to these situations.
-
-     <dl>
-<dt><code>unsupported hook</code><dd><a name="index-g_t_0040code_007bunsupported-hook_007d-94"></a>If it's not simply due to an application programming error
+</p>
+<dl compact="compact">
+<dt> <code>unsupported hook</code></dt>
+<dd><a name="index-unsupported-hook-1"></a>
+<p>If it&rsquo;s not simply due to an application programming error
 (<a href="Application-Programming-Errors.html#Application-Programming-Errors">Application Programming Errors</a>) this message may be the result of
 trying to use an application that requires a newer version of
 <code>avram</code> than the one installed, even though applications should
 avoid this problem by checking the version number at run time. If this
-is the reason, the solution would be to install the latest version. 
-<br><dt><var>application-name</var><code>: I need avram linked with </code><var>foo</var><code>, </code><var>bar</var><code> and </code><var>baz</var><code>.</code><dd><a name="index-g_t_0040code_007bI-need-avram-linked-with_007d-95"></a>A message of the this form indicates that a new installation may be
+is the reason, the solution would be to install the latest version.
+</p></dd>
+<dt> <code><var>application-name</var>: I need avram linked with <var>foo</var>, <var>bar</var> and <var>baz</var>.</code></dt>
+<dd><a name="index-I-need-avram-linked-with"></a>
+<p>A message of the this form indicates that a new installation may be
 needed. At this writing (11/11/1), <code>avram</code> may report this message
 with respect to <code>libexpect5.32</code>, <code>tcl8.3</code>, and <code>libutil</code>
-if any of the <samp><span class="option">-i</span></samp>, <samp><span class="option">-t</span></samp>, or <samp><span class="option">-s</span></samp> options is used on a
+if any of the &lsquo;<samp>-i</samp>&rsquo;, &lsquo;<samp>-t</samp>&rsquo;, or &lsquo;<samp>-s</samp>&rsquo; options is used on a
 system where not all of these libraries were detected when <code>avram</code>
-was installed from a source distribution. (See <a href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>.) 
+was installed from a source distribution. (See <a href="Parameter-Mode-Options.html#Parameter-Mode-Options">Parameter Mode Options</a>.)
 Because <code>avram</code> is useful even without interactive applications,
 these libraries are not considered absolute prerequisites by the
-configuration script. 
-<br><dt><code>avram: can't emulate version </code><var>version</var><dd><a name="index-g_t_0040code_007bcan_0027t-emulate-version_007d-96"></a><a name="index-g_t_0040code_007bemulation_007d-command-line-option-97"></a><a name="index-versions-98"></a><a name="index-backward-compatibility-99"></a>The <samp><span class="option">--emulation=</span><var>version</var></samp> option obviously won't work if
+configuration script.
+</p></dd>
+<dt> <code>avram: can't emulate version <var>version</var></code></dt>
+<dd><a name="index-can_0027t-emulate-version"></a>
+<a name="index-emulation-command-line-option-1"></a>
+<a name="index-versions"></a>
+<a name="index-backward-compatibility"></a>
+<p>The &lsquo;<samp>--emulation=<var>version</var></samp>&rsquo; option obviously won&rsquo;t work if
 the requested version is newer than the installed version, or if it is
 not a valid version number (<a href="General-Options.html#General-Options">General Options</a>). When that happens,
-this message is printed instead and <code>avram</code> terminates. 
-<br><dt><code>avram: multiple version specifications</code><dd><a name="index-g_t_0040code_007bmultiple-version-specifications_007d-100"></a>The <samp><span class="option">--emulation=</span><var>version</var></samp> option can be used at most once
+this message is printed instead and <code>avram</code> terminates.
+</p></dd>
+<dt> <code>avram: multiple version specifications</code></dt>
+<dd><a name="index-multiple-version-specifications"></a>
+<p>The &lsquo;<samp>--emulation=<var>version</var></samp>&rsquo; option can be used at most once
 on a command line. This message is printed if it is used more than
 once. If you only typed it once and got this message, check your aliases
-and wrapper scripts before reporting a bug. 
-<br><dt><code>avram: unrecognized option: </code><var>option-name</var><dd><a name="index-g_t_0040code_007bunrecognized-option_007d-101"></a>may mean that a command line option has been misspelled, or may be another
+and wrapper scripts before reporting a bug.
+</p></dd>
+<dt> <code>avram: unrecognized option: <var>option-name</var></code></dt>
+<dd><a name="index-unrecognized-option"></a>
+<p>may mean that a command line option has been misspelled, or may be another
 sign of an obsolete version of <code>avram</code>. This message will be followed
-by a usage summary similar to that of the <samp><span class="option">--help</span></samp> option. 
-(<a href="General-Options.html#General-Options">General Options</a>). 
-<br><dt><var>application-name</var><code>: warning: search paths not supported</code><dd><a name="index-search-paths-102"></a><a name="index-paths-103"></a><a name="index-environment-104"></a><a name="index-g_t_0040code_007bAVMINPUTS_007d-105"></a><a name="index-g_t_0040code_007bsearch-paths-not-supported_007d-106"></a><a name="index-g_t_0040file_007bargz_002eh_007d-107"></a>If the <samp><span class="file">argz.h</span></samp> header file was not detected during configuration,
+by a usage summary similar to that of the &lsquo;<samp>--help</samp>&rsquo; option.
+(<a href="General-Options.html#General-Options">General Options</a>).
+</p></dd>
+<dt> <code><var>application-name</var>: warning: search paths not supported</code></dt>
+<dd><a name="index-search-paths"></a>
+<a name="index-paths"></a>
+<a name="index-environment-2"></a>
+<a name="index-AVMINPUTS-1"></a>
+<a name="index-search-paths-not-supported"></a>
+<a name="index-argz_002eh"></a>
+<p>If the &lsquo;<tt>argz.h</tt>&rsquo; header file was not detected during configuration,
 <code>avram</code> will not be able to support search paths in the
-<samp><span class="env">AVMINPUTS</span></samp> environment variable (<a href="Environment.html#Environment">Environment</a>). This message
+<code>AVMINPUTS</code> environment variable (<a href="Environment.html#Environment">Environment</a>). This message
 is a warning that the environment variable is being ignored. If the
 warning is followed by an i/o error
 (<a href="i_002fo-Errors.html#i_002fo-Errors">i/o Errors</a>), the latter may be due to a file being in a path that
 was not searched for this reason. A workaround is to specify the full
 path names of all input files outside the current working directory. If
-you don't need search paths, you can get rid of this message by
-undefining <samp><span class="env">AVMINPUTS</span></samp>. 
+you don&rsquo;t need search paths, you can get rid of this message by
+undefining <code>AVMINPUTS</code>.
+</p></dd>
 </dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Application-Programming-Errors.html#Application-Programming-Errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Diagnostics.html#Diagnostics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

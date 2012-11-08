@@ -1,74 +1,112 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Example Script - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="prev" href="Security.html#Security" title="Security">
-<link rel="next" href="Files.html#Files" title="Files">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.8 Example Script</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.8 Example Script">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.8 Example Script">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Example-Script"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Files.html#Files">Files</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Security.html#Security">Security</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
-<hr>
-</div>
-
-<h3 class="section">1.8 Example Script</h3>
-
-<p><a name="index-script-120"></a><a name="index-shell-script-121"></a>It is recommended that the application developer (or the compiler)
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Security.html#Security" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Files.html#Files" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Example-Script-1"></a>
+<h2 class="section">1.8 Example Script</h2>
+<a name="index-script"></a>
+<a name="index-shell-script"></a>
+<p>It is recommended that the application developer (or the compiler)
 package virtual machine code applications as shell scripts with the
 <code>avram</code> command line embedded in them. This style relieves the user
 of the need to remember the appropriate virtual machine options for
 invoking the application, which are always the same for a given
 application, or even to be aware of the virtual machine at all.
+</p>
+<a name="index-cat"></a>
+<a name="index-default_002dto_002dstdin-command-line-option-1"></a>
+<p>Here is a script that performs a similar operation to the standard
+<a name="index-Unix-3"></a>
+Unix <code>cat</code> utility.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#!/bin/sh
+#\
+exec avram --force-text-input --default-to-stdin &quot;$0&quot; &quot;$@&quot;
+sKYQNTP\
+</pre></td></tr></table>
 
-   <p><a name="index-g_t_0040code_007bcat_007d-122"></a><a name="index-g_t_0040code_007bdefault_002dto_002dstdin_007d-command-line-option-123"></a>Here is a script that performs a similar operation to the standard
-<a name="index-Unix-124"></a>Unix <samp><span class="command">cat</span></samp> utility.
-
-<pre class="example">     #!/bin/sh
-     #\
-     exec avram --force-text-input --default-to-stdin "$0" "$@"
-     sKYQNTP\
-</pre>
-   <p class="noindent">That is, it copies the contents of a file whose
+<p>That is, it copies the contents of a file whose
 name is given on the command line to standard output, or copies
 standard input to standard output if no file name is given. This
 script can be marked executable
-<a name="index-executable-files-125"></a>(with <samp><span class="command">chmod</span></samp>) and run by any user
-<a name="index-g_t_0040code_007bchmod_007d-126"></a><a name="index-paths-127"></a>with the directory of the <code>avram</code> executable in his or her
+<a name="index-executable-files"></a>
+(with <code>chmod</code>) and run by any user
+<a name="index-chmod"></a>
+<a name="index-paths-1"></a>
+with the directory of the <code>avram</code> executable in his or her
 <code>PATH</code> environment variable, even if <code>avram</code> had to be
 installed in a non-standard directory such as
-<a name="index-non_002dstandard-installation-128"></a><samp><span class="file">~/bin</span></samp>.
-
-   <p>The idea for this script is blatantly lifted from the <samp><span class="command">wish</span></samp>
-<a name="index-g_t_0040code_007bwish_007d-129"></a>manpage. The first line of the script invokes a shell to process
+<a name="index-non_002dstandard-installation"></a>
+&lsquo;<tt>~/bin</tt>&rsquo;.
+</p>
+<p>The idea for this script is blatantly lifted from the <code>wish</code>
+<a name="index-wish"></a>
+manpage. The first line of the script invokes a shell to process
 what follows. The shell treats the second line as a comment and
 ignores it.  Based on the third line, the shell invokes <code>avram</code>
 with the indicated options, the script itself as the next argument, and
 whatever command line parameters were initially supplied by the user
 as the remaining arguments. The rest of the script after
 that line is never processed by the shell.
-
-   <p>When <code>avram</code> attempts to load the shell script as a virtual
+</p>
+<p>When <code>avram</code> attempts to load the shell script as a virtual
 machine code file, which happens as a result of it being executed by
 the shell, it treats the first line as a comment and ignores it. It
 also treats the second line as a comment, but takes heed of the
@@ -77,6 +115,30 @@ character. It therefore also treats the third line as a comment and
 ignores it. Starting with the fourth line, it reads the virtual code,
 which is in a binary data format encoded with printable characters,
 and evaluates it.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Security.html#Security" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Files.html#Files" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

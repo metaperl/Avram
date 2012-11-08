@@ -1,41 +1,70 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Input for Mapped Applications - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
-<link rel="prev" href="Input-Data-Structure.html#Input-Data-Structure" title="Input Data Structure">
-<link rel="next" href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Output From Non-interactive Applications">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.6.2 Input for Mapped Applications</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.6.2 Input for Mapped Applications">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.6.2 Input for Mapped Applications">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Input-for-Mapped-Applications"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications">Output From Non-interactive Applications</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Input-Data-Structure.html#Input-Data-Structure" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Input-for-Mapped-Applications-1"></a>
+<h3 class="subsection">2.6.2 Input for Mapped Applications</h3>
 
-<h4 class="subsection">2.6.2 Input for Mapped Applications</h4>
-
-<p>Applications invoked using the <samp><span class="option">--map-to-each-file</span></samp> option
-<a name="index-g_t_0040code_007bmap_002dto_002deach_002dfile_007d-command-line-option-219"></a>benefit from a slightly different interface than the one described
+<p>Applications invoked using the &lsquo;<samp>--map-to-each-file</samp>&rsquo; option
+<a name="index-map_002dto_002deach_002dfile-command-line-option-1"></a>
+benefit from a slightly different interface than the one described
 above. As the purpose of this option is to save memory by loading only
 one file at a time, the application does not have access to all input
 files named on the command line simultaneously within the same data
@@ -45,27 +74,29 @@ a list containing exactly one item for an input file. If <kbd>-</kbd>
 is used as a command line parameter, indicating standard input, then
 <var>files</var> will have another item pertaining to standard
 input. In no event will it have other than one or two items.
-
-   <p>The mapped application is expected to work by being applied individually
+</p>
+<p>The mapped application is expected to work by being applied individually
 to each of any number of separately constructed data structures, doing
 the same in each case as it would if that case were the only one. To make
 that possible, copies of the environment variables, the contents of standard
 input, and the list of application specific options are contained in the
-data structure used for every invocation.
-
-   <p><a name="index-command-line-220"></a>The position numbers in the options are adjusted for each invocation to
-reflect the position of the particular input file associated with it. 
+data structure used for every invocation. 
+</p>
+<a name="index-command-line-3"></a>
+<p>The position numbers in the options are adjusted for each invocation to
+reflect the position of the particular input file associated with it.
 For example, in the following command
-<pre class="display">     <kbd>avram --map-to-each-file mapster.avm fa.txt --data fb.dat --code fc.o</kbd>
-</pre>
-   <p class="noindent">the function in the virtual code file <samp><span class="file">mapster.avm</span></samp> would be
+</p><table><tr><td>&nbsp;</td><td><pre class="display"><kbd>avram --map-to-each-file mapster.avm fa.txt --data fb.dat --code fc.o</kbd>
+</pre></td></tr></table>
+<p>the function in the virtual code file &lsquo;<tt>mapster.avm</tt>&rsquo; would be
 applied to each of three data structures, corresponding to the commands
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><kbd>avram mapster.avm fa.txt --data --code</kbd>
+<kbd>avram mapster.avm --data fb.dat --code</kbd>
+<kbd>avram mapster.avm --data --code fc.o</kbd>
+</pre></td></tr></table>
 
-<pre class="display">     <kbd>avram mapster.avm fa.txt --data --code</kbd>
-     <kbd>avram mapster.avm --data fb.dat --code</kbd>
-     <kbd>avram mapster.avm --data --code fc.o</kbd>
-</pre>
-   <p class="noindent">If the relative positions of the options and filenames were important to
+<p>If the relative positions of the options and filenames were important to
 the application, they could be reliably inferred from the position
 numbers. In the first case, they would be 1 and 2, implying that the
 file is in position 0. In the second case they would be 0 and 2,
@@ -73,33 +104,57 @@ implying that the file is in position 1, and in the third case they
 would be 0 and 1, implying that the file is in position 2. (Of course,
 nothing compels an application to concern itself with the positions of
 its parameters, and the alternative might be preferable.)
-
-   <p>For the most part, any application that can operate on one file at a
+</p>
+<p>For the most part, any application that can operate on one file at a
 time without needing information from any others can be executed more
-economically with the <samp><span class="option">--map-to-each-file</span></samp> option and few if any
+economically with the &lsquo;<samp>--map-to-each-file</samp>&rsquo; option and few if any
 changes to the code. The effect will normally be analogous to the above
 example, subject to a few possible differences.
-
-     <ul>
-<li>If an application is supposed to do something by default when
-there are no file parameters or only standard input, it won't work as a
-mapped application, because if there are no file parameters it won't be
-executed at all. 
-<li>If a mapped application causes any output files to be generated, they
+</p>
+<ul>
+<li> If an application is supposed to do something by default when
+there are no file parameters or only standard input, it won&rsquo;t work as a
+mapped application, because if there are no file parameters it won&rsquo;t be
+executed at all.
+</li><li> If a mapped application causes any output files to be generated, they
 may be written before other input files are read, possibly causing the
 input files to be overwritten if they have the same names, and causing
 subsequent invocations to use the overwritten versions. This behavior
 differs from that of loading all input files at the outset, which
 ensures the application seeing all of the original versions. The latter may be
 more convenient for maintaining a group of files in some sort of
-consistent state. 
-<li>If an application causes standard output to be written along with
+consistent state.
+</li><li> If an application causes standard output to be written along with
 output files, normally standard output is written last as a security
-measure against malicious code altering the <samp><span class="option">--ask-to-overwrite</span></samp>
+measure against malicious code altering the &lsquo;<samp>--ask-to-overwrite</samp>&rsquo;
 prompts by subtly clobbering the console. In a mapped application,
-standard output isn't always last because there may be more invocations
-to come. 
-</ul>
+standard output isn&rsquo;t always last because there may be more invocations
+to come.
+</li></ul>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Input-Data-Structure.html#Input-Data-Structure" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

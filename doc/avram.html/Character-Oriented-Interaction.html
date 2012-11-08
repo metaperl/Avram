@@ -1,70 +1,126 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Character Oriented Interaction - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Output From Interactive Applications">
-<link rel="prev" href="Line-Oriented-Interaction.html#Line-Oriented-Interaction" title="Line Oriented Interaction">
-<link rel="next" href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction" title="Mixed Modes of Interaction">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Character-Oriented-Interaction"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Line-Oriented-Interaction.html#Line-Oriented-Interaction">Line Oriented Interaction</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.6.4.2 Character Oriented Interaction</title>
 
-<h5 class="subsubsection">2.6.4.2 Character Oriented Interaction</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.6.4.2 Character Oriented Interaction">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.6.4.2 Character Oriented Interaction">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Character-Oriented-Interaction"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Line-Oriented-Interaction.html#Line-Oriented-Interaction" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Character-Oriented-Interaction-1"></a>
+<h4 class="subsubsection">2.6.4.2 Character Oriented Interaction</h4>
 
 <p>A character oriented style of interaction involves the function always
-returning a data structure of the form <code>(</code><var>state</var><code>,(</code><var>command
-lines</var><code>,nil))</code>. The <var>state</var> and <var>command lines</var> fields serve
-<a name="index-command-line-236"></a>exactly the same purposes respectively as they do in the case of line
+returning a data structure of the form <code>(<var>state</var>,(<var>command
+lines</var>,nil))</code>. The <var>state</var> and <var>command lines</var> fields serve
+<a name="index-command-line-5"></a>
+exactly the same purposes respectively as they do in the case of line
 oriented interaction. The field that would be occupied by the
 <var>prompt strings</var> list in the case of line oriented interaction is
 identically <code>nil</code> in this style.
-
-   <p>When this style is used, <code>avram</code> spawns a process and/or sends
-<a name="index-spawning-processes-237"></a>command lines to it as in the case of line oriented interaction, but
+</p>
+<p>When this style is used, <code>avram</code> spawns a process and/or sends
+<a name="index-spawning-processes-2"></a>
+command lines to it as in the case of line oriented interaction, but
 attempts to read only a single character from it per iteration. When the
 character is received, <code>avram</code> applies the function to the pair
-<code>(</code><var>state</var><code>,</code><var>character</var><code>)</code> in order to obtain the next state
+<code>(<var>state</var>,<var>character</var>)</code> in order to obtain the next state
 and the next list of command lines. If the process has terminated, a
 <code>nil</code> value is used in place of the character. If the process is
 quiescent, deadlock ensues.
-
-   <p>The character oriented style is a lower level protocol that shifts more
-of the burden of analyzing the process's output to the virtual code
+</p>
+<p>The character oriented style is a lower level protocol that shifts more
+of the burden of analyzing the process&rsquo;s output to the virtual code
 application. It can do anything line oriented interaction can do except
 proceeding immediately without waiting to receive any output from the
 process. It may also allow more general criteria (in effect) than the
 matching of a fixed prompt string to delimit the received data, for
 those pathological processes that may require such things.
-
-   <p>Applications using character oriented interaction need to deal with line
-<a name="index-line-breaks-238"></a>breaks explicitly among the received characters, unlike the case with
+</p>
+<p>Applications using character oriented interaction need to deal with line
+<a name="index-line-breaks"></a>
+breaks explicitly among the received characters, unlike the case with
 line oriented interaction, where the line breaks are implicit in the
-<a name="index-Unix-239"></a>list of received strings. Contrary to the convention for Unix text
+<a name="index-Unix-6"></a>
+list of received strings. Contrary to the convention for Unix text
 files, line breaks in the output of a process are indicated by character
 code 13 followed by character code 10.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Line-Oriented-Interaction.html#Line-Oriented-Interaction" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

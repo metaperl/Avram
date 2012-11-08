@@ -1,67 +1,102 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Interaction combinator - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Interfaces to External Code">
-<link rel="prev" href="Have-combinator.html#Have-combinator" title="Have combinator">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Interaction-combinator"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Have-combinator.html#Have-combinator">Have combinator</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.16.3 Interaction combinator</title>
 
-<h5 class="subsubsection">2.7.16.3 Interaction combinator</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.16.3 Interaction combinator">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.16.3 Interaction combinator">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Interaction-combinator"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Have-combinator.html#Have-combinator" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Vacant-Address-Space.html#Vacant-Address-Space" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Interaction-combinator-1"></a>
+<h4 class="subsubsection">2.7.16.3 Interaction combinator</h4>
 
 <p>A further combinator allows virtual code applications to interact
 directly with any interactive console application using the
 <code>expect</code> library.  The mechanism is similar to that of
-interactive applications documented in the <a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>, but attempts to be more convenient. 
+interactive applications documented in the <a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>, but attempts to be more convenient.
 Instead of being designed as an interactive application, any virtual
 code application may use this combinator to spawn a shell and interact
 with it in order to compute some desired result.
-
-   <p>The advantage of this combinator over the <code>library</code> combinator is
+</p>
+<p>The advantage of this combinator over the <code>library</code> combinator is
 that it requires no modification of the virtual machine to support new
 applications. It can also interact with applications that may reside
 on remote servers, that are implemented languages other than C, or
-<a name="index-GNU-R-380"></a>whose source code is unavailable. For example, the GNU R statistical
+<a name="index-GNU-R"></a>
+whose source code is unavailable. For example, the GNU R statistical
 package provides an interactive command to evaluate multivariate
-<a name="index-multivariate-normal-distrubution-381"></a>normal distribution functions with an arbitrary covariance matrix, but
-<a name="index-covariance-matrix-382"></a>the corresponding function is not provided by the <code>Rmath</code> C
-library (or any other free library, to the author's knowledge) because
+<a name="index-multivariate-normal-distrubution"></a>
+normal distribution functions with an arbitrary covariance matrix, but
+<a name="index-covariance-matrix"></a>
+the corresponding function is not provided by the <code>Rmath</code> C
+library (or any other free library, to the author&rsquo;s knowledge) because
 it is implemented in interpreted code. This combinator makes it
 callable by an <code>avram</code> virtual code application nevertheless. The
 disadvantage compared to the <code>library</code> combinator is that there
 is more overhead in spawning a process than simply making a call to a
 built in function, and the programming interface is more complicated.
-
-   <p>The combinator takes the form
-
-     <dl>
-<dt><em>T35</em><dd>[[<code>interact</code>]] <var>f</var> = <code>((nil,nil),(((nil,nil),nil),((nil,</code><var>f</var><code>),nil)))</code>
+</p>
+<p>The combinator takes the form
+</p>
+<dl compact="compact">
+<dt> <em>T35</em></dt>
+<dd><p>[[<code>interact</code>]] <var>f</var> = <code>((nil,nil),(((nil,nil),nil),((nil,<var>f</var>),nil)))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">where <var>f</var> is the virtual code for a function that
+<p>where <var>f</var> is the virtual code for a function that
 follows the same protocol described in <a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>,
 except that it does not allow file output as described in
 <a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>. The argument <code>x</code> is ignored when the
@@ -71,76 +106,109 @@ is a transcript of the dialogue that took place between <code>f</code> and the
 externally spawned shell, represented as a list of lists of strings for
 line oriented interaction, or a list of characters alternating with lists of
 strings in the case of character oriented interaction.
-
-   <p>The following example demonstrates a trivial use of the <code>interact</code>
+</p>
+<p>The following example demonstrates a trivial use of the <code>interact</code>
 combinator to spawn an <code>ftp</code> client, do an <code>ls</code> command, and then
-<a name="index-ftp-383"></a>terminate the session.
+<a name="index-ftp"></a>
+terminate the session.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+eof = &lt;(nil,(nil,(((nil,nil),nil),(nil,nil))))&gt;
 
-<pre class="example">     
-     eof = &lt;(nil,(nil,(((nil,nil),nil),(nil,nil))))&gt;
-     
-     demo =
-     
-     interact conditional(
-        conditional(identity,constant false,constant true),
-        constant(0,&lt;'ftp'&gt;,&lt;'ftp&gt; '&gt;),
-        conditional(
-           conditional(left,constant false,constant true),
-           constant(1,&lt;'ls',''&gt;,&lt;'','ftp&gt; '&gt;),
-           conditional(
-              compose(compare,couple(left,constant 1)),
-              constant(2,&lt;'bye',''&gt;,&lt;eof&gt;),
-              constant nil)))
-</pre>
-   <p class="noindent">Some liberties are taken with <code>silly</code> syntax in this example, in
+demo =
+
+interact conditional(
+   conditional(identity,constant false,constant true),
+   constant(0,&lt;'ftp'&gt;,&lt;'ftp&gt; '&gt;),
+   conditional(
+      conditional(left,constant false,constant true),
+      constant(1,&lt;'ls',''&gt;,&lt;'','ftp&gt; '&gt;),
+      conditional(
+         compose(compare,couple(left,constant 1)),
+         constant(2,&lt;'bye',''&gt;,&lt;eof&gt;),
+         constant nil)))
+</pre></td></tr></table>
+
+<p>Some liberties are taken with <code>silly</code> syntax in this example, in
 the way of using angle brackets to denote lists, and numbers to
 represent states.
-
-     <ul>
-<li>The interacting transducer works by checking whether its argument is
+</p>
+<ul>
+<li>
+The interacting transducer works by checking whether its argument is
 empty (via the <code>identity</code> function used as a predicate in the
 <code>conditional</code>, which is then negated). In that case it returns
 the triple containing the initial state of 0, the <code>ftp</code> shell
 command to spawn the client, and the <code>'ftp&gt; '</code> prompt expected
 when the client has been spawned, both of the latter being lists of
-strings. 
-<li>If the argument is non-empty, then next it checks whether it is in the
+strings.
+</li><li>
+If the argument is non-empty, then next it checks whether it is in the
 initial state of 0, (via the <code>left</code> function used as a predicate,
 referring to the state variable expected on the left of any given
 <code>(state,input)</code> pair, also negated). If so, it returns the triple
 containing the next state of 1, the <code>ls</code> command followed by an
 empty string to indicate a line break, and the expected prompt
 preceded by an empty string to match it only at the beginning of a
-line. 
-<li>Finally, it checks for state 1, in which case it issues the
+line.
+</li><li>
+Finally, it checks for state 1, in which case it issues the
 <code>bye</code> command to close the session, <code>eof</code> rather than a
-<a name="index-eof-384"></a>prompt to wait for termination of the client, and a state of 2. 
-<li>In the remaining state of 2, which needn't be explicitly tested
+<a name="index-eof"></a>
+prompt to wait for termination of the client, and a state of 2.
+</li><li>
+In the remaining state of 2, which needn&rsquo;t be explicitly tested
 because it is the only remaining possibility, the program returns a
 <code>nil</code> value to indicate that the computation has
-terminated. 
-</ul>
+terminated.
+</li></ul>
 
-   <p>Deadlock would be possible at any point if either party did not follow
-<a name="index-deadlock-385"></a>this protocol, but for this example it is not an issue. If an
+<p>Deadlock would be possible at any point if either party did not follow
+<a name="index-deadlock-1"></a>
+this protocol, but for this example it is not an issue. If an
 expression of the form <code>demo x</code> were to be evaluated, then
 regardless of the value of <code>x</code>, the value of the result would be
 as shown below.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;
+   &lt;'ftp'&gt;,
+   &lt;'ftp&gt; '&gt;,
+   &lt;'ls',''&gt;,
+   &lt;'ls','Not connected.','ftp&gt; '&gt;,
+   &lt;'bye',''&gt;,
+   &lt;'bye',''&gt;&gt;
+</pre></td></tr></table>
 
-<pre class="example">     &lt;
-        &lt;'ftp'&gt;,
-        &lt;'ftp&gt; '&gt;,
-        &lt;'ls',''&gt;,
-        &lt;'ls','Not connected.','ftp&gt; '&gt;,
-        &lt;'bye',''&gt;,
-        &lt;'bye',''&gt;&gt;
-</pre>
-   <p class="noindent">That is, it would be a list of lists of strings, alternating between the
+<p>That is, it would be a list of lists of strings, alternating between the
 output of the interactor and the output of the <code>ftp</code> client.  If
 the spawned application had been something non-trivial such as a
 computer algebra system or a command line web search utility,
 then it is easy to see how functions using this combinator can leverage
 off a wealth of available resources.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Have-combinator.html#Have-combinator" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Vacant-Address-Space.html#Vacant-Address-Space" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

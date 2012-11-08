@@ -1,121 +1,185 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Raw Files - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="File-Manipulation.html#File-Manipulation" title="File Manipulation">
-<link rel="prev" href="File-Names.html#File-Names" title="File Names">
-<link rel="next" href="Formatted-Input.html#Formatted-Input" title="Formatted Input">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.3.2 Raw Files</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.3.2 Raw Files">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.3.2 Raw Files">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Raw-Files"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Formatted-Input.html#Formatted-Input">Formatted Input</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Names.html#File-Names">File Names</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>
-<hr>
-</div>
-
-<h4 class="subsection">3.3.2 Raw Files</h4>
-
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="File-Names.html#File-Names" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Formatted-Input.html#Formatted-Input" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Raw-Files-1"></a>
+<h3 class="subsection">3.3.2 Raw Files</h3>
 <p>Some low level operations involving lists and data files are provided by
-these functions, which are declared in the header file <samp><span class="file">rawio.h</span></samp>.
-
-<div class="defun">
-&mdash; Function: list <b>avm_received_list</b> (<var>FILE *object, char *filename</var>)<var><a name="index-avm_005freceived_005flist-547"></a></var><br>
-<blockquote><p>This function is a convenient way of transferring data directly from a
+these functions, which are declared in the header file &lsquo;<tt>rawio.h</tt>&rsquo;.
+</p>
+<dl>
+<dt><a name="index-avm_005freceived_005flist"></a><u>Function:</u> list <b>avm_received_list</b><i> (FILE *<var>object</var>, char *<var>filename</var>)</i></dt>
+<dd><p>This function is a convenient way of transferring data directly from a
 raw format file into a list in memory. It might typically be used to
 load the virtual code for an application that has been written to a file
-by a compiler.
-
-          <dl>
-<dt><var>object</var><dd>is the address of a file which should
+by a compiler.  
+</p>
+<dl compact="compact">
+<dt> <code><var>object</var></code></dt>
+<dd><p>is the address of a file which should
 already be open for reading before this function is called, and will be
-read from its current position. 
-<br><dt><var>filename</var><dd>should be set by the caller to the address of a null terminated string
+read from its current position.
+</p></dd>
+<dt> <code><var>filename</var></code></dt>
+<dd><p>should be set by the caller to the address of a null terminated string
 containing the name of the file, but is not used unless it needs to be
 printed as part of an error message. If it is a null pointer, standard
-input is assumed. 
+input is assumed.
+</p></dd>
 </dl>
 
-        <p>The result returned is a list containing data read from the file.
-
-        <p>The file format is described in <a href="File-Format.html#File-Format">File Format</a>. The preamble section
+<p>The result returned is a list containing data read from the file.
+</p>
+<p>The file format is described in <a href="File-Format.html#File-Format">File Format</a>. The preamble section
 of the file, if any, is ignored. If the file ends prematurely or
 otherwise conflicts with the format, the program is aborted with a
-message of
-<a name="index-g_t_0040code_007binvalid-raw-file-format_007d-548"></a>
-     <pre class="display">          <var>program-name</var><code>: invalid raw file format in </code><var>filename</var>
-</pre>
-        <p>written to standard error. The program will also be aborted by this
-function in the event of a memory overflow.
+message of 
+<a name="index-invalid-raw-file-format-1"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><code><var>program-name</var>: invalid raw file format in <var>filename</var></code>
+</pre></td></tr></table>
 
-        <p>The file is left open when this function returns, and could therefore be
+<p>written to standard error. The program will also be aborted by this
+function in the event of a memory overflow.
+</p>
+<p>The file is left open when this function returns, and could therefore be
 used to store other data after the end of the list. The end of a list is
 detected automatically by this function, and it reads no further,
-leaving the file position on the next character, if any. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_send_list</b> (<var>FILE *repository, list operand, char *filename</var>)<var><a name="index-avm_005fsend_005flist-549"></a></var><br>
-<blockquote><p>This function can be used to transfer data from a list in memory to a
+leaving the file position on the next character, if any.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fsend_005flist"></a><u>Function:</u> void <b>avm_send_list</b><i> (FILE *<var>repository</var>, list <var>operand</var>, char *<var>filename</var>)</i></dt>
+<dd><p>This function can be used to transfer data from a list in memory to a
 file, essentially by implementing the printing algorithm described in
-<a href="Bit-String-Encoding.html#Bit-String-Encoding">Bit String Encoding</a>.
-
-          <dl>
-<dt><var>repository</var><dd>is the address of a file already open for writing, to which the data are
-written starting from the current position. 
-<br><dt><var>operand</var><dd>is the list containing the data to be written
-<br><dt><var>filename</var><dd>is the address of a null terminated string containing the name of the
-file that will be reported in an error message if necessary. 
+<a href="Bit-String-Encoding.html#Bit-String-Encoding">Bit String Encoding</a>. 
+</p>
+<dl compact="compact">
+<dt> <code><var>repository</var></code></dt>
+<dd><p>is the address of a file already open for writing, to which the data are
+written starting from the current position.
+</p></dd>
+<dt> <code><var>operand</var></code></dt>
+<dd><p>is the list containing the data to be written
+</p></dd>
+<dt> <code><var>filename</var></code> </dt>
+<dd><p>is the address of a null terminated string containing the name of the
+file that will be reported in an error message if necessary.
+</p></dd>
 </dl>
 
-        <p>No preamble section is written by this function, but one could be
-<a name="index-preamble-550"></a>written to the file by the caller prior to calling it.  Error messages
+<p>No preamble section is written by this function, but one could be
+<a name="index-preamble-5"></a>
+written to the file by the caller prior to calling it.  Error messages
 are possible either because of i/o errors or because of insufficient
 memory. I/o errors are not fatal and will result only in a warning
 message being printed to standard error, but a memory overflow will
 cause the process to abort. An i/o error message reported by this
 function would be of the form
-<a name="index-g_t_0040code_007bcan_0027t-write_007d-551"></a>
-     <pre class="display">          <var>program-name</var><code>: can't write to </code><var>filename</var>
-</pre>
-        <p>followed by the diagnostic obtained from the standard <code>strerror</code>
-<a name="index-g_t_0040code_007bstrerror_007d-552"></a>function if it exists on the host platform. The file is left open when
-this function returns. 
-</p></blockquote></div>
+<a name="index-can_0027t-write-1"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><code><var>program-name</var>: can't write to <var>filename</var></code>
+</pre></td></tr></table>
 
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_rawio</b> ()<var><a name="index-avm_005finitialize_005frawio-553"></a></var><br>
-<blockquote><p>This function initializes some necessary data structures for the
+<p>followed by the diagnostic obtained from the standard <code>strerror</code>
+<a name="index-strerror-1"></a>
+function if it exists on the host platform. The file is left open when
+this function returns.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005finitialize_005frawio"></a><u>Function:</u> void <b>avm_initialize_rawio</b><i> ()</i></dt>
+<dd><p>This function initializes some necessary data structures for the
 functions in this section, and should be called prior to them at the
-beginning of a run. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_rawio</b> ()<var><a name="index-avm_005fcount_005frawio-554"></a></var><br>
-<blockquote><p>This function does nothing in the present version of the library, but
+beginning of a run.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005frawio"></a><u>Function:</u> void <b>avm_count_rawio</b><i> ()</i></dt>
+<dd><p>This function does nothing in the present version of the library, but
 should be called after the last call to all of the other functions in
 this section in order to maintain compatibility with future versions of
 the library. Future versions may decide to use this function to do some
-cleaning up of local data structures. 
-</p></blockquote></div>
+cleaning up of local data structures.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="File-Names.html#File-Names" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Formatted-Input.html#Formatted-Input" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

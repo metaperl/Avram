@@ -1,65 +1,108 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Note - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
-<link rel="prev" href="Version.html#Version" title="Version">
-<link rel="next" href="Profile.html#Profile" title="Profile">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Note"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Profile.html#Profile">Profile</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Version.html#Version">Version</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.7.2 Note</title>
 
-<h5 class="subsubsection">2.7.7.2 Note</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.7.2 Note">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.7.2 Note">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Note"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Version.html#Version" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Profile.html#Profile" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Note-1"></a>
+<h4 class="subsubsection">2.7.7.2 Note</h4>
 
 <p>This operation allows arbitrary information or comments to be embedded
 in a virtual code application in such a way that it will be ignored by
 <code>avram</code> when executing it. For the <code>silly</code> language, a
 <code>note</code> function is defined in the standard prelude so as to imply
-the following theorem. 
-<a name="index-g_t_0040code_007bnote_007d-281"></a><a name="index-annotations-282"></a>
-     <dl>
-<dt><em>T11</em><dd>[[<code>note</code>]] <code>(</code><var>f</var><code>,</code><var>c</var><code>)</code> = <code>((nil,nil),((nil,nil),(nil,(nil,(</code><var>f</var><code>,</code><var>c</var><code>)))))</code>
+the following theorem.
+<a name="index-note"></a>
+<a name="index-annotations"></a>
+</p>
+<dl compact="compact">
+<dt> <em>T11</em></dt>
+<dd><p>[[<code>note</code>]] <code>(<var>f</var>,<var>c</var>)</code> = <code>((nil,nil),((nil,nil),(nil,(nil,(<var>f</var>,<var>c</var>)))))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">Intuitively, the argument <var>f</var> represents a function, and the
+<p>Intuitively, the argument <code><var>f</var></code> represents a function, and the
 argument <code>c</code> represents the comment, annotation, or whatever, that
 will be embedded but ignored in the virtual code.
-
-   <p>Semantically, a function with a note attached is the same as the
+</p>
+<p>Semantically, a function with a note attached is the same as the
 function by itself, as the following property stipulates for
-any non-<code>nil</code> <var>f</var>.
-
-     <dl>
-<dt><em>P8</em><dd>([[<code>note</code>]] <code>(</code><var>f</var><code>,</code><var>c</var><code>)</code>) <var>x</var> = <var>f</var> <var>x</var>
+any non-<code>nil</code> <code><var>f</var></code>.
+</p>
+<dl compact="compact">
+<dt> <em>P8</em></dt>
+<dd><p>([[<code>note</code>]] <code>(<var>f</var>,<var>c</var>)</code>) <code><var>x</var></code> = <code><var>f</var> <var>x</var></code>
+</p></dd>
 </dl>
 
-   <p>A possible reason for using this feature might be to support a language
+<p>A possible reason for using this feature might be to support a language
 that performs run-time type checking by hanging type tags on
-<a name="index-type-tags-283"></a>everything. Another possible use would be to include symbolic
+<a name="index-type-tags"></a>
+everything. Another possible use would be to include symbolic
 information needed by a debugger.
+</p>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

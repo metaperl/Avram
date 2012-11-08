@@ -1,190 +1,296 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Implementing new library functions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Library-Maintenance.html#External-Library-Maintenance" title="External Library Maintenance">
-<link rel="prev" href="Calling-existing-library-functions.html#Calling-existing-library-functions" title="Calling existing library functions">
-<link rel="next" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Working around library misfeatures">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Implementing-new-library-functions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Calling-existing-library-functions.html#Calling-existing-library-functions">Calling existing library functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3.9.2 Implementing new library functions</title>
 
-<h4 class="subsection">3.9.2 Implementing new library functions</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 3.9.2 Implementing new library functions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.9.2 Implementing new library functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Implementing-new-library-functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Calling-existing-library-functions.html#Calling-existing-library-functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Library-Maintenance.html#External-Library-Maintenance" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Implementing-new-library-functions-1"></a>
+<h3 class="subsection">3.9.2 Implementing new library functions</h3>
 
 <p>Adding more external libraries to <code>avram</code> is currently a manual
-procedure requiring the attention of a developer conversant with C. 
+procedure requiring the attention of a developer conversant with C.
 To support a new library called <code>foobar</code>,
 these steps need to be followed at a minimum.
-
-     <ul>
-<li>Create a new file called <samp><span class="file">foobar.h</span></samp> under the <samp><span class="file">avm/</span></samp>
-directory in the main source tree whose name doesn't clash with any
-<a name="index-header-file-659"></a><a name="index-library-interface-header-file-660"></a>existing file names and preferably doesn't induce any proper prefixes
+</p>
+<ul>
+<li>
+Create a new file called &lsquo;<tt>foobar.h</tt>&rsquo; under the &lsquo;<tt>avm/</tt>&rsquo;
+directory in the main source tree whose name doesn&rsquo;t clash with any
+<a name="index-header-file"></a>
+<a name="index-library-interface-header-file"></a>
+existing file names and preferably doesn&rsquo;t induce any proper prefixes
 among them. This file should contain at least these function
 declarations.
-     <pre class="example">          
-          extern list avm_foobar_call (list function_name,list argument,
-                                       int *fault);
-          
-          extern list avm_have_foobar_call (list function_name,int *fault);
-          
-          extern void avm_initialize_foobar ();
-          
-          extern void avm_count_foobar ();
-</pre>
-     <p>There should also be the usual preprocessor directives for
-<samp><span class="file">include</span></samp> files. The naming convention shown should be followed in
-anticipation of automated support for these operations in the future. 
-<li>Add <samp><span class="file">foobar.h</span></samp> to the list of other header files in
-<samp><span class="file">avm/Makefile.am</span></samp>. 
-<li>Create a new file called <samp><span class="file">foobar.c</span></samp> under the <samp><span class="file">src/</span></samp>
-directory whose name doesn't clash with any existing file names to
-<a name="index-library-interfac-source-file-661"></a>store most of the library interface code. It can start out with
-stubs for the functions declared in <samp><span class="file">foobar.h</span></samp>. 
-<li>Add <samp><span class="file">foobar.c</span></samp> to the list of other source files in
-<samp><span class="file">src/Makefile.am</span></samp>
-<li>Execute the following command in the main <samp><span class="file">avram-x.x.x</span></samp>
-source directory where the file <samp><span class="file">configure.in</span></samp> is found.
-     <pre class="example">          
-          aclocal \
-          &amp;&amp; automake --gnu --add-missing \
-          &amp;&amp; autoconf
-</pre>
-     <p>This command requires having <code>automake</code> and
-<a name="index-automake-662"></a><a name="index-autoconf-663"></a><code>autoconf</code> installed on your system. 
-<li>Make the following changes to <samp><span class="file">libfuns.c</span></samp>.
+<table><tr><td>&nbsp;</td><td><pre class="example">
+extern list avm_foobar_call (list function_name,list argument,
+                             int *fault);
 
-          <ul>
-<li>Add the line <code>#include&lt;avm/foobar.h&gt;</code> after the
-<a name="index-include-directives-664"></a>other <code>include</code> directives. 
-<li>Add the string <code>"foobar"</code> to the end of the array of
-<code>libnames</code> in <code>avm_initialize_libfuns</code>. 
-<li>Add a call to <code>avm_initialize_foobar</code> to the body. 
-<li>Add a call to <code>avm_count_foobar</code> to the body of
-<code>avm_count_libfuns</code>. 
-<li>Add a case of the form
-          <pre class="example">               case nn:
-                 return avm_foobar_call(function_name,argument,fault);
-</pre>
-          <p>after the last case in <code>avm_library_call</code>, being
+extern list avm_have_foobar_call (list function_name,int *fault);
+
+extern void avm_initialize_foobar ();
+
+extern void avm_count_foobar ();
+</pre></td></tr></table>
+
+<p>There should also be the usual preprocessor directives for
+&lsquo;<tt>include</tt>&rsquo; files. The naming convention shown should be followed in
+anticipation of automated support for these operations in the future.
+</p></li><li>
+Add &lsquo;<tt>foobar.h</tt>&rsquo; to the list of other header files in
+&lsquo;<tt>avm/Makefile.am</tt>&rsquo;.
+</li><li>
+Create a new file called &lsquo;<tt>foobar.c</tt>&rsquo; under the &lsquo;<tt>src/</tt>&rsquo;
+directory whose name doesn&rsquo;t clash with any existing file names to
+<a name="index-library-interfac-source-file"></a>
+store most of the library interface code. It can start out with
+stubs for the functions declared in &lsquo;<tt>foobar.h</tt>&rsquo;.
+</li><li>
+Add &lsquo;<tt>foobar.c</tt>&rsquo; to the list of other source files in
+&lsquo;<tt>src/Makefile.am</tt>&rsquo;
+</li><li>
+Execute the following command in the main &lsquo;<tt>avram-x.x.x</tt>&rsquo;
+source directory where the file &lsquo;<tt>configure.in</tt>&rsquo; is found.
+<table><tr><td>&nbsp;</td><td><pre class="example">
+aclocal \
+&amp;&amp; automake --gnu --add-missing \
+&amp;&amp; autoconf
+</pre></td></tr></table>
+
+<p>This command requires having <code>automake</code> and
+<a name="index-automake"></a>
+<a name="index-autoconf"></a>
+<code>autoconf</code> installed on your system.
+</p></li><li>
+Make the following changes to &lsquo;<tt>libfuns.c</tt>&rsquo;.
+
+<ul>
+<li>
+Add the line <code>#include&lt;avm/foobar.h&gt;</code> after the
+<a name="index-include-directives"></a>
+other <code>include</code> directives.
+</li><li>
+Add the string <code>&quot;foobar&quot;</code> to the end of the array of
+<code>libnames</code> in <code>avm_initialize_libfuns</code>.
+</li><li> 
+Add a call to <code>avm_initialize_foobar</code> to the body.
+</li><li>
+Add a call to <code>avm_count_foobar</code> to the body of
+<code>avm_count_libfuns</code>.
+</li><li>
+Add a case of the form
+<table><tr><td>&nbsp;</td><td><pre class="example">case nn:
+  return avm_foobar_call(function_name,argument,fault);
+</pre></td></tr></table>
+
+<p>after the last case in <code>avm_library_call</code>, being
 careful not to change the order, and using the same
-name as above in the file <samp><span class="file">foobar.h</span></samp>. 
-<li>Add a case of the form
-          <pre class="example">               case nn:
-                 looked_up = avm_have_foobar_call(function_name,fault);
-                 break;
-</pre>
-          <p>after the last case in <code>avm_have_library_call</code>, being
-careful not to change the order, and using the same name
-as above in the file <samp><span class="file">foobar.h</span></samp>. 
-</ul>
-     <li>Edit <samp><span class="file">foobar.c</span></samp> and <samp><span class="file">foobar.h</span></samp> to suit,
-periodically compiling and testing by executing <code>make</code>. 
-<li>Package and install at will. 
-</ul>
+name as above in the file &lsquo;<tt>foobar.h</tt>&rsquo;.
+</p></li><li>
+Add a case of the form
+<table><tr><td>&nbsp;</td><td><pre class="example">case nn:
+  looked_up = avm_have_foobar_call(function_name,fault);
+  break;
+</pre></td></tr></table>
 
-   <p>The functions shown above have the obvious interpretations, namely
+<p>after the last case in <code>avm_have_library_call</code>, being
+careful not to change the order, and using the same name
+as above in the file &lsquo;<tt>foobar.h</tt>&rsquo;.
+</p></li></ul>
+</li><li>
+Edit &lsquo;<tt>foobar.c</tt>&rsquo; and &lsquo;<tt>foobar.h</tt>&rsquo; to suit,
+periodically compiling and testing by executing <code>make</code>.
+</li><li>
+Package and install at will.
+</li></ul>
+
+<p>The functions shown above have the obvious interpretations, namely
 that <code>avm_foobar_call</code> evaluates a library function from the
 <code>foobar</code> library, and <code>avm_have_foobar_call</code> tests for a
-function's availability. The latter should interpret wild cards as
+function&rsquo;s availability. The latter should interpret wild cards as
 explained in <a href="Calling-existing-library-functions.html#Calling-existing-library-functions">Calling existing library functions</a>, but should
 return only a list of strings for the matching function names rather
-than a list of pairs of strings, as the library name is redundant. 
+than a list of pairs of strings, as the library name is redundant.
 The remaining functions are for static initialization and reclamation.
-
-   <p>These functions should consist mainly of boilerplate code similar to
+</p>
+<p>These functions should consist mainly of boilerplate code similar to
 the corresponding functions in any of the other library source files,
 which should be consulted as examples. The real work would be done by
 other functions called by them. These should be statically declared
-within the <samp><span class="file">.c</span></samp> source file and normally not listed in the
-<samp><span class="file">.h</span></samp> header file unless there is some reason to think they may be
+within the &lsquo;<tt>.c</tt>&rsquo; source file and normally not listed in the
+&lsquo;<tt>.h</tt>&rsquo; header file unless there is some reason to think they may be
 of more general use. Any externally visible functions should have
 names beginning with <code>avm_</code> to avoid name clashes.
-
-   <p>Some helpful hints are reported below for what they may be worth.
-
-     <ul>
-<li>The reason for doing this is to leverage off other people's
+</p>
+<p>Some helpful hints are reported below for what they may be worth.
+</p>
+<ul>
+<li>
+The reason for doing this is to leverage off other people&rsquo;s
 intelligence, so generally <code>foobar.c</code> should contain only glue
 code for library routines developed elsewhere with great skill rather
-than reinventing them in some home grown way. 
-<li>The best numerical software is often written by Fortran
-<a name="index-Fortran-665"></a>programmers. Linking to a Fortran library is no problem on GNU systems
+than reinventing them in some home grown way.
+</li><li>
+The best numerical software is often written by Fortran
+<a name="index-Fortran-2"></a>
+programmers. Linking to a Fortran library is no problem on GNU systems
 provided that all variables are passed by reference and all arrays are
-converted to column order (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>). 
-<li>Most C++ programmers have yet to reach a comparable standard, but C++
-<a name="index-C_002b_002b-666"></a>libraries can also be linked by running <code>nm</code> on the static
-<a name="index-nm-utility-667"></a>library file to find out the real names of the functions and
-<a name="index-c_002b_002bfilt-utility-668"></a><code>c++filt</code> to find out which is which. However, there
+converted to column order (<a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>).
+</li><li>
+Most C++ programmers have yet to reach a comparable standard, but C++
+<a name="index-C_002b_002b-1"></a>
+libraries can also be linked by running <code>nm</code> on the static
+<a name="index-nm-utility"></a>
+library file to find out the real names of the functions and
+<a name="index-c_002b_002bfilt-utility"></a>
+<code>c++filt</code> to find out which is which. However, there
 is no obvious workaround for the use of so called derived classes
-by C++ programmers to simulate passing functions as parameters. 
-<li>Anything worth using can probably be found in the Debian
-<a name="index-Debian-669"></a>archive. 
-<li>Not all libraries are sensible candidates for interfaces to
+by C++ programmers to simulate passing functions as parameters.
+</li><li>
+Anything worth using can probably be found in the Debian
+<a name="index-Debian"></a>
+archive.
+</li><li>
+Not all libraries are sensible candidates for interfaces to
 <code>avram</code>. Typical design flaws are
 
-          <ul>
-<li>irrepressible debugging messages written to <code>stderr</code> or
+<ul>
+<li>
+irrepressible debugging messages written to <code>stderr</code> or
 <code>stdout</code> that are unfit for end user consumption
-<li>deliberately crashing the application if <code>malloc</code> fails
-<li>opaque data types with undocumented storage requirements
-<li>opaque data types that would be useful to store persistently
+</li><li>
+deliberately crashing the application if <code>malloc</code> fails
+</li><li>
+opaque data types with undocumented storage requirements
+</li><li>
+opaque data types that would be useful to store persistently
 but have platform specific binary representations
-<li>heavily state dependent
-<a name="index-state-dependence-670"></a>semantics
-<li>identifiers with clashing names
-<li>restrictive
-<a name="index-licensing-restrictions-671"></a>licenses
-</ul>
+</li><li>
+heavily state dependent
+<a name="index-state-dependence"></a>
+semantics
+</li><li>
+identifiers with clashing names
+</li><li>
+restrictive
+<a name="index-licensing-restrictions"></a>
+licenses
+</li></ul>
 
-     <p>Some of these misfeatures have workarounds as explained next in
-<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>, at least if there's
-nothing else wrong with the library. 
-</ul>
+<p>Some of these misfeatures have workarounds as explained next in
+<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures">Working around library misfeatures</a>, at least if there&rsquo;s
+nothing else wrong with the library.
+</p></li></ul>
 
-   <p>Those who support <code>avram</code> are always prepared to assist in the
+<p>Those who support <code>avram</code> are always prepared to assist in the
 dissemination of worthwhile contributed library modules under terms
-compatible with <a href="Copying.html#Copying">Copying</a>, and under separate copyrights if
-<a name="index-copyright-672"></a>preferred.  Contributed modules can be integrated into the official
+compatible with <a href="Copying.html#Copying">GNU GENERAL PUBLIC LICENCE</a>, and under separate copyrights if
+<a name="index-copyright"></a>
+preferred.  Contributed modules can be integrated into the official
 source tree provided that they meet the following additional
-<a name="index-coding-standards-673"></a>guidelines to those above.
-
-     <ul>
-<li>source code documentation and indentation according to GNU coding
+<a name="index-coding-standards"></a>
+guidelines to those above.
+</p>
+<ul>
+<li>
+source code documentation and indentation according to GNU coding
 standards (<a href="http://www.gnu.org/prep/standards">http://www.gnu.org/prep/standards</a>)
-<li>sufficient stability for a semi-annual release cycle
-<li>no run-time or compile-time dependence on any non-free software,
+</li><li>
+sufficient stability for a semi-annual release cycle
+</li><li>
+no run-time or compile-time dependence on any non-free software,
 although dynamic loading and client/server interaction are acceptable
-<li>portable or at least unbreakable configuration by appropriate use of
-<a name="index-autoconf-674"></a><code>autoconf</code> macros and conditional defines
-<li>little or no state dependence at the level of the virtual code
-<a name="index-state-dependence-675"></a>interface (i.e., pure functions or something like them, except for
-<a name="index-random-number-generators-676"></a>random number generators and related applications)
-<li>adequate documentation for a section in <a href="External-Libraries.html#External-Libraries">External Libraries</a>
-</ul>
+</li><li>
+portable or at least unbreakable configuration by appropriate use of
+<a name="index-autoconf-1"></a>
+<code>autoconf</code> macros and conditional defines
+</li><li>
+little or no state dependence at the level of the virtual code
+<a name="index-state-dependence-1"></a>
+interface (i.e., pure functions or something like them, except for
+<a name="index-random-number-generators"></a>
+random number generators and related applications)
+</li><li>
+adequate documentation for a section in <a href="External-Libraries.html#External-Libraries">External Libraries</a>
+</li></ul>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Calling-existing-library-functions.html#Calling-existing-library-functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Working-around-library-misfeatures.html#Working-around-library-misfeatures" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Library-Maintenance.html#External-Library-Maintenance" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

@@ -1,55 +1,88 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Output From Interactive Applications - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
-<link rel="prev" href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Output From Non-interactive Applications">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.6.4 Output From Interactive Applications</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.6.4 Output From Interactive Applications">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.6.4 Output From Interactive Applications">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Output-From-Interactive-Applications"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications">Output From Non-interactive Applications</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Line-Oriented-Interaction.html#Line-Oriented-Interaction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Output-From-Interactive-Applications-1"></a>
+<h3 class="subsection">2.6.4 Output From Interactive Applications</h3>
 
-<h4 class="subsection">2.6.4 Output From Interactive Applications</h4>
-
-<p><a name="index-g_t_0040code_007binteractive_007d-command-line-option-228"></a><a name="index-g_t_0040code_007bstep_007d-command-line-option-229"></a>Parameter mode applications invoked with either of the
-<samp><span class="option">--interactive</span></samp> or <samp><span class="option">--step</span></samp> options are
+<a name="index-interactive-command-line-option-2"></a>
+<a name="index-step-command-line-option-2"></a>
+<p>Parameter mode applications invoked with either of the
+&lsquo;<samp>--interactive</samp>&rsquo; or &lsquo;<samp>--step</samp>&rsquo; options are
 required to take the data structure described in <a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a> as an
 argument but to return the virtual code for a function that will observe
-<a name="index-shell-230"></a>a certain protocol allowing shell commands to be executed on its
-behalf. The intent is that the virtual code file doesn't contain the
+<a name="index-shell-2"></a>
+a certain protocol allowing shell commands to be executed on its
+behalf. The intent is that the virtual code file doesn&rsquo;t contain the
 real application <em>per se</em>, but only something that builds the real
 one on the fly using configuration information from the input files and
 command line options.
-
-   <p>The format of the result returned by an interactive application, being a
+</p>
+<p>The format of the result returned by an interactive application, being a
 virtual code application itself, requires a full exposition of the
-virtual machine code semantics. This subject is deferred to <a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>. 
+virtual machine code semantics. This subject is deferred to <a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>.
 The remainder of this section describes the protocol followed by the
 function returned by the interactive application rather than the
 application itself.
-
-   <p>Similarly to the case of a byte transducer described in <a href="Byte-Transducers.html#Byte-Transducers">Byte Transducers</a>,
+</p>
+<p>Similarly to the case of a byte transducer described in <a href="Byte-Transducers.html#Byte-Transducers">Byte Transducers</a>,
 the basic pattern of interaction between <code>avram</code> and the function
 is a cycle of invocations. In general terms, the function is applied to
 a <code>nil</code> argument initially, and expected to return an initial state
@@ -58,12 +91,39 @@ state returned on the previous iteration, and the next installment of
 input. The function returns further output and a new state, and the
 cycle continues until the function returns a value of <code>nil</code>, at
 which time the computation terminates.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="Line-Oriented-Interaction.html#Line-Oriented-Interaction">2.6.4.1 Line Oriented Interaction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   
+</td></tr>
+<tr><td align="left" valign="top"><a href="Character-Oriented-Interaction.html#Character-Oriented-Interaction">2.6.4.2 Character Oriented Interaction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">2.6.4.3 Mixed Modes of Interaction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="Line-Oriented-Interaction.html#Line-Oriented-Interaction">Line Oriented Interaction</a>
-<li><a accesskey="2" href="Character-Oriented-Interaction.html#Character-Oriented-Interaction">Character Oriented Interaction</a>
-<li><a accesskey="3" href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Output-From-Non_002dinteractive-Applications.html#Output-From-Non_002dinteractive-Applications" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Line-Oriented-Interaction.html#Line-Oriented-Interaction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

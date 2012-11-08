@@ -1,139 +1,202 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>File Names - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="File-Manipulation.html#File-Manipulation" title="File Manipulation">
-<link rel="prev" href="File-Manipulation.html#File-Manipulation" title="File Manipulation">
-<link rel="next" href="Raw-Files.html#Raw-Files" title="Raw Files">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="File-Names"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Raw-Files.html#Raw-Files">Raw Files</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3.3.1 File Names</title>
 
-<h4 class="subsection">3.3.1 File Names</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 3.3.1 File Names">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.3.1 File Names">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="File-Names"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Raw-Files.html#Raw-Files" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="File-Names-1"></a>
+<h3 class="subsection">3.3.1 File Names</h3>
 
 <p>A standard representation is used by virtual code applications for the
-<a name="index-file-names-528"></a>path names of files, following the description in <a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a>. The functions and constants declared in <code>fnames.h</code>
+<a name="index-file-names-2"></a>
+path names of files, following the description in <a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a>. The functions and constants declared in <code>fnames.h</code>
 provide an API for operating on file names in this form.
-
-<div class="defun">
-&mdash; Function: list <b>avm_path_representation</b> (<var>char *path</var>)<var><a name="index-avm_005fpath_005frepresentation-529"></a></var><br>
-<blockquote><p>If a C program is to invoke a virtual code application and pass a path
+</p>
+<dl>
+<dt><a name="index-avm_005fpath_005frepresentation"></a><u>Function:</u> list <b>avm_path_representation</b><i> (char *<var>path</var>)</i></dt>
+<dd><p>If a C program is to invoke a virtual code application and pass a path
 name to it as a parameter, this function can be used to generate the
 appropriate representation from a given character string.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">conf_path = avm_path_representation(&quot;/etc/resolve.conf&quot;);
+</pre></td></tr></table>
 
-     <pre class="example">          conf_path = avm_path_representation("/etc/resolve.conf");
-</pre>
-        <p>In this example, <code>conf_path</code> is a <code>list</code>.  For potentially
+<p>In this example, <code>conf_path</code> is a <code>list</code>.  For potentially
 better portability, a C program can use the character constant
 <code>avm_path_separator_character</code> in place of the slashes in hard
 coded path names.
-
-        <p>Other useful constants are <code>avm_current_directory_prefix</code> as a
-<a name="index-g_t_0040code_007bavm_005fpath_005fseparator_005fcharacter_007d-530"></a><a name="index-g_t_0040code_007bavm_005fpath_005fseparator_007d-531"></a><a name="index-g_t_0040code_007bavm_005fcurrent_005fdirectory_005fprefix_007d-532"></a><a name="index-g_t_0040code_007bavm_005fparent_005fdirectory_005fprefix_007d-533"></a><a name="index-g_t_0040code_007bavm_005froot_005fdirectory_005fprefix_007d-534"></a>portable replacement for <code>"./"</code>, as well as
-<code>avm_parent_directory_prefix</code> instead of <code>"../"</code>. There is
-also <code>avm_root_directory_prefix</code> for <code>"/"</code>. These three
+</p>
+<p>Other useful constants are <code>avm_current_directory_prefix</code> as a
+<a name="index-avm_005fpath_005fseparator_005fcharacter"></a>
+<a name="index-avm_005fpath_005fseparator"></a>
+<a name="index-avm_005fcurrent_005fdirectory_005fprefix"></a>
+<a name="index-avm_005fparent_005fdirectory_005fprefix"></a>
+<a name="index-avm_005froot_005fdirectory_005fprefix"></a>
+portable replacement for <code>&quot;./&quot;</code>, as well as
+<code>avm_parent_directory_prefix</code> instead of <code>&quot;../&quot;</code>. There is
+also <code>avm_root_directory_prefix</code> for <code>&quot;/&quot;</code>. These three
 constants are null terminated strings, unlike
 <code>avm_path_separator_character</code>, which is a character.
-
-        <p>If a <code>NULL</code> pointer is passed as the <var>path</var>, a
+</p>
+<p>If a <code>NULL</code> pointer is passed as the <code><var>path</var></code>, a
 <code>NULL</code> list is returned, which is the path representation for
 standard input or standard output. If the address of an empty string is
-passed to this function as the <var>path</var>, the list of the empty
+passed to this function as the <code><var>path</var></code>, the list of the empty
 string will be returned, which is the path representation for the root
-directory. Trailing path separators are ignored, so <code>"/"</code> is the
+directory. Trailing path separators are ignored, so <code>&quot;/&quot;</code> is the
 same as the empty string.
-
-        <p>Some memory needs to be allocated for the result of this function. If
+</p>
+<p>Some memory needs to be allocated for the result of this function. If
 the memory is not available, an error message is written to standard
-error and the process is terminated. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: list <b>avm_date_representation</b> (<var>char *path</var>)<var><a name="index-avm_005fdate_005frepresentation-535"></a></var><br>
-<blockquote><p>This function is essentially a wrapper around the standard
+error and the process is terminated.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fdate_005frepresentation"></a><u>Function:</u> list <b>avm_date_representation</b><i> (char *<var>path</var>)</i></dt>
+<dd><p>This function is essentially a wrapper around the standard
 <code>ctime_r</code> function that not only gets the time stamp for a file at
 a given path, but transforms it to a list representation according to
 <a href="Character-Table.html#Character-Table">Character Table</a>. It needs to allocate memory for the result and
 will cause the program to exit with an error message if there is not
 enough memory available.
-
-        <p>The time stamp will usually be in a format like <code>Sun Mar 4 10:56:40
+</p>
+<p>The time stamp will usually be in a format like <code>Sun Mar 4 10:56:40
 GMT 2001</code>. If for some reason the time stamp can not be obtained, the
-<a name="index-g_t_0040code_007bunknown-date_007d-536"></a>result will be a representation of the string <code>unknown date</code>. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: char* <b>avm_path_name</b> (<var>list path</var>)<var><a name="index-avm_005fpath_005fname-537"></a></var><br>
-<blockquote><p>This function is the inverse of <code>avm_path_representation</code>, in that
+<a name="index-unknown-date"></a>
+result will be a representation of the string <code>unknown date</code>.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fpath_005fname"></a><u>Function:</u> char* <b>avm_path_name</b><i> (list <var>path</var>)</i></dt>
+<dd><p>This function is the inverse of <code>avm_path_representation</code>, in that
 it takes a list representing a path to the path name expressed as a character
 string. This function can be used in C programs that invoke virtual code
 applications returning paths as part of their results, so that the C
 program can get the path into a character string in order to open the file.
-
-        <p>If the <var>path</var> parameter is <code>NULL</code>, a <code>NULL</code> pointer
+</p>
+<p>If the <code><var>path</var></code> parameter is <code>NULL</code>, a <code>NULL</code> pointer
 is returned as the result. The calling program should check for a
-<a name="index-standard-input-538"></a><a name="index-standard-output-539"></a><code>NULL</code> result and interpret it as the path to standard input or
+<a name="index-standard-input-9"></a>
+<a name="index-standard-output-4"></a>
+<code>NULL</code> result and interpret it as the path to standard input or
 standard output.
-
-        <p>The memory needed for the character string whose address is returned is
-allocated by this function if possible. The given <var>path</var> is
+</p>
+<p>The memory needed for the character string whose address is returned is
+allocated by this function if possible. The given <code><var>path</var></code> is
 not required to be consistent with the host file system, but it is
 required to consist of representations of non-null printable characters
 or spaces as lists per <a href="Character-Table.html#Character-Table">Character Table</a>.  In the event of any error
 or overflow, control does not return to the caller, but an error message
 is printed and the program is aborted. The possible error messages from
-this function are the following. 
-<a name="index-g_t_0040code_007bcounter-overflow_007d-540"></a><a name="index-g_t_0040code_007bmemory-overflow_007d-541"></a><a name="index-g_t_0040code_007bnull-character-in-file-name_007d-542"></a><a name="index-g_t_0040code_007bbad-character-in-file-name_007d-543"></a><a name="index-g_t_0040code_007binvalid-file-name_007d-544"></a>
-          <ul>
-<li><var>program-name</var><code>: counter overflow (code </code><var>nn</var><code>)</code>
-<li><var>program-name</var><code>: memory overflow (code </code><var>nn</var><code>)</code>
-<li><var>program-name</var><code>: null character in file name</code>
-<li><var>program-name</var><code>: bad character in file name</code>
-<li><var>program-name</var><code>: invalid file name (code </code><var>nn</var><code>)</code>
-</ul>
+this function are the following.
+<a name="index-counter-overflow-1"></a>
+<a name="index-memory-overflow-1"></a>
+<a name="index-null-character-in-file-name-1"></a>
+<a name="index-bad-character-in-file-name-1"></a>
+<a name="index-invalid-file-name"></a>
+</p>
+<ul>
+<li> <code><var>program-name</var>: counter overflow (code <var>nn</var>)</code>
+</li><li> <code><var>program-name</var>: memory overflow (code <var>nn</var>)</code>
+</li><li> <code><var>program-name</var>: null character in file name</code>
+</li><li> <code><var>program-name</var>: bad character in file name</code>
+</li><li> <code><var>program-name</var>: invalid file name (code <var>nn</var>)</code>
+</li></ul>
 
-        </blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_fnames</b> ()<var><a name="index-avm_005finitialize_005ffnames-545"></a></var><br>
-<blockquote><p>A few housekeeping operations relevant to internal data structures are
+</dd></dl>
+<dl>
+<dt><a name="index-avm_005finitialize_005ffnames"></a><u>Function:</u> void <b>avm_initialize_fnames</b><i> ()</i></dt>
+<dd><p>A few housekeeping operations relevant to internal data structures are
 performed by this function, making it necessary to be called by the
-client program prior to using any of the other ones. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_fnames</b> ()<var><a name="index-avm_005fcount_005ffnames-546"></a></var><br>
-<blockquote><p>This function can be used after the the last call to any of the other
+client program prior to using any of the other ones.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005ffnames"></a><u>Function:</u> void <b>avm_count_fnames</b><i> ()</i></dt>
+<dd><p>This function can be used after the the last call to any of the other
 functions in this section during a run, and it will detect memory leaks
 that may be attributable to code in these functions or misuse
 thereof. If any unreclaimed storage remains when this function is
 called, a warning message will be written to standard error. If the
 function <code>avm_count_lists</code> is also being used by the client, it
-should be called after this one. 
-</p></blockquote></div>
+should be called after this one.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Raw-Files.html#Raw-Files" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Manipulation.html#File-Manipulation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

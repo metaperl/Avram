@@ -1,76 +1,130 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>gslint input parameters - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="gslint.html#gslint" title="gslint">
-<link rel="prev" href="gslint.html#gslint" title="gslint">
-<link rel="next" href="gslint-output.html#gslint-output" title="gslint output">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="gslint-input-parameters"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="gslint-output.html#gslint-output">gslint output</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="gslint.html#gslint">gslint</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="gslint.html#gslint">gslint</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.7.1 gslint input parameters</title>
 
-<h4 class="subsection">D.7.1 <code>gslint</code> input parameters</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.7.1 gslint input parameters">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.7.1 gslint input parameters">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="gslint-input-parameters"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gslint.html#gslint" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gslint-output.html#gslint-output" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gslint.html#gslint" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="gslint-input-parameters-1"></a>
+<h3 class="subsection">D.7.1 <code>gslint</code> input parameters</h3>
 
 <p>The library functions <code>qng</code> and <code>qagx</code> take an
-argument of the form <code>(</code><var>f</var><code>,(</code><var>a</var><code>,</code><var>b</var><code>))</code>, where <var>f</var>
+argument of the form <code>(<var>f</var>,(<var>a</var>,<var>b</var>))</code>, where <var>f</var>
 is a function to be integrated, <var>a</var> is the lower limit, and
 <var>b</var> is the upper limit, both limits being floating point numbers
-as in <a href="math.html#math">math</a>.
-
-   <p>The <code>qng_tol</code> and <code>qagx_tol</code> functions take an argument of
-<a name="index-tolerance-727"></a>the form <code>((</code><var>f</var><code>,</code><var>t</var><code>),(</code><var>a</var><code>,</code><var>b</var><code>))</code>, where <var>f</var>,
+as in <a href="math.html#math"><code>math</code></a>.
+</p>
+<p>The <code>qng_tol</code> and <code>qagx_tol</code> functions take an argument of
+<a name="index-tolerance"></a>
+the form <code>((<var>f</var>,<var>t</var>),(<var>a</var>,<var>b</var>))</code>, where <var>f</var>,
 <var>a</var>, and <var>b</var> are as above, and <var>t</var> is a specified
 tolerance.
-
-   <p>The <code>qagp</code> and <code>qagp_tol</code> functions take arguments of
-the form <code>(</code><var>f</var><code>,</code><var>p</var><code>)</code> and
-<code>((</code><var>f</var><code>,</code><var>t</var><code>),</code><var>p</var><code>)</code>, respectively, where <var>f</var> and
+</p>
+<p>The <code>qagp</code> and <code>qagp_tol</code> functions take arguments of
+the form <code>(<var>f</var>,<var>p</var>)</code> and
+<code>((<var>f</var>,<var>t</var>),<var>p</var>)</code>, respectively, where <var>f</var> and
 <var>t</var> are as above, and <var>p</var> is an ordered list of real numbers
 specifying the limits of integration along with arbitrarily many
 intervening breakpoints.
-
-   <p>The integrand <var>f</var> is expressed in virtual machine code, and takes a
+</p>
+<p>The integrand <var>f</var> is expressed in virtual machine code, and takes a
 single real argument to a real result. The argument and result of
 <var>f</var> are required to be floating point numbers as described in
-<a href="math.html#math">math</a>. Any expressible function of this type is acceptable, even
+<a href="math.html#math"><code>math</code></a>. Any expressible function of this type is acceptable, even
 one defined in terms of other integrals, so that a double or triple
-integral can be expressed easily, albeit a costly computation. 
+integral can be expressed easily, albeit a costly computation.
 However, a constant overhead in stack space is required for each
 nested library function call, and there is currently no mechanism to
-<a name="index-segmentation-fault-728"></a>prevent segmentation faults due to a stack overflow.
-
-   <p>When no tolerance is specified, as with <code>qng</code>, <code>qagx</code>, and
+<a name="index-segmentation-fault-8"></a>
+prevent segmentation faults due to a stack overflow.
+</p>
+<p>When no tolerance is specified, as with <code>qng</code>, <code>qagx</code>, and
 <code>qagp</code>, the tightest attainable tolerance is chosen by default,
 currently <code>2e-14</code>, in order find the most accurate result
 possible. A selection of progressively looser tolerances is tried
 automatically if the tightest one is not successful, stopping when
 either a solution is found or ten orders of magnitude are covered.
-
-   <p>If a tolerance is explicitly specified, as with <code>qng_tol</code>,
+</p>
+<p>If a tolerance is explicitly specified, as with <code>qng_tol</code>,
 <code>qagx_tol</code> or <code>qagp_tol</code>, only that tolerance is tried.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gslint.html#gslint" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gslint-output.html#gslint-output" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gslint.html#gslint" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

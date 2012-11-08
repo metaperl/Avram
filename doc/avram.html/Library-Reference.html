@@ -1,37 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Library Reference - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="prev" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Virtual Machine Specification">
-<link rel="next" href="Character-Table.html#Character-Table" title="Character Table">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Library-Reference"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Character-Table.html#Character-Table">Character Table</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Virtual-Machine-Specification.html#Virtual-Machine-Specification">Virtual Machine Specification</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3. Library Reference</title>
 
-<h2 class="chapter">3 Library Reference</h2>
+<meta name="description" content="avram - a virtual machine code interpreter: 3. Library Reference">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3. Library Reference">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Library-Reference"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Vacant-Address-Space.html#Vacant-Address-Space" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Lists.html#Lists" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Library-Reference-1"></a>
+<h1 class="chapter">3. Library Reference</h1>
 
 <p>Much of the code developed for <code>avram</code> may be reusable in other
 projects, so it has been packaged into a library and documented in this
@@ -41,60 +70,97 @@ file encapsulates an abstract type and a number of related functions,
 except for a few cases where C makes such a design awkward. An attempt
 has been made to present the sections in a readable order as far as
 possible.
-
-   <p>The documentation in this chapter is confined to the application program
+</p>
+<p>The documentation in this chapter is confined to the application program
 interface (API), and does not delve unnecessarily into any details of the
-<a name="index-API-392"></a>implementation. A reader wishing to extend, modify, or troubleshoot the
+<a name="index-API"></a>
+implementation. A reader wishing to extend, modify, or troubleshoot the
 library itself can find additional information in the source code
 comments. These are more likely to be in sync with the code than this
 document may be, and are more readily accessible to someone working with
 the code.
-
-   <p>Some general points pertaining to the library are the following.
-
-     <ul>
-<li>Unlike the previous chapter, this chapter uses the word
-&ldquo;function&rdquo; in the C sense rather than the mathematical sense of the word. 
-<li>Internal errors are internal from the user's point of view, not
-the developer's (<a href="Internal-Errors.html#Internal-Errors">Internal Errors</a>). Invoking these functions in
+</p>
+<p>Some general points pertaining to the library are the following.
+</p>
+<ul>
+<li> Unlike the previous chapter, this chapter uses the word
+&ldquo;function&rdquo; in the C sense rather than the mathematical sense of the word.
+</li><li> Internal errors are internal from the user&rsquo;s point of view, not
+the developer&rsquo;s (<a href="Internal-Errors.html#Internal-Errors">Internal Errors</a>). Invoking these functions in
 ways that are contrary to their specifications can certainly cause
-internal errors (not to mention segfaults). 
-<li>The library is definitely not thread safe, and thread safety is
-<a name="index-threads-393"></a>not a planned enhancement. The amount of locking required to make it
+internal errors (not to mention segfaults).
+</li><li> The library is definitely not thread safe, and thread safety is
+<a name="index-threads"></a>
+not a planned enhancement. The amount of locking required to make it
 thread safe would probably incur an objectionable performance penalty
 due to the complexity of the shared data structures involved, in
 addition to being very difficult to get right. If you need these
 facilities in a concurrent application, consider spawning a process for
-<a name="index-spawning-processes-394"></a>each client of the library so as to keep their address spaces separate. 
-<li>The library files are built from the standard source
-distribution using GNU <samp><span class="command">libtool</span></samp>. In the default directory
+<a name="index-spawning-processes-3"></a>
+each client of the library so as to keep their address spaces separate.
+</li><li> The library files are built from the standard source
+distribution using GNU <code>libtool</code>. In the default directory
 hierarchy, they will be found
-either in <samp><span class="file">/usr/lib/libavram.*</span></samp> or in <samp><span class="file">/usr/local/lib/libavram.*</span></samp>. 
-These directories will differ in a non-standard installation. 
-<li>The header files will probably be
-located in either <samp><span class="file">/usr/include/avm/*.h</span></samp> or
-<samp><span class="file">/usr/local/include/avm/*.h</span></samp> for a standard installation. 
-<li>All exported functions, macros and constants are
+either in &lsquo;<tt>/usr/lib/libavram.*</tt>&rsquo; or in &lsquo;<tt>/usr/local/lib/libavram.*</tt>&rsquo;.
+These directories will differ in a non-standard installation.
+</li><li> The header files will probably be
+located in either &lsquo;<tt>/usr/include/avm/*.h</tt>&rsquo; or
+&lsquo;<tt>/usr/local/include/avm/*.h</tt>&rsquo; for a standard installation.
+</li><li> All exported functions, macros and constants are
 preceded with <code>avm_</code>, so as to reduce the chance of name clashes
 with other libraries. Not all type declarations or field identifiers
-follow this convention, because that would be far too tedious. 
-<li>The library header files are designed to be compatible with C++
-<a name="index-C_002b_002b-395"></a>but have been tested only with C. Please refer to platform specific
+follow this convention, because that would be far too tedious.
+</li><li> The library header files are designed to be compatible with C++
+<a name="index-C_002b_002b"></a>
+but have been tested only with C. Please refer to platform specific
 documentation for further information on how to link library modules
-with your own code. 
-</ul>
+with your own code.
+</li></ul>
 
-<ul class="menu">
-<li><a accesskey="1" href="Lists.html#Lists">Lists</a>
-<li><a accesskey="2" href="Characters-and-Strings.html#Characters-and-Strings">Characters and Strings</a>
-<li><a accesskey="3" href="File-Manipulation.html#File-Manipulation">File Manipulation</a>
-<li><a accesskey="4" href="Invocation.html#Invocation">Invocation</a>
-<li><a accesskey="5" href="Version-Management.html#Version-Management">Version Management</a>
-<li><a accesskey="6" href="Error-Reporting.html#Error-Reporting">Error Reporting</a>
-<li><a accesskey="7" href="Profiling.html#Profiling">Profiling</a>
-<li><a accesskey="8" href="Emulation-Primitives.html#Emulation-Primitives">Emulation Primitives</a>
-<li><a accesskey="9" href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>
-</ul>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="Lists.html#Lists">3.1 Lists</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       
+</td></tr>
+<tr><td align="left" valign="top"><a href="Characters-and-Strings.html#Characters-and-Strings">3.2 Characters and Strings</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      
+</td></tr>
+<tr><td align="left" valign="top"><a href="File-Manipulation.html#File-Manipulation">3.3 File Manipulation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">           
+</td></tr>
+<tr><td align="left" valign="top"><a href="Invocation.html#Invocation">3.4 Invocation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Version-Management.html#Version-Management">3.5 Version Management</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="Error-Reporting.html#Error-Reporting">3.6 Error Reporting</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="Profiling.html#Profiling">3.7 Profiling</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   
+</td></tr>
+<tr><td align="left" valign="top"><a href="Emulation-Primitives.html#Emulation-Primitives">3.8 Emulation Primitives</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        
+</td></tr>
+<tr><td align="left" valign="top"><a href="External-Library-Maintenance.html#External-Library-Maintenance">3.9 External Library Maintenance</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        
+</td></tr>
+</table>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Vacant-Address-Space.html#Vacant-Address-Space" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Lists.html#Lists" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

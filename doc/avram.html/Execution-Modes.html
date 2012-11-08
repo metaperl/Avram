@@ -1,94 +1,132 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Execution Modes - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Invocation.html#Invocation" title="Invocation">
-<link rel="prev" href="Command-Line-Parsing.html#Command-Line-Parsing" title="Command Line Parsing">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.4.2 Execution Modes</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.4.2 Execution Modes">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.4.2 Execution Modes">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Execution-Modes"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Command-Line-Parsing.html#Command-Line-Parsing">Command Line Parsing</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Invocation.html#Invocation">Invocation</a>
-<hr>
-</div>
-
-<h4 class="subsection">3.4.2 Execution Modes</h4>
-
-<p>Some functions declared in <samp><span class="file">exmodes.h</span></samp> are useful for executing
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Command-Line-Parsing.html#Command-Line-Parsing" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Version-Management.html#Version-Management" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Invocation.html#Invocation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Execution-Modes-1"></a>
+<h3 class="subsection">3.4.2 Execution Modes</h3>
+<p>Some functions declared in &lsquo;<tt>exmodes.h</tt>&rsquo; are useful for executing
 interactive applications or filter mode transducers in a manner
 consistent with the specifications described in the previous chapter.
-
-<div class="defun">
-&mdash; Function: void <b>avm_interact</b> (<var>list avm_interactor, int step_mode, int ask_to_overwrite_mode, int quiet_mode</var>)<var><a name="index-avm_005finteract-593"></a></var><br>
-<blockquote>
-        <p>This function executes an interactive virtual code application. The
+</p>
+<dl>
+<dt><a name="index-avm_005finteract"></a><u>Function:</u> void <b>avm_interact</b><i> (list <var>avm_interactor</var>, int <var>step_mode</var>, int <var>ask_to_overwrite_mode</var>, int <var>quiet_mode</var>)</i></dt>
+<dd>
+<p>This function executes an interactive virtual code application. The
 parameters have these interpretations.
-
-          <dl>
-<dt><var>avm_interactor</var><dd>is the virtual code for a function that performs as specified in
-<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>. 
-<br><dt><var>step_mode</var><dd>will cause all shell commands to be echoed if set to a non-zero
+</p>
+<dl compact="compact">
+<dt> <code><var>avm_interactor</var></code></dt>
+<dd><p>is the virtual code for a function that performs as specified in
+<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>.
+</p></dd>
+<dt> <code><var>step_mode</var></code></dt>
+<dd><p>will cause all shell commands to be echoed if set to a non-zero
 value, and will cause the program to pause after each shell command
-until a key is pressed. 
-<br><dt><var>ask_to_overwrite_mode</var><dd>can be set to a non-zero value by the caller to cause the program to ask
+until a key is pressed.
+</p></dd>
+<dt> <code><var>ask_to_overwrite_mode</var></code></dt>
+<dd><p>can be set to a non-zero value by the caller to cause the program to ask
 permission of the user to overwrite any existing files in cases where
-the virtual code returns a file list as described in <a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>. 
-<br><dt><var>quiet_mode</var><dd>can be set to a non-zero value to suppress console messages in the case
-of file output per <a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>. 
+the virtual code returns a file list as described in <a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>.
+</p></dd>
+<dt> <code><var>quiet_mode</var></code></dt>
+<dd><p>can be set to a non-zero value to suppress console messages in the case
+of file output per <a href="Mixed-Modes-of-Interaction.html#Mixed-Modes-of-Interaction">Mixed Modes of Interaction</a>.
+</p></dd>
 </dl>
 
-        <p>The meaning of this function is accessible to any reader willing to slog
+<p>The meaning of this function is accessible to any reader willing to slog
 through <a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>. The only subtle
-point is that <var>avm_interactor</var> parameter in this function
+point is that <code><var>avm_interactor</var></code> parameter in this function
 does not correspond to the virtual code application that <code>avram</code>
 reads from a virtual code file, but to the result computed when the
 application read from the file is applied to the data structure
 representing the command line and environment.
-
-        <p>Any of the memory overflows or i/o errors possible with other functions
+</p>
+<p>Any of the memory overflows or i/o errors possible with other functions
 in the library are possible from this one as well, and will also cause
 it to print an error message and halt the program. A badly designed
-<a name="index-deadlock-594"></a>virtual code application could cause a deadlock, which will not be
+<a name="index-deadlock-2"></a>
+virtual code application could cause a deadlock, which will not be
 detected or reported
-</p></blockquote></div>
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_trace_interaction</b> ()<var><a name="index-avm_005ftrace_005finteraction-595"></a></var><br>
-<blockquote>
-        <p>This function enables diagnostic output for the <code>avm_recoverable_interact</code>
-function. 
-</p></blockquote></div>
+<dl>
+<dt><a name="index-avm_005ftrace_005finteraction"></a><u>Function:</u> void <b>avm_trace_interaction</b><i> ()</i></dt>
+<dd>
+<p>This function enables diagnostic output for the <code>avm_recoverable_interact</code>
+function.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: void <b>avm_disable_interaction</b> ()<var><a name="index-avm_005fdisable_005finteraction-596"></a></var><br>
-<blockquote>
-        <p>This function causes <code>avm_interact</code> and <code>avm_recoverable_interact</code>
+<dl>
+<dt><a name="index-avm_005fdisable_005finteraction"></a><u>Function:</u> void <b>avm_disable_interaction</b><i> ()</i></dt>
+<dd>
+<p>This function causes <code>avm_interact</code> and <code>avm_recoverable_interact</code>
 to terminate with an error instead of executing, as required by the
-<code>--jail</code> command line option. 
-</p></blockquote></div>
+<code>--jail</code> command line option.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_recoverable_interact</b> (<var>list interactor, int *fault</var>)<var><a name="index-avm_005frecoverable_005finteract-597"></a></var><br>
-<blockquote>
-        <p>This function is similar to <code>avm_interact</code> but always closes the
+<dl>
+<dt><a name="index-avm_005frecoverable_005finteract"></a><u>Function:</u> list <b>avm_recoverable_interact</b><i> (list <var>interactor</var>, int <var>*fault</var>)</i></dt>
+<dd>
+<p>This function is similar to <code>avm_interact</code> but always closes the
 pipe and performs no file i/o, and will return an error message rather
 than exiting. Otherwise it returns a transcript of the intereaction as
 a list of lists of strings represented as lists of character
@@ -96,44 +134,64 @@ encodings.  It implements the <var>interact</var> combinator with the
 virtual code for the transducer function given as the parameter.  A
 prior call to <code>avm_trace_interaction</code> will cause diagnostic
 information to be written to standard output when this function is
-executed. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_byte_transduce</b> (<var>list operator</var>)<var><a name="index-avm_005fbyte_005ftransduce-598"></a></var><br>
-<blockquote>
-        <p>This function executes a filter mode byte transducer application, which
+executed.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fbyte_005ftransduce"></a><u>Function:</u> void <b>avm_byte_transduce</b><i> (list <var>operator</var>)</i></dt>
+<dd>
+<p>This function executes a filter mode byte transducer application, which
 behaves as described in <a href="Byte-Transducers.html#Byte-Transducers">Byte Transducers</a>. The argument is the
 virtual code for the application, which would be found in a virtual code
 file. There are limited opportunities for i/o errors, as only standard
 input and standard output are involved with this function, but fatal
-errors due to memory overflow are possible. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_line_map</b> (<var>list operator</var>)<var><a name="index-avm_005fline_005fmap-599"></a></var><br>
-<blockquote>
-        <p>This function executes line mapped filter mode applications, which are
+errors due to memory overflow are possible.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fline_005fmap"></a><u>Function:</u> void <b>avm_line_map</b><i> (list <var>operator</var>)</i></dt>
+<dd>
+<p>This function executes line mapped filter mode applications, which are
 explained in <a href="Line-Maps.html#Line-Maps">Line Maps</a>. The argument is the virtual code for the
-application. Similar comments to those above apply. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_exmodes</b> ()<var><a name="index-avm_005finitialize_005fexmodes-600"></a></var><br>
-<blockquote>
-        <p>This function should be called before any of the other functions in this
+application. Similar comments to those above apply.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005finitialize_005fexmodes"></a><u>Function:</u> void <b>avm_initialize_exmodes</b><i> ()</i></dt>
+<dd>
+<p>This function should be called before any of the other functions in this
 section in order to initialize some local variables. Results are
-undefined if this function isn't called first. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_exmodes</b> ()<var><a name="index-avm_005fcount_005fexmodes-601"></a></var><br>
-<blockquote>
-        <p>This function doesn't do anything in the present version of the library,
+undefined if this function isn&rsquo;t called first.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005fexmodes"></a><u>Function:</u> void <b>avm_count_exmodes</b><i> ()</i></dt>
+<dd>
+<p>This function doesn&rsquo;t do anything in the present version of the library,
 but should be called after the last call to any of the other functions
 in this section in order to maintain compatibility with future versions,
-which may use it for cleaning up local variables. 
-</p></blockquote></div>
+which may use it for cleaning up local variables.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Command-Line-Parsing.html#Command-Line-Parsing" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Version-Management.html#Version-Management" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Invocation.html#Invocation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

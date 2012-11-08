@@ -1,83 +1,147 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>umf - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
-<link rel="prev" href="rmath.html#rmath" title="rmath">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="umf"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="rmath.html#rmath">rmath</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.17 umf</title>
 
-<h3 class="section">D.17 <code>umf</code></h3>
+<meta name="description" content="avram - a virtual machine code interpreter: D.17 umf">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.17 umf">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="umf"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="rmath-exceptions.html#rmath-exceptions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="umf-input-parameters.html#umf-input-parameters" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="umf-1"></a>
+<h2 class="section">D.17 <code>umf</code></h2>
 
 <p>Systems of equations described by sparse matrices (i.e., matrices
-<a name="index-sparse-matrices-813"></a>containing mostly zeros) arise in certain practical problems. The
+<a name="index-sparse-matrices"></a>
+containing mostly zeros) arise in certain practical problems. The
 usual array representation in which zeros are explicitly stored would
 be prohibitive for large matrices occurring in many problems of
 interest. A more sophisticated approach is used by the <code>umf</code>
 library to manage memory efficiently, which is documented at
 <a href="http://www.cise.ufl.edu/research/sparse/SuiteSparse/current/SuiteSparse/UMFPACK/Doc/">http://www.cise.ufl.edu/research/sparse/SuiteSparse/current/SuiteSparse/UMFPACK/Doc/</a>.
+</p>
 
-   <p>A virtual code interface to functions for solving sparse systems of
+
+<p>A virtual code interface to functions for solving sparse systems of
 equations by these methods is afforded by library functions of the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('umf',f)
+</pre></td></tr></table>
 
-<pre class="example">     library('umf',f)
-</pre>
-   <p class="noindent">where the library function name, <code>f</code> is a character string
-of the form <var>tt</var><code>_</code><var>m</var><code>_</code><var>rrr</var>.
-
-     <ul>
-<li><var>tt</var>
-can be either <code>di</code> for real matrices, or <code>zi</code> for complex. 
-<li><var>m</var>
+<p>where the library function name, <code>f</code> is a character string
+of the form <code><var>tt</var>_<var>m</var>_<var>rrr</var></code>.
+</p>
+<ul>
+<li> <var>tt</var>
+can be either <code>di</code> for real matrices, or <code>zi</code> for complex.
+</li><li> <var>m</var>
 can be one of <code>a</code>, <code>t</code>, or <code>c</code> for solving a system
 given either by a matrix, its transpose, or its conjugate transpose,
 respectively,
-<a name="index-conjugate-transpose-814"></a>corresponding to mnemonics <code>A</code>, <code>Aat</code> and <code>At</code> used in
-the C language API. 
-<li><var>rrr</var>
+<a name="index-conjugate-transpose"></a>
+corresponding to mnemonics <code>A</code>, <code>Aat</code> and <code>At</code> used in
+the C language API.
+</li><li> <var>rrr</var>
 is either <code>trp</code> or <code>col</code>, to indicate a sparse matrix expressed
-either as a list of triples, or in packed column form, as documented below. 
-</ul>
+either as a list of triples, or in packed column form, as documented below.
+</li></ul>
 
-   <p>The complete set of function names for this library interface is as
+<p>The complete set of function names for this library interface is as
 follows.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">di_a_trp      di_a_col       zi_a_trp       zi_a_col
+di_t_trp      di_t_col       zi_t_trp       zi_t_col
+                             zi_c_trp       zi_c_col
+</pre></td></tr></table>
 
-<pre class="example">     di_a_trp      di_a_col       zi_a_trp       zi_a_col
-     di_t_trp      di_t_col       zi_t_trp       zi_t_col
-                                  zi_c_trp       zi_c_col
-</pre>
-   <p class="noindent">Not all combinations are represented, because the conjugate transpose
+<p>Not all combinations are represented, because the conjugate transpose
 is relevant only to complex matrices.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="umf-input-parameters.html#umf-input-parameters">D.17.1 <code>umf</code> input parameters</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="umf-output.html#umf-output">D.17.2 <code>umf</code> output</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="umf-exceptions.html#umf-exceptions">D.17.3 <code>umf</code> exceptions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="Additional-umf-notes.html#Additional-umf-notes">D.17.4 Additional <code>umf</code> notes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="umf-input-parameters.html#umf-input-parameters">umf input parameters</a>
-<li><a accesskey="2" href="umf-output.html#umf-output">umf output</a>
-<li><a accesskey="3" href="umf-exceptions.html#umf-exceptions">umf exceptions</a>
-<li><a accesskey="4" href="Additional-umf-notes.html#Additional-umf-notes">Additional umf notes</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="rmath-exceptions.html#rmath-exceptions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="umf-input-parameters.html#umf-input-parameters" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

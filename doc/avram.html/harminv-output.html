@@ -1,68 +1,109 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>harminv output - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="harminv.html#harminv" title="harminv">
-<link rel="prev" href="harminv-input-parameters.html#harminv-input-parameters" title="harminv input parameters">
-<link rel="next" href="harminv-exceptions.html#harminv-exceptions" title="harminv exceptions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="harminv-output"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="harminv-exceptions.html#harminv-exceptions">harminv exceptions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="harminv-input-parameters.html#harminv-input-parameters">harminv input parameters</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="harminv.html#harminv">harminv</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.8.2 harminv output</title>
 
-<h4 class="subsection">D.8.2 <code>harminv</code> output</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.8.2 harminv output">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.8.2 harminv output">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="harminv-output"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="harminv-input-parameters.html#harminv-input-parameters" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="harminv-exceptions.html#harminv-exceptions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="harminv.html#harminv" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="harminv-output-1"></a>
+<h3 class="subsection">D.8.2 <code>harminv</code> output</h3>
 
 <p>The result returned by a call to
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('harminv','hsolve')
+</pre></td></tr></table>
 
-<pre class="example">     library('harminv','hsolve')
-</pre>
-   <p class="noindent">with valid input (<a href="harminv-input-parameters.html#harminv-input-parameters">harminv input parameters</a>) is a list of similar tuples of the form
+<p>with valid input (<a href="harminv-input-parameters.html#harminv-input-parameters"><code>harminv</code> input parameters</a>) is a list of similar tuples of the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;(amplitude,frequency,decay,quality,error)...&gt;
+</pre></td></tr></table>
 
-<pre class="example">     &lt;(amplitude,frequency,decay,quality,error)...&gt;
-</pre>
-   <p class="noindent">with all members being real valued except for the amplitudes, which are
+<p>with all members being real valued except for the amplitudes, which are
 complex. Each tuple describes a function of the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">f(t) = A * sin (frequency * t + P) * exp (-decay * t)
+</pre></td></tr></table>
 
-<pre class="example">     f(t) = A * sin (frequency * t + P) * exp (-decay * t)
-</pre>
-   <p class="noindent">such that the summation of these functions approximates the original
-given signal (<a href="harminv-input-parameters.html#harminv-input-parameters">harminv input parameters</a>). The real amplitude
+<p>such that the summation of these functions approximates the original
+given signal (<a href="harminv-input-parameters.html#harminv-input-parameters"><code>harminv</code> input parameters</a>). The real amplitude
 <code>A</code> and phase <code>P</code> are given by the modulus and argument of
 the complex amplitude returned in the result,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">A = library('complex','cabs') amplitude
+P = library('complex','carg') amplitude
+</pre></td></tr></table>
 
-<pre class="example">     A = library('complex','cabs') amplitude
-     P = library('complex','carg') amplitude
-</pre>
-   <p class="noindent">in terms of the complex library functions (<a href="complex.html#complex">complex</a>). 
+<p>in terms of the complex library functions (<a href="complex.html#complex"><code>complex</code></a>).
 The error values are measures of the goodness of fit, and the quality
 factors are defined as
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">quality = (pi * |frequency| / decay)
+</pre></td></tr></table>
 
-<pre class="example">     quality = (pi * |frequency| / decay)
-</pre>
-   <p class="noindent">It may be useful in some applications to ignore components with
+<p>It may be useful in some applications to ignore components with
 quality factors outside of a certain range.
+</p>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

@@ -1,176 +1,220 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Two dimensional arrays - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Type-Conversions.html#Type-Conversions" title="Type Conversions">
-<link rel="prev" href="One-dimensional-arrays.html#One-dimensional-arrays" title="One dimensional arrays">
-<link rel="next" href="Related-utility-functions.html#Related-utility-functions" title="Related utility functions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.1.4.3 Two dimensional arrays</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.1.4.3 Two dimensional arrays">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.1.4.3 Two dimensional arrays">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Two-dimensional-arrays"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Related-utility-functions.html#Related-utility-functions">Related utility functions</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="One-dimensional-arrays.html#One-dimensional-arrays">One dimensional arrays</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Type-Conversions.html#Type-Conversions">Type Conversions</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="One-dimensional-arrays.html#One-dimensional-arrays" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Related-utility-functions.html#Related-utility-functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Two-dimensional-arrays-1"></a>
+<h4 class="subsubsection">3.1.4.3 Two dimensional arrays</h4>
 
-<h5 class="subsubsection">3.1.4.3 Two dimensional arrays</h5>
-
-<p>Several other functions in <samp><span class="file">matcon.h</span></samp> are meant to support
+<p>Several other functions in &lsquo;<tt>matcon.h</tt>&rsquo; are meant to support
 conversions between matrices represented as lists of lists and arrays
 in a variety of representations. Dense matrices either square or
-<a name="index-matrices-450"></a>rectangular are accommodated, and symmetric square matrices can be
+<a name="index-matrices"></a>
+rectangular are accommodated, and symmetric square matrices can be
 stored with redundant entries omitted in either upper trangular or
 lower triangular format.
-
-   <p>Similarly to the vector operations (<a href="One-dimensional-arrays.html#One-dimensional-arrays">One dimensional arrays</a>)
+</p>
+<p>Similarly to the vector operations (<a href="One-dimensional-arrays.html#One-dimensional-arrays">One dimensional arrays</a>)
 these functions are intended to allow a developer to present an
 interface to external libraries based on lists rather than arrays.
-
-   <p>The preferred convention for virtual code applications is to represent
+</p>
+<p>The preferred convention for virtual code applications is to represent
 a matrix as a list of lists of entities (typically numbers), with
 one list for each row of the matrix. For example, a 3 by 3 matrix
 containing a value of <code>aij</code> in the <code>i</code>-th row and the
 <code>j</code>-th column would be represented by this list of three lists.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;
+   &lt;a11,a12,a13&gt;,
+   &lt;a21,a22,a23&gt;,
+   &lt;a31,a32,a33&gt;&gt;
+</pre></td></tr></table>
 
-<pre class="example">     &lt;
-        &lt;a11,a12,a13&gt;,
-        &lt;a21,a22,a23&gt;,
-        &lt;a31,a32,a33&gt;&gt;
-</pre>
-   <p class="noindent">Such a representation is convenient for manipulation by
+<p>Such a representation is convenient for manipulation by
 virtual machine combinators, for example <code>transpose</code>
 (<a href="Transpose.html#Transpose">Transpose</a>), and is readily identified with the matrix
 it represents.
-
-   <p>If a matrix is symmetric (that is, with <code>aij</code> equal to
+</p>
+<p>If a matrix is symmetric (that is, with <code>aij</code> equal to
 <code>aji</code> for all values of <code>i</code> and <code>j</code>), only the lower
 triangular portion needs to be stored because the other entries are
-<a name="index-triangular-matrix-451"></a>redundant.  The list representatation would be something like this.
+<a name="index-triangular-matrix"></a>
+redundant.  The list representatation would be something like this.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;
+   &lt;a11&gt;,
+   &lt;a21,a22&gt;,
+   &lt;a31,a32,a33&gt;&gt;
+</pre></td></tr></table>
 
-<pre class="example">     &lt;
-        &lt;a11&gt;,
-        &lt;a21,a22&gt;,
-        &lt;a31,a32,a33&gt;&gt;
-</pre>
-   <p>Another alternative for representing a symmetric matrix is to store only the
+<p>Another alternative for representing a symmetric matrix is to store only the
 upper triangular portion. In this case, a list such as the following would be used.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;
+   &lt;a11,a12,a13&gt;,
+   &lt;a22,a23&gt;,
+   &lt;a33&gt;&gt;
+</pre></td></tr></table>
 
-<pre class="example">     &lt;
-        &lt;a11,a12,a13&gt;,
-        &lt;a22,a23&gt;,
-        &lt;a33&gt;&gt;
-</pre>
-   <p class="noindent">The upper and lower triangular representations are distinguishable by
+<p>The upper and lower triangular representations are distinguishable by
 whether or not the row lengths form an increasing sequence.
-
-   <p>In addition to representing symmetric matrices, these upper and lower
-<a name="index-symmetric-matrix-452"></a>triangular forms are also appropriate for representing matrices whose
+</p>
+<p>In addition to representing symmetric matrices, these upper and lower
+<a name="index-symmetric-matrix"></a>
+triangular forms are also appropriate for representing matrices whose
 remaining entries are zero, such as the factors in an LU
-decomposition. 
-<a name="index-LU-decomposition-453"></a>
-
-<div class="defun">
-&mdash; Function: void <b>*avm_matrix_of_list</b> (<var>int square, int upper_triangular, int lower_triangular, int column_major, list operand, size_t item_size, list *message, int *fault</var>)<var><a name="index-g_t_002aavm_005fmatrix_005fof_005flist-454"></a></var><br>
-<blockquote>
-        <p>This function converts a matrix in one of the list representations
-above to a contiguous array according to the given specifications. 
+decomposition.
+<a name="index-LU-decomposition"></a>
+</p>
+<dl>
+<dt><a name="index-_002aavm_005fmatrix_005fof_005flist"></a><u>Function:</u> void <b>*avm_matrix_of_list</b><i> (int <var>square</var>, int <var>upper_triangular</var>, int <var>lower_triangular</var>, int <var>column_major</var>, list <var>operand</var>, size_t <var>item_size</var>, list *<var>message</var>, int *<var>fault</var>)</i></dt>
+<dd>
+<p>This function converts a matrix in one of the list representations
+above to a contiguous array according to the given specifications.
 The array can contain elements of any fixed sized type of size
 <var>item_size</var>. The memory for it is allocated by this function and
 it should be freed by the caller when no longer needed.
-
-        <p>The input matrix is given by the list parameter, <var>operand</var>, and
+</p>
+<p>The input matrix is given by the list parameter, <var>operand</var>, and
 its format is described by the integer parameters <var>square</var>,
 <var>upper_triangular</var>, and <var>lower_triangular</var>. The number of
-bytes occupied by each entry is given by <var>item_size</var>.
-
-        <p>To the extent these specifications are redundant, they are used for
+bytes occupied by each entry is given by <var>item_size</var>. 
+</p>
+<p>To the extent these specifications are redundant, they are used for
 validation. If any of the following conditions is not met, the integer
 referenced by <var>fault</var> is assigned a non-zero value and a copy
 of the message <code>&lt;'bad matrix specification'&gt;</code> represented as
 a list is assigned to the list referenced by <var>message</var>. Errors
 are also possible due to insufficient memory.
-
-          <ul>
-<li>The <var>operand</var> must be a list of lists of lists such that
+</p>
+<ul>
+<li>
+The <var>operand</var> must be a list of lists of lists such that 
 each item of each item is has a length of <var>item_size</var>,
 and its items consist of character representations as
-required by <code>avm_value_of_list</code> (<a href="Primitive-types.html#Primitive-types">Primitive types</a>). 
-<li>If the lengths of the top level lists in the <var>operand</var> form an
+required by <code>avm_value_of_list</code> (<a href="Primitive-types.html#Primitive-types">Primitive types</a>).
+</li><li>
+If the lengths of the top level lists in the <var>operand</var> form an
 increasing sequence, the lower triangular representation is assumed
-and the <var>lower_triangular</var> parameter must have a non-zero value. 
-<li>If the lengths of the top level lists in the <var>operand</var> form a
+and the <var>lower_triangular</var> parameter must have a non-zero value.
+</li><li> 
+If the lengths of the top level lists in the <var>operand</var> form a
 decreasing sequence, the upper triangular representation is assumed
-and the <var>upper_triangular</var> parameter must have a non-zero value. 
-<li>At least one of <var>upper_triangular</var> or <var>lower_triangular</var> must
-be zero. 
-<li>If <var>square</var> has a non-zero value, then either all items of the
-<var>operand</var> must have the same length as the operand, or if it's
+and the <var>upper_triangular</var> parameter must have a non-zero value.
+</li><li>
+At least one of <var>upper_triangular</var> or <var>lower_triangular</var> must
+be zero.
+</li><li>
+If <var>square</var> has a non-zero value, then either all items of the
+<var>operand</var> must have the same length as the operand, or if it&rsquo;s
 triangular, then the longest one must have the same length as the
-operand. 
-<li>If the <var>operand</var> is neither square nor a triangular form, all
-items of it are required to have the same length. 
-</ul>
+operand.
+</li><li>
+If the <var>operand</var> is neither square nor a triangular form, all
+items of it are required to have the same length.
+</li></ul>
 
-        <p>The parameters <var>upper_triangular</var> or <var>lower_triangular</var> may be
+<p>The parameters <var>upper_triangular</var> or <var>lower_triangular</var> may be
 set to non-zero values even if the <var>operand</var> is not in one of the
 upper or lower triangular forms discussed above. In this case, the
 <var>operand</var> must be square or rectangular (i.e., with all items the
 same length), and the following interpretations apply.
-
-          <ul>
-<li>If <var>upper_triangular</var> is non-zero, the diagonal elements and the
-upper triangular portion of the input matrix are copied to the output. 
+</p>
+<ul>
+<li>
+If <var>upper_triangular</var> is non-zero, the diagonal elements and the
+upper triangular portion of the input matrix are copied to the output.
 The lower triangle of the input is ignored and the lower triangle of
-the output is left uninitialized. 
-<li>If <var>lower_triangular</var> is non-zero, the diagonal elements and the
-lower triangular portion of the input matrix are copied to the output. 
+the output is left uninitialized.
+</li><li>
+If <var>lower_triangular</var> is non-zero, the diagonal elements and the
+lower triangular portion of the input matrix are copied to the output.
 The upper triangle of the input is ignored and the upper triangle of
-the output is left uninitialized. 
-</ul>
+the output is left uninitialized.
+</li></ul>
 
-        <p>The <var>column_major</var> parameter affects the form of the output array. 
+<p>The <var>column_major</var> parameter affects the form of the output array.
 If it is zero, then each row of the input matrix is stored in a
 contiguous block of memory in the output array, and if it is non-zero,
 each column is stored contiguously. 
-<a name="index-Fortran-455"></a>The latter representation is also
+<a name="index-Fortran"></a>
+The latter representation is also
 known as Fortran order and may be required by library functions
 written in Fortran.
-
-        <p>In all cases when a triangular form is specified, part of the output
+</p>
+<p>In all cases when a triangular form is specified, part of the output
 matrix is left uninitialized. The redundant entries may be assigned if
-required by the <code>avm_reflect_matrix</code> function (<a href="Related-utility-functions.html#Related-utility-functions">Related utility functions</a>). 
-</p></blockquote></div>
+required by the <code>avm_reflect_matrix</code> function (<a href="Related-utility-functions.html#Related-utility-functions">Related utility functions</a>).
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_list_of_matrix</b> (<var>void *matrix, int rows, int cols, size_t item_size, int *fault</var>)<var><a name="index-avm_005flist_005fof_005fmatrix-456"></a></var><br>
-<blockquote><p>This function performs an inverse operation to
+<dl>
+<dt><a name="index-avm_005flist_005fof_005fmatrix"></a><u>Function:</u> list <b>avm_list_of_matrix</b><i> (void *<var>matrix</var>, int <var>rows</var>, int <var>cols</var>, size_t <var>item_size</var>, int *<var>fault</var>)</i></dt>
+<dd><p>This function performs an inverse operation to
 <code>avm_matrix_of_list</code> by taking the address of a matrix stored as
 a contiguous array in the parameter <var>matrix</var> and constructing the
 list representation as discussed above. Only square and rectangular
 matrices in row major order are supported, but see
 <code>avm_matrix_transposition</code> for a way to convert between row major
-<a name="index-column-major-order-457"></a>and column major order (<a href="Related-utility-functions.html#Related-utility-functions">Related utility functions</a>).
-
-        <p>The parameters <var>rows</var>, <var>cols</var>, and <var>item_size</var> describe
+<a name="index-column-major-order"></a>
+and column major order (<a href="Related-utility-functions.html#Related-utility-functions">Related utility functions</a>).
+</p>
+<p>The parameters <var>rows</var>, <var>cols</var>, and <var>item_size</var> describe
 the form of the matrix. The list returned as a result will have a
 length of <var>rows</var>, and each item will be a list of length
 <var>cols</var>. Each item of the result corresponds to a row of the
@@ -178,103 +222,138 @@ matrix, and each item of the items represents the an entry of the
 matrix as a list of length <var>item_size</var>. These items could be
 passed to <code>avm_value_of_list</code>, for example, to obtain their
 values (<a href="Primitive-types.html#Primitive-types">Primitive types</a>).
-
-        <p>Memory is allocated by this function to create the list, which can be
+</p>
+<p>Memory is allocated by this function to create the list, which can be
 reclaimed by <code>avm_dispose</code> (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>). If there is
 insufficient memory, the integer referenced by <var>fault</var> is assigned
 a non-zero value and the result returned is a list representation of
 the message <code>&lt;'memory overflow'&gt;</code>. The error message be reclaimed
-by the caller as well using <code>avm_dispose</code>. 
-</p></blockquote></div>
+by the caller as well using <code>avm_dispose</code>.
+</p></dd></dl>
 
-   <p>A packed storage representation for symmetric square matrices and
-<a name="index-packed-arrays-458"></a>triangular matrices is of interest because it is used by some library
+
+<p>A packed storage representation for symmetric square matrices and
+<a name="index-packed-arrays"></a>
+triangular matrices is of interest because it is used by some library
 functions, notably those in <code>LAPACK</code>, to save memory and thereby
 accommodate larger problems. In this representation, column major
-<a name="index-column-major-order-459"></a>order is assumed, and either the lower or the upper triangle of the
+<a name="index-column-major-order-1"></a>
+order is assumed, and either the lower or the upper triangle of the
 matrix is not explicitly stored. For example, a lower triangular
-<a name="index-triangular-matrix-460"></a>matrix whose list representation corresponds to
+<a name="index-triangular-matrix-1"></a>
+matrix whose list representation corresponds to
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;
+   &lt;a11&gt;,
+   &lt;a21,a22&gt;,
+   &lt;a31,a32,a33&gt;,
+   &lt;a41,a42,a43,a44&gt;&gt;
+</pre></td></tr></table>
 
-<pre class="example">     &lt;
-        &lt;a11&gt;,
-        &lt;a21,a22&gt;,
-        &lt;a31,a32,a33&gt;,
-        &lt;a41,a42,a43,a44&gt;&gt;
-</pre>
-   <p class="noindent">would be stored according to the memory map
-<a name="index-matrix-memory-map-461"></a>
-<pre class="example">     [a11 a21 a31 a41 a22 a32 a42 a33 a43 a44]
-</pre>
-   <p class="noindent">with <code>a11</code> at the beginning address. An upper triangular matrix
+<p>would be stored according to the memory map
+<a name="index-matrix-memory-map"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">[a11 a21 a31 a41 a22 a32 a42 a33 a43 a44]
+</pre></td></tr></table>
 
-<pre class="example">     &lt;
-        &lt;a11,a12,a13,a14&gt;,
-        &lt;a22,a23,a24&gt;,
-        &lt;a33,a34&gt;,
-        &lt;a44&gt;&gt;
-</pre>
-   <p class="noindent">would be stored according to the memory map
+<p>with <code>a11</code> at the beginning address. An upper triangular matrix
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;
+   &lt;a11,a12,a13,a14&gt;,
+   &lt;a22,a23,a24&gt;,
+   &lt;a33,a34&gt;,
+   &lt;a44&gt;&gt;
+</pre></td></tr></table>
 
-<pre class="example">     [a11 a12 a22 a13 a23 a33 a14 a24 a34 a44].
-</pre>
-   <p>A couple of functions converting between list representations and
+<p>would be stored according to the memory map
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">[a11 a12 a22 a13 a23 a33 a14 a24 a34 a44].
+</pre></td></tr></table>
+
+<p>A couple of functions converting between list representations and
 packed array format are provided as described below.
-
-<div class="defun">
-&mdash; Function: void <b>*avm_packed_matrix_of_list</b> (<var>int upper_triangular, list operand, int n, size_t item_size, list *message, int *fault</var>)<var><a name="index-g_t_002aavm_005fpacked_005fmatrix_005fof_005flist-462"></a></var><br>
-<blockquote>
-        <p>If the <var>operand</var> is a list in one of the triangular forms
+</p>
+<dl>
+<dt><a name="index-_002aavm_005fpacked_005fmatrix_005fof_005flist"></a><u>Function:</u> void <b>*avm_packed_matrix_of_list</b><i> (int <var>upper_triangular</var>, list <var>operand</var>, int <var>n</var>, size_t <var>item_size</var>, list *<var>message</var>, int *<var>fault</var>)</i></dt>
+<dd>
+<p>If the <var>operand</var> is a list in one of the triangular forms
 explained above, then the <var>upper_triangular</var> parameter must be
 consisitent with it, being non-zero if the <var>operand</var> is upper
 triangular and zero otherwise.
-
-        <p>If the <var>operand</var> is not in a triangular form, then each item of
+</p>
+<p>If the <var>operand</var> is not in a triangular form, then each item of
 the operand must be a list of length <var>n</var>. In this case, the
 <var>upper_triangular</var> parameter indicates which triangle of the
 operand should be copied to the result, and the other triangle is
 ignored.
-
-        <p>In either case, the operand must have a length of <var>n</var>, and the
+</p>
+<p>In either case, the operand must have a length of <var>n</var>, and the
 items of its items must be lists of length <var>item_size</var> containing
 character representations as required by <code>avm_value_of_list</code>
 (<a href="Primitive-types.html#Primitive-types">Primitive types</a>).
-
-        <p>If the input parameters are inconsistent or if there is insufficient
+</p>
+<p>If the input parameters are inconsistent or if there is insufficient
 memory to allocate the result, the integer referenced by <var>fault</var>
 is assigned a non-zero value, and the list referenced by <var>message</var>
 is assigned a copy of the list representation of <code>&lt;'bad matrix
 specification'&gt;</code> or <code>&lt;'memory overflow'&gt;</code>, respectively. A
 non-empty message must be reclaimed by the caller using
 <code>avm_dispose</code> (<a href="Simple-Operations.html#Simple-Operations">Simple Operations</a>).
-
-        <p>If there are no errors, the result is a pointer to a packed array
+</p>
+<p>If there are no errors, the result is a pointer to a packed array
 representation of the <var>operand</var> as explained above. The memory for
 this result is allocated by this function and should be freed by the
 caller when no longer required. The number of bytes allocated will be
-<var>item_size</var> * (<var>n</var> * (<var>n</var> + 1))/2. 
-</p></blockquote></div>
+<var>item_size</var> * (<var>n</var> * (<var>n</var> + 1))/2.
+</p></dd></dl>
 
-<div class="defun">
-&mdash; Function: list <b>avm_list_of_packed_matrix</b> (<var>int upper_trianguler,void *operand, int n, size_t item_size, int *fault</var>)<var><a name="index-avm_005flist_005fof_005fpacked_005fmatrix-463"></a></var><br>
-<blockquote>
-        <p>This function performs an inverse operation to that of
+<dl>
+<dt><a name="index-avm_005flist_005fof_005fpacked_005fmatrix"></a><u>Function:</u> list <b>avm_list_of_packed_matrix</b><i> (int <var>upper_trianguler</var>,void *<var>operand</var>, int <var>n</var>, size_t <var>item_size</var>, int *<var>fault</var>)</i></dt>
+<dd>
+<p>This function performs an inverse operation to that of
 <code>avm_packed_matrix_of_list</code> given the address of a packed matrix
 stored according to one of the memory maps discussed above. The
 <var>operand</var> parameter holds the address, the parameter <var>n</var> gives
 the number of rows, and the <var>upper_triangular</var> parameter specifies
 which of the two possible memory maps to assume.
-
-        <p>If there is sufficient memory, the result returned is a list in one of
+</p>
+<p>If there is sufficient memory, the result returned is a list in one of
 the triangular forms described above, being upper triangular if the
 <var>upper_triangular</var> parameter is non-zero, with values of length
 <var>item_size</var> taken from the array.
-
-        <p>In the event of a memory overflow, the integer referenced by
+</p>
+<p>In the event of a memory overflow, the integer referenced by
 <var>fault</var> is assigned a non-zero value and the result is a copy of
 the message <code>&lt;'memory overflow'&gt;</code> represented as a list. A
-<a name="index-segmentation-fault-464"></a>segmentation fault is possible if this function is passed an invalid
-pointer or dimension. 
-</p></blockquote></div>
+<a name="index-segmentation-fault-4"></a>
+segmentation fault is possible if this function is passed an invalid
+pointer or dimension.
+</p></dd></dl>
 
-   </body></html>
 
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="One-dimensional-arrays.html#One-dimensional-arrays" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Related-utility-functions.html#Related-utility-functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Type-Conversions.html#Type-Conversions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

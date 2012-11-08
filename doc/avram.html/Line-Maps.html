@@ -1,54 +1,94 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Line Maps - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Filter Mode Interface">
-<link rel="prev" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once" title="Loading All of Standard Input at Once">
-<link rel="next" href="Byte-Transducers.html#Byte-Transducers" title="Byte Transducers">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.5.2 Line Maps</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.5.2 Line Maps">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.5.2 Line Maps">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Line-Maps"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Byte-Transducers.html#Byte-Transducers">Byte Transducers</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Loading-All-of-Standard-Input-at-Once.html#Loading-All-of-Standard-Input-at-Once">Loading All of Standard Input at Once</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Filter-Mode-Interface.html#Filter-Mode-Interface">Filter Mode Interface</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Standard-Output-Representation.html#Standard-Output-Representation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Byte-Transducers.html#Byte-Transducers" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Filter-Mode-Interface.html#Filter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Line-Maps-1"></a>
+<h3 class="subsection">2.5.2 Line Maps</h3>
 
-<h4 class="subsection">2.5.2 Line Maps</h4>
+<a name="index-line_002dmap-command-line-option-2"></a>
+<p>Virtual code applications invoked with the &lsquo;<samp>--line-map</samp>&rsquo; option
+(with or without the &lsquo;<samp>--unparameterized</samp>&rsquo; option) adhere to a very
+simple interface. 
+</p>
+<ul>
+<li> The argument to the function is a character string, and the result
+must also be a character string.
+</li><li> The function is applied to each line of the standard input file
+<a name="index-standard-input-7"></a>
+and the result in each case is written to standard output followed by a
+<a name="index-standard-output-1"></a>
+line break.
+</li></ul>
 
-<p><a name="index-g_t_0040code_007bline_002dmap_007d-command-line-option-193"></a>Virtual code applications invoked with the <samp><span class="option">--line-map</span></samp> option
-(with or without the <samp><span class="option">--unparameterized</span></samp> option) adhere to a very
-simple interface.
-
-     <ul>
-<li>The argument to the function is a character string, and the result
-must also be a character string. 
-<li>The function is applied to each line of the standard input file
-<a name="index-standard-input-194"></a>and the result in each case is written to standard output followed by a
-<a name="index-standard-output-195"></a>line break. 
-</ul>
-
-   <p><a name="index-infinite-streams-196"></a>This kind of application may be used on finite or infinite streams,
+<a name="index-infinite-streams-1"></a>
+<p>This kind of application may be used on finite or infinite streams,
 provided that the lengths of the lines are finite, but preserves no state
 information from one line to the next.
+</p>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

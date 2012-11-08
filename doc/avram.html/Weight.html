@@ -1,66 +1,125 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Weight - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Metrics and Maintenance">
-<link rel="prev" href="Profile.html#Profile" title="Profile">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Weight"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Profile.html#Profile">Profile</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Metrics-and-Maintenance.html#Metrics-and-Maintenance">Metrics and Maintenance</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.7.4 Weight</title>
 
-<h5 class="subsubsection">2.7.7.4 Weight</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.7.4 Weight">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.7.4 Weight">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Weight"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Profile.html#Profile" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Deconstruction.html#Deconstruction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Weight-1"></a>
+<h4 class="subsubsection">2.7.7.4 Weight</h4>
 
 <p>The following virtual code implements a function that returns the weight
-of its argument in the standard representation for natural numbers. 
-<a name="index-g_t_0040code_007bweight_007d-286"></a>
-<pre class="example">     weight = ((nil,nil),((nil,nil),(nil,(nil,nil))))
-</pre>
-   <p class="noindent">The weight of a tree is zero if the tree is <code>nil</code>, and otherwise
-the sum of the weights of the two subtrees plus one.
+of its argument in the standard representation for natural numbers.
+<a name="index-weight"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">weight = ((nil,nil),((nil,nil),(nil,(nil,nil))))
+</pre></td></tr></table>
 
-   <p>An algorithm to compute the weight of a tree would be trivial to
+<p>The weight of a tree is zero if the tree is <code>nil</code>, and otherwise
+the sum of the weights of the two subtrees plus one.
+</p>
+<p>An algorithm to compute the weight of a tree would be trivial to
 implement without being built in to the virtual machine. The built in
 capability could also be used for purposes unrelated to code
 maintenance. Nevertheless, it is built in for the following reasons.
-
-     <ul>
-<li>Computing weights happened to be a bottleneck for a particular
+</p>
+<ul>
+<li> Computing weights happened to be a bottleneck for a particular
 aspect of code generation that was of interest to the author,
-<a name="index-compression-287"></a>namely the compression of generated code. 
-<li>A built in implementation in C runs at least an order of magnitude
-faster than the equivalent implementation in virtual code. 
-<li>It runs even faster when repeated on the same data, by retrieving
-previously calculated weights rather than recalculating them. 
-</ul>
+<a name="index-compression"></a>
+namely the compression of generated code.
+</li><li> A built in implementation in C runs at least an order of magnitude
+faster than the equivalent implementation in virtual code.
+</li><li> It runs even faster when repeated on the same data, by retrieving
+previously calculated weights rather than recalculating them.
+</li></ul>
 
-   <p>The only disadvantage of using this feature instead of implementing a
+<p>The only disadvantage of using this feature instead of implementing a
 function in virtual code to compute weights is that it relies on native
-<a name="index-native-integer-arithmetic-288"></a><a name="index-overflow-289"></a>integer arithmetic and could overflow, causing a fatal error. It has
+<a name="index-native-integer-arithmetic"></a>
+<a name="index-overflow-1"></a>
+integer arithmetic and could overflow, causing a fatal error. It has
 never occurred in practice, but is possible due to sharing, whereby the
 nominal weight of a tree could be exponentially larger than the actual
 amount of memory occupied by it.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Profile.html#Profile" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Deconstruction.html#Deconstruction" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Metrics-and-Maintenance.html#Metrics-and-Maintenance" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

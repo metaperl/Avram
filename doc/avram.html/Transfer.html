@@ -1,142 +1,213 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Transfer - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
-<link rel="prev" href="Sort.html#Sort" title="Sort">
-<link rel="next" href="Mapcur.html#Mapcur" title="Mapcur">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.13.5 Transfer</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.13.5 Transfer">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.13.5 Transfer">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Transfer"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Mapcur.html#Mapcur">Mapcur</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Sort.html#Sort">Sort</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Sort.html#Sort" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Mapcur.html#Mapcur" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Transfer-1"></a>
+<h4 class="subsubsection">2.7.13.5 Transfer</h4>
 
-<h5 class="subsubsection">2.7.13.5 Transfer</h5>
-
-<p><a name="index-g_t_0040code_007btransfer_007d-331"></a>A particular interpretation is given to virtual code in the following form.
-
-     <dl>
-<dt><em>T26</em><dd>[[<code>transfer</code>]] <var>f</var> = <code>((nil,nil),(nil,(nil,</code><var>f</var><code>)))</code>
+<a name="index-transfer"></a>
+<p>A particular interpretation is given to virtual code in the following form.
+</p>
+<dl compact="compact">
+<dt> <em>T26</em></dt>
+<dd><p>[[<code>transfer</code>]] <code><var>f</var></code> = <code>((nil,nil),(nil,(nil,<var>f</var>)))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">When code in this form is evaluated with an argument, the tree
-<a name="index-state-transition-function-332"></a><var>f</var> is used as a state transition function, and the argument
+<p>When code in this form is evaluated with an argument, the tree
+<a name="index-state-transition-function"></a>
+<code><var>f</var></code> is used as a state transition function, and the argument
 is used as a list to be traversed. The traversal begins with
-<var>f</var> being evaluated on <code>nil</code> to get the initial state
+<code><var>f</var></code> being evaluated on <code>nil</code> to get the initial state
 and the initial output. Thereafter, each item of the list is paired with
-the current state to be evaluated with <var>f</var>, resulting in a
+the current state to be evaluated with <code><var>f</var></code>, resulting in a
 list of output and the next state. The output resulting from the entire
 application is the cumulative concatenation of all outputs obtained in
-the course of evaluating <var>f</var>. The computation
-terminates when <var>f</var> yields a <code>nil</code> result. If the list
+the course of evaluating <code><var>f</var></code>. The computation
+terminates when <code><var>f</var></code> yields a <code>nil</code> result. If the list
 of inputs runs out before the computation terminates, <code>nil</code> values
 are used as inputs.
-
-   <p>This behavior is specified more precisely in the following property
-of the operator, which applies in the case of non-<code>nil</code> <var>f</var>. 
-<a name="index-g_t_0040code_007btransition_007d-333"></a>
-     <dl>
-<dt><em>P33</em><dd>([[<code>transfer</code>]] <var>f</var>) <var>x</var> =
-([[<code>transition</code>]] <var>f</var>) <code>(nil,(</code><var>f</var><code> nil,</code><var>x</var><code>))</code>
+</p>
+<p>This behavior is specified more precisely in the following property
+of the operator, which applies in the case of non-<code>nil</code> <code><var>f</var></code>.
+<a name="index-transition"></a>
+</p>
+<dl compact="compact">
+<dt> <em>P33</em></dt>
+<dd><p>([[<code>transfer</code>]] <code><var>f</var></code>) <code><var>x</var></code> =
+([[<code>transition</code>]] <code><var>f</var></code>) <code>(nil,(<var>f</var> nil,<var>x</var>))</code>
+</p></dd>
 </dl>
 
-   <p>Much of the <code>transfer</code> semantics is implicit in the meaning of
-<code>transition</code>. For any given application <var>f</var>,
-[[<code>transition</code>]] <var>f</var> is the virtual code for a function
-that takes the list traversal from one configuration to the next. 
+<p>Much of the <code>transfer</code> semantics is implicit in the meaning of
+<code>transition</code>. For any given application <code><var>f</var></code>,
+[[<code>transition</code>]] <code><var>f</var></code> is the virtual code for a function
+that takes the list traversal from one configuration to the next.
 A configuration is represented as a tuple, usually in the form
-<code>(</code><var>previous outputs</var><code>,((</code><var>state</var><code>,</code><var>output</var><code>),(</code><var>next input</var><code>,</code><var>subsequent
-inputs</var><code>)))</code>. A terminal configuration has the form
-<code>(</code><var>previous outputs</var><code>,(nil,(</code><var>next input</var><code>,</code><var>subsequent
-inputs</var><code>)))</code>. A configuration may also have <code>nil</code> in place of the
-pair <code>(</code><var>next input</var><code>,</code><var>subsequent inputs</var><code>)</code> if no more input
+<code>(<var>previous outputs</var>,((<var>state</var>,<var>output</var>),(<var>next input</var>,<var>subsequent
+inputs</var>)))</code>. A terminal configuration has the form
+<code>(<var>previous outputs</var>,(nil,(<var>next input</var>,<var>subsequent
+inputs</var>)))</code>. A configuration may also have <code>nil</code> in place of the
+pair <code>(<var>next input</var>,<var>subsequent inputs</var>)</code> if no more input
 remains.
-
-   <p>In the non-degenerate case, the meaning of [[<code>transition</code>]]
-<var>f</var> is consistent with the following equation.
-
-     <dl>
-<dt><em>E7</em><dd>([[<code>transition</code>]] <var>f</var>) <code>(</code><var>y</var><code>,((</code><var>s</var><code>,</code><var>o</var><code>),(</code><var>i</var><code>,</code><var>x</var><code>)))</code> =<br>
-&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->([[<code>transition</code>]] <var>f</var>) <code>((</code><var>o</var><code>,</code><var>y</var><code>),(</code><var>f</var><code> (</code><var>s</var><code>,</code><var>i</var><code>),</code><var>x</var><code>))</code>
+</p>
+<p>In the non-degenerate case, the meaning of [[<code>transition</code>]]
+<code><var>f</var></code> is consistent with the following equation.
+</p>
+<dl compact="compact">
+<dt> <em>E7</em></dt>
+<dd><p>([[<code>transition</code>]] <code><var>f</var></code>) <code>(<var>y</var>,((<var>s</var>,<var>o</var>),(<var>i</var>,<var>x</var>)))</code> =<br>
+    ([[<code>transition</code>]] <code><var>f</var></code>) <code>((<var>o</var>,<var>y</var>),(<var>f</var> (<var>s</var>,<var>i</var>),<var>x</var>))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">That is, the current output <var>o</var> is stored with previous outputs <var>y</var>, the next
-input <var>i</var> is removed from the configuration, and the next state and output
-are obtained from the evaluation of <var>f</var> with the state <var>s</var> and
-the next input <var>i</var>.
-
-   <p>In the case where no input remains, the transition function is
+<p>That is, the current output <code><var>o</var></code> is stored with previous outputs <code><var>y</var></code>, the next
+input <code><var>i</var></code> is removed from the configuration, and the next state and output
+are obtained from the evaluation of <code><var>f</var></code> with the state <code><var>s</var></code> and
+the next input <code><var>i</var></code>.
+</p>
+<p>In the case where no input remains, the transition function is
 consistent with the following equation.
-
-     <dl>
-<dt><em>E8</em><dd>([[<code>transition</code>]] <var>f</var>) <code>(</code><var>y</var><code>,((</code><var>s</var><code>,</code><var>o</var><code>),nil))</code> = <br>
-&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->([[<code>transition</code>]] <var>f</var>) <code>((</code><var>o</var><code>,</code><var>y</var><code>),(</code><var>f</var><code> (</code><var>s</var><code>,nil),nil))</code>
+</p>
+<dl compact="compact">
+<dt> <em>E8</em></dt>
+<dd><p>([[<code>transition</code>]] <code><var>f</var></code>) <code>(<var>y</var>,((<var>s</var>,<var>o</var>),nil))</code> = <br>
+    ([[<code>transition</code>]] <code><var>f</var></code>) <code>((<var>o</var>,<var>y</var>),(<var>f</var> (<var>s</var>,nil),nil))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">This case is similar to the previous one except that the <code>nil</code>
+<p>This case is similar to the previous one except that the <code>nil</code>
 value is used in place of the next input. Note that in either case,
-nothing about <var>f</var> depends on the particular way
+nothing about <code><var>f</var></code> depends on the particular way
 configurations are represented, except that it should have a state as
 its left argument and an input as its right argument.
-
-   <p>Finally, in the case of a terminal configuration, the transition
+</p>
+<p>Finally, in the case of a terminal configuration, the transition
 function returns the cumulative output.
-
-     <dl>
-<dt><em>E9</em><dd>([[<code>transition</code>]] <var>f</var>) <code>(</code><var>y</var><code>,(nil,</code><var>x</var><code>))</code> =
-[[<code>reduce(cat,nil)</code>]] [[<code>reverse</code>]] <var>y</var>
+</p>
+<dl compact="compact">
+<dt> <em>E9</em></dt>
+<dd><p>([[<code>transition</code>]] <code><var>f</var></code>) <code>(<var>y</var>,(nil,<var>x</var>))</code> =
+[[<code>reduce(cat,nil)</code>]] [[<code>reverse</code>]] <code><var>y</var></code>
+</p></dd>
 </dl>
 
-<p class="noindent">The <code>silly</code> code <code>reduce(cat,nil)</code> has the effect of
-<a name="index-g_t_0040code_007bcat_007d-334"></a><a name="index-concatenation-335"></a>flattening a list of lists into one long list, which is necessary
+<p>The <code>silly</code> code <code>reduce(cat,nil)</code> has the effect of
+<a name="index-cat-1"></a>
+<a name="index-concatenation"></a>
+flattening a list of lists into one long list, which is necessary
 insofar as the transition function will have generated not necessarily a
 single output but a list of outputs on each iteration. The <code>cat</code>
-mnemonic stands for list concatenation and is explained in <a href="Cat.html#Cat">Cat</a>. 
+mnemonic stands for list concatenation and is explained in <a href="Cat.html#Cat">Cat</a>.
 The reversal is necessary to cause the first generated output to be at
 the head of the list. List reversal is a built in operation of the
 virtual machine and is described in <a href="Reverse.html#Reverse">Reverse</a>.
-
-   <p>If such a function as <code>transition</code> seems implausible, its
+</p>
+<p>If such a function as <code>transition</code> seems implausible, its
 implementation in <code>silly</code> can be found in <a href="Transition.html#Transition">Transition</a>.
-
-   <p>It is usually more awkward to express a function in terms of
+</p>
+<p>It is usually more awkward to express a function in terms of
 a <code>transfer</code> than to code it directly using recursion or other list
 operations. However, this feature is provided by the virtual machine for
 several reasons.
-
-     <ul>
-<li>Functions in this form may be an easier translation target if the
-source is an imperative language. 
-<li>Translating from virtual code to asynchronous circuits or process
-<a name="index-asynchronous-circuits-336"></a>networks has been a research interest of the author, and code in this
-<a name="index-author-337"></a>form lends itself to easy recognition and mapping onto discrete components. 
-<li>The <samp><span class="option">--byte-transducer</span></samp> and <samp><span class="option">--interactive</span></samp> command
+</p>
+<ul>
+<li> Functions in this form may be an easier translation target if the
+source is an imperative language.
+</li><li> Translating from virtual code to asynchronous circuits or process
+<a name="index-asynchronous-circuits"></a>
+networks has been a research interest of the author, and code in this
+<a name="index-author-1"></a>
+form lends itself to easy recognition and mapping onto discrete components.
+</li><li> The &lsquo;<samp>--byte-transducer</samp>&rsquo; and &lsquo;<samp>--interactive</samp>&rsquo; command
 line options to <code>avram</code> cause an application to be invoked in a
-<a name="index-state-transition-function-338"></a>similar manner to the transition function in a <code>transfer</code>
+<a name="index-state-transition-function-1"></a>
+similar manner to the transition function in a <code>transfer</code>
 function, so this feature allows for easy simulation and troubleshooting
-of these applications without actually deploying them. 
-</ul>
+of these applications without actually deploying them.
+</li></ul>
 
-   </body></html>
 
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Sort.html#Sort" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Mapcur.html#Mapcur" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

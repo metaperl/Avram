@@ -1,65 +1,109 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Blocking - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Concrete-Syntax.html#Concrete-Syntax" title="Concrete Syntax">
-<link rel="prev" href="Bit-String-Encoding.html#Bit-String-Encoding" title="Bit String Encoding">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Blocking"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Bit-String-Encoding.html#Bit-String-Encoding">Bit String Encoding</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Concrete-Syntax.html#Concrete-Syntax">Concrete Syntax</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.2.2 Blocking</title>
 
-<h4 class="subsection">2.2.2 Blocking</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.2.2 Blocking">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.2.2 Blocking">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Blocking"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Bit-String-Encoding.html#Bit-String-Encoding" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="File-Format.html#File-Format" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Concrete-Syntax.html#Concrete-Syntax" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Blocking-1"></a>
+<h3 class="subsection">2.2.2 Blocking</h3>
 
 <p>After the bit string is obtained as described above, it is grouped into
 blocks of six. Continuing with the example, the string
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">111111101011110010001001100010100010100100100
+</pre></td></tr></table>
 
-<pre class="example">     111111101011110010001001100010100010100100100
-</pre>
-   <p class="noindent">would be grouped as
+<p>would be grouped as
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">111111 101011 110010 001001 100010 100010 100100 100
+</pre></td></tr></table>
 
-<pre class="example">     111111 101011 110010 001001 100010 100010 100100 100
-</pre>
-   <p class="noindent">Because the number of bits isn't a multiple of six, the last group has to
+<p>Because the number of bits isn&rsquo;t a multiple of six, the last group has to
 be padded with zeros, to give
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">111111 101011 110010 001001 100010 100010 100100 100000
+</pre></td></tr></table>
 
-<pre class="example">     111111 101011 110010 001001 100010 100010 100100 100000
-</pre>
-   <p class="noindent">Each of these six bit substrings is then treated as a binary number,
+<p>Each of these six bit substrings is then treated as a binary number,
 with the most significant bit on the left. The numbers expressed in
 decimal are
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">63 43 50 9 34 34 36 32
+</pre></td></tr></table>
 
-<pre class="example">     63 43 50 9 34 34 36 32
-</pre>
-   <p class="noindent"><a name="index-character-codes-153"></a>The character codes for the characters to be written are obtained by
+<a name="index-character-codes"></a>
+<p>The character codes for the characters to be written are obtained by
 adding sixty to each of these numbers, so as to ensure that they will be
 printable characters. The resulting character codes are
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">123 103 110 69 94 94 96 92
+</pre></td></tr></table>
 
-<pre class="example">     123 103 110 69 94 94 96 92
-</pre>
-   <p class="noindent">which implies that the tree in the example could be written to a file as
+<p>which implies that the tree in the example could be written to a file as
 <code>{gnE^^`\</code>.
+</p>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

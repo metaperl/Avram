@@ -1,106 +1,166 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Computable Error Messages - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Exception-Handling.html#Exception-Handling" title="Exception Handling">
-<link rel="prev" href="Expedient-Error-Messages.html#Expedient-Error-Messages" title="Expedient Error Messages">
-<link rel="next" href="Exception-Handler-Usage.html#Exception-Handler-Usage" title="Exception Handler Usage">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Computable-Error-Messages"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Exception-Handler-Usage.html#Exception-Handler-Usage">Exception Handler Usage</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Expedient-Error-Messages.html#Expedient-Error-Messages">Expedient Error Messages</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Exception-Handling.html#Exception-Handling">Exception Handling</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.15.5 Computable Error Messages</title>
 
-<h5 class="subsubsection">2.7.15.5 Computable Error Messages</h5>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.15.5 Computable Error Messages">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.15.5 Computable Error Messages">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Computable-Error-Messages"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Expedient-Error-Messages.html#Expedient-Error-Messages" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handler-Usage.html#Exception-Handler-Usage" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handling.html#Exception-Handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Computable-Error-Messages-1"></a>
+<h4 class="subsubsection">2.7.15.5 Computable Error Messages</h4>
 
 <p>The automatic generation and reporting of error messages provides a
 reasonable default behavior for applications that do not consider
 exceptional conditions. All applications and their input data are
-ordinarily members of the bottom level set in the hierarchy
+ordinarily members of the bottom level set in the hierarchy 
 (<a href="A-Hierarchy-of-Sets.html#A-Hierarchy-of-Sets">A Hierarchy of Sets</a>).  The error messages caused by invalid
 operations on this level are on the first level above the bottom, which
 are recognized as such and written to standard error without
 intervention from the application. However, there are two drawbacks to
-this style of dealing with exceptions. 
-<a name="index-exceptions-368"></a>
-     <ul>
-<li>An application developer may wish to translate error messages
+this style of dealing with exceptions.
+<a name="index-exceptions-3"></a>
+</p>
+<ul>
+<li> 
+An application developer may wish to translate error messages
 into terms that are meaningful to the user, not only by literally
 translating them from English to the local vernacular, but perhaps by
 relating the particular exceptional condition to application specific
 causes. While it is convenient for the &ldquo;back end&rdquo; code not to be
 required to intervene in the error reporting, it would be most
-inconvenient for it not to be able to do so. 
-<li>Some application specific errors might not correspond directly to any of
+inconvenient for it not to be able to do so.
+</li><li> 
+Some application specific errors might not correspond directly to any of
 the particular conditions detected automatically due to invalid
 operations, for example a semantic error in a syntactically correct
 input file. It might be convenient in such cases for an application to
 be able to define its own error messages but still have them reported
-automatically like the built in messages. 
-</ul>
+automatically like the built in messages.
+</li></ul>
 
-   <p>These situations suggest a need for some ability on the part of an
+<p>These situations suggest a need for some ability on the part of an
 application to operate on error messages themselves. Based on the
 operator semantics given so far, such an application is inexpressible,
-because for any application <var>f</var><code>_0</code> and error message
-<var>x</var><code>_1</code><!-- /@w -->, property <em>P44</em> stipulates <var>f</var><code>_0 </code><var>x</var><code>_1</code> =
-<var>x</var><code>_1</code>, meaning that the resulting error message is
+because for any application <code><var>f</var>_0</code> and error message
+<code><var>x</var>_1</code>, property <em>P44</em> stipulates <code><var>f</var>_0 <var>x</var>_1</code> =
+<code><var>x</var>_1</code>, meaning that the resulting error message is
 unchanged. Therefore, we need to define another basic property of the
 operator.
-
-   <p>The following form of virtual code is used in applications that may need
-to operate on error messages. 
-<a name="index-g_t_0040code_007bguard_007d-369"></a>
-     <dl>
-<dt><em>T32</em><dd>[[<code>guard</code>]] <code>(</code><var>f</var><code>,</code><var>g</var><code>)</code> = <code>((nil,</code><var>f</var><code>),</code><var>g</var><code>)</code>
+</p>
+<p>The following form of virtual code is used in applications that may need
+to operate on error messages.
+<a name="index-guard"></a>
+</p>
+<dl compact="compact">
+<dt> <em>T32</em></dt>
+<dd><p>[[<code>guard</code>]] <code>(<var>f</var>,<var>g</var>)</code> = <code>((nil,<var>f</var>),<var>g</var>)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">Code in this form has the following semantics.
-
-     <dl>
-<dt><em>P53</em><dd>([[<code>guard</code>]] <code>(</code><var>f</var><code>,</code><var>g</var><code>)</code>)<code>_</code><var>n</var>
-<var>x</var><code>_</code><var>p</var> =
-<var>g</var><code>_(</code><var>n</var><code>+1) </code><var>f</var><code>_</code><var>n</var> <var>x</var><code>_</code><var>p</var>
+<p>Code in this form has the following semantics.
+</p>
+<dl compact="compact">
+<dt> <em>P53</em></dt>
+<dd><p>([[<code>guard</code>]] <code>(<var>f</var>,<var>g</var>)</code>)<code>_<var>n</var></code>
+<code><var>x</var>_<var>p</var></code> =
+<code><var>g</var>_(<var>n</var>+1) <var>f</var>_<var>n</var> <var>x</var>_<var>p</var></code>
+</p></dd>
 </dl>
 
-<p class="noindent">The intuitive explanation is that <var>f</var> is the main part of the
-application, and <var>g</var> is the part of the application that
-operates on the error message that comes from <var>f</var> if an
+<p>The intuitive explanation is that <code><var>f</var></code> is the main part of the
+application, and <code><var>g</var></code> is the part of the application that
+operates on the error message that comes from <code><var>f</var></code> if an
 exception occurs while it is being evaluated (i.e., the &ldquo;exception
 handler&rdquo;). Typically the exception handler code implements a function
 that takes an error message as an argument and returns an error message
 as a result.
-
-   <p>Where there is no exception, the exception handler
-<var>g</var><code>_(</code><var>n</var><code>+1)</code> is never used, because its argument will be
-on level <var>n</var>, and therefore unaffected by an application on
-level <var>n</var><code>+1</code>.
-
-   <p>Exception handlers may have their own exception handlers, which will be
+</p>
+<p>Where there is no exception, the exception handler
+<code><var>g</var>_(<var>n</var>+1)</code> is never used, because its argument will be
+on level <code><var>n</var></code>, and therefore unaffected by an application on
+level <code><var>n</var>+1</code>.
+</p>
+<p>Exception handlers may have their own exception handlers, which will be
 invoked if the evaluation of the exception handler causes a further
 exception. Such an exception corresponds semantically to a value on the
 next level of the hierarchy of sets.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Expedient-Error-Messages.html#Expedient-Error-Messages" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handler-Usage.html#Exception-Handler-Usage" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Exception-Handling.html#Exception-Handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

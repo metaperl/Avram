@@ -1,200 +1,271 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Command Line Parsing - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Invocation.html#Invocation" title="Invocation">
-<link rel="prev" href="Invocation.html#Invocation" title="Invocation">
-<link rel="next" href="Execution-Modes.html#Execution-Modes" title="Execution Modes">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 3.4.1 Command Line Parsing</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 3.4.1 Command Line Parsing">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.4.1 Command Line Parsing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Command-Line-Parsing"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Execution-Modes.html#Execution-Modes">Execution Modes</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Invocation.html#Invocation">Invocation</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Invocation.html#Invocation">Invocation</a>
-<hr>
-</div>
-
-<h4 class="subsection">3.4.1 Command Line Parsing</h4>
-
-<p><a name="index-command-line-584"></a>A couple of functions declared in <samp><span class="file">cmdline.h</span></samp> can be used to do all
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Invocation.html#Invocation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Execution-Modes.html#Execution-Modes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Invocation.html#Invocation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Command-Line-Parsing-1"></a>
+<h3 class="subsection">3.4.1 Command Line Parsing</h3>
+<a name="index-command-line-6"></a>
+<p>A couple of functions declared in &lsquo;<tt>cmdline.h</tt>&rsquo; can be used to do all
 the necessary parsing of command lines and environment variables needed
 by virtual code applications.
-
-<div class="defun">
-&mdash; Function: list <b>avm_default_command_line</b> (<var>int argc, char *argv</var>[]<var>, int index, char *extension, char *paths, int default_to_stdin_mode, int force_text_input_mode, int *file_ordinal</var>)<var><a name="index-avm_005fdefault_005fcommand_005fline-585"></a></var><br>
-<blockquote>
-        <p>The purpose of this function is to build most of the data structure used
+</p>
+<dl>
+<dt><a name="index-avm_005fdefault_005fcommand_005fline"></a><u>Function:</u> list <b>avm_default_command_line</b><i> (int <var>argc</var>, char *<var>argv</var>[], int <var>index</var>, char *<var>extension</var>, char *<var>paths</var>, int <var>default_to_stdin_mode</var>, int <var>force_text_input_mode</var>, int *<var>file_ordinal</var>)</i></dt>
+<dd>
+<p>The purpose of this function is to build most of the data structure used
 by parameter mode applications, as described in <a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a>, by parsing the command line according to <a href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>. The parameters have these interpretations.
-
-          <dl>
-<dt><var>argc</var><dd>is the number elements in the array referenced by <var>argv</var>
-<br><dt><var>argv</var><dd>is the address of an array of pointers to null terminated character strings
+</p>
+<dl compact="compact">
+<dt> <code><var>argc</var></code></dt>
+<dd><p>is the number elements in the array referenced by <code><var>argv</var></code>
+</p></dd>
+<dt> <code><var>argv</var></code></dt>
+<dd><p>is the address of an array of pointers to null terminated character strings
 holding command line arguments
-<br><dt><var>index</var><dd>is the position of the first element of <var>argv</var> to be
-considered. Those preceding it are ignored. 
-<br><dt><var>extension</var><dd>is the address of a string that will be appended to input file names
-given in <var>argv</var> in an effort to find the associated files
-<br><dt><var>paths</var><dd>is the address of a null terminated character string containing a colon
+</p></dd>
+<dt> <code><var>index</var></code></dt>
+<dd><p>is the position of the first element of <code><var>argv</var></code> to be
+considered. Those preceding it are ignored.
+</p></dd>
+<dt> <code><var>extension</var></code></dt>
+<dd><p>is the address of a string that will be appended to input file names
+given in <code><var>argv</var></code> in an effort to find the associated files
+</p></dd>
+<dt> <code><var>paths</var></code></dt>
+<dd><p>is the address of a null terminated character string containing a colon
 separated list of directory names that will be searched for input files
-<br><dt><var>default_to_stdin_mode</var><dd>is set to a non-zero value by the caller if the contents of standard
+</p></dd>
+<dt> <code><var>default_to_stdin_mode</var></code></dt>
+<dd><p>is set to a non-zero value by the caller if the contents of standard
 input should be read in the absence of input files
-<br><dt><var>force_text_input_mode</var><dd>is set to a non-zero value by the caller to indicate that input files
+</p></dd>
+<dt> <code><var>force_text_input_mode</var></code></dt>
+<dd><p>is set to a non-zero value by the caller to indicate that input files
 should be read as text, using <code>avm_load</code> (rather than
 <code>avm_preamble_and_contents</code>, which would allow them to be either
-text or data). The <var>preamble</var> field of the returned file
-specifications will always be empty when this flag is set. 
-<br><dt><var>file_ordinal</var><dd>is set to a pointer to an integer by the caller if only one file is to
+text or data). The <code><var>preamble</var></code> field of the returned file
+specifications will always be empty when this flag is set.
+</p></dd>
+<dt> <code><var>file_ordinal</var></code></dt>
+<dd><p>is set to a pointer to an integer by the caller if only one file is to
 be loaded during each call. The value of the integer indicates the which
-one it will be. 
+one it will be.
+</p></dd>
 </dl>
 
-        <p>The result returned by this function is a list whose <code>head</code> is a list
+<p>The result returned by this function is a list whose <code>head</code> is a list
 of file specifications and whose <code>tail</code> is a list of command line options
 intended for input to a virtual code application.
-
-        <p>The list of file specifications returned in the <code>head</code> of the
-result follows the same conventions as the <var>data</var> parameter
+</p>
+<p>The list of file specifications returned in the <code>head</code> of the
+result follows the same conventions as the <code><var>data</var></code> parameter
 to the function <code>avm_output_as_directed</code>, except that the
 <code>head</code> of the <code>head</code> of each item is a list representing the
 time stamp of the file as given by <code>avm_date_representation</code>. If
 the file is standard input, then it holds the current system date and
 time.
-
-        <p>If the <var>file_ordinal</var> parameter is <code>NULL</code>, then all
+</p>
+<p>If the <code><var>file_ordinal</var></code> parameter is <code>NULL</code>, then all
 files on the command line are loaded, but if it points to an integer
 <var>n</var>, then only the <var>n</var>th file is loaded, and <var>n</var> is
 incremented. If there is no <var>n</var>th file, a <code>NULL</code> value is
 returned as the entire result of the function. For a series of calls,
 the integer should be initialized to zero by the caller before the first
 call.
-
-        <p>If standard input is indicated as one of the files on the command line
+</p>
+<p>If standard input is indicated as one of the files on the command line
 (by a dash), then it is also loaded regardless of the
-<var>file_ordinal</var>, but a cached copy of it is used on subsequent
+<code><var>file_ordinal</var></code>, but a cached copy of it is used on subsequent
 calls after the first, so that the function does not actually attempt to
 reread it. If standard input is to be loaded, it must be finite for this
 function to work properly.
-
-        <p>The search strategy for files is described in <a href="Environment.html#Environment">Environment</a>, and
-makes use of the <var>extension</var> and <var>paths</var> parameters.
-
-        <p>In the list of command line options returned in the <code>tail</code> of the
+</p>
+<p>The search strategy for files is described in <a href="Environment.html#Environment">Environment</a>, and
+makes use of the <code><var>extension</var></code> and <code><var>paths</var></code> parameters.
+</p>
+<p>In the list of command line options returned in the <code>tail</code> of the
 result, each item is a list with a non-empty <code>head</code> and
 <code>tail</code>, and is interpreted as follows.
-
-          <ul>
-<li>The <code>head</code> of the <code>head</code> is a list representing a
+</p>
+<ul>
+<li> The <code>head</code> of the <code>head</code> is a list representing a
 natural number, as given by <code>avm_natural</code>, indicating the position
 of the option on the command line relative to the initial value of the
-<var>index</var> parameter. 
-<li>The <code>tail</code> of the <code>head</code> is a list which is <code>NULL</code>
+<code><var>index</var></code> parameter.
+</li><li> The <code>tail</code> of the <code>head</code> is a list which is <code>NULL</code>
 in the case of a &ldquo;short form&rdquo; option, written with a single
 dash on the command line, but is a list whose <code>head</code> and
 <code>tail</code> are <code>NULL</code> in the case of a &ldquo;long form&rdquo; option,
-written with two dashes. 
-<li>The <code>head</code> of the <code>tail</code> is a list representing a
+written with two dashes.
+</li><li> The <code>head</code> of the <code>tail</code> is a list representing a
 character string for the keyword of an option, for example <kbd>foo</kbd> in
-the case of an option written <kbd>--foo=bar,baz</kbd>. 
-<li>The <code>tail</code> of the <code>tail</code> is a list of lists representing
+the case of an option written <kbd>--foo=bar,baz</kbd>.
+</li><li> The <code>tail</code> of the <code>tail</code> is a list of lists representing
 character strings, with one item for each parameter associated with the
-option, for example, <kbd>bar</kbd> and <kbd>baz</kbd>. 
-</ul>
+option, for example, <kbd>bar</kbd> and <kbd>baz</kbd>.
+</li></ul>
 
-        <p>If multiple calls to the function are made with differing values of
-<code>*</code><var>file_ordinal</var> but other parameters unchanged, the same list of
+<p>If multiple calls to the function are made with differing values of
+<code>*<var>file_ordinal</var></code> but other parameters unchanged, the same list of
 options will be returned each time, except insofar as the position
 numbers in the <code>head</code> of the <code>head</code> of each item are adjusted
 as explained in <a href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications">Input for Mapped Applications</a>.
-
-        <p>Any of the i/o errors or fatal errors associated with other file
+</p>
+<p>Any of the i/o errors or fatal errors associated with other file
 input operations are possible with this function as well. This non-fatal
-warning message is also possible. 
-<a name="index-g_t_0040code_007bsearch-paths-not-supported_007d-586"></a>
-     <pre class="display">          <var>program-name</var><code>: warning: search paths not supported</code>
-</pre>
-        <p>This error occurs if the library has been built on a platform that
-<a name="index-g_t_0040file_007bargz_002eh_007d-587"></a>doesn't have the <samp><span class="file">argz.h</span></samp> header file and the <var>paths</var>
-parameter is non-<code>NULL</code>. 
-</p></blockquote></div>
+warning message is also possible.
+<a name="index-search-paths-not-supported-1"></a>
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><code><var>program-name</var>: warning: search paths not supported</code>
+</pre></td></tr></table>
 
-<div class="defun">
-&mdash; Function: list <b>avm_environment</b> (<var>char *env</var>[])<var><a name="index-avm_005fenvironment-588"></a></var><br>
-<blockquote><p><a name="index-environment-589"></a>This function takes the address of a null terminated array of pointers
+<p>This error occurs if the library has been built on a platform that
+<a name="index-argz_002eh-1"></a>
+doesn&rsquo;t have the &lsquo;<tt>argz.h</tt>&rsquo; header file and the <code><var>paths</var></code>
+parameter is non-<code>NULL</code>.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fenvironment"></a><u>Function:</u> list <b>avm_environment</b><i> (char *<var>env</var>[])</i></dt>
+<dd><a name="index-environment-6"></a>
+<p>This function takes the address of a null terminated array of pointers
 to null terminated character strings of the form
-<code>"variable=value"</code>. The result returned is a list of lists, with
+<code>&quot;variable=value&quot;</code>. The result returned is a list of lists, with
 one item for each element of the array. The <code>head</code> of each item is
 a representation of the left side of the corresponding string, and the
 <code>tail</code> is a representation of the right.
-
-        <p>This function is therefore useful along with
+</p>
+<p>This function is therefore useful along with
 <code>avm_default_command_line</code> for building the remainder of the data
 structure described in <a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>. For example, a
 virtual machine emulator for non-interactive parameter mode applications
 with no bells and whistles could have the following form.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">int
+main(argc,argv,env)
+&hellip;
+{
+  FILE *virtual_code_file;
+&hellip;
+  avm_initialize_lists();
+  avm_initialize_apply();
+  avm_initialize_rawio();
+  avm_initialize_formout();
+  avm_initialize_cmdline();
+  virtual_code_file = fopen(argv[1],&quot;rb&quot;);
+  operator = avm_received_list(
+    virtual_code_file,argv[1]);
+  fclose(virtual_code_file);
+  command = avm_default_command_line(argc,
+    argv,2,NULL,NULL,0,0,NULL);
+  environs = avm_environment(env);
+  operand = avm_join(command,environs);
+  result = avm_apply(operator,operand);
+  avm_output_as_directed(result,0,0);
+  avm_dispose(result);
+&hellip;
+}
+</pre></td></tr></table>
 
-     <pre class="example">          int
-          main(argc,argv,env)
-          ...
-          {
-            FILE *virtual_code_file;
-          ...
-            avm_initialize_lists();
-            avm_initialize_apply();
-            avm_initialize_rawio();
-            avm_initialize_formout();
-            avm_initialize_cmdline();
-            virtual_code_file = fopen(argv[1],"rb");
-            operator = avm_received_list(
-              virtual_code_file,argv[1]);
-            fclose(virtual_code_file);
-            command = avm_default_command_line(argc,
-              argv,2,NULL,NULL,0,0,NULL);
-            environs = avm_environment(env);
-            operand = avm_join(command,environs);
-            result = avm_apply(operator,operand);
-            avm_output_as_directed(result,0,0);
-            avm_dispose(result);
-          ...
-          }
-</pre>
-        <p>The <code>avm_environment</code> function could cause the program to abort due
+<p>The <code>avm_environment</code> function could cause the program to abort due
 to a memory overflow.  For security reasons, it will also abort with an
-<a name="index-security-590"></a>error message if any non-printing characters are detected in its
-argument. (See <a href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">Other Diagnostics and Warnings</a>.) 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_initialize_cmdline</b> ()<var><a name="index-avm_005finitialize_005fcmdline-591"></a></var><br>
-<blockquote><p>This function initializes some local variables and should be called
+<a name="index-security-2"></a>
+error message if any non-printing characters are detected in its
+argument. (See <a href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">Other Diagnostics and Warnings</a>.)
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005finitialize_005fcmdline"></a><u>Function:</u> void <b>avm_initialize_cmdline</b><i> ()</i></dt>
+<dd><p>This function initializes some local variables and should be called
 before any of the other functions in this section is called, or else
-their results are unpredictable. 
-</p></blockquote></div>
-
-<div class="defun">
-&mdash; Function: void <b>avm_count_cmdline</b> ()<var><a name="index-avm_005fcount_005fcmdline-592"></a></var><br>
-<blockquote><p>This function should be called after the last call to any of the other
+their results are unpredictable.
+</p></dd></dl>
+<dl>
+<dt><a name="index-avm_005fcount_005fcmdline"></a><u>Function:</u> void <b>avm_count_cmdline</b><i> ()</i></dt>
+<dd><p>This function should be called after the last call to any of the other
 functions in this section, as it reclaims some locally allocated
 storage. If the <code>avm_count_lists</code> function is used, it should be
-called after this one. 
-</p></blockquote></div>
+called after this one.
+</p></dd></dl>
 
-   </body></html>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Invocation.html#Invocation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Execution-Modes.html#Execution-Modes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Invocation.html#Invocation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

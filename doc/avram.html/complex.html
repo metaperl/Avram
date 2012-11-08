@@ -1,93 +1,151 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>complex - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
-<link rel="prev" href="bes.html#bes" title="bes">
-<link rel="next" href="fftw.html#fftw" title="fftw">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="complex"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="fftw.html#fftw">fftw</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="bes.html#bes">bes</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.2 complex</title>
 
-<h3 class="section">D.2 <code>complex</code></h3>
+<meta name="description" content="avram - a virtual machine code interpreter: D.2 complex">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.2 complex">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="complex"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Bessel-function-errors.html#Bessel-function-errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="fftw.html#fftw" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="complex-1"></a>
+<h2 class="section">D.2 <code>complex</code></h2>
 
 <p>Complex numbers are represented according to the ISO C standard as
-<a name="index-complex-numbers-711"></a>arrays of two IEEE double precision floating point numbers of 8 bytes
+<a name="index-complex-numbers"></a>
+arrays of two IEEE double precision floating point numbers of 8 bytes
 each, with the number representing the real part first.
-
-   <p>A small selection of operations on complex numbers is available by
+</p>
+<p>A small selection of operations on complex numbers is available by
 function calls of the form <code>library('complex',f)</code>. These
-functions are implemented by the host system's C library.
-
-   <p>One example is <code>library('complex','create')</code> which takes a pair
-of floating point numbers <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> to a complex number
-whose real part is <var>x</var> and whose imaginary part is <var>y</var>. 
-See <a href="math.html#math">math</a> for information about constructing floating point
+functions are implemented by the host system&rsquo;s C library.
+</p>
+<p>One example is <code>library('complex','create')</code> which takes a pair
+of floating point numbers <code>(<var>x</var>,<var>y</var>)</code> to a complex number
+whose real part is <var>x</var> and whose imaginary part is <var>y</var>.
+See <a href="math.html#math"><code>math</code></a> for information about constructing floating point
 numbers.
-
-   <p>Other than that, the <code>complex</code> library functions <code>f</code> fall
+</p>
+<p>Other than that, the <code>complex</code> library functions <code>f</code> fall
 into three main groups, which are the real valued unary operations,
 the complex valued unary operations, and the complex valued binary
 operations. All of these operations are designated by their standard C
 names as documented elsewhere, such as the GNU <code>libc</code> reference
 manual, except as noted.
+</p>
+<dl compact="compact">
+<dt>&bull;  real valued unary operations</dt>
+<dd><table><tr><td>&nbsp;</td><td><pre class="example">
+creal  cimag  cabs  carg
+</pre></td></tr></table>
+</dd>
+<dt>&bull;  complex valued unary operations</dt>
+<dd><table><tr><td>&nbsp;</td><td><pre class="example">
+ccos   cexp    clog   conj   csin    csqrt
+ctan   csinh   ccosh  ctanh  casinh  cacosh
+catanh casin   cacos  catan
+</pre></td></tr></table>
+</dd>
+<dt>&bull;  complex valued binary operations</dt>
+<dd><table><tr><td>&nbsp;</td><td><pre class="example">
+cpow  vid  bus  mul  add  sub  div
+</pre></td></tr></table>
+</dd>
+</dl>
 
-     <dl>
-<dt>&bull; real valued unary operations<dd>
-     <pre class="example">          
-          creal  cimag  cabs  carg
-</pre>
-     <br><dt>&bull; complex valued unary operations<dd>
-     <pre class="example">          
-          ccos   cexp    clog   conj   csin    csqrt
-          ctan   csinh   ccosh  ctanh  casinh  cacosh
-          catanh casin   cacos  catan
-</pre>
-     <br><dt>&bull; complex valued binary operations<dd>
-     <pre class="example">          
-          cpow  vid  bus  mul  add  sub  div
-</pre>
-     </dl>
-
-   <p>The last four correspond to the C language operators <code>*</code>,
+<p>The last four correspond to the C language operators <code>*</code>,
 <code>+</code>, <code>-</code>, and <code>/</code> for complex numbers.  The functions
 named <code>vid</code> and <code>bus</code> are similar to <code>div</code> and
 <code>sub</code>, respectively, but with the operands interchanged. That is,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('complex','vid') (x,y)
+</pre></td></tr></table>
 
-<pre class="example">     library('complex','vid') (x,y)
-</pre>
-   <p class="noindent">is equivalent to
+<p>is equivalent to
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('complex','div') (y,x)
+</pre></td></tr></table>
 
-<pre class="example">     library('complex','div') (y,x)
-</pre>
-   <p>All functions in this library taking complex numbers as input may also
+<p>All functions in this library taking complex numbers as input may also
 operate on real numbers, and binary operators can have either or both
 operands real. For real operands, a value of zero is inferred as the
 imaginary part. The result type of the function is the same
 regardless.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Bessel-function-errors.html#Bessel-function-errors" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="fftw.html#fftw" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

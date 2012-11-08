@@ -1,122 +1,199 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Vacant Address Space - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
-<link rel="prev" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code" title="Interfaces to External Code">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Vacant-Address-Space"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Interfaces-to-External-Code.html#Interfaces-to-External-Code">Interfaces to External Code</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 2.7.17 Vacant Address Space</title>
 
-<h4 class="subsection">2.7.17 Vacant Address Space</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.17 Vacant Address Space">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.17 Vacant Address Space">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Vacant-Address-Space"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Interaction-combinator.html#Interaction-combinator" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Vacant-Address-Space-1"></a>
+<h3 class="subsection">2.7.17 Vacant Address Space</h3>
 
 <p>Not every possible pattern has been used by the virtual machine as a way
-of encoding a function. The following patterns, where <var>a</var>,
-<var>b</var>, and <var>c</var> are non-<code>nil</code> trees, do not
+of encoding a function. The following patterns, where <code><var>a</var></code>,
+<code><var>b</var></code>, and <code><var>c</var></code> are non-<code>nil</code> trees, do not
 represent anything useful.
-
-     <dl>
-<dt>unary forms<dd><code>((nil,nil),((nil,nil),(nil,((nil,</code><var>a</var><code>),nil))))</code><br>
-<code>((nil,nil),((nil,nil),(nil,(nil,(nil,</code><var>a</var><code>)))))</code>
-<br><dt>binary forms<dd><code>((nil,nil),((nil,nil),(</code><var>a</var><code>,</code><var>b</var><code>)))</code><br>
-<code>((nil,nil),((</code><var>a</var><code>,nil),(</code><var>b</var><code>,nil)))</code><br>
-<code>((nil,nil),((</code><var>a</var><code>,nil),(nil,</code><var>b</var><code>)))</code>
-<br><dt>ternary forms<dd><code>((nil,nil),((</code><var>a</var><code>,</code><var>b</var><code>),(</code><var>c</var><code>,nil)))</code><br>
-<code>((nil,nil),((</code><var>a</var><code>,</code><var>b</var><code>),(nil,</code><var>c</var><code>)))</code><br>
-<code>((nil,nil),((</code><var>a</var><code>,nil),(</code><var>b</var><code>,</code><var>c</var><code>)))</code><br>
-<code>((nil,nil),((nil,</code><var>a</var><code>),(</code><var>b</var><code>,</code><var>c</var><code>)))</code>
+</p>
+<dl compact="compact">
+<dt> unary forms</dt>
+<dd><p><code>((nil,nil),((nil,nil),(nil,((nil,<var>a</var>),nil))))</code><br>
+<code>((nil,nil),((nil,nil),(nil,(nil,(nil,<var>a</var>)))))</code>
+</p></dd>
+<dt> binary forms</dt>
+<dd><p><code>((nil,nil),((nil,nil),(<var>a</var>,<var>b</var>)))</code><br>
+<code>((nil,nil),((<var>a</var>,nil),(<var>b</var>,nil)))</code><br>
+<code>((nil,nil),((<var>a</var>,nil),(nil,<var>b</var>)))</code>
+</p></dd>
+<dt> ternary forms</dt>
+<dd><p><code>((nil,nil),((<var>a</var>,<var>b</var>),(<var>c</var>,nil)))</code><br>
+<code>((nil,nil),((<var>a</var>,<var>b</var>),(nil,<var>c</var>)))</code><br>
+<code>((nil,nil),((<var>a</var>,nil),(<var>b</var>,<var>c</var>)))</code><br>
+<code>((nil,nil),((nil,<var>a</var>),(<var>b</var>,<var>c</var>)))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">These patterns are detected by the virtual machine simply to avoid blowing
-it up, but they always cause an error message to be reported. 
-<a name="index-g_t_0040code_007bunsupported-hook_007d-386"></a><a name="index-g_t_0040code_007bunrecognized-combinator_007d-387"></a>
-     <dl>
-<dt><em>P55</em><dd>For <var>f</var> matching any of the first three trees in the above list,<br>
-&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w --><var>f</var><code>_</code><var>n</var> <var>x</var><code>_</code><var>n</var> =
-[[<code>('unsupported hook',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
-<br><dt><em>P56</em><dd>For the remaining trees <var>f</var> in the above list,<br>
-&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w --><var>f</var><code>_</code><var>n</var> <var>x</var><code>_</code><var>n</var> =
-[[<code>('unrecognized combinator (code </code><var>m</var><code>)',nil)</code>]]<code>_(</code><var>n</var><code>+1)</code>
+<p>These patterns are detected by the virtual machine simply to avoid blowing
+it up, but they always cause an error message to be reported.
+<a name="index-unsupported-hook-2"></a>
+<a name="index-unrecognized-combinator-1"></a>
+</p>
+<dl compact="compact">
+<dt> <em>P55</em></dt>
+<dd><p>For <code><var>f</var></code> matching any of the first three trees in the above list,<br>
+   <code><var>f</var>_<var>n</var> <var>x</var>_<var>n</var></code> =
+[[<code>('unsupported hook',nil)</code>]]<code>_(<var>n</var>+1)</code>
+</p></dd>
+<dt> <em>P56</em></dt>
+<dd><p>For the remaining trees <code><var>f</var></code> in the above list,<br>
+   <code><var>f</var>_<var>n</var> <var>x</var>_<var>n</var></code> =
+[[<code>('unrecognized combinator (code <var>m</var>)',nil)</code>]]<code>_(<var>n</var>+1)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">Here, <var>m</var> is a numeric constant dependent on which tree
-<var>f</var> was used. The unsupported hook message is meant to be
+<p>Here, <code><var>m</var></code> is a numeric constant dependent on which tree
+<code><var>f</var></code> was used. The unsupported hook message is meant to be
 more informative than the unrecognized combinator message, suggesting
 that a feature intended for future use is not yet available.
-
-   <p>This list has been assembled for the benefit of readers considering the
+</p>
+<p>This list has been assembled for the benefit of readers considering the
 addition of backward compatible extensions to the virtual code
-semantics, who are undeterred by the facts that
-     <ul>
-<li>the computational model
-<a name="index-universality-388"></a>is already universal
-<li>virtual code applications are already
+semantics, who are undeterred by the facts that 
+</p><ul>
+<li> 
+the computational model
+<a name="index-universality-1"></a>
+is already universal
+</li><li>
+virtual code applications are already
 interoperable with all kinds of high performance software having a text
 based or console interface by way of the <code>interact</code> combinator
-<li>an unlimited number of built in library functions can be added
+</li><li>
+an unlimited number of built in library functions can be added
 by way of the <code>library</code> combinator as described in
 <a href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>
-<li>the C code in <code>avram</code> makes fairly
-<a name="index-pointers-389"></a>intricate use of pointers with a careful policy of reference counting
+</li><li>
+the C code in <code>avram</code> makes fairly
+<a name="index-pointers-2"></a>
+intricate use of pointers with a careful policy of reference counting
 and storage reclamation
-<li>there is also a performance penalty incurred by
-<a name="index-reference-count-390"></a>further extensions to the semantics, even for applications that don't
+</li><li>
+there is also a performance penalty incurred by
+<a name="index-reference-count"></a>
+further extensions to the semantics, even for applications that don&rsquo;t
 use them, because a pattern recognition algorithm in the interpreter has
-more cases to consider. 
-</ul>
+more cases to consider.
+</li></ul>
 
-   <p>Nevertheless, a new functional form combining a pair of functions to be
+<p>Nevertheless, a new functional form combining a pair of functions to be
 interpreted in a new way by the virtual machine could be defined using
-any of the binary forms above, for example, with <var>a</var> as the
-virtual code for one of the functions and <var>b</var> as that of the
+any of the binary forms above, for example, with <code><var>a</var></code> as the
+virtual code for one of the functions and <code><var>b</var></code> as that of the
 other. Such a form would not conflict with any existing applications,
-provided that both <var>a</var> and <var>b</var> are not <code>nil</code>,
+provided that both <code><var>a</var></code> and <code><var>b</var></code> are not <code>nil</code>,
 which is true of any valid representation for a function.
-
-   <p>Virtual machine architects, take note. There are infinitely many trees
-<a name="index-trees-391"></a>fitting these patterns, but it would be possible to use them up by
+</p>
+<p>Virtual machine architects, take note. There are infinitely many trees
+<a name="index-trees-4"></a>
+fitting these patterns, but it would be possible to use them up by
 assigning them without adequate foresight. For example, if
 interpretations were assigned to the four ternary forms, the three binary
 forms, and one of the remaining unary forms, then the only
 unassigned pattern could be of the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><code>((nil,nil),((nil,nil),(nil,(nil,(nil,<var>a</var>)))))</code>
+</pre></td></tr></table>
 
-<pre class="display">     <code>((nil,nil),((nil,nil),(nil,(nil,(nil,</code><var>a</var><code>)))))</code>
-</pre>
-   <p class="noindent">Assigning an interpretation to it would leave no further room for
+<p>Assigning an interpretation to it would leave no further room for
 backward compatible expansion. On the other hand, any tree of the
 following form also fits the above pattern,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="display"><code>((nil,nil),((nil,nil),(nil,(nil,(nil,(<var>b</var>,<var>c</var>))))))</code>
+</pre></td></tr></table>
 
-<pre class="display">     <code>((nil,nil),((nil,nil),(nil,(nil,(nil,(</code><var>b</var><code>,</code><var>c</var><code>))))))</code>
-</pre>
-   <p class="noindent">with any values for <var>b</var> and <var>c</var>. Different
+<p>with any values for <code><var>b</var></code> and <code><var>c</var></code>. Different
 meanings could be chosen for the case where both are <code>nil</code>, both
 are non-<code>nil</code>, or one is <code>nil</code> and the other non-<code>nil</code>,
 allowing two unary forms, one binary, and one constant. If at least one
 of these patterns is reserved for future enhancements, then a
 potentially inexhaustible supply of address space remains and there will
 be no need for incompatible changes later.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Interaction-combinator.html#Interaction-combinator" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

@@ -1,73 +1,129 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>mpfr binary operators with a natural operand - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="mpfr.html#mpfr" title="mpfr">
-<link rel="prev" href="mpfr-unary-operators.html#mpfr-unary-operators" title="mpfr unary operators">
-<link rel="next" href="mpfr-binary-predicates.html#mpfr-binary-predicates" title="mpfr binary predicates">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="mpfr-binary-operators-with-a-natural-operand"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="mpfr-binary-predicates.html#mpfr-binary-predicates">mpfr binary predicates</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-unary-operators.html#mpfr-unary-operators">mpfr unary operators</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.14.3 mpfr binary operators with a natural operand</title>
 
-<h4 class="subsection">D.14.3 <code>mpfr</code> binary operators with a natural operand</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: D.14.3 mpfr binary operators with a natural operand">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.14.3 mpfr binary operators with a natural operand">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="mpfr-binary-operators-with-a-natural-operand"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mpfr-unary-operators.html#mpfr-unary-operators" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr-binary-predicates.html#mpfr-binary-predicates" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr.html#mpfr" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="mpfr-binary-operators-with-a-natural-operand-1"></a>
+<h3 class="subsection">D.14.3 <code>mpfr</code> binary operators with a natural operand</h3>
 
 <p>Functions with these names take an argument of the form
-<code>(</code><var>x</var><code>,</code><var>n</var><code>)</code>, where <var>x</var> is an <code>mpfr</code> number
+<code>(<var>x</var>,<var>n</var>)</code>, where <var>x</var> is an <code>mpfr</code> number
 and <var>n</var> is a natural number.
+</p>
+<ul>
+<li> <code>root</code>
+</li><li> <code>pow_ui</code>
+</li><li> <code>mul_2ui</code>
+</li><li> <code>div_2ui</code>
+</li><li> <code>grow</code>
+</li><li> <code>shrink</code>
+</li></ul>
 
-     <ul>
-<li><code>root</code>
-<li><code>pow_ui</code>
-<li><code>mul_2ui</code>
-<li><code>div_2ui</code>
-<li><code>grow</code>
-<li><code>shrink</code>
-</ul>
-
-   <p>The last two are specific to the virtual code interface, having no
+<p>The last two are specific to the virtual code interface, having no
 counterpart in the native API of the <code>mpfr</code> library.  The
 <code>grow</code> function returns a copy of <var>x</var> with its precision
 increased by <var>n</var> bits, and the <code>shrink</code> function returns a
-copy of <var>x</var> with its precision reduced by <var>n</var> bits.
-
-     <ul>
-<li>The precisions are silently capped at the maximum or floored at the
-<a name="index-precision-795"></a>minimum allowable precisions if necessary. 
-<li>Increasing the precision by the <code>grow</code> function does not directly
+copy of <var>x</var> with its precision reduced by <var>n</var> bits. 
+</p>
+<ul>
+<li>
+The precisions are silently capped at the maximum or floored at the
+<a name="index-precision-1"></a>
+minimum allowable precisions if necessary.
+</li><li>
+Increasing the precision by the <code>grow</code> function does not directly
 cause a more accurate result to be computed, but only pads an existing
-number with zeros. 
-<li>Decreasing the precision by the <code>shrink</code> function does not prevent
-valid bits from being discarded. 
-</ul>
+number with zeros.
+</li><li>
+Decreasing the precision by the <code>shrink</code> function does not prevent
+valid bits from being discarded.
+</li></ul>
 
-   <p>The appropriate way to use <code>grow</code> is to grow the precision of an
+<p>The appropriate way to use <code>grow</code> is to grow the precision of an
 operand before applying an operator to it, which will cause the result
 to be computed to the full precision. This capability is suitable for
 algorithms that iterate over increasing precisions until a stopping
 criterion is met.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mpfr-unary-operators.html#mpfr-unary-operators" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr-binary-predicates.html#mpfr-binary-predicates" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr.html#mpfr" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

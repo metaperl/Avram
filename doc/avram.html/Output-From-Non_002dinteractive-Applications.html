@@ -1,57 +1,91 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Output From Non-interactive Applications - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Parameter Mode Interface">
-<link rel="prev" href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications" title="Input for Mapped Applications">
-<link rel="next" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Output From Interactive Applications">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.6.3 Output From Non-interactive Applications</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.6.3 Output From Non-interactive Applications">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.6.3 Output From Non-interactive Applications">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
-<a name="Output-From-Non-interactive-Applications"></a>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Output-From-Non_002dinteractive-Applications"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications">Output From Interactive Applications</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications">Input for Mapped Applications</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Parameter-Mode-Interface.html#Parameter-Mode-Interface">Parameter Mode Interface</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Output-From-Non_002dinteractive-Applications-1"></a>
+<h3 class="subsection">2.6.3 Output From Non-interactive Applications</h3>
 
-<h4 class="subsection">2.6.3 Output From Non-interactive Applications</h4>
-
-<p><a name="index-g_t_0040code_007binteractive_007d-command-line-option-221"></a><a name="index-g_t_0040code_007bstep_007d-command-line-option-222"></a>If a parameter mode application is not invoked with either of the
-<samp><span class="option">--interactive</span></samp> or <samp><span class="option">--step</span></samp> options,
+<a name="index-interactive-command-line-option-1"></a>
+<a name="index-step-command-line-option-1"></a>
+<p>If a parameter mode application is not invoked with either of the
+&lsquo;<samp>--interactive</samp>&rsquo; or &lsquo;<samp>--step</samp>&rsquo; options,
 then it is deemed to be non-interactive, and therefore does not concern
 itself with executing shell commands. Instead, it simply specifies a
 list of output files to be created or updated on its behalf by <code>avram</code>.
-
-   <p>The files are described by a list of quadruples
-<code>((</code><var>overwrite</var><code>,</code><var>path</var><code>),(</code><var>preamble</var><code>,</code><var>contents</var><code>))</code>,
+</p>
+<p>The files are described by a list of quadruples
+<code>((<var>overwrite</var>,<var>path</var>),(<var>preamble</var>,<var>contents</var>))</code>,
 with one quadruple for each file.
-
-   <p><a name="index-preamble-223"></a><a name="index-paths-224"></a><a name="index-standard-input-225"></a><a name="index-standard-output-226"></a>In each quadruple, the <var>path</var>, <var>preamble</var>, and <var>contents</var>
+</p>
+<a name="index-preamble-4"></a>
+<a name="index-paths-4"></a>
+<a name="index-standard-input-8"></a>
+<a name="index-standard-output-2"></a>
+<p>In each quadruple, the <var>path</var>, <var>preamble</var>, and <var>contents</var>
 fields have the same interpretations as in the list of files in the
 input data structure described in <a href="Input-Data-Structure.html#Input-Data-Structure">Input Data Structure</a>, except that a
 <code>nil</code> path refers to standard output rather than to standard input.
-
-   <p>The <var>overwrite</var> field in each quadruple tells whether the file
-<a name="index-appending-to-files-227"></a>should be overwritten or appended. If the <var>overwrite</var> field is
+</p>
+<p>The <var>overwrite</var> field in each quadruple tells whether the file
+<a name="index-appending-to-files"></a>
+should be overwritten or appended. If the <var>overwrite</var> field is
 <code>nil</code> (i.e., the representation for the Boolean value of
 <code>false</code>) and a file already exists at the given path, the new
 contents will be appended to it.  If the <var>overwrite</var> field is
@@ -60,6 +94,30 @@ path, a new file is written or the extant one is overwritten. Note that
 the data file format specified in <a href="File-Format.html#File-Format">File Format</a> precludes appending
 anything to it, but the format of existing output files is not checked
 and nothing prevents data or text from being appended to one.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Input-for-Mapped-Applications.html#Input-for-Mapped-Applications" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Output-From-Interactive-Applications.html#Output-From-Interactive-Applications" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Parameter-Mode-Interface.html#Parameter-Mode-Interface" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

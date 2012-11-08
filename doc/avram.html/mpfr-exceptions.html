@@ -1,50 +1,92 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>mpfr exceptions - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="mpfr.html#mpfr" title="mpfr">
-<link rel="prev" href="mpfr-conversion-functions.html#mpfr-conversion-functions" title="mpfr conversion functions">
-<link rel="next" href="Additional-mpfr-notes.html#Additional-mpfr-notes" title="Additional mpfr notes">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: D.14.9 mpfr exceptions</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: D.14.9 mpfr exceptions">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.14.9 mpfr exceptions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="mpfr-exceptions"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Additional-mpfr-notes.html#Additional-mpfr-notes">Additional mpfr notes</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="mpfr-conversion-functions.html#mpfr-conversion-functions">mpfr conversion functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="mpfr.html#mpfr">mpfr</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="mpfr-conversion-functions.html#mpfr-conversion-functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Additional-mpfr-notes.html#Additional-mpfr-notes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr.html#mpfr" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="mpfr-exceptions-1"></a>
+<h3 class="subsection">D.14.9 <code>mpfr</code> exceptions</h3>
 
-<h4 class="subsection">D.14.9 <code>mpfr</code> exceptions</h4>
-
-     <ul>
-<li>A message of <code>&lt;'memory overflow'&gt;</code> is possible any time
-<code>mpfr</code> runs out of memory. 
-<li>A message of <code>&lt;'bad mpfr specification'&gt;</code> will be returned
-<a name="index-bad-mpfr-specification-799"></a>if an input argument recognizably violates the required specification. 
-<li>The <code>&lt;'mpfr error'&gt;</code> message is returned in the event of any
-<a name="index-mpfr-error-800"></a>unexpected behavior or irregular status from the API. 
-<li>The message of <code>&lt;'mpfr overflow'&gt;</code> can be cause by the
+<ul>
+<li>
+A message of <code>&lt;'memory overflow'&gt;</code> is possible any time
+<code>mpfr</code> runs out of memory.
+</li><li>
+A message of <code>&lt;'bad mpfr specification'&gt;</code> will be returned
+<a name="index-bad-mpfr-specification"></a>
+if an input argument recognizably violates the required specification.
+</li><li>
+The <code>&lt;'mpfr error'&gt;</code> message is returned in the event of any
+<a name="index-mpfr-error"></a>
+unexpected behavior or irregular status from the API.
+</li><li>
+The message of <code>&lt;'mpfr overflow'&gt;</code> can be cause by the
 <code>nat2mp</code> function if a natural number has too many bits to be
-represented exactly as an <code>mpfr</code> number. 
-</ul>
+represented exactly as an <code>mpfr</code> number.
+</li></ul>
 
-   </body></html>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
+</p>
+</body>
+</html>

@@ -1,57 +1,99 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>math - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
-<link rel="prev" href="lapack.html#lapack" title="lapack">
-<link rel="next" href="mtwist.html#mtwist" title="mtwist">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="math"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="mtwist.html#mtwist">mtwist</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="lapack.html#lapack">lapack</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.11 math</title>
 
-<h3 class="section">D.11 <code>math</code></h3>
+<meta name="description" content="avram - a virtual machine code interpreter: D.11 math">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.11 math">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="math"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Additional-lapack-notes.html#Additional-lapack-notes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="math-library-operators.html#math-library-operators" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="math-1"></a>
+<h2 class="section">D.11 <code>math</code></h2>
 
 <p>The <code>math</code> library exports functions that operate on IEEE double
-precision floating point numbers using the host system's C
+precision floating point numbers using the host system&rsquo;s C
 library. The numbers are represented natively as contiguous blocks of
 8 bytes each, and on the virtual side as lists of eight character
 representations. (More explanation is given in <a href="Type-Conversions.html#Type-Conversions">Type Conversions</a>.) These functions take the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('math',f)
+</pre></td></tr></table>
 
-<pre class="example">     library('math',f)
-</pre>
-   <p class="noindent">where <code>f</code> is a character string identifying the function in most
+<p>where <code>f</code> is a character string identifying the function in most
 cases by its standard name in the C library.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="math-library-operators.html#math-library-operators">D.11.1 <code>math</code> library operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="math-library-predicates.html#math-library-predicates">D.11.2 <code>math</code> library predicates</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="math-library-conversion-functions.html#math-library-conversion-functions">D.11.3 <code>math</code> library conversion functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="math-library-exceptions.html#math-library-exceptions">D.11.4 <code>math</code> library exceptions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="Additional-math-library-notes.html#Additional-math-library-notes">D.11.5 Additional <code>math</code> library notes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="math-library-operators.html#math-library-operators">math library operators</a>
-<li><a accesskey="2" href="math-library-predicates.html#math-library-predicates">math library predicates</a>
-<li><a accesskey="3" href="math-library-conversion-functions.html#math-library-conversion-functions">math library conversion functions</a>
-<li><a accesskey="4" href="math-library-exceptions.html#math-library-exceptions">math library exceptions</a>
-<li><a accesskey="5" href="Additional-math-library-notes.html#Additional-math-library-notes">Additional math library notes</a>
-</ul>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

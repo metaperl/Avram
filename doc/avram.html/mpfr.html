@@ -1,38 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>mpfr - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Libraries.html#External-Libraries" title="External Libraries">
-<link rel="prev" href="minpack.html#minpack" title="minpack">
-<link rel="next" href="lpsolve.html#lpsolve" title="lpsolve">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="mpfr"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="lpsolve.html#lpsolve">lpsolve</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="minpack.html#minpack">minpack</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Libraries.html#External-Libraries">External Libraries</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: D.14 mpfr</title>
 
-<h3 class="section">D.14 <code>mpfr</code></h3>
+<meta name="description" content="avram - a virtual machine code interpreter: D.14 mpfr">
+<meta name="keywords" content="avram - a virtual machine code interpreter: D.14 mpfr">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="mpfr"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Additional-minpack-notes.html#Additional-minpack-notes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr-binary-operators.html#mpfr-binary-operators" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="mpfr-1"></a>
+<h2 class="section">D.14 <code>mpfr</code></h2>
 
 <p>The <code>mpfr</code> library provides a rich assortment of floating point
 operations on arbitrary precision numbers
@@ -40,45 +68,83 @@ operations on arbitrary precision numbers
 that is not binary compatible with the standard IEEE floating point
 number format used by other libraries, but they offer superior
 numerical stability suitable for many ill conditioned problems.
-
-   <p>The virtual code interface to the <code>mpfr</code> library follows the
+</p>
+<p>The virtual code interface to the <code>mpfr</code> library follows the
 native API to the extent of using the same names for most operations,
 but excludes features pertaining to i/o, mutable storage, and memory
 management.
-
-   <p>The <code>mpfr</code> library functions are invoked by an expression of the
+</p>
+<p>The <code>mpfr</code> library functions are invoked by an expression of the
 form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">library('mpfr',f)
+</pre></td></tr></table>
 
-<pre class="example">     library('mpfr',f)
-</pre>
-   <p class="noindent">Aside from a few exceptions as noted, <code>f</code> is a character string
+<p>Aside from a few exceptions as noted, <code>f</code> is a character string
 derived from the name of the related function from the <code>mpfr</code> C
 library as documented at the above address, but without the
 <code>mpfr_</code> prefix.
-
-   <p>The full complement of available functions is documented in the
+</p>
+<p>The full complement of available functions is documented in the
 remainder of this section.
+</p>
+<ul>
+<li>
+References to natural numbers pertain to the list representation
+described in <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>.
+</li><li>
+All functions that perform rounding use a mode of <code>GMP_RNDN</code> for
+<a name="index-rounding"></a>
+rounding to nearest, which is not explicitly specified on the virtual
+side.
+</li></ul>
 
-     <ul>
-<li>References to natural numbers pertain to the list representation
-described in <a href="Representation-of-Numeric-and-Textual-Data.html#Representation-of-Numeric-and-Textual-Data">Representation of Numeric and Textual Data</a>. 
-<li>All functions that perform rounding use a mode of <code>GMP_RNDN</code> for
-<a name="index-rounding-792"></a>rounding to nearest, which is not explicitly specified on the virtual
-side. 
-</ul>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="mpfr-binary-operators.html#mpfr-binary-operators">D.14.1 <code>mpfr</code> binary operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-unary-operators.html#mpfr-unary-operators">D.14.2 <code>mpfr</code> unary operators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-binary-operators-with-a-natural-operand.html#mpfr-binary-operators-with-a-natural-operand">D.14.3 <code>mpfr</code> binary operators with a natural operand</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-binary-predicates.html#mpfr-binary-predicates">D.14.4 <code>mpfr</code> binary predicates</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-unary-predicates.html#mpfr-unary-predicates">D.14.5 <code>mpfr</code> unary predicates</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-constants.html#mpfr-constants">D.14.6 <code>mpfr</code> constants</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions">D.14.7 <code>mpfr</code> functions with miscellaneous calling conventions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-conversion-functions.html#mpfr-conversion-functions">D.14.8 <code>mpfr</code> conversion functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="mpfr-exceptions.html#mpfr-exceptions">D.14.9 <code>mpfr</code> exceptions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="Additional-mpfr-notes.html#Additional-mpfr-notes">D.14.10 Additional <code>mpfr</code> notes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="mpfr-binary-operators.html#mpfr-binary-operators">mpfr binary operators</a>
-<li><a accesskey="2" href="mpfr-unary-operators.html#mpfr-unary-operators">mpfr unary operators</a>
-<li><a accesskey="3" href="mpfr-binary-operators-with-a-natural-operand.html#mpfr-binary-operators-with-a-natural-operand">mpfr binary operators with a natural operand</a>
-<li><a accesskey="4" href="mpfr-binary-predicates.html#mpfr-binary-predicates">mpfr binary predicates</a>
-<li><a accesskey="5" href="mpfr-unary-predicates.html#mpfr-unary-predicates">mpfr unary predicates</a>
-<li><a accesskey="6" href="mpfr-constants.html#mpfr-constants">mpfr constants</a>
-<li><a accesskey="7" href="mpfr-functions-with-miscellaneous-calling-conventions.html#mpfr-functions-with-miscellaneous-calling-conventions">mpfr functions with miscellaneous calling conventions</a>
-<li><a accesskey="8" href="mpfr-conversion-functions.html#mpfr-conversion-functions">mpfr conversion functions</a>
-<li><a accesskey="9" href="mpfr-exceptions.html#mpfr-exceptions">mpfr exceptions</a>
-<li><a href="Additional-mpfr-notes.html#Additional-mpfr-notes">Additional mpfr notes</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Additional-minpack-notes.html#Additional-minpack-notes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="mpfr-binary-operators.html#mpfr-binary-operators" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Libraries.html#External-Libraries" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Copying.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

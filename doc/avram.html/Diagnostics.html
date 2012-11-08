@@ -1,69 +1,130 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Diagnostics - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="User-Manual.html#User-Manual" title="User Manual">
-<link rel="prev" href="Command-Line-Syntax.html#Command-Line-Syntax" title="Command Line Syntax">
-<link rel="next" href="Security.html#Security" title="Security">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 1.6 Diagnostics</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 1.6 Diagnostics">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 1.6 Diagnostics">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Diagnostics"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Security.html#Security">Security</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Command-Line-Syntax.html#Command-Line-Syntax">Command Line Syntax</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="User-Manual.html#User-Manual">User Manual</a>
-<hr>
-</div>
-
-<h3 class="section">1.6 Diagnostics</h3>
-
-<p><a name="index-diagnostics-52"></a><a name="index-error-messages-53"></a><a name="index-run-time-errors-54"></a>The means exists for virtual code applications to have run time error
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Command-Line-Syntax.html#Command-Line-Syntax" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Internal-Errors.html#Internal-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Diagnostics-1"></a>
+<h2 class="section">1.6 Diagnostics</h2>
+<a name="index-diagnostics"></a>
+<a name="index-error-messages"></a>
+<a name="index-run-time-errors"></a>
+<p>The means exists for virtual code applications to have run time error
 messages written to standard error on their behalf by
 <code>avram</code>. Any error messages not documented here originate with an
 application and should be documented by it.
-
-   <p>Most error messages originating from <code>avram</code> are prefaced by the
+</p>
+<p>Most error messages originating from <code>avram</code> are prefaced by the
 application name (i.e., the name of the file containing the virtual
 machine code), but will be prefaced by <code>avram:</code> if the error is
 caused by a problem loading this file itself. Error messages originating
 from virtual code applications are the responsibility of their
 respective authors and might not be prefaced by the application name.
-
-   <p>The run time errors not specifically raised by the application can be
+</p>
+<p>The run time errors not specifically raised by the application can be
 classified as internal errors, i/o errors, overflow errors, file
 format errors, application programming errors, and configuration related
 errors.
-
-   <p>Some error messages include a code number. The number identifies
+</p>
+<p>Some error messages include a code number. The number identifies
 the specific point in the source code where the condition was
 detected, for the benefit of the person maintaining it.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="Internal-Errors.html#Internal-Errors">1.6.1 Internal Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="i_002fo-Errors.html#i_002fo-Errors">1.6.2 i/o Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Overflow-Errors.html#Overflow-Errors">1.6.3 Overflow Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             
+</td></tr>
+<tr><td align="left" valign="top"><a href="File-Format-Errors.html#File-Format-Errors">1.6.4 File Format Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          
+</td></tr>
+<tr><td align="left" valign="top"><a href="Application-Programming-Errors.html#Application-Programming-Errors">1.6.5 Application Programming Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Configuration-Related-Errors.html#Configuration-Related-Errors">1.6.6 Configuration Related Errors</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+<tr><td align="left" valign="top"><a href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">1.6.7 Other Diagnostics and Warnings</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="Internal-Errors.html#Internal-Errors">Internal Errors</a>
-<li><a accesskey="2" href="i_002fo-Errors.html#i_002fo-Errors">i/o Errors</a>
-<li><a accesskey="3" href="Overflow-Errors.html#Overflow-Errors">Overflow Errors</a>
-<li><a accesskey="4" href="File-Format-Errors.html#File-Format-Errors">File Format Errors</a>
-<li><a accesskey="5" href="Application-Programming-Errors.html#Application-Programming-Errors">Application Programming Errors</a>
-<li><a accesskey="6" href="Configuration-Related-Errors.html#Configuration-Related-Errors">Configuration Related Errors</a>
-<li><a accesskey="7" href="Other-Diagnostics-and-Warnings.html#Other-Diagnostics-and-Warnings">Other Diagnostics and Warnings</a>
-</ul>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Command-Line-Syntax.html#Command-Line-Syntax" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Internal-Errors.html#Internal-Errors" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="User-Manual.html#User-Manual" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

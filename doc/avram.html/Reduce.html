@@ -1,133 +1,205 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Reduce - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="List-Combinators.html#List-Combinators" title="List Combinators">
-<link rel="prev" href="Filter.html#Filter" title="Filter">
-<link rel="next" href="Sort.html#Sort" title="Sort">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.13.3 Reduce</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.13.3 Reduce">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.13.3 Reduce">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="Reduce"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="Sort.html#Sort">Sort</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Filter.html#Filter">Filter</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="List-Combinators.html#List-Combinators">List Combinators</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Filter.html#Filter" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Sort.html#Sort" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Reduce-1"></a>
+<h4 class="subsubsection">2.7.13.3 Reduce</h4>
 
-<h5 class="subsubsection">2.7.13.3 Reduce</h5>
-
-<p><a name="index-g_t_0040code_007breduce_007d-321"></a>In the virtual code fragment shown below, <var>f</var> should be
-regarded as the virtual code for a binary operator, and <var>k</var>
+<a name="index-reduce"></a>
+<p>In the virtual code fragment shown below, <code><var>f</var></code> should be
+regarded as the virtual code for a binary operator, and <code><var>k</var></code>
 is a constant.
-
-     <dl>
-<dt><em>T24</em><dd>[[<code>reduce</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code> = <code>((nil,nil),((</code><var>f</var><code>,</code><var>k</var><code>),nil))</code>
+</p>
+<dl compact="compact">
+<dt> <em>T24</em></dt>
+<dd><p>[[<code>reduce</code>]] <code>(<var>f</var>,<var>k</var>)</code> = <code>((nil,nil),((<var>f</var>,<var>k</var>),nil))</code>
+</p></dd>
 </dl>
 
-<p class="noindent">By constructing a tree in the form shown, the <code>silly</code>
+<p>By constructing a tree in the form shown, the <code>silly</code>
 mnemonic <code>reduce</code> effectively constructs the code for a function
 operating on lists in a particular way.
-
-   <p>The effect of evaluating an application in this form with an argument
+</p>
+<p>The effect of evaluating an application in this form with an argument
 representing a list can be broken down into several cases.
-
-     <ul>
-<li>If the list is empty, then the value of <var>k</var> is the
-result. 
-<li>If the list has only one item, then that item is the result. 
-<li>if the list has exactly two items, the first being <var>x</var> and the
-second being <var>y</var>, then  the result is  <var>f</var><code>
-(</code><var>x</var><code>,</code><var>y</var><code>)</code>. 
-<li>If the list has more than two items and an even number of them, the
+</p>
+<ul>
+<li> If the list is empty, then the value of <code><var>k</var></code> is the
+result.
+</li><li> If the list has only one item, then that item is the result.
+</li><li> if the list has exactly two items, the first being <code><var>x</var></code> and the
+second being <code><var>y</var></code>, then  the result is  <code><var>f</var>
+(<var>x</var>,<var>y</var>)</code>.
+</li><li> If the list has more than two items and an even number of them, the
 result is that of evaluating the application with the list of values
 obtained by partitioning the list into pairs of adjacent items, and
-evaluating <var>f</var> with each pair. 
-<li>If the list has more than two items and an odd number of them, the
+evaluating <code><var>f</var></code> with each pair.
+</li><li> If the list has more than two items and an odd number of them, the
 result is that of evaluating the application with the list of values
 obtained by partitioning the list into pairs of adjacent items excluding
-the last one, evaluating <var>f</var> with each pair, and then
-appending the last item to the list of values. 
-</ul>
+the last one, evaluating <code><var>f</var></code> with each pair, and then
+appending the last item to the list of values.
+</li></ul>
 
-<p class="noindent">In the last two cases, evaluation of the application is not necessarily
+<p>In the last two cases, evaluation of the application is not necessarily
 finished after just one traversal of the list, because it has to carry
 on until the list is reduced to a single item.
-
-   <p>Some care has been taken to describe this operation in detail because it
+</p>
+<p>Some care has been taken to describe this operation in detail because it
 differs from comparable operations common to functional programming
-<a name="index-fold-322"></a>languages, variously known as fold or reduce. All of these operations
+<a name="index-fold"></a>
+languages, variously known as fold or reduce. All of these operations
 could be used, for example, to compute the summation of a list of
 numbers. The crucial differences are as follows.
+</p>
+<ul>
+<li> Whereas a fold or a reduce is conventionally either of the left or
+right variety, this <code>reduce</code> is neither.
+</li><li> The vacuous case result <code><var>k</var></code> is never used at all unless
+the argument is the empty list.
+</li><li> This <code>reduce</code> is not very useful if the operator
+<code><var>f</var></code> is not associative.
+</li></ul>
 
-     <ul>
-<li>Whereas a fold or a reduce is conventionally either of the left or
-right variety, this <code>reduce</code> is neither. 
-<li>The vacuous case result <var>k</var> is never used at all unless
-the argument is the empty list. 
-<li>This <code>reduce</code> is not very useful if the operator
-<var>f</var> is not associative. 
-</ul>
-
-   <p>The reason for defining the semantics of <code>reduce</code> in this way
+<p>The reason for defining the semantics of <code>reduce</code> in this way
 instead of the normal way is that a distributed implementation of this
-<a name="index-distributed-implementation-323"></a>one could work in logarithmic time, so it's worth making it easy for a
+<a name="index-distributed-implementation-1"></a>
+one could work in logarithmic time, so it&rsquo;s worth making it easy for a
 language processor to detect the pattern in case the virtual code is
 ever going to be targeted to such an implementation. Of course, nothing
 prevents the conventional left or right reduction semantics from being
-translated to virtual code by explicit recursion. 
-<a name="index-recursion-324"></a>
-The precise semantics of this operation are as follows, where
-<var>f</var> is not <code>nil</code>, <var>k</var> is unconstrained, and
-<code>pairwise</code> represents a function to be explained presently. 
-<a name="index-g_t_0040code_007biterate_007d-325"></a><a name="index-g_t_0040code_007bpairwise_007d-326"></a><a name="index-g_t_0040code_007bbu_007d-327"></a><a name="index-g_t_0040code_007bright_007d-328"></a>
-     <dl>
-<dt><em>P29</em><dd>([[<code>reduce</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code>) <code>nil</code> = <var>k</var>
-<br><dt><em>P30</em><dd>([[<code>reduce</code>]] <code>(</code><var>f</var><code>,</code><var>k</var><code>)</code>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> = <br>
-&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->&nbsp;<!-- /@w -->
-[[<code>left</code>]] ([[<code>bu(iterate,right)</code>]] [[<code>pairwise</code>]] <var>f</var>) <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code>
+translated to virtual code by explicit recursion.
+<a name="index-recursion-2"></a>
+</p>
+<p>The precise semantics of this operation are as follows, where
+<code><var>f</var></code> is not <code>nil</code>, <code><var>k</var></code> is unconstrained, and
+<code>pairwise</code> represents a function to be explained presently.
+<a name="index-iterate-1"></a>
+<a name="index-pairwise"></a>
+<a name="index-bu-1"></a>
+<a name="index-right-2"></a>
+</p>
+<dl compact="compact">
+<dt> <em>P29</em></dt>
+<dd><p>([[<code>reduce</code>]] <code>(<var>f</var>,<var>k</var>)</code>) <code>nil</code> = <code><var>k</var></code>
+</p></dd>
+<dt> <em>P30</em></dt>
+<dd><p>([[<code>reduce</code>]] <code>(<var>f</var>,<var>k</var>)</code>) <code>(<var>x</var>,<var>y</var>)</code> = <br>
+   
+[[<code>left</code>]] ([[<code>bu(iterate,right)</code>]] [[<code>pairwise</code>]] <code><var>f</var></code>) <code>(<var>x</var>,<var>y</var>)</code> 
+</p></dd>
 </dl>
 
-<p class="noindent">The latter property leverages off some virtual machine features and
+<p>The latter property leverages off some virtual machine features and
 <code>silly</code> code that has been defined already. The function
-implemented by [[<code>pairwise</code>]] <var>f</var> is the one that
-partitions its argument into pairs and evaluates <var>f</var> with
+implemented by [[<code>pairwise</code>]] <code><var>f</var></code> is the one that
+partitions its argument into pairs and evaluates <code><var>f</var></code> with
 each pair as described above. The combination of that with
 <code>bu(iterate,right)</code> results in an application that repeatedly
-performs [[<code>pairwise</code>]] <var>f</var> while the resulting list
+performs [[<code>pairwise</code>]] <code><var>f</var></code> while the resulting list
 still has a tail (i.e., a <code>right</code> side), and stops when the list
 has only a single item (i.e., when <code>right</code> is false). The
 <code>left</code> operation then extracts the item.
-
-   <p>For the sake of completeness, it is tedious but straightforward to
+</p>
+<p>For the sake of completeness, it is tedious but straightforward to
 give an exact definition for <code>pairwise</code>. The short version is that
 it can be anything that satisfies these three equations.
-
-     <dl>
-<dt><em>E1</em><dd>([[<code>pairwise</code>]] <var>f</var>) <code>nil</code> = <code>nil</code>
-<br><dt><em>E2</em><dd>([[<code>pairwise</code>]] <var>f</var>) <code>(</code><var>x</var><code>,nil)</code> = <code>(</code><var>x</var><code>,nil)</code>
-<br><dt><em>E3</em><dd>([[<code>pairwise</code>]] <var>f</var>) <code>(</code><var>x</var><code>,(</code><var>y</var><code>,</code><var>z</var><code>))</code> =
-<code>(</code><var>f</var><code> (</code><var>x</var><code>,</code><var>y</var><code>),</code>([[<code>pairwise</code>]] <var>f</var>) <var>z</var><code>)</code>
+</p>
+<dl compact="compact">
+<dt> <em>E1</em></dt>
+<dd><p>([[<code>pairwise</code>]] <code><var>f</var></code>) <code>nil</code> = <code>nil</code>
+</p></dd>
+<dt> <em>E2</em></dt>
+<dd><p>([[<code>pairwise</code>]] <code><var>f</var></code>) <code>(<var>x</var>,nil)</code> = <code>(<var>x</var>,nil)</code>
+</p></dd>
+<dt> <em>E3</em></dt>
+<dd><p>([[<code>pairwise</code>]] <code><var>f</var></code>) <code>(<var>x</var>,(<var>y</var>,<var>z</var>))</code> =
+<code>(<var>f</var> (<var>x</var>,<var>y</var>),</code>([[<code>pairwise</code>]] <code><var>f</var></code>) <code><var>z</var>)</code>
+</p></dd>
 </dl>
 
-<p class="noindent">For the long version, see <a href="Pairwise.html#Pairwise">Pairwise</a>.
+<p>For the long version, see <a href="Pairwise.html#Pairwise">Pairwise</a>.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Filter.html#Filter" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Sort.html#Sort" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="List-Combinators.html#List-Combinators" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

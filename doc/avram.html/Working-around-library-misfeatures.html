@@ -1,36 +1,66 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>Working around library misfeatures - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="External-Library-Maintenance.html#External-Library-Maintenance" title="External Library Maintenance">
-<link rel="prev" href="Implementing-new-library-functions.html#Implementing-new-library-functions" title="Implementing new library functions">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
-</head>
-<body>
-<div class="node">
-<a name="Working-around-library-misfeatures"></a>
-<p>
-Previous:&nbsp;<a rel="previous" accesskey="p" href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="External-Library-Maintenance.html#External-Library-Maintenance">External Library Maintenance</a>
-<hr>
-</div>
+<title>avram - a virtual machine code interpreter: 3.9.3 Working around library misfeatures</title>
 
-<h4 class="subsection">3.9.3 Working around library misfeatures</h4>
+<meta name="description" content="avram - a virtual machine code interpreter: 3.9.3 Working around library misfeatures">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 3.9.3 Working around library misfeatures">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Working-around-library-misfeatures"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="Implementing-new-library-functions.html#Implementing-new-library-functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Inept-excess-verbiage.html#Inept-excess-verbiage" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="External-Library-Maintenance.html#External-Library-Maintenance" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Character-Table.html#Character-Table" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="Working-around-library-misfeatures-1"></a>
+<h3 class="subsection">3.9.3 Working around library misfeatures</h3>
 
 <p>As mentioned already (<a href="Implementing-new-library-functions.html#Implementing-new-library-functions">Implementing new library functions</a>), some
 common problems with external libraries that are worthwhile in other
@@ -38,17 +68,28 @@ respects are that they may generate unwelcome console output while
 running, they may follow ill defined memory management policies, and
 they may handle exceptions just by crashing themselves along with the
 client module.
-
-   <p>An accumulation of techniques for coping with these issues (short of
+</p>
+<p>An accumulation of techniques for coping with these issues (short of
 modifying the library source) has been collected into the API and made
-available by way of the header file <samp><span class="file">mwrap.h</span></samp>. This section
+available by way of the header file &lsquo;<tt>mwrap.h</tt>&rsquo;. This section
 briefly documents how they might be put to use.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="Inept-excess-verbiage.html#Inept-excess-verbiage">3.9.3.1 Inept excess verbiage</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="Memory-leaks.html#Memory-leaks">3.9.3.2 Memory leaks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+<tr><td align="left" valign="top"><a href="Suicidal-exception-handling.html#Suicidal-exception-handling">3.9.3.3 Suicidal exception handling</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">
+</td></tr>
+</table>
 
-<ul class="menu">
-<li><a accesskey="1" href="Inept-excess-verbiage.html#Inept-excess-verbiage">Inept excess verbiage</a>
-<li><a accesskey="2" href="Memory-leaks.html#Memory-leaks">Memory leaks</a>
-<li><a accesskey="3" href="Suicidal-exception-handling.html#Suicidal-exception-handling">Suicidal exception handling</a>
-</ul>
+<hr size="1">
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

@@ -1,76 +1,133 @@
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 8, 2012 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
 <head>
-<title>On Equality - avram - a virtual machine code interpreter</title>
-<meta http-equiv="Content-Type" content="text/html">
-<meta name="description" content="avram - a virtual machine code interpreter">
-<meta name="generator" content="makeinfo 4.13">
-<link title="Top" rel="start" href="index.html#Top">
-<link rel="up" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Virtual Code Semantics">
-<link rel="prev" href="A-New-Operator.html#A-New-Operator" title="A New Operator">
-<link rel="next" href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties" title="A Minimal Set of Properties">
-<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
-<meta http-equiv="Content-Style-Type" content="text/css">
-<style type="text/css"><!--
-  pre.display { font-family:inherit }
-  pre.format  { font-family:inherit }
-  pre.smalldisplay { font-family:inherit; font-size:smaller }
-  pre.smallformat  { font-family:inherit; font-size:smaller }
-  pre.smallexample { font-size:smaller }
-  pre.smalllisp    { font-size:smaller }
-  span.sc    { font-variant:small-caps }
-  span.roman { font-family:serif; font-weight:normal; } 
-  span.sansserif { font-family:sans-serif; font-weight:normal; } 
---></style>
+<title>avram - a virtual machine code interpreter: 2.7.2 On Equality</title>
+
+<meta name="description" content="avram - a virtual machine code interpreter: 2.7.2 On Equality">
+<meta name="keywords" content="avram - a virtual machine code interpreter: 2.7.2 On Equality">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
 </head>
-<body>
-<div class="node">
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
 <a name="On-Equality"></a>
-<p>
-Next:&nbsp;<a rel="next" accesskey="n" href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties">A Minimal Set of Properties</a>,
-Previous:&nbsp;<a rel="previous" accesskey="p" href="A-New-Operator.html#A-New-Operator">A New Operator</a>,
-Up:&nbsp;<a rel="up" accesskey="u" href="Virtual-Code-Semantics.html#Virtual-Code-Semantics">Virtual Code Semantics</a>
-<hr>
-</div>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="A-New-Operator.html#A-New-Operator" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<hr size="1">
+<a name="On-Equality-1"></a>
+<h3 class="subsection">2.7.2 On Equality</h3>
 
-<h4 class="subsection">2.7.2 On Equality</h4>
-
-<p><a name="index-equality-241"></a>One example of a property this operator should have, for reasons that
-will not be immediately clear, is that for any trees <var>x</var> and
-<var>k</var>, the equality <code>cons(cons(nil,</code><var>k</var><code>),nil) </code><var>x</var><code> =
-</code><var>k</var> always holds. 
+<a name="index-equality"></a>
+<p>One example of a property this operator should have, for reasons that
+will not be immediately clear, is that for any trees <code><var>x</var></code> and
+<code><var>k</var></code>, the equality <code>cons(cons(nil,<code><var>k</var>),nil) <var>x</var></code> =
+<code><var>k</var></code></code> always holds.
 Even though the present exposition opts for readability over formality,
 statements like these demand clarification of the notion of
 equality. Some of the more pedantic points in <a href="Raw-Material.html#Raw-Material">Raw Material</a> may be needed
 for the following ideas to hold water.
-
-     <ul>
-<li>As originally stipulated, it is always possible to distinguish
+</p>
+<ul>
+<li> As originally stipulated, it is always possible to distinguish
 <code>nil</code> from any member of the set. We can therefore decide on this
-basis whether <var>a</var><code> = </code><var>b</var> whenever at least one of them is <code>nil</code>. 
-<li>Where neither <var>a</var> nor <var>b</var> is <code>nil</code> in an expression
-<var>a</var><code> = </code><var>b</var>, but rather something of the form
-<code>cons(</code><var>x</var><code>,</code><var>y</var><code>)</code>, the equality holds if and only
+basis whether <code><var>a</var> = <var>b</var></code> whenever at least one of them is <code>nil</code>.
+</li><li> Where neither <code><var>a</var></code> nor <code><var>b</var></code> is <code>nil</code> in an expression
+<code><var>a</var> = <var>b</var></code>, but rather something of the form
+<code>cons(<var>x</var>,<var>y</var>)</code>, the equality holds if and only
 if both pairs of corresponding subexpressions are equal. If at least one
 member of each pair of corresponding subexpressions is <code>nil</code>, the
 question is settled, but otherwise there is recourse to their respective
 subexpressions, and so on. This condition follows from the uniqueness property
-of the <code>cons</code> operator. 
-<li>If one side of an equality is of the form
-<var>x</var> <var>y</var>, or is defined in terms of such an expression,
-but <code>(</code><var>x</var><code>,</code><var>y</var><code>)</code> is one of those pairs with which the operator
+of the <code>cons</code> operator.
+</li><li> If one side of an equality is of the form
+<code><var>x</var> <var>y</var></code>, or is defined in terms of such an expression,
+but <code>(<var>x</var>,<var>y</var>)</code> is one of those pairs with which the operator
 associates no result, then the equality holds if and only if the other
-side is similarly ill defined. 
-<li>Statements involving universal quantification (i.e.,
-<a name="index-universal-quantification-242"></a><a name="index-undefined-expressions-243"></a>beginning with words similar to &ldquo;for any tree <var>x</var> <small class="dots">...</small>&rdquo;)
-obviously do not apply to instances of a variable (<var>x</var>) outside
+side is similarly ill defined.
+</li><li> Statements involving universal quantification (i.e.,
+<a name="index-universal-quantification"></a>
+<a name="index-undefined-expressions"></a>
+beginning with words similar to &ldquo;for any tree <code><var>x</var></code> &hellip;&rdquo;)
+obviously do not apply to instances of a variable (<code><var>x</var></code>) outside
 the indicated set (trees). Hence, they are not refuted by any
-consequence of identifying a variable with an undefined expression. 
-</ul>
+consequence of identifying a variable with an undefined expression.
+</li></ul>
 
-   <p>Readers who are aware of such issues as pointer equality or intensional
-<a name="index-pointer-equality-244"></a><a name="index-pointers-245"></a>versus extensional equality of functions are urged to forget all about
+<p>Readers who are aware of such issues as pointer equality or intensional
+<a name="index-pointer-equality"></a>
+<a name="index-pointers-1"></a>
+versus extensional equality of functions are urged to forget all about
 them in the context of this document, and abide only by what is
 stated. Other readers should ignore this paragraph.
+</p>
+<hr size="1">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="A-New-Operator.html#A-New-Operator" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="A-Minimal-Set-of-Properties.html#A-Minimal-Set-of-Properties" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="Virtual-Machine-Specification.html#Virtual-Machine-Specification" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="Virtual-Code-Semantics.html#Virtual-Code-Semantics" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="Library-Reference.html#Library-Reference" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="avram.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="avram_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="Function-Index.html#Function-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="avram_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+ </font>
+ <br>
 
-   </body></html>
-
+</p>
+</body>
+</html>

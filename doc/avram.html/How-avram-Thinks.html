@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
 <html>
-<!-- Created on November 8, 2012 by texi2html 1.82
+<!-- Created on December 10, 2012 by texi2html 1.82
 texi2html was written by: 
             Lionel Cons <Lionel.Cons@cern.ch> (original author)
             Karl Berry  <karl@freefriends.org>
@@ -117,35 +117,6 @@ of the basic operator properties postulated in <a href="A-Minimal-Set-of-Propert
 <p>The proof is a routine calculation. Beware of the distinction between
 the mathematical <code>nil</code> and the <code>silly</code> identifier <code>nil</code>.
 </p>
-<table><tr><td>&nbsp;</td><td><pre class="format">
-   ([[<code>couple</code>]] <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code> =  ([[<code>((((left,nil),constant_nil),nil),right)</code>]] <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
-
-by substitution of <code>couple</code> with its definition in the standard library
-
-   = (<code>((((</code>[[<code>left</code>]]<code>,</code>[[<code>nil</code>]]<code>),</code>[[<code>constant_nil</code>]]<code>),</code>[[<code>nil</code>]])<code>,</code>[[<code>right</code>]]<code>)</code> <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
-
-by definition of the semantic function [[&hellip;]] regarding pairs
-
-   = (<code>((((</code>[[<code>left</code>]]<code>,</code>[[<code>()</code>]]<code>),</code>[[<code>constant_nil</code>]]<code>),</code>[[<code>()</code>]])<code>,</code>[[<code>right</code>]]<code>)</code> <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
-
-by substitution of <code>nil</code> from its definition in the standard library
-
-   = (<code>((((</code>[[<code>left</code>]]<code>,</code><code>nil</code><code>),</code>[[<code>constant_nil</code>]]<code>),</code><code>nil</code>)<code>,</code>[[<code>right</code>]]<code>)</code> <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
-
-by definition of the semantic function in the case of [[<code>()</code>]]
-
-   = (<code>(</code>[[<code>left</code>]] <code>(<var>f</var>,<var>g</var>),</code>[[<code>constant_nil</code>]] <code>(<var>f</var>,<var>g</var>)),</code>[[<code>right</code>]] <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
-
-by property <em>P6</em> (twice)
-
-   = <code>((<var>f</var>,nil),<var>g</var>) <var>x</var></code>
-
-by theorems <em>T1</em>, <em>T2</em>, and <em>T5</em>
-
-   = <code>(<var>f</var> <var>x</var>,<var>g</var> <var>x</var>)</code>
-
-by property <em>P6</em> again.
-</pre></td></tr></table>
 
 
 <p>Something to observe about this proof is that it might just as well have
@@ -185,9 +156,7 @@ but <code><var>g</var> <var>x</var></code> if <code><var>p</var> <var>x</var></c
 <p>The proofs of these theorems are routine calculations analogous to the
 proof of <em>T6</em>. Here is a proof of theorem <em>T7</em> for good
 measure.
-</p><table><tr><td>&nbsp;</td><td><pre class="format">
-   ([[<code>compose</code>]] <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code> = ([[<code>couple(identity,constant_nil)</code>]] <code>(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
-</pre></td></tr></table>
+</p>
 <p>by substitution of <code>compose</code> with its definition in the standard library
 </p><table><tr><td>&nbsp;</td><td><pre class="format">
    = (<code>(</code>[[<code>couple</code>]] <code>(</code>[[<code>identity</code>]]<code>,</code>[[<code>constant_nil</code>]]<code>))(<var>f</var>,<var>g</var>)</code>) <code><var>x</var></code>
@@ -226,7 +195,7 @@ by property <em>P5</em> of the operator.
 </tr></table>
 <p>
  <font size="-1">
-  This document was generated on <i>November 8, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
+  This document was generated on <i>December 10, 2012</i> using <a href="http://www.nongnu.org/texi2html/"><i>texi2html 1.82</i></a>.
  </font>
  <br>
 
